@@ -1,0 +1,325 @@
+<title>2026 ITF 旅展優惠</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* 版面：登機證式頁首＋分頁籤；總覽用卡片，其餘是可篩選表格 */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --ink:#18233a; --muted:#5d6a80; --line:#dbe1ea;
+  --accent:#d9682b; --accent-soft:#fbe9de; --navy:#1f3a64; --navy-ink:#ffffff;
+  --old:#8a6d1e; --old-soft:#f6edd2; --good:#1f7a4d;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --f-num:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10151f; --surface:#182131; --ink:#e7ecf4; --muted:#9aa7bc; --line:#2a364b;
+  --accent:#f08a50; --accent-soft:#3a2518; --navy:#22406e; --navy-ink:#f2f5fa;
+  --old:#e3c56b; --old-soft:#3a3218; --good:#5fcf93; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10151f; --surface:#182131; --ink:#e7ecf4; --muted:#9aa7bc; --line:#2a364b;
+  --accent:#f08a50; --accent-soft:#3a2518; --navy:#22406e; --navy-ink:#f2f5fa;
+  --old:#e3c56b; --old-soft:#3a3218; --good:#5fcf93; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;margin:0}
+a{color:var(--accent)}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.pass{background:var(--navy);color:var(--navy-ink)}
+header.pass .wrap{padding-block:22px 18px;display:flex;flex-wrap:wrap;gap:18px 40px;align-items:flex-end;justify-content:space-between}
+.pass h1{font-size:clamp(24px,4vw,34px);font-weight:900;margin:0;letter-spacing:.02em;text-wrap:balance}
+.pass .sub{opacity:.8;font-size:13px;margin-top:2px}
+.stubs{display:flex;flex-wrap:wrap;gap:10px 28px}
+.stub{display:flex;flex-direction:column;border-left:2px dashed rgba(255,255,255,.35);padding-left:12px}
+.stub b{font-family:var(--f-num);font-size:18px;font-weight:600}
+.stub span{font-size:11px;letter-spacing:.12em;opacity:.75}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.tabs button{font:inherit;font-size:14px;background:none;border:0;color:var(--muted);padding:12px 14px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);font-weight:700;border-bottom-color:var(--accent)}
+nav.tabs button:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+nav.tabs .n{font-family:var(--f-num);font-size:11px;color:var(--muted);margin-left:4px}
+main .wrap{padding-block:22px 60px}
+h2{font-size:20px;margin:0 0 12px;text-wrap:balance}
+h3{font-size:16px;margin:0 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px;min-width:0}
+.card h3 .go{font-size:12px;font-weight:500;margin-left:8px;cursor:pointer;background:none;border:0;color:var(--accent);padding:0;font-family:inherit}
+ol.top{margin:0;padding-left:1.3em;display:grid;gap:8px}
+ol.top li::marker{font-family:var(--f-num);color:var(--accent);font-weight:600}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums;font-weight:600}
+.note{color:var(--muted);font-size:13px}
+section{margin-bottom:28px}
+.tbox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.04em;background:var(--surface);white-space:nowrap}
+.data th{cursor:pointer;user-select:none;position:sticky;top:0}
+.data th[aria-sort]::after{content:" ▲";color:var(--accent)}
+.data th[aria-sort="descending"]::after{content:" ▼"}
+.data tbody tr.row{cursor:pointer}
+.data tbody tr.row:hover{background:var(--accent-soft)}
+td.price{font-family:var(--f-num);font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+td .clip{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-width:8em;max-width:28em}
+.pill{display:inline-block;font-size:11px;padding:1px 7px;border-radius:99px;background:var(--old-soft);color:var(--old);font-weight:700;white-space:nowrap;margin-left:4px}
+tr.detail td{background:var(--bg)}
+dl.kv{display:grid;grid-template-columns:minmax(7em,max-content) 1fr;gap:4px 16px;margin:4px 0}
+dl.kv dt{color:var(--muted);font-size:13px}
+dl.kv dd{margin:0;overflow-wrap:anywhere}
+.tools{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin:0 0 12px}
+.tools input[type=search]{font:inherit;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);flex:1 1 240px;min-width:0}
+.tools select{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);max-width:100%}
+.tools label{font-size:14px;display:flex;gap:6px;align-items:center}
+.count{font-size:13px;color:var(--muted);margin-left:auto}
+.more{display:block;margin:14px auto 0;font:inherit;padding:8px 20px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);cursor:pointer}
+ul.plain{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 24px;margin:0 0 20px}
+.facts div{font-size:14px}
+.facts b{color:var(--muted);font-weight:500;margin-right:6px;font-size:13px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="pass"><div class="wrap">
+  <div><h1>2026 ITF 台灣國際旅展 優惠整理</h1>
+  <div class="sub">資料查詢日期 2026-10-29｜國內住宿・餐飲・國外機票・跟團｜價格以官方公告為準</div></div>
+  <div class="stubs">
+    <div class="stub"><span>展期</span><b>11/06–11/09</b></div>
+    <div class="stub"><span>地點</span><b>南港展覽館 1館</b></div>
+    <div class="stub"><span>全票／預售</span><b>200／180</b></div>
+  </div>
+</div></header>
+
+<nav class="tabs" aria-label="分類"><div class="wrap" id="tabs" role="tablist"></div></nav>
+
+<main><div class="wrap">
+<div id="view-home" class="view">
+  <div class="facts">
+    <div><b>開放時間</b>11/6 12:00 開門，其餘 10:00–18:00</div>
+    <div><b>門票</b>全票 200、11/5 前網路預售 180、優待 150、愛心 100、未滿 6 歲免費</div>
+    <div><b>捐血換票</b>10/31–11/7，限量 8,000 張</div>
+    <div><b>官網</b><a href="https://www.taiwanitf.org.tw/" target="_blank" rel="noopener">taiwanitf.org.tw</a></div>
+  </div>
+
+  <section class="grid">
+    <div class="card"><h3>國內住宿 最划算前 5（每人每晚）<button class="go" data-go="lodging">看全部 →</button></h3>
+      <ol class="top">
+        <li>承億文旅三天兩夜雙人券 <span class="num">2,999</span>：淡水或花蓮兩晚含早，每人每晚約 <span class="num">750</span>；只能電話訂房</li>
+        <li>承億集團聯合雙人房券 <span class="num">1,899</span>：含早，約 <span class="num">950</span>；買 8 送 1 約 844</li>
+        <li>老爺家庭聯盟券 <span class="num">3,999</span>：平日四人房約 <span class="num">1,000</span>；只在 11/9 賣</li>
+        <li>雲朗聯合住宿券 <span class="num">2,300</span>：翰品高雄或兆品嘉義含雙早，約 <span class="num">1,150</span></li>
+        <li>台東趣淘漫旅連住 3 晚 <span class="num">6,999</span>：含早，約 <span class="num">1,166</span></li>
+      </ol></div>
+    <div class="card"><h3>餐飲 最划算前 5（每人一次）<button class="go" data-go="dining">看全部 →</button></h3>
+      <ol class="top">
+        <li>海霸王甲天下四人套餐 <span class="num">888</span>：每人 <span class="num">222</span>；展場限定，每天 50 組（M1006）</li>
+        <li>海霸王打狗霸日式海陸雙人券 <span class="num">688</span>：每人 <span class="num">344</span></li>
+        <li>海霸王 16OZ 昆布鍋雙人券 <span class="num">699</span>：每人 <span class="num">350</span></li>
+        <li>海霸王魅麗海平日雙人自助吧 <span class="num">890</span>：買 5 送 1，每人 <span class="num">371</span></li>
+        <li>喜來登十二廚平日雙人下午茶 <span class="num">800</span>：每人 <span class="num">400</span>；只在 11/6，寒舍會員</li>
+      </ol>
+      <p class="note">只看五星飯店自助餐：十二廚 400、板橋凱撒蓮花 445、南港老爺早餐 545、晶華栢麗廳早餐 550、高雄萬豪蔬食 715。</p></div>
+    <div class="card"><h3>國外機票 各區含稅來回最低<button class="go" data-go="flight">看全部 →</button></h3>
+      <div class="tbox"><table><tbody>
+        <tr><th>港澳</th><td>澳門航空 約 <span class="num">6,650</span>（含 32kg 行李）</td></tr>
+        <tr><th>東南亞</th><td>汶萊皇家 汶萊 <span class="num">7,253</span></td></tr>
+        <tr><th>日本</th><td>日航 沖繩 約 <span class="num">7,616</span>（含 2 件行李）</td></tr>
+        <tr><th>韓國</th><td>華航 釜山 約 <span class="num">10,014</span></td></tr>
+        <tr><th>紐澳</th><td>汶萊皇家 墨爾本 <span class="num">18,919</span>（轉機）</td></tr>
+        <tr><th>歐洲</th><td>新航 <span class="num">25,648</span>（新加坡轉機）</td></tr>
+        <tr><th>美加</th><td>星宇 舊金山 <span class="num">25,650</span></td></tr>
+      </tbody></table></div>
+      <p class="note">旅展起價只比平常便宜 2–4%，有時更貴；真正省的是限量折扣碼和含行李票種。新聞價多半未稅。</p></div>
+    <div class="card"><h3>跟團 各區每天平均最低<button class="go" data-go="tour">看全部 →</button></h3>
+      <div class="tbox"><table><tbody>
+        <tr><th>韓國</th><td>百威 邱釜慶 5 天 <span class="num">8,888</span>（每天 1,778）</td></tr>
+        <tr><th>東南亞</th><td>易飛 泰國曼芭 6 日 <span class="num">14,688</span>（每天 2,448）</td></tr>
+        <tr><th>日本</th><td>大榮 沖繩 4 日 <span class="num">15,888</span>（每天 3,972）</td></tr>
+        <tr><th>中東</th><td>易飛 土耳其 10 日 <span class="num">39,900</span>（每天 3,990）</td></tr>
+        <tr><th>美加</th><td>雄獅 美西 8 日 <span class="num">42,900</span>（每天 5,362）</td></tr>
+        <tr><th>歐洲</th><td>東南 奧捷 10 日 <span class="num">58,900</span>（每天 5,890）</td></tr>
+        <tr><th>紐澳</th><td>山富 黃金海岸 6 日 <span class="num">39,900</span>（每天 6,650）</td></tr>
+      </tbody></table></div></div>
+  </section>
+
+  <section><h2>還搶得到的時段</h2>
+    <div class="tbox"><table><thead><tr><th>時間</th><th>內容</th></tr></thead><tbody>
+      <tr><td class="price">10/30 13:00</td><td>君悅凱菲屋／彩日本料理「兩人同行一人免費」，每人 979，限量 50 組</td></tr>
+      <tr><td class="price">10/28–11/11 平日 11:00</td><td>易遊網 100 元機票（沖繩、北海道、曼谷、首爾）</td></tr>
+      <tr><td class="price">11/4 10:00</td><td>易遊網全站折扣碼，最高折 1,000</td></tr>
+      <tr><td class="price">11/4 11:00</td><td>雄獅機票碼，中信卡滿 15,000 折 1,000</td></tr>
+      <tr><td class="price">現場每天 10:00</td><td>大溪笠復威斯汀 M2702 買住宿券送下午茶券，每天 100 張</td></tr>
+      <tr><td class="price">現場每天 11:00、15:00</td><td>六福萬怡 M1609 自助餐套券 7,800</td></tr>
+      <tr><td class="price">現場每天 15:00</td><td>美福 M1607 自助晚餐券 1,600，每天 60 組</td></tr>
+      <tr><td class="price">11/6</td><td>圓山 M1009 快閃住宿券 5,999（10 組）；喜來登十二廚下午茶</td></tr>
+      <tr><td class="price">11/8</td><td>寒舍艾美探索廚房平日自助餐 4 張 4,100</td></tr>
+      <tr><td class="price">11/9</td><td>老爺家庭聯盟券 3,999</td></tr>
+      <tr><td class="price">11/11</td><td>易遊網大阪、釜山 1,111 機票；5 家餐廳 1,111 折扣碼</td></tr>
+    </tbody></table></div>
+    <p class="note">完整 68 筆在「限時搶購」分頁。</p>
+  </section>
+
+  <section class="grid">
+    <div class="card"><h3>最容易吃虧的地方</h3><ul class="plain">
+      <li>中信「千元旅遊大禮包」用 LINE Pay、街口、Apple Pay 付款不算，跟 LINE Pay 6% 回饋只能二選一。</li>
+      <li>兆豐「最高 5,000」是每月在指定旅行社刷卡登錄，不是旅展限定。</li>
+      <li>滿額禮限消費當天到 4 樓 N3014 兌換；去年有些開展不到一小時就換完。</li>
+      <li>餐券服務費：美福、JR東日本、老爺、海霸王甲天下原價寫「＋10%」，最可能現場要補。</li>
+      <li>各家「平日」定義不同；北投麗禧淡季券 10–4 月入住要加價。</li>
+      <li>跟團起價只限最便宜的出發日；小費、簽證多半另計；單人房差都沒寫。</li>
+      <li>機票新聞價多半未稅；廉航行李另計；春節、清明多半不適用。</li>
+    </ul></div>
+    <div class="card"><h3>還沒公布，11/5–11/6 再查</h3><ul class="plain">
+      <li>住宿：國賓、義大、煙波、涵碧樓、桂田</li>
+      <li>餐飲：漢來海港、饗賓、國賓、W、台中林酒店、台中金典（今年無旅展餐券）</li>
+      <li>機票：虎航（去年展前一天才公告）、樂桃、星悅、天馬、阿提哈德、大韓</li>
+      <li>跟團：大部分旅行社的現場價和攤位號</li>
+      <li>官網電子型錄還沒上線</li>
+    </ul>
+    <p class="note">每筆資料都附來源網址；不同來源說法不一樣的，兩邊都記在備註。標「2025參考」的是去年的價格。</p></div>
+  </section>
+</div>
+<div id="view-data" class="view" hidden></div>
+</div></main>
+
+<script type="application/json" id="data">__DATA__</script>
+<script>
+(function(){
+const D = JSON.parse(document.getElementById('data').textContent);
+const SHOTS = __SHOTS__;
+const CFG = {
+  lodging:{show:['飯店名稱','地區','房型','旅展價','原價','折數','每人每晚','使用期限'],filters:['地區','縣市'],price:['旅展價','原價','每人每晚'],sort:'每人每晚'},
+  dining:{show:['飯店/品牌','餐廳','地區','餐別','單張價','每人均價','折數','張數組合','服務費（'],filters:['地區','餐別','服務費（'],price:['單張價','每人均價','原價','套組總價'],sort:'每人均價'},
+  flight:{show:['航空','銷售者','出發地','目的地','區域','艙等','單程/來回','旅展價','是否含稅','出發期間'],filters:['區域','航空','類型'],price:['旅展價'],sort:'旅展價'},
+  tour:{show:['旅行社','行程名稱','目的地國家','天數','出發日期','旅展價','每日平均價','折扣'],filters:['區域分類','旅行社','天數'],price:['旅展價','原價','每日平均價'],sort:'每日平均價'},
+  flash:{show:['日期','時間','攤位','商家','品項','價格','限量'],filters:['日期','商家'],price:[],sort:null},
+  card:{show:['銀行','活動內容','門檻','回饋','期限'],filters:['銀行'],price:[],sort:null},
+  booth:{show:['樓層區','類別','參展單位','攤位號'],filters:['樓層區','類別'],price:[],sort:null}
+};
+const ORDER = ['home','lodging','dining','flight','tour','flash','card','booth'];
+const tabs = document.getElementById('tabs');
+const viewHome = document.getElementById('view-home');
+const viewData = document.getElementById('view-data');
+const state = {};
+
+function col(h, sub){ return h.findIndex(x => x.includes(sub)); }
+function num(s){ if(!s) return NaN; const m = String(s).replace(/,/g,'').match(/\d+(\.\d+)?/); return m ? parseFloat(m[0]) : NaN; }
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function isOld(d, r){
+  const y = d.headers.findIndex(x => x.startsWith('資料年'));
+  return (y >= 0 && r[y].includes('2025')) || r.some(c => c.includes('2025參考'));
+}
+function linkify(s){
+  return esc(s).replace(/https?:\/\/[^\s；，、）)\]」]+/g, u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
+}
+function shots(d, s){
+  const names = s.split(/[；;、,\n]+/).map(x => x.trim()).filter(Boolean);
+  if(!SHOTS) return esc(names.join('、')) + ' <span class="note">（截圖在 GitHub 網站版）</span>';
+  return names.map(n => `<a href="${encodeURI(d.folder + '/截圖_jpg/' + n.replace(/\.png$/i, '.jpg'))}" target="_blank">${esc(n)}</a>`).join('<br>');
+}
+
+ORDER.forEach(k => {
+  const b = document.createElement('button');
+  b.role = 'tab'; b.dataset.key = k; b.id = 'tab-' + k;
+  b.innerHTML = k === 'home' ? '總覽' : `${esc(D[k].name)}<span class="n">${D[k].rows.length}</span>`;
+  b.addEventListener('click', () => go(k));
+  tabs.appendChild(b);
+});
+document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => go(b.dataset.go)));
+
+function go(k){
+  if(!ORDER.includes(k)) k = 'home';
+  tabs.querySelectorAll('button').forEach(b => b.setAttribute('aria-selected', b.dataset.key === k));
+  viewHome.hidden = k !== 'home';
+  viewData.hidden = k === 'home';
+  if(k !== 'home') renderSet(k);
+  if(location.hash.slice(1) !== k) history.replaceState(null, '', '#' + k);
+  try{ localStorage.setItem('itf-tab', k); }catch(e){}
+  window.scrollTo({top:0});
+}
+
+function renderSet(k){
+  const d = D[k], c = CFG[k], h = d.headers;
+  const show = c.show.map(s => col(h, s)).filter(i => i >= 0);
+  const priceCols = new Set(c.price.map(s => col(h, s)).filter(i => i >= 0));
+  const filt = c.filters.map(s => col(h, s)).filter((i, n, a) => i >= 0 && a.indexOf(i) === n);
+  const st = state[k] || (state[k] = {q:'', f:{}, hideOld:false, sort: c.sort ? col(h, c.sort) : -1, dir:1, limit:200, open:new Set()});
+  const hasOld = d.rows.some(r => isOld(d, r));
+
+  let html = `<h2>${esc(d.name)}</h2><div class="tools">
+    <input type="search" id="q-${k}" placeholder="搜尋飯店、地點、行程、航空…" value="${esc(st.q)}" aria-label="搜尋">`;
+  filt.forEach(i => {
+    const vals = [...new Set(d.rows.map(r => r[i].trim()).filter(Boolean))];
+    if(vals.length < 2 || vals.length > 60) return;
+    vals.sort((a, b) => (num(a) - num(b)) || a.localeCompare(b, 'zh-Hant'));
+    html += `<select id="f-${k}-${i}" data-i="${i}" aria-label="${esc(h[i])}"><option value="">${esc(h[i].replace(/[（(].*$/, ''))}：全部</option>` +
+      vals.map(v => `<option${st.f[i] === v ? ' selected' : ''}>${esc(v)}</option>`).join('') + `</select>`;
+  });
+  if(hasOld) html += `<label><input type="checkbox" id="old-${k}"${st.hideOld ? ' checked' : ''}> 隱藏 2025 參考</label>`;
+  html += `<span class="count" id="cnt-${k}"></span></div>
+    <div class="tbox"><table class="data"><thead><tr>${show.map(i => `<th data-i="${i}"${st.sort === i ? ` aria-sort="${st.dir > 0 ? 'ascending' : 'descending'}"` : ''}>${esc(h[i])}</th>`).join('')}</tr></thead><tbody id="tb-${k}"></tbody></table></div>
+    <button class="more" id="more-${k}" hidden>顯示更多</button>
+    <p class="note">點欄位名稱可排序，點任一列展開完整資料、來源網址和截圖。</p>`;
+  viewData.innerHTML = html;
+
+  const draw = () => {
+    const q = st.q.trim().toLowerCase();
+    let rows = d.rows.map((r, idx) => ({r, idx})).filter(({r}) =>
+      (!q || r.join(' ').toLowerCase().includes(q)) &&
+      Object.entries(st.f).every(([i, v]) => !v || r[i].trim() === v) &&
+      !(st.hideOld && isOld(d, r)));
+    if(st.sort >= 0){
+      const i = st.sort;
+      rows.sort((a, b) => {
+        const x = num(a.r[i]), y = num(b.r[i]);
+        if(isNaN(x) && isNaN(y)) return a.r[i].localeCompare(b.r[i], 'zh-Hant') * st.dir;
+        if(isNaN(x)) return 1; if(isNaN(y)) return -1;
+        return (x - y) * st.dir;
+      });
+    }
+    document.getElementById('cnt-' + k).textContent = `${rows.length} / ${d.rows.length} 筆`;
+    const tb = document.getElementById('tb-' + k);
+    tb.innerHTML = rows.slice(0, st.limit).map(({r, idx}) => {
+      const cells = show.map((i, n) => {
+        const v = r[i] || '';
+        if(priceCols.has(i)) return `<td class="price">${esc(v)}</td>`;
+        const pill = n === 0 && isOld(d, r) ? '<span class="pill">2025參考</span>' : '';
+        return `<td><div class="clip">${esc(v)}${pill}</div></td>`;
+      }).join('');
+      let out = `<tr class="row" data-idx="${idx}" tabindex="0">${cells}</tr>`;
+      if(st.open.has(idx)){
+        out += `<tr class="detail"><td colspan="${show.length}"><dl class="kv">` + h.map((name, i) => {
+          const v = r[i]; if(!v || !v.trim()) return '';
+          const body = name.includes('截圖') ? shots(d, v) : linkify(v);
+          return `<dt>${esc(name)}</dt><dd>${body}</dd>`;
+        }).join('') + `</dl></td></tr>`;
+      }
+      return out;
+    }).join('') || `<tr><td colspan="${show.length}" class="note">沒有符合的資料，換個關鍵字或清除篩選。</td></tr>`;
+    const more = document.getElementById('more-' + k);
+    more.hidden = rows.length <= st.limit;
+    more.textContent = `顯示更多（還有 ${rows.length - st.limit} 筆）`;
+  };
+
+  document.getElementById('q-' + k).addEventListener('input', e => { st.q = e.target.value; st.limit = 200; draw(); });
+  viewData.querySelectorAll('select').forEach(s => s.addEventListener('change', e => { st.f[e.target.dataset.i] = e.target.value; st.limit = 200; draw(); }));
+  const oc = document.getElementById('old-' + k);
+  if(oc) oc.addEventListener('change', e => { st.hideOld = e.target.checked; draw(); });
+  viewData.querySelectorAll('th[data-i]').forEach(th => th.addEventListener('click', () => {
+    const i = +th.dataset.i;
+    st.dir = st.sort === i ? -st.dir : 1; st.sort = i;
+    viewData.querySelectorAll('th').forEach(t => t.removeAttribute('aria-sort'));
+    th.setAttribute('aria-sort', st.dir > 0 ? 'ascending' : 'descending');
+    draw();
+  }));
+  const tb = document.getElementById('tb-' + k);
+  const toggle = tr => { const idx = +tr.dataset.idx; st.open.has(idx) ? st.open.delete(idx) : st.open.add(idx); draw(); };
+  tb.addEventListener('click', e => { if(e.target.closest('a')) return; const tr = e.target.closest('tr.row'); if(tr) toggle(tr); });
+  tb.addEventListener('keydown', e => { if(e.key === 'Enter'){ const tr = e.target.closest('tr.row'); if(tr) toggle(tr); } });
+  document.getElementById('more-' + k).addEventListener('click', () => { st.limit += 300; draw(); });
+  draw();
+}
+
+let start = location.hash.slice(1);
+if(!ORDER.includes(start)){ try{ start = localStorage.getItem('itf-tab') || 'home'; }catch(e){ start = 'home'; } }
+go(start);
+window.addEventListener('hashchange', () => go(location.hash.slice(1)));
+})();
+</script>
