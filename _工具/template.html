@@ -1,6 +1,6 @@
 <title>2026 ITF 旅展優惠</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;600;700&display=swap">
 <style>
 /* 版面：深藍票券頁首＋黏頂分頁（國內／國外／展場分組）；資料頁為「優惠卡」格狀排列，價格最大、條件分行，點開看完整資料；可收藏 */
 :root{
@@ -10,6 +10,9 @@
   --star:#d99a00;
   --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --f-num:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --shadow-sm:0 1px 3px rgba(24,34,58,.05);
+  --shadow-md:0 4px 12px rgba(24,34,58,.07);
+  --shadow-lg:0 10px 25px -3px rgba(24,34,58,.12), 0 4px 8px -2px rgba(24,34,58,.05);
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#11161f; --surface:#1a2230; --sunk:#141b26; --ink:#eaeef5; --muted:#a6b1c3; --faint:#7d899c; --line:#2b3648;
@@ -29,10 +32,10 @@ button,input,select{font:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 /* 頁首 */
-header.pass{background:var(--navy);color:var(--navy-ink)}
-header.pass .wrap{padding-block:20px 18px;display:flex;flex-wrap:wrap;gap:14px 36px;align-items:flex-end;justify-content:space-between}
-.pass h1{font-size:clamp(22px,3.6vw,30px);font-weight:900;margin:0;line-height:1.3;text-wrap:balance}
-.pass .sub{opacity:.85;font-size:14px;margin-top:4px}
+header.pass{background:linear-gradient(135deg, #162a4a 0%, #1d3760 100%);color:var(--navy-ink);box-shadow:0 4px 16px rgba(0,0,0,.1)}
+header.pass .wrap{padding-block:22px 20px;display:flex;flex-wrap:wrap;gap:14px 36px;align-items:flex-end;justify-content:space-between}
+.pass h1{font-size:clamp(22px,3.6vw,30px);font-weight:900;margin:0;line-height:1.3;text-wrap:balance;letter-spacing:-.01em}
+.pass .sub{opacity:.85;font-size:14px;margin-top:5px}
 .stubs{display:flex;flex-wrap:wrap;gap:8px 24px}
 .stub{border-left:2px dashed rgba(255,255,255,.4);padding-left:12px;line-height:1.35}
 .stub span{display:block;font-size:12px;opacity:.8}
@@ -45,26 +48,26 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 nav.tabs .wrap{display:flex;gap:2px;overflow-x:auto;scrollbar-width:thin;align-items:stretch}
 nav.tabs .grp{align-self:center;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--faint);padding:0 2px 0 14px;margin-left:6px;border-left:1px solid var(--line);white-space:nowrap;line-height:1.2}
 nav.tabs .star-n{color:var(--star)}
-nav.tabs button{background:none;border:0;color:var(--muted);padding:13px 14px 11px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;font-size:15px}
+nav.tabs button{background:none;border:0;color:var(--muted);padding:13px 14px 11px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;font-size:15px;transition:color .12s,border-color .12s}
 nav.tabs button:hover{color:var(--ink)}
 nav.tabs button[aria-current="page"]{color:var(--ink);font-weight:700;border-bottom-color:var(--accent)}
 nav.tabs .n{font-size:12px;color:var(--faint);margin-left:5px;font-variant-numeric:tabular-nums}
 
 main .wrap{padding-block:24px 64px}
-h2{font-size:22px;margin:0 0 4px;line-height:1.35;text-wrap:balance}
-h3{font-size:18px;margin:0 0 12px;line-height:1.4}
+h2{font-size:24px;margin:0 0 6px;line-height:1.35;text-wrap:balance;font-weight:900}
+h3{font-size:18px;margin:0 0 12px;line-height:1.4;font-weight:700}
 .lead{color:var(--muted);margin:0 0 18px;font-size:15px}
 .note{color:var(--muted);font-size:14px;margin:10px 0 0}
 section{margin-bottom:32px}
 
 /* 總覽 */
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:10px;margin:0 0 28px}
-.fact{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;min-width:0}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px;min-width:0;box-shadow:var(--shadow-sm)}
 .fact b{display:block;font-size:13px;color:var(--muted);font-weight:500}
-.alert{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin-bottom:32px}
+.alert{background:var(--accent-soft);border-radius:14px;padding:18px 20px;margin-bottom:32px;border:1px solid rgba(201,86,28,.15)}
 .alert h3{color:var(--accent);margin-bottom:8px}
 .timeline{display:grid;gap:0;margin:0;padding:0;list-style:none}
-.timeline li{display:grid;grid-template-columns:minmax(118px,150px) 1fr;gap:14px;padding:9px 0;border-bottom:1px solid var(--line)}
+.timeline li{display:grid;grid-template-columns:minmax(118px,150px) 1fr;gap:14px;padding:10px 0;border-bottom:1px solid var(--line)}
 .timeline li:last-child{border-bottom:0}
 .timeline .when{font-weight:700;font-variant-numeric:tabular-nums}
 .alert .timeline li{border-color:rgba(201,86,28,.2)}
@@ -79,18 +82,18 @@ section{margin-bottom:32px}
 .entry{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:16px;margin-bottom:32px}
 .zone h3{font-size:13px;letter-spacing:.12em;color:var(--muted);margin:0 0 8px;font-weight:700}
 .zone .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.tile{display:flex;flex-direction:column;gap:2px;text-align:left;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:12px;padding:14px 16px;cursor:pointer;color:var(--ink);min-width:0;transition:transform .12s,box-shadow .12s}
+.tile{display:flex;flex-direction:column;gap:2px;text-align:left;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:12px;padding:14px 16px;cursor:pointer;color:var(--ink);min-width:0;box-shadow:var(--shadow-sm);transition:transform .15s ease,box-shadow .15s ease}
 .zone.abroad .tile{border-left-color:var(--sky)}
-.tile:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.tile:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
 .tile .t{font-size:18px;font-weight:900;line-height:1.35}
 .tile .c{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
 .tile .p{font-size:14px;color:var(--accent);font-weight:700;margin-top:6px}
 .zone.abroad .tile .p{color:var(--sky)}
 .picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,500px),1fr));gap:16px}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 22px;min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px;min-width:0;box-shadow:var(--shadow-sm)}
 .panel-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:10px}
 .panel-head h3{margin:0}
-.linkbtn{background:none;border:0;color:var(--accent);cursor:pointer;padding:4px 0;font-size:15px;white-space:nowrap}
+.linkbtn{background:none;border:0;color:var(--accent);cursor:pointer;padding:4px 0;font-size:15px;white-space:nowrap;font-weight:600}
 .rank{list-style:none;margin:0;padding:0;display:grid}
 .rank li{display:grid;grid-template-columns:minmax(1.6em,auto) 1fr auto;gap:4px 10px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line)}
 .rank li:last-child{border-bottom:0}
@@ -103,67 +106,133 @@ ul.plain{margin:0;padding-left:1.2em;display:grid;gap:8px}
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px}
 
 /* 資料頁工具列 */
-.toolbar{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:12px;margin:16px 0}
+.toolbar{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:12px;margin:16px 0;box-shadow:var(--shadow-sm)}
 .searchrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.searchrow input[type=search]{flex:1 1 260px;min-width:0;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font-size:16px}
+.searchrow input[type=search]{flex:1 1 260px;min-width:0;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font-size:16px;transition:border-color .15s}
+.searchrow input[type=search]:focus{border-color:var(--accent);outline:none}
 .filters{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:flex-end}
-.field{display:grid;gap:2px;min-width:0}
-.field span{font-size:13px;color:var(--muted)}
+.field{display:grid;gap:3px;min-width:0}
+.field span{font-size:13px;color:var(--muted);font-weight:500}
 .field select{padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);max-width:100%;min-width:9em}
 .check{display:flex;gap:8px;align-items:center;font-size:15px;padding-bottom:8px;cursor:pointer}
 .check input{width:18px;height:18px;accent-color:var(--accent)}
-.reset{background:none;border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--muted);cursor:pointer}
+.reset{background:none;border:1px solid var(--line);border-radius:8px;padding:8px 14px;color:var(--muted);cursor:pointer;font-size:14px;transition:all .12s}
+.reset:hover{color:var(--ink);border-color:var(--faint)}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin:0;padding:0;border:0;min-width:0}
-.chips legend{font-size:13px;color:var(--muted);padding:0;margin-bottom:4px;float:left;width:100%}
-.chip{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:99px;padding:5px 13px;font-size:14px;cursor:pointer;white-space:nowrap}
+.chips legend{font-size:13px;color:var(--muted);padding:0;margin-bottom:4px;float:left;width:100%;font-weight:500}
+.chip{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:99px;padding:5px 13px;font-size:14px;cursor:pointer;white-space:nowrap;transition:all .12s}
 .chip:hover{border-color:var(--faint)}
 .chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--navy-ink);font-weight:700}
 @media (max-width:640px){.chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding-inline:16px}.chips legend{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
 .count{font-size:15px;color:var(--muted);margin:0 0 12px}
 .count b{color:var(--ink);font-variant-numeric:tabular-nums}
 
-/* 優惠卡 */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:14px}
-.deal{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
-.deal.old{background:var(--sunk)}
-.deal.saved{border-color:var(--star);box-shadow:inset 0 0 0 1px var(--star)}
+/* 優惠卡通用樣式 */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px}
+.deal{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0;box-shadow:var(--shadow-sm);transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease;position:relative}
+.deal:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);border-color:#cbd5e1}
+.deal.old{background:var(--sunk);opacity:.92}
+.deal.saved{border-color:var(--star);box-shadow:inset 0 0 0 1.5px var(--star), var(--shadow-sm)}
 .top{display:flex;gap:8px;align-items:flex-start;justify-content:space-between}
-.save-btn{flex:none;background:none;border:1px solid var(--line);border-radius:99px;color:var(--faint);cursor:pointer;padding:2px 10px;font-size:13px;line-height:1.6;white-space:nowrap;margin-left:auto}
+.save-btn{flex:none;background:none;border:1px solid var(--line);border-radius:99px;color:var(--faint);cursor:pointer;padding:2px 10px;font-size:13px;line-height:1.6;white-space:nowrap;margin-left:auto;transition:all .12s}
 .save-btn:hover{color:var(--star);border-color:var(--star)}
-.save-btn[aria-pressed="true"]{color:var(--star);border-color:var(--star);font-weight:700}
-.tags{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.save-btn[aria-pressed="true"]{color:var(--star);border-color:var(--star);font-weight:700;background:rgba(217,154,0,.08)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;min-width:0;align-items:center}
 .tag.booth{background:var(--navy);color:var(--navy-ink);font-family:var(--f-num);font-weight:600}
-.tag{font-size:13px;line-height:1.5;padding:1px 9px;border-radius:99px;background:var(--sunk);color:var(--muted);white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.tag{font-size:12px;line-height:1.5;padding:2px 8px;border-radius:6px;background:var(--sunk);color:var(--muted);white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
 .deal.old .tag{background:var(--surface)}
 .tag.disc{background:var(--good-soft);color:var(--good);font-weight:700}
 .tag.y25{background:var(--old-soft);color:var(--old);font-weight:700}
-.deal h4{font-size:17px;line-height:1.45;margin:0;overflow-wrap:anywhere}
-.deal .subt{color:var(--muted);font-size:15px;line-height:1.55;margin-top:2px;overflow-wrap:anywhere}
-.price{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
-.price .now{font-family:var(--f-num);font-size:24px;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1.2;overflow-wrap:anywhere}
+.deal h4{font-size:17px;line-height:1.45;margin:0;overflow-wrap:anywhere;font-weight:700}
+.deal .subt{color:var(--muted);font-size:14px;line-height:1.55;margin-top:2px;overflow-wrap:anywhere}
+.price{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.price .now{font-family:var(--f-num);font-size:24px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1.2;overflow-wrap:anywhere}
 .price .now.txt{font-family:var(--f-body);font-size:17px;font-weight:700;line-height:1.5}
 .price .now.na{font-family:var(--f-body);font-size:16px;color:var(--faint);font-weight:500}
-.price .was{color:var(--faint);text-decoration:line-through;font-size:15px;font-variant-numeric:tabular-nums}
-.price .per{font-size:14px;background:var(--accent-soft);color:var(--accent);border-radius:6px;padding:1px 8px;font-weight:700;white-space:nowrap}
-.info{margin:0;display:grid;gap:4px;font-size:15px}
-.info div{display:grid;grid-template-columns:5.2em 1fr;gap:8px}
-.info dt{color:var(--muted);font-size:14px}
+.price .was{color:var(--faint);text-decoration:line-through;font-size:14px;font-variant-numeric:tabular-nums}
+.price .per{font-size:13px;background:var(--accent-soft);color:var(--accent);border-radius:6px;padding:2px 8px;font-weight:700;white-space:nowrap}
+.info{margin:0;display:grid;gap:5px;font-size:14px}
+.info div{display:grid;grid-template-columns:4.8em 1fr;gap:8px}
+.info dt{color:var(--muted);font-size:13px}
 .info dd{margin:0;overflow-wrap:anywhere;line-height:1.55}
-.more-btn{align-self:flex-start;background:none;border:0;color:var(--accent);cursor:pointer;padding:2px 0;font-size:15px;margin-top:auto}
-.full{margin:0;border-top:1px dashed var(--line);padding-top:10px;display:grid;gap:8px;font-size:14px}
-.full dt{color:var(--muted);font-size:13px}
+.more-btn{align-self:flex-start;background:var(--sunk);border:1px solid var(--line);border-radius:8px;color:var(--ink);cursor:pointer;padding:5px 12px;font-size:13px;font-weight:600;margin-top:auto;transition:all .12s}
+.more-btn:hover{background:var(--surface);border-color:var(--accent);color:var(--accent)}
+.full{margin:0;border-top:1px dashed var(--line);padding-top:12px;display:grid;gap:8px;font-size:14px}
+.full dt{color:var(--muted);font-size:13px;font-weight:600}
 .full dd{margin:0;overflow-wrap:anywhere;line-height:1.6}
-.loadmore{display:block;margin:20px auto 0;padding:10px 26px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);cursor:pointer;font-size:15px}
-.empty{background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:30px;text-align:center;color:var(--muted)}
+.loadmore{display:block;margin:24px auto 0;padding:11px 28px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);cursor:pointer;font-size:15px;font-weight:600;box-shadow:var(--shadow-sm);transition:all .15s}
+.loadmore:hover{box-shadow:var(--shadow-md);border-color:var(--faint)}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:14px;padding:36px;text-align:center;color:var(--muted)}
 .saved-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:24px 0 10px}
 .saved-head h3{margin:0}
-.totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:6;background:var(--navy);color:var(--navy-ink);border:0;border-radius:99px;padding:10px 16px;font-size:14px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:6;background:var(--navy);color:var(--navy-ink);border:0;border-radius:99px;padding:10px 16px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.2);transition:transform .12s}
+.totop:hover{transform:translateY(-2px)}
+
+/* ===== 機票卡片專屬強化 ===== */
+.deal.deal-flight{border-top:4px solid var(--sky);background:linear-gradient(180deg, rgba(31,95,168,.02) 0%, var(--surface) 35%)}
+.flight-airline{font-size:15px;font-weight:800;color:var(--navy);display:inline-flex;align-items:center;gap:5px;letter-spacing:.01em}
+:root[data-theme="dark"] .flight-airline, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .flight-airline{color:var(--sky)}}
+.flight-route-box{background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;margin:2px 0 4px}
+.flight-city{font-size:16px;font-weight:900;color:var(--ink);overflow-wrap:anywhere}
+.flight-city.dep{text-align:left}
+.flight-city.arr{text-align:right}
+.flight-path{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1 1 50px;min-width:50px;padding:0 4px}
+.flight-path .path-line{width:100%;height:2px;background:repeating-linear-gradient(90deg, var(--sky) 0, var(--sky) 4px, transparent 4px, transparent 8px);position:relative;display:flex;align-items:center;justify-content:center}
+.flight-path .plane-fly{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--surface);border:1px solid var(--line);color:var(--sky);border-radius:99px;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px}
+.flight-path .flight-type-tag{font-size:11px;font-weight:600;color:var(--muted);margin-top:3px;white-space:nowrap}
+
+/* 含稅 / 未稅高亮標籤 */
+.tag-tax{font-size:12px;font-weight:800;line-height:1.4;padding:2px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.tag-tax.tax-in{background:var(--good-soft);color:var(--good);border:1px solid rgba(29,115,73,.35)}
+.tag-tax.tax-ex{background:var(--accent-soft);color:var(--accent);border:1px solid rgba(201,86,28,.3)}
+.tag-tax.tax-code{background:#f3e8ff;color:#6b21a8;border:1px solid rgba(107,33,168,.3)}
+:root[data-theme="dark"] .tag-tax.tax-code, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag-tax.tax-code{background:#2e1b47;color:#d8b4fe;border-color:#6b21a8}}
+
+/* 行李額度標籤 */
+.tag-baggage{font-size:12px;font-weight:700;line-height:1.4;padding:2px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;background:var(--sky-soft);color:var(--sky);border:1px solid rgba(31,95,168,.25);white-space:nowrap}
+.tag-baggage.warn{background:#fff8e6;color:#b45309;border-color:rgba(180,83,9,.3)}
+:root[data-theme="dark"] .tag-baggage.warn, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag-baggage.warn{background:#332612;color:#fbbf24;border-color:#78350f}}
+
+/* 折扣碼券盒 */
+.coupon-box{background:#faf5ff;border:1px dashed #a855f7;border-radius:8px;padding:6px 10px;display:flex;align-items:center;justify-content:space-between;gap:8px;margin:2px 0 2px}
+:root[data-theme="dark"] .coupon-box, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .coupon-box{background:#231738;border-color:#7e22ce}}
+.coupon-code{font-family:var(--f-num);font-size:14px;font-weight:700;color:#7e22ce;letter-spacing:.04em}
+:root[data-theme="dark"] .coupon-code, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .coupon-code{color:#d8b4fe}}
+.copy-btn{background:var(--surface);border:1px solid #c084fc;color:#7e22ce;border-radius:6px;padding:2px 9px;font-size:12px;cursor:pointer;font-weight:700;transition:all .12s}
+.copy-btn:hover{background:#7e22ce;color:#fff}
+
+/* 住宿早餐標籤 */
+.tag-meal{font-size:12px;font-weight:700;line-height:1.4;padding:2px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.tag-meal.in{background:#e6f7f2;color:#0f766e;border:1px solid rgba(15,118,110,.3)}
+.tag-meal.no{background:var(--sunk);color:var(--muted);border:1px solid var(--line)}
+:root[data-theme="dark"] .tag-meal.in, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag-meal.in{background:#133431;color:#5eead4;border-color:#115e59}}
+
+/* 機票避坑指南 Banner */
+.flight-guide{background:linear-gradient(135deg, rgba(31,95,168,.08) 0%, rgba(31,95,168,.02) 100%);border:1px solid rgba(31,95,168,.25);border-radius:14px;padding:16px 18px;margin-bottom:20px}
+.flight-guide-head{display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;user-select:none}
+.flight-guide-title{font-size:16px;font-weight:800;color:var(--sky);display:flex;align-items:center;gap:6px}
+.flight-guide-toggle{background:none;border:0;color:var(--sky);font-size:13px;cursor:pointer;font-weight:700}
+.flight-guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px;margin-top:12px;padding-top:12px;border-top:1px dashed rgba(31,95,168,.2)}
+.guide-col{display:flex;gap:8px;font-size:13px;line-height:1.55;color:var(--ink)}
+.guide-num{font-family:var(--f-num);font-weight:700;color:var(--sky);font-size:15px;opacity:.8;flex:none}
+.guide-col b{display:block;font-size:13px;color:var(--sky);margin-bottom:2px}
+
+/* 快速開關（Quick Filter Switches） */
+.quick-switches{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding-top:4px}
+.switch-chip{background:var(--bg);border:1px solid var(--line);color:var(--muted);border-radius:99px;padding:4px 12px;font-size:13px;cursor:pointer;font-weight:600;transition:all .12s;display:inline-flex;align-items:center;gap:4px}
+.switch-chip:hover{border-color:var(--faint);color:var(--ink)}
+.switch-chip[aria-pressed="true"]{background:var(--sky);border-color:var(--sky);color:#fff;font-weight:700}
+.switch-chip.tax[aria-pressed="true"]{background:var(--good);border-color:var(--good);color:#fff}
+
+/* 吐司通知 Toast */
+.toast-notice{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:rgba(24,34,58,.94);color:#fff;padding:10px 22px;border-radius:99px;font-size:14px;font-weight:700;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .25s cubic-bezier(0.16,1,0.3,1),opacity .25s;opacity:0;pointer-events:none}
+.toast-notice.show{transform:translateX(-50%) translateY(0);opacity:1}
 
 /* 攤位表 */
-.tbox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.tbox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-sm)}
 table{border-collapse:collapse;width:100%;font-size:15px}
 th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:13px;color:var(--muted);font-weight:700;white-space:nowrap}
+th{font-size:13px;color:var(--muted);font-weight:700;white-space:nowrap;background:var(--sunk)}
 td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
 @media (max-width:520px){
   .timeline li{grid-template-columns:1fr;gap:0}
@@ -171,13 +240,14 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
   .fact{padding:10px 12px;font-size:14px;line-height:1.55}
   .tile .t{font-size:17px}
   .price .now{font-size:22px}
+  .flight-city{font-size:15px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 
 <header class="pass"><div class="wrap">
   <div><h1>2026 ITF 台灣國際旅展 優惠整理</h1>
-  <div class="sub">住宿・餐券・機票・跟團｜資料查詢 2026-10-29｜實際以商家公告為準</div></div>
+  <div class="sub">住宿・餐券・機票・跟團｜資料查詢 2026-11-01｜實際以商家公告為準</div></div>
   <div class="stubs">
     <div class="stub"><span>展期</span><b>11/6（五）–11/9（一）</b></div>
     <div class="stub"><span>地點</span><b>南港展覽館 1 館</b></div>
@@ -209,7 +279,7 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
 
   <div class="alert">
     <h3>要搶的時間</h3>
-    <!-- data-start／data-end：這一項開始與最後有效的日期（沒有 start 表示只有 end 當天），依今天自動標「已過／進行中／下一個」 -->
+    <!-- data-start／data-end：這一項開始與最後有效的日期，依今天自動標「已過／進行中／下一個」 -->
     <ul class="timeline">
       <li data-end="2026-10-30"><span class="when">10/30 13:00</span><span>君悅凱菲屋、彩日本料理「兩人同行一人免費」，每人 979 元，限量 50 組</span></li>
       <li data-start="2026-10-29" data-end="2026-11-11"><span class="when">到 11/11 平日 11:00</span><span>易遊網 100 元機票（沖繩、北海道、曼谷、首爾）</span></li>
@@ -221,12 +291,12 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
       <li data-end="2026-11-08"><span class="when">只有 11/8</span><span>寒舍艾美探索廚房平日自助餐 4 張 4,100 元</span></li>
       <li data-end="2026-11-09"><span class="when">只有 11/9</span><span>老爺家庭聯盟券 3,999 元</span></li>
     </ul>
-    <p class="note">完整 68 筆在「限時搶購」分頁。</p>
+    <p class="note">完整限時搶購在「限時搶購」分頁。</p>
   </div>
 
   <section class="picks">
     <div class="panel">
-      <div class="panel-head"><h3>國內住宿 最划算</h3><button class="linkbtn" data-go="lodging">看全部 159 筆 →</button></div>
+      <div class="panel-head"><h3>國內住宿 最划算</h3><button class="linkbtn" data-go="lodging">看全部住宿 →</button></div>
       <ol class="rank">
         <li><span class="no">1</span><span class="what">承億文旅 三天兩夜雙人券<small>淡水或花蓮住兩晚，含早；只能電話訂房</small></span><span class="amt">2,999<small>每人每晚約 750</small></span></li>
         <li><span class="no">2</span><span class="what">承億集團 聯合雙人房券<small>含早；買 8 送 1 後約 844 元</small></span><span class="amt">1,899<small>每人每晚約 950</small></span></li>
@@ -236,7 +306,7 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
       </ol>
     </div>
     <div class="panel">
-      <div class="panel-head"><h3>餐券 最划算</h3><button class="linkbtn" data-go="dining">看全部 185 筆 →</button></div>
+      <div class="panel-head"><h3>餐券 最划算</h3><button class="linkbtn" data-go="dining">看全部餐券 →</button></div>
       <ol class="rank">
         <li><span class="no">1</span><span class="what">海霸王甲天下 四人套餐<small>只在展場賣，每天 50 組（M1006）</small></span><span class="amt">888<small>每人 222</small></span></li>
         <li><span class="no">2</span><span class="what">海霸王打狗霸 日式海陸雙人券</span><span class="amt">688<small>每人 344</small></span></li>
@@ -246,20 +316,20 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
       </ol>
     </div>
     <div class="panel">
-      <div class="panel-head"><h3>國外機票 各區最低（含稅來回）</h3><button class="linkbtn" data-go="flight">看全部 314 筆 →</button></div>
+      <div class="panel-head"><h3>國外機票 各區最低（含稅來回）</h3><button class="linkbtn" data-go="flight">看全部機票 →</button></div>
       <ol class="rank">
         <li><span class="no">港澳</span><span class="what">澳門航空 台北或高雄→澳門<small>含 32 公斤行李</small></span><span class="amt">約 6,650</span></li>
-        <li><span class="no">東南亞</span><span class="what">汶萊皇家 →汶萊</span><span class="amt">7,253</span></li>
-        <li><span class="no">日本</span><span class="what">日航 →沖繩<small>含 2 件行李</small></span><span class="amt">約 7,616</span></li>
-        <li><span class="no">韓國</span><span class="what">華航 →釜山</span><span class="amt">約 10,014</span></li>
+        <li><span class="no">日本</span><span class="what">日航 →沖繩<small>含 2 件 23kg 免費託運（東京 13,859）</small></span><span class="amt">7,616</span></li>
+        <li><span class="no">東南亞</span><span class="what">汶萊皇家 →汶萊 / 越捷全線 0 元起（未稅）</span><span class="amt">7,253</span></li>
+        <li><span class="no">韓國</span><span class="what">大韓航空 / 華航 →首爾、釜山<small>含 23kg 行李</small></span><span class="amt">約 9,880</span></li>
         <li><span class="no">紐澳</span><span class="what">汶萊皇家 →墨爾本<small>轉機</small></span><span class="amt">18,919</span></li>
-        <li><span class="no">歐洲</span><span class="what">新航<small>新加坡轉機</small></span><span class="amt">25,648</span></li>
-        <li><span class="no">美加</span><span class="what">星宇 →舊金山</span><span class="amt">25,650</span></li>
+        <li><span class="no">歐洲</span><span class="what">新航（轉機 25,648）/ 阿提哈德 指定行程 8 折起</span><span class="amt">25,648</span></li>
+        <li><span class="no">美加</span><span class="what">星宇航空 →舊金山</span><span class="amt">25,650</span></li>
       </ol>
-      <p class="note">旅展機票起價只比平常便宜 2–4%，真正省的是限量折扣碼。新聞上的價格大多不含稅。</p>
+      <p class="note">旅展機票起價通常未稅，加上稅費後與平時差距有限，最划算的是日本航空（含2件23kg行李）與國泰、星宇旅展現折折扣碼！</p>
     </div>
     <div class="panel">
-      <div class="panel-head"><h3>跟團 各區每天最便宜</h3><button class="linkbtn" data-go="tour">看全部 1,723 筆 →</button></div>
+      <div class="panel-head"><h3>跟團 各區每天最便宜</h3><button class="linkbtn" data-go="tour">看全部跟團 →</button></div>
       <ol class="rank">
         <li><span class="no">韓國</span><span class="what">百威 邱釜慶超值 5 天</span><span class="amt">8,888<small>每天 1,778</small></span></li>
         <li><span class="no">東南亞</span><span class="what">易飛 泰國曼芭 6 日</span><span class="amt">14,688<small>每天 2,448</small></span></li>
@@ -282,18 +352,18 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
       <li>跟團起價只限最便宜的出發日；小費、簽證多半另外付；單人房價差都沒寫。</li>
       <li>機票新聞價多半不含稅；廉航行李另外算；春節、清明多半不能用。</li>
     </ul></div>
-    <div class="panel"><h3>還沒公布，11/5–11/6 再查</h3><ul class="plain">
-      <li>住宿：國賓、煙波、涵碧樓、桂田等，請再查各商品細節</li>
-      <li>機票：虎航（去年開展前一天才公告）、樂桃、星悅、天馬、阿提哈德、大韓</li>
-      <li>跟團：大部分旅行社的現場價和攤位號碼</li>
-      <li>官網電子型錄還沒上線</li>
+    <div class="panel"><h3>查證進度與追蹤備忘</h3><ul class="plain">
+      <li>住宿：重點 12 家集團加價規定與攤位已完整補齊，其餘飯店持續留意官方公告</li>
+      <li>機票：阿提哈德（J116）、國泰（I403）、日航（K101）、大韓、越捷促銷與折扣碼已補齊；虎航（J709）、樂桃、星悅開展前夕促銷持續追蹤</li>
+      <li>跟團：各旅行社現場加碼優惠開展時以現場看板為主</li>
+      <li>展場手冊：官方電子型錄上線後同步核實</li>
     </ul>
-    <p class="note">每筆資料都附來源網址。不同來源說法不一樣的，兩邊都記在備註。標「2025 參考」的是去年的價格。</p></div>
+    <p class="note">每筆資料都附來源網址。不同來源說法不一樣的，兩邊都記在備註。標「2025 舊價格」的是去年的價格。</p></div>
   </section>
 </div>
 <div id="view-data" hidden></div>
 </div></main>
-<button class="totop" id="totop" hidden>↑ 回到上面</button>
+<button class="totop" id="totop" hidden>↑ 回到頂部</button>
 
 <script type="application/json" id="data">__DATA__</script>
 <script>
@@ -321,7 +391,7 @@ const CFG = {
     filters:['銀行'], sorts:[]},
   booth:{table:true, filters:['樓層區','類別']}
 };
-// 卡片上醒目顯示攤位號（展場找攤位用）；第一個篩選欄位改成可直接點的標籤
+// 卡片上醒目顯示攤位號；第一欄篩選提供快捷點擊標籤
 ['lodging','dining','flight','tour'].forEach(k => { CFG[k].booth = '攤位號碼'; CFG[k].chips = true; });
 const GROUPS = [['', ['home']], ['國內', ['lodging','dining']], ['國外', ['flight','tour']], ['展場', ['flash','card','booth']], ['', ['saved']]];
 const ORDER = GROUPS.flatMap(g => g[1]);
@@ -334,20 +404,34 @@ let view = 'home';
 
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const col = (h, sub) => sub ? h.findIndex(x => x.includes(sub)) : -1;
-// 只把「主要是一個數字」的欄位當價格（例：2999、約 1,200、1550（起）），一長串說明文字不算
 const num = s => { s = String(s || '').trim(); const m = s.match(/\d[\d,]*(\.\d+)?/);
   return m && s.length <= m[0].length + 8 ? parseFloat(m[0].replace(/,/g, '')) : NaN; };
 const blank = v => !v || !String(v).trim() || /^(未公布|未標示|查無|—|-|無)$/.test(String(v).trim());
 const fmt = v => /^\s*[\d,]+(\.\d+)?\s*$/.test(v) ? Number(String(v).replace(/,/g, '')).toLocaleString('zh-TW') : String(v).trim();
 const isOld = (d, r) => { const y = d.headers.findIndex(x => x.startsWith('資料年')); return (y >= 0 && r[y].includes('2025')) || r.some(c => c.includes('2025參考')); };
-const linkify = s => esc(s).replace(/https?:\/\/[^\s；，、）)\]」]+/g, u => `<a href="${u}" target="_blank" rel="noopener">${u.length > 60 ? u.slice(0, 57) + '…' : u}</a>`);
+const linkify = s => esc(s).replace(/https?:\/\/[^\s；，、）)\]」]+/g, u => `<a href="${u}" target="_blank" rel="noopener">${u.length > 60 ? u.slice(0, 57) + '…' : u} ↗</a>`);
 function shots(d, s){
   const names = s.split(/[；;、,\n]+/).map(x => x.trim()).filter(Boolean);
-  if(!SHOTS) return esc(names.join('、')) + '<br><span class="note">截圖請到 GitHub 網站版看</span>';
-  return names.map(n => `<a href="${encodeURI(d.folder + '/截圖_jpg/' + n.replace(/\.png$/i, '.jpg'))}" target="_blank">看截圖：${esc(n.replace(/\.png$/i, ''))}</a>`).join('<br>');
+  if(!SHOTS) return esc(names.join('、')) + '<br><span class="note">截圖請至 GitHub 網站版查看</span>';
+  return names.map(n => `<a href="${encodeURI(d.folder + '/截圖_jpg/' + n.replace(/\.png$/i, '.jpg'))}" target="_blank">🖼 查看截圖：${esc(n.replace(/\.png$/i, ''))}</a>`).join('<br>');
 }
 
-// 收藏：存在這台裝置的瀏覽器裡，用「分類＋名稱＋價格」當鑰匙，資料重新整理後序號變了也找得回來
+// 浮動提示 Toast
+function showToast(msg){
+  let t = document.getElementById('toast-notice');
+  if(!t){
+    t = document.createElement('div');
+    t.id = 'toast-notice';
+    t.className = 'toast-notice';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// 收藏系統
 let saved = new Set();
 try{ saved = new Set(JSON.parse(localStorage.getItem('itf-saved') || '[]')); }catch(e){}
 const persist = () => { try{ localStorage.setItem('itf-saved', JSON.stringify([...saved])); }catch(e){} };
@@ -370,7 +454,7 @@ starCount();
 document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => go(b.dataset.go)));
 document.querySelectorAll('[data-n]').forEach(s => s.textContent = `${D[s.dataset.n].rows.length.toLocaleString()} 筆`);
 
-// 以台北時間的「今天」標倒數、標搶購時程已過／下一個
+// 倒數計時與時程
 const today = new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Taipei'}).format(new Date());
 (function(){
   const cd = document.getElementById('countdown'), day = s => Date.parse(s + 'T00:00:00Z') / 864e5;
@@ -400,9 +484,21 @@ function go(k){
   window.scrollTo({top:0});
 }
 
-// 收藏鈕與「完整資料」鈕：所有卡片共用同一個點擊處理
+// 點擊代理（收藏、展開、複製代碼）
 const savedOpen = new Set();
 viewData.addEventListener('click', e => {
+  const cb = e.target.closest('.copy-btn');
+  if(cb){
+    const code = cb.dataset.copy;
+    if(code){
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(code).then(() => showToast(`已複製折扣碼：${code}`)).catch(() => prompt('請手動複製代碼：', code));
+      } else {
+        prompt('請手動複製代碼：', code);
+      }
+    }
+    return;
+  }
   const sb = e.target.closest('.save-btn');
   if(sb){
     const k = sb.dataset.k, r = D[k].rows[+sb.dataset.idx], key = rowKey(k, r);
@@ -416,11 +512,12 @@ viewData.addEventListener('click', e => {
   const k = b.dataset.k, idx = +b.dataset.idx, open = view === 'saved' ? savedOpen : state[k].open, id = view === 'saved' ? k + idx : idx;
   open.has(id) ? open.delete(id) : open.add(id);
   b.closest('.deal').outerHTML = card(D[k], CFG[k], D[k].rows[idx], idx, open.has(id), k);
-  viewData.querySelector(`.more-btn[data-k="${k}"][data-idx="${idx}"]`).focus();
+  const nextBtn = viewData.querySelector(`.more-btn[data-k="${k}"][data-idx="${idx}"]`);
+  if(nextBtn) nextBtn.focus();
 });
 
 function renderSaved(){
-  let html = `<h2>★ 我的收藏</h2><p class="lead">在任何優惠卡上按「☆ 收藏」就會出現在這裡，逛展場時方便對照。收藏只存在這台裝置的瀏覽器裡。</p>`;
+  let html = `<h2>★ 我的收藏</h2><p class="lead">在任何優惠卡上按「☆ 收藏」就會出現在這裡，逛展場時方便快速比價。收藏儲存於目前裝置的瀏覽器中。</p>`;
   let total = 0;
   ORDER.filter(k => D[k] && !CFG[k].table).forEach(k => {
     const rows = D[k].rows.map((r, idx) => ({r, idx})).filter(x => saved.has(rowKey(k, x.r)));
@@ -429,7 +526,7 @@ function renderSaved(){
     html += `<div class="saved-head"><h3>${esc(D[k].name)}（${rows.length}）</h3></div><div class="cards">` +
       rows.map(x => card(D[k], CFG[k], x.r, x.idx, savedOpen.has(k + x.idx), k)).join('') + `</div>`;
   });
-  if(!total) html += `<div class="empty">還沒有收藏。到「國內住宿」「餐飲」「國外機票」「跟團」等分頁，在想買的優惠卡上按「☆ 收藏」。</div>`;
+  if(!total) html += `<div class="empty">目前還沒有收藏。可前往「國內住宿」「餐飲」「國外機票」「跟團」等分頁點擊「☆ 收藏」。</div>`;
   else html += `<p class="note" style="margin-top:24px"><button class="reset" id="clear-saved">清空全部收藏</button></p>`;
   viewData.innerHTML = html;
   const cs = document.getElementById('clear-saved');
@@ -437,20 +534,38 @@ function renderSaved(){
 }
 
 const totop = document.getElementById('totop');
-addEventListener('scroll', () => { totop.hidden = scrollY < 900; }, {passive:true});
-totop.addEventListener('click', () => scrollTo({top:0}));
+addEventListener('scroll', () => { totop.hidden = scrollY < 800; }, {passive:true});
+totop.addEventListener('click', () => scrollTo({top:0, behavior:'smooth'}));
 
 function renderSet(k){
   const d = D[k], c = CFG[k], h = d.headers;
   const filt = c.filters.map(s => col(h, s)).filter((i, n, a) => i >= 0 && a.indexOf(i) === n);
   const sorts = (c.sorts || []).map(([s, label]) => ({i: col(h, s), label})).filter(x => x.i >= 0);
-  const st = state[k] || (state[k] = {q:'', f:{}, hideOld:false, sort: sorts.length ? 0 : -1, limit:PAGE, open:new Set()});
+  const st = state[k] || (state[k] = {q:'', f:{}, hideOld:false, sort: sorts.length ? 0 : -1, limit:PAGE, open:new Set(), taxOnly:false, under10k:false, promoOnly:false});
   const hasOld = d.rows.some(r => isOld(d, r));
 
-  let html = `<h2>${esc(d.name)}</h2><p class="lead">共 ${d.rows.length.toLocaleString()} 筆。點「完整資料」可看所有條件、來源網址和截圖。</p>
+  let guideBanner = '';
+  if(k === 'flight'){
+    guideBanner = `<div class="flight-guide">
+      <div class="flight-guide-head" id="fg-head">
+        <span class="flight-guide-title">✈ 2026 ITF 旅展買機票 4 大避坑守則</span>
+        <button type="button" class="flight-guide-toggle" id="fg-toggle">收合 ▴</button>
+      </div>
+      <div class="flight-guide-grid" id="fg-grid">
+        <div class="guide-col"><span class="guide-num">01</span><div><b>認明「含稅 vs 未稅」</b>廉航與部分新聞稿常報「0元起、未稅千元」，但加上機場稅與燃油附加費通常要加 2,000–3,500 元以上（長程線稅金 5,000–8,000 元）。本站卡片已清楚標註含稅/未稅！</div></div>
+        <div class="guide-col"><span class="guide-num">02</span><div><b>託運行李額度差很大</b>日本航空經濟艙直接贈送「2件各23kg」（日本線誠意最高）、澳門航空享「32kg」；廉航（虎航、越捷、亞航）最低價僅含手提 7kg，加購來回託運約 1,500–2,500 元。</div></div>
+        <div class="guide-col"><span class="guide-num">03</span><div><b>熱門連假多數排除</b>特惠機票多數排除跨年、農曆春節、寒暑假旺季與清明連假，購票請先點開「完整資料」確認出發期限與限制。</div></div>
+        <div class="guide-col"><span class="guide-num">04</span><div><b>折扣碼現折最有感</b>國泰航空（亞洲折 500 / 長程折 1,000）、星宇聯名卡碼、易遊網滿額券，結帳直接折抵，搶票前請先點擊「複製代碼」備用！</div></div>
+      </div>
+    </div>`;
+  }
+
+  let html = `<h2>${esc(d.name)}</h2><p class="lead">共 ${d.rows.length.toLocaleString()} 筆。點擊「完整資料」可查看加價規定、平假日限制、來源網址與證明截圖。</p>
+    ${guideBanner}
     <div class="toolbar"><div class="searchrow">
-      <input type="search" id="q-${k}" placeholder="搜尋名稱、地點、行程…" value="${esc(st.q)}" aria-label="搜尋">
+      <input type="search" id="q-${k}" placeholder="搜尋名稱、地點、航線、航空公司…" value="${esc(st.q)}" aria-label="搜尋">
       <button class="reset" id="reset-${k}">清除條件</button></div><div class="filters">`;
+
   let chipHtml = '';
   filt.forEach((i, n) => {
     const vals = [...new Set(d.rows.map(r => r[i].trim()).filter(Boolean))];
@@ -458,7 +573,6 @@ function renderSet(k){
     vals.sort((a, b) => (num(a) - num(b)) || a.localeCompare(b, 'zh-Hant'));
     const label = h[i].replace(/[（(].*$/, '').replace('區域分類', '區域');
     if(c.chips && n === 0 && vals.length <= 16){
-      // 依筆數多寡排，空白和「—」不列
       const cnt = {}; d.rows.forEach(r => { const v = r[i].trim(); cnt[v] = (cnt[v] || 0) + 1; });
       const cv = vals.filter(v => !blank(v)).sort((a, b) => cnt[b] - cnt[a]);
       chipHtml = `<fieldset class="chips"><legend>${esc(label)}</legend>` +
@@ -473,26 +587,66 @@ function renderSet(k){
     sorts.map((s, n) => `<option value="${n}"${st.sort === n ? ' selected' : ''}>${esc(s.label)}</option>`).join('') +
     `<option value="-1"${st.sort === -1 ? ' selected' : ''}>原始順序</option></select></label>`;
   if(hasOld) html += `<label class="check"><input type="checkbox" id="old-${k}"${st.hideOld ? ' checked' : ''}> 不看 2025 年舊價格</label>`;
+
+  if(k === 'flight'){
+    html += `<div class="quick-switches">
+      <span style="font-size:13px;color:var(--muted);font-weight:600">快速篩選：</span>
+      <button type="button" class="switch-chip tax" id="sw-tax-${k}" aria-pressed="${st.taxOnly ? 'true' : 'false'}">✓ 只看含稅價</button>
+      <button type="button" class="switch-chip" id="sw-10k-${k}" aria-pressed="${st.under10k ? 'true' : 'false'}">💰 萬元有找</button>
+      <button type="button" class="switch-chip" id="sw-promo-${k}" aria-pressed="${st.promoOnly ? 'true' : 'false'}">🏷 折扣碼/優惠</button>
+    </div>`;
+  }
+
   html += `</div></div><p class="count" id="cnt-${k}" role="status" aria-live="polite"></p><div id="list-${k}"></div><button class="loadmore" id="more-${k}" hidden></button>`;
   viewData.innerHTML = html;
 
+  // 避坑指南收合
+  const fgHead = document.getElementById('fg-head');
+  if(fgHead){
+    fgHead.addEventListener('click', () => {
+      const g = document.getElementById('fg-grid'), t = document.getElementById('fg-toggle');
+      if(g.hidden){ g.hidden = false; t.textContent = '收合 ▴'; } else { g.hidden = true; t.textContent = '展開 ▾'; }
+    });
+  }
+
   const draw = () => {
     const q = st.q.trim().toLowerCase();
-    let rows = d.rows.map((r, idx) => ({r, idx})).filter(({r}) =>
-      (!q || r.join(' ').toLowerCase().includes(q)) &&
-      Object.entries(st.f).every(([i, v]) => !v || r[i].trim() === v) &&
-      !(st.hideOld && isOld(d, r)));
+    const taxIdx = col(h, '是否含稅');
+    const priceIdx = col(h, '旅展價');
+    const typeIdx = col(h, '類型');
+    const noteIdx = col(h, '備註');
+
+    let rows = d.rows.map((r, idx) => ({r, idx})).filter(({r}) => {
+      if(q && !r.join(' ').toLowerCase().includes(q)) return false;
+      if(!Object.entries(st.f).every(([i, v]) => !v || r[i].trim() === v)) return false;
+      if(st.hideOld && isOld(d, r)) return false;
+      if(k === 'flight'){
+        if(st.taxOnly && taxIdx >= 0 && !r[taxIdx].includes('含稅')) return false;
+        if(st.under10k && priceIdx >= 0){
+          const p = num(r[priceIdx]);
+          if(isNaN(p) || p <= 0 || p > 10000) return false;
+        }
+        if(st.promoOnly){
+          const isPromo = (typeIdx >= 0 && r[typeIdx].includes('折扣碼')) ||
+                          (taxIdx >= 0 && r[taxIdx].includes('折抵')) ||
+                          (priceIdx >= 0 && r[priceIdx].includes('折')) ||
+                          (noteIdx >= 0 && (r[noteIdx].includes('折扣碼') || r[noteIdx].includes('代碼')));
+          if(!isPromo) return false;
+        }
+      }
+      return true;
+    });
+
     if(st.sort >= 0 && sorts[st.sort]){
       const i = sorts[st.sort].i;
       rows.sort((a, b) => { const x = num(a.r[i]), y = num(b.r[i]);
         if(isNaN(x)) return isNaN(y) ? 0 : 1; if(isNaN(y)) return -1; return x - y; });
     }
-    // 去年的舊價格一律排到最後
     rows.sort((a, b) => isOld(d, a.r) - isOld(d, b.r));
     document.getElementById('cnt-' + k).innerHTML = rows.length === d.rows.length
       ? `顯示全部 <b>${rows.length.toLocaleString()}</b> 筆` : `符合條件 <b>${rows.length.toLocaleString()}</b> 筆（共 ${d.rows.length.toLocaleString()} 筆）`;
     const list = document.getElementById('list-' + k);
-    if(!rows.length){ list.innerHTML = `<div class="empty">沒有符合的資料。試試換個關鍵字，或按「清除條件」。</div>`; }
+    if(!rows.length){ list.innerHTML = `<div class="empty">沒有符合條件的優惠。請試試調整關鍵字，或按「清除條件」。</div>`; }
     else if(c.table) list.innerHTML = boothTable(d, rows.slice(0, st.limit));
     else list.innerHTML = `<div class="cards">${rows.slice(0, st.limit).map(x => card(d, c, x.r, x.idx, st.open.has(x.idx), k)).join('')}</div>`;
     const more = document.getElementById('more-' + k);
@@ -511,6 +665,15 @@ function renderSet(k){
   const oc = document.getElementById('old-' + k); if(oc) oc.addEventListener('change', e => { st.hideOld = e.target.checked; draw(); });
   document.getElementById('reset-' + k).addEventListener('click', () => { delete state[k]; renderSet(k); document.getElementById('q-' + k).focus(); });
   document.getElementById('more-' + k).addEventListener('click', () => { st.limit += PAGE; draw(); });
+
+  if(k === 'flight'){
+    const swTax = document.getElementById('sw-tax-' + k);
+    if(swTax) swTax.addEventListener('click', () => { st.taxOnly = !st.taxOnly; swTax.setAttribute('aria-pressed', st.taxOnly); st.limit = PAGE; draw(); });
+    const sw10k = document.getElementById('sw-10k-' + k);
+    if(sw10k) sw10k.addEventListener('click', () => { st.under10k = !st.under10k; sw10k.setAttribute('aria-pressed', st.under10k); st.limit = PAGE; draw(); });
+    const swPromo = document.getElementById('sw-promo-' + k);
+    if(swPromo) swPromo.addEventListener('click', () => { st.promoOnly = !st.promoOnly; swPromo.setAttribute('aria-pressed', st.promoOnly); st.limit = PAGE; draw(); });
+  }
   draw();
 }
 
@@ -519,9 +682,104 @@ function pick(h, r, subs){ return (subs || []).map(s => { const i = col(h, s); r
 function card(d, c, r, idx, open, k){
   const h = d.headers, old = isOld(d, r);
   const val = s => { const i = col(h, s); return i >= 0 ? r[i].trim() : ''; };
-  // 攤位號只取開頭像 M2702、I區1802 的代號；標了 2025 的是去年攤位，不顯示
   const bv = c.booth ? val(c.booth) : '', bm = !bv.includes('2025') && bv.match(/^[A-Z]區?\d{2,4}/);
   const on = saved.has(rowKey(k, r));
+
+  // 機票專屬卡片結構
+  if(k === 'flight'){
+    const airline = val('航空') || '航空公司';
+    const dep = val('出發地'), arr = val('目的地');
+    const hasRoute = dep && arr && dep !== '—' && arr !== '—';
+    const trip = val('單程/來回'), cabin = val('艙等'), tax = val('是否含稅');
+    const notes = val('備註'), priceVal = val('旅展價'), wasVal = val('一般價');
+    const region = val('區域'), type = val('類型');
+
+    // 含稅 vs 未稅標籤
+    let taxTag = '';
+    if(tax.includes('含稅')) taxTag = `<span class="tag-tax tax-in">✓ 含稅來回</span>`;
+    else if(tax.includes('未稅')) taxTag = `<span class="tag-tax tax-ex">⚠ 未稅起價</span>`;
+    else if(tax.includes('折抵')) taxTag = `<span class="tag-tax tax-code">🏷 折扣抵用</span>`;
+    else if(!blank(tax)) taxTag = `<span class="tag-tax">${esc(tax)}</span>`;
+
+    // 行李額度標籤
+    let bagTag = '';
+    if(notes.includes('2件') && (notes.includes('23kg') || notes.includes('23公斤') || notes.includes('託運'))){
+      bagTag = `<span class="tag-baggage">🧳 含2件23kg</span>`;
+    } else if(notes.includes('32kg') || notes.includes('32公斤')){
+      bagTag = `<span class="tag-baggage">🧳 含32kg託運</span>`;
+    } else if(notes.includes('23kg') || notes.includes('23公斤')){
+      bagTag = `<span class="tag-baggage">🧳 含23kg託運</span>`;
+    } else if(notes.includes('手提') || notes.includes('託運行李另計') || notes.includes('未含行李') || notes.includes('需加購') || notes.includes('不含託運')){
+      bagTag = `<span class="tag-baggage warn">⚠️ 僅手提/託運另計</span>`;
+    }
+
+    // 旅展折扣碼辨識
+    let promoCoupon = '';
+    const mCode = notes.match(/\b(CXITF\d+|[A-Z0-9]{5,10})\b/) || priceVal.match(/\b(CXITF\d+)\b/);
+    if(mCode && (type.includes('折扣碼') || notes.includes('折扣碼') || notes.includes('代碼'))){
+      promoCoupon = `<div class="coupon-box"><span style="font-size:12px;font-weight:700;color:#7e22ce">🏷 折扣碼</span><code class="coupon-code">${esc(mCode[1])}</code><button type="button" class="copy-btn" data-copy="${esc(mCode[1])}">📋 複製代碼</button></div>`;
+    }
+
+    const tags = [];
+    if(old) tags.push('<span class="tag y25">2025 舊價格</span>');
+    if(bm) tags.push(`<span class="tag booth" title="展場攤位">攤位 ${esc(bm[0])}</span>`);
+    if(taxTag) tags.push(taxTag);
+    if(bagTag) tags.push(bagTag);
+    if(!blank(region) && region !== '—') tags.push(`<span class="tag">${esc(region)}</span>`);
+    if(!blank(cabin) && cabin !== '—') tags.push(`<span class="tag">${esc(cabin)}</span>`);
+
+    let routeHtml = '';
+    if(hasRoute){
+      routeHtml = `<div class="flight-route-box">
+        <div class="flight-city dep">${esc(dep)}</div>
+        <div class="flight-path">
+          <div class="path-line"><span class="plane-fly">✈</span></div>
+          <div class="flight-type-tag">${esc(trip || '來回')}</div>
+        </div>
+        <div class="flight-city arr">${esc(arr)}</div>
+      </div>`;
+    } else {
+      routeHtml = `<h4 style="margin:4px 0 2px">${esc(airline)} ${esc(arr || dep || '優惠行程')}</h4>`;
+    }
+
+    let priceHtml = '';
+    if(blank(priceVal)){
+      priceHtml = `<div class="price"><span class="now na">價格未公布</span></div>`;
+    } else if(!isNaN(num(priceVal))){
+      priceHtml = `<div class="price">
+        <span style="font-size:13px;font-weight:700;color:var(--accent);align-self:flex-end;margin-bottom:2px">NT$</span>
+        <span class="now">${esc(fmt(priceVal))}</span>
+        <span style="font-size:13px;color:var(--muted);align-self:flex-end;margin-bottom:2px">起</span>
+        ${!blank(wasVal) && wasVal !== priceVal ? `<span class="was">NT$ ${esc(fmt(wasVal))}</span>` : ''}
+      </div>`;
+    } else {
+      priceHtml = `<div class="price"><span class="now txt">${esc(priceVal)}</span></div>`;
+    }
+
+    const infoFields = [['出發期間','出發'],['開票/購買','搶購期'],['搶票方式','方式']];
+    const info = infoFields.map(([s, label]) => {
+      const v = val(s); return blank(v) ? '' : `<div><dt>${label}</dt><dd>${esc(v.length > 90 ? v.slice(0, 88) + '…' : v)}</dd></div>`;
+    }).join('');
+
+    const full = open ? `<dl class="full">${h.map((name, i) => { const v = r[i]; if(!v || !v.trim()) return '';
+      return `<div><dt>${esc(name)}</dt><dd>${name.includes('截圖') ? shots(d, v) : linkify(v)}</dd></div>`; }).join('')}</dl>` : '';
+
+    return `<article class="deal deal-flight${old ? ' old' : ''}${on ? ' saved' : ''}">
+      <div class="top">
+        <div class="flight-airline">✈ ${esc(airline)}</div>
+        <button class="save-btn" data-k="${k}" data-idx="${idx}" aria-pressed="${on}" aria-label="收藏：${esc(airline)} ${esc(arr)}">${on ? '★ 已收藏' : '☆ 收藏'}</button>
+      </div>
+      ${routeHtml}
+      ${tags.length ? `<div class="tags">${tags.join('')}</div>` : ''}
+      ${promoCoupon}
+      ${priceHtml}
+      ${info ? `<dl class="info">${info}</dl>` : ''}
+      ${full}
+      <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-expanded="${open}">${open ? '收起詳細 ▴' : '完整資料、來源與截圖 ▾'}</button>
+    </article>`;
+  }
+
+  // 國內住宿、餐飲、跟團等其他卡片
   let title = pick(h, r, c.title).join('｜') || '（未命名）';
   const route = pick(h, r, c.route);
   if(route.length === 2) title += `　${route[0]} → ${route[1]}`;
@@ -529,6 +787,17 @@ function card(d, c, r, idx, open, k){
   const tags = pick(h, r, c.tags).map(v => `<span class="tag">${esc(v)}</span>`);
   const disc = c.disc && val(c.disc); if(!blank(disc)) tags.push(`<span class="tag disc">${esc(disc)}</span>`);
   const tax = c.tax && val(c.tax); if(!blank(tax)) tags.push(`<span class="tag">${esc(tax)}</span>`);
+
+  // 住宿早餐辨識
+  if(k === 'lodging'){
+    const inc = val('包含內容');
+    if(inc.includes('早餐') || inc.includes('一泊一食') || inc.includes('一泊二食') || inc.includes('早晚餐')){
+      tags.push(`<span class="tag-meal in">🍳 含早餐</span>`);
+    } else if(inc.includes('不含早') || inc.includes('純住宿')){
+      tags.push(`<span class="tag-meal no">🍳 純住宿</span>`);
+    }
+  }
+
   if(old) tags.unshift('<span class="tag y25">2025 舊價格</span>');
   if(bm) tags.unshift(`<span class="tag booth" title="展場攤位">攤位 ${esc(bm[0])}</span>`);
 
@@ -548,7 +817,7 @@ function card(d, c, r, idx, open, k){
     <div class="top">${tags.length ? `<div class="tags">${tags.join('')}</div>` : ''}<button class="save-btn" data-k="${k}" data-idx="${idx}" aria-pressed="${on}" aria-label="收藏：${esc(title)}">${on ? '★ 已收藏' : '☆ 收藏'}</button></div>
     <div><h4>${esc(title)}</h4>${sub ? `<div class="subt">${esc(sub)}</div>` : ''}</div>
     ${price}${info ? `<dl class="info">${info}</dl>` : ''}${full}
-    <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-expanded="${open}">${open ? '收起 ▴' : '完整資料、來源與截圖 ▾'}</button>
+    <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-expanded="${open}">${open ? '收起詳細 ▴' : '完整資料、加價規定與截圖 ▾'}</button>
   </article>`;
 }
 
@@ -556,7 +825,7 @@ function boothTable(d, rows){
   const h = d.headers, show = ['類別','參展單位','攤位號','樓層區'].map(s => col(h, s)).filter(i => i >= 0);
   return `<div class="tbox"><table><thead><tr>${show.map(i => `<th>${esc(h[i])}</th>`).join('')}</tr></thead><tbody>` +
     rows.map(({r}) => `<tr>${show.map(i => `<td${h[i].includes('攤位') ? ' class="code"' : ''}>${esc(r[i])}</td>`).join('')}</tr>`).join('') +
-    `</tbody></table></div><p class="note">攤位號是從官方展場平面圖讀出來的，以現場為準。</p>`;
+    `</tbody></table></div><p class="note">攤位號是從官方展場平面圖讀出，以現場公告為準。</p>`;
 }
 
 let start = location.hash.slice(1);
