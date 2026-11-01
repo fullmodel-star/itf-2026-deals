@@ -331,6 +331,21 @@ button.tag.booth:hover{background:var(--accent);color:#fff}
   .gs-cat ul{font-size:12px}
 }
 
+
+/* ===== 最佳推薦專屬頁樣式 ===== */
+.picks-hero{background:linear-gradient(135deg, rgba(201,86,28,.08) 0%, rgba(31,95,168,.08) 100%);border:1px solid rgba(201,86,28,.2);border-radius:14px;padding:20px 22px;margin-bottom:24px}
+.picks-hero h2{margin:0 0 8px;font-size:24px;font-weight:900;display:flex;align-items:center;gap:8px}
+.picks-hero p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
+.picks-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.picks-nav a{background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:6px 14px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:4px;box-shadow:var(--shadow-sm);transition:all .12s}
+.picks-nav a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.pick-sec{margin-bottom:36px;scroll-margin-top:70px}
+.pick-sec-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:14px;border-bottom:2px solid var(--line);padding-bottom:8px}
+.pick-sec-head h3{margin:0;font-size:19px;font-weight:800;display:flex;align-items:center;gap:6px}
+.pick-sec-head .more-link{color:var(--accent);font-weight:700;font-size:14px;cursor:pointer;background:none;border:0;padding:0}
+.pick-sec-head .more-link:hover{text-decoration:underline}
+.badge-hot{background:linear-gradient(135deg, #ef4444 0%, #f97316 100%);color:#fff;font-size:11px;font-weight:800;padding:2px 7px;border-radius:4px;letter-spacing:.02em}
+
 /* 攤位表 */
 .tbox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-sm)}
 table{border-collapse:collapse;width:100%;font-size:15px}
@@ -381,6 +396,20 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
       <button type="button">下午茶</button><button type="button">吃到飽</button><button type="button">沖繩</button><button type="button">北海道</button><button type="button">日月潭</button><button type="button">宜蘭</button><button type="button">含早</button><button type="button">星宇</button>
     </div>
     <div class="gs-res" id="gs-res" role="status" aria-live="polite"></div>
+  </section>
+
+  <!-- 最佳優惠推薦專區入口 -->
+  <section style="margin-bottom:24px">
+    <div style="background:linear-gradient(135deg, #1d3760 0%, #1f5fa8 100%);color:#fff;border-radius:14px;padding:18px 22px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;box-shadow:var(--shadow-md)">
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <span style="font-size:20px;font-weight:900">🔥 2026 ITF 最佳優惠推薦專頁</span>
+          <span class="badge" style="background:#ef4444;color:#fff">精選榜單</span>
+        </div>
+        <div style="opacity:.9;font-size:14px">住宿、餐飲、機票、跟團 4 大領域性價比最高 Top 8 優惠完整精選！</div>
+      </div>
+      <button type="button" onclick="go('picks')" style="background:#fff;border:0;color:#1d3760;border-radius:99px;padding:9px 20px;font-size:15px;font-weight:800;cursor:pointer;white-space:nowrap;box-shadow:var(--shadow-sm);transition:transform .12s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">立即查看推薦清單 →</button>
+    </div>
   </section>
 
   <section class="entry">
@@ -560,7 +589,7 @@ const CFG = {
   booth:{table:true, filters:['樓層區','類別']}
 };
 ['lodging','dining','flight','tour'].forEach(k => { CFG[k].booth = '攤位號碼'; CFG[k].chips = true; });
-const GROUPS = [['', ['home']], ['國內', ['lodging','dining']], ['國外', ['flight','tour']], ['展場', ['flash','card','booth']], ['', ['saved']]];
+const GROUPS = [['', ['home','picks']], ['國內', ['lodging','dining']], ['國外', ['flight','tour']], ['展場', ['flash','card','booth']], ['', ['saved']]];
 const ORDER = GROUPS.flatMap(g => g[1]);
 const tabs = document.getElementById('tabs');
 const viewHome = document.getElementById('view-home');
@@ -611,7 +640,7 @@ GROUPS.forEach(([label, keys]) => {
   keys.forEach(k => {
     const b = document.createElement('button');
     b.dataset.key = k;
-    b.innerHTML = k === 'home' ? '總覽' : k === 'saved' ? '★ 收藏<span class="n star-n"></span>'
+    b.innerHTML = k === 'home' ? '總覽' : k === 'picks' ? '🔥 最佳推薦' : k === 'saved' ? '★ 收藏<span class="n star-n"></span>'
       : `${esc(D[k].name)}<span class="n">${D[k].rows.length.toLocaleString()}</span>`;
     b.addEventListener('click', () => go(k));
     tabs.appendChild(b);
@@ -734,7 +763,7 @@ function go(k){
   const cur = tabs.querySelector(`[data-key="${k}"]`); if(cur) cur.scrollIntoView({block:'nearest', inline:'nearest'});
   viewHome.hidden = k !== 'home';
   viewData.hidden = k === 'home';
-  if(k === 'saved') renderSaved(); else if(k !== 'home') renderSet(k);
+  if(k === 'picks') renderPicks(); else if(k === 'saved') renderSaved(); else if(k !== 'home') renderSet(k);
   syncHash(k);
   try{ localStorage.setItem('itf-tab', k); }catch(e){}
   window.scrollTo({top:0});
@@ -782,7 +811,96 @@ viewData.addEventListener('click', e => {
   if(nextBtn) nextBtn.focus();
 });
 
+
+// 最佳推薦特選頁面渲染
+function renderPicks(){
+  // 精選國內住宿 (8 筆高 CP 首選)
+  // 承億文旅3天2夜(137), 承億集團雙人(136), 老爺家庭聯盟(61), 台南老爺家庭(73), 雲朗翰品高雄/兆品嘉義(2), 台東趣淘漫旅(45), 台北圓山通用券(8), 台北萬豪經典客房(160)
+  const lodgingIdxs = [136, 135, 60, 72, 1, 44, 7, 159]; // 0-based row indices
+  
+  // 精選餐飲餐券 (8 筆超值首選)
+  // 海霸王甲天下四人(161), 海霸王打狗霸(163), 喜來登十二廚(40), 台北天成套餐(100), 晶華栢麗廳早餐(24), 凱撒聯合買一送一(68), 台北美福彩匯平日午餐(77), 君悅凱菲屋下午茶四人(17)
+  const diningIdxs = [161, 163, 40, 100, 24, 68, 77, 17];
+  
+  // 精選國外機票 (8 筆含稅/送行李必搶)
+  // 日航沖繩(165), 澳門航空(203), 國泰香港(153), 華航釜山(83), 星宇舊金山(132), 汶萊皇家汶萊(212), 阿提哈德(314), 台灣虎航成田(234)
+  const flightIdxs = [165, 203, 153, 83, 132, 212, 314, 234];
+  
+  // 精選跟團 (8 筆各區最高性價比)
+  // 百威MSC郵輪沖繩5天, 雄獅阿里山夜未眠2日, 百威邱釜慶5天, 雄獅釜山5日, 可樂花蓮補助3日, 易飛泰國曼芭6日, 大榮沖繩4日, 易飛土耳其10日
+  const tourRows = D.tour.rows;
+  const tourHits = [];
+  const findTour = (kw, agency) => {
+    return tourRows.findIndex(r => (!agency || r[1].includes(agency)) && r[2].includes(kw));
+  };
+  const t1 = findTour('宮古島、沖繩、石垣島', '百威'); if(t1 >= 0) tourHits.push(t1);
+  const t2 = findTour('阿里山夜未眠', '雄獅'); if(t2 >= 0) tourHits.push(t2);
+  const t3 = findTour('邱釜慶', '百威'); if(t3 >= 0) tourHits.push(t3);
+  const t4 = findTour('海雲台列車', '雄獅'); if(t4 >= 0) tourHits.push(t4);
+  const t5 = findTour('花蓮補助', '可樂'); if(t5 >= 0) tourHits.push(t5);
+  const t6 = findTour('曼芭', '易飛'); if(t6 >= 0) tourHits.push(t6);
+  const t7 = findTour('沖繩', '大榮'); if(t7 >= 0) tourHits.push(t7);
+  const t8 = findTour('土耳其', '易飛'); if(t8 >= 0) tourHits.push(t8);
+
+  let html = `
+    <div class="picks-hero">
+      <h2>🔥 2026 ITF 旅展 最佳優惠推薦</h2>
+      <p>由編輯團隊依據「官方真實定價、每人均價性價比、含稅/含行李條件與歷年折扣誠意」嚴格精選！免去在數千筆中挑選的繁瑣，四大領域最值得入手的 Top 8 優惠全收錄：</p>
+    </div>
+    
+    <div class="picks-nav">
+      <a href="#pick-lodging">🏨 住宿最超值 Top 8</a>
+      <a href="#pick-dining">🍴 餐券吃到飽 Top 8</a>
+      <a href="#pick-flight">✈ 機票含稅熱門 Top 8</a>
+      <a href="#pick-tour">🚌 推薦跟團行程 Top 8</a>
+    </div>
+
+    <section class="pick-sec" id="pick-lodging">
+      <div class="pick-sec-head">
+        <h3>🏨 國內住宿券．最超值精選 Top 8 <span class="badge-hot">萬元有找 / 每人每晚750起</span></h3>
+        <button type="button" class="more-link" onclick="go('lodging')">查看全部 171 筆住宿 →</button>
+      </div>
+      <div class="cards">
+        ${lodgingIdxs.map(i => D.lodging.rows[i] ? card(D.lodging, CFG.lodging, D.lodging.rows[i], i, state.lodging && state.lodging.open && state.lodging.open.has(i), 'lodging') : '').join('')}
+      </div>
+    </section>
+
+    <section class="pick-sec" id="pick-dining">
+      <div class="pick-sec-head">
+        <h3>🍴 熱門餐券．五星飯店與吃到飽 Top 8 <span class="badge-hot">每人222起 / 必搶快閃</span></h3>
+        <button type="button" class="more-link" onclick="go('dining')">查看全部 185 筆餐券 →</button>
+      </div>
+      <div class="cards">
+        ${diningIdxs.map(i => D.dining.rows[i] ? card(D.dining, CFG.dining, D.dining.rows[i], i, state.dining && state.dining.open && state.dining.open.has(i), 'dining') : '').join('')}
+      </div>
+    </section>
+
+    <section class="pick-sec" id="pick-flight">
+      <div class="pick-sec-head">
+        <h3>✈ 國外機票．含稅來回與高性價比 Top 8 <span class="badge-hot">送託運行李 / 折扣碼折抵</span></h3>
+        <button type="button" class="more-link" onclick="go('flight')">查看全部 321 筆機票 →</button>
+      </div>
+      <div class="cards">
+        ${flightIdxs.map(i => D.flight.rows[i] ? card(D.flight, CFG.flight, D.flight.rows[i], i, state.flight && state.flight.open && state.flight.open.has(i), 'flight') : '').join('')}
+      </div>
+    </section>
+
+    <section class="pick-sec" id="pick-tour">
+      <div class="pick-sec-head">
+        <h3>🚌 跟團行程．每日預算最省 Top 8 <span class="badge-hot">每天1,380起 / 日韓郵輪首選</span></h3>
+        <button type="button" class="more-link" onclick="go('tour')">查看全部 1,723 筆跟團 →</button>
+      </div>
+      <div class="cards">
+        ${tourHits.map(i => D.tour.rows[i] ? card(D.tour, CFG.tour, D.tour.rows[i], i, state.tour && state.tour.open && state.tour.open.has(i), 'tour') : '').join('')}
+      </div>
+    </section>
+  `;
+
+  viewData.innerHTML = html;
+}
+
 function renderSaved(){
+
   let html = `<h2>★ 我的收藏</h2><p class="lead">在任何優惠卡上按「☆ 收藏」就會出現在這裡，逛展場時方便快速比價。收藏儲存於目前裝置的瀏覽器中。</p>`;
   let total = 0;
   ORDER.filter(k => D[k] && !CFG[k].table).forEach(k => {
