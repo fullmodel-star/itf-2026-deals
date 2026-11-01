@@ -260,6 +260,25 @@ ul.plain{margin:0;padding-left:1.2em;display:grid;gap:8px}
 .toast-notice{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:rgba(24,34,58,.94);color:#fff;padding:10px 22px;border-radius:99px;font-size:14px;font-weight:700;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .25s cubic-bezier(0.16,1,0.3,1),opacity .25s;opacity:0;pointer-events:none}
 .toast-notice.show{transform:translateX(-50%) translateY(0);opacity:1}
 
+
+/* ===== 跟團卡片專屬強化 ===== */
+.deal.deal-tour{border-top:4px solid #0284c7;background:linear-gradient(180deg, rgba(2,132,199,.02) 0%, var(--surface) 35%)}
+.tour-agency-box{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.tour-agency-pill{background:#e0f2fe;color:#0369a1;font-weight:700;font-size:13px;padding:2px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px}
+:root[data-theme="dark"] .tour-agency-pill, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tour-agency-pill{background:#0c4a6e;color:#7dd3fc}}
+.tour-header-meta{display:flex;align-items:center;gap:6px;margin:4px 0 2px}
+.tour-dest-tag{background:var(--sunk);color:var(--ink);font-weight:700;font-size:12px;padding:2px 8px;border-radius:6px;border:1px solid var(--line)}
+.tour-days-tag{background:#fef3c7;color:#b45309;font-weight:800;font-size:12px;padding:2px 8px;border-radius:6px;border:1px solid rgba(180,83,9,.25)}
+:root[data-theme="dark"] .tour-days-tag, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tour-days-tag{background:#451a03;color:#fde68a;border-color:#78350f}}
+.tour-title{font-size:16px;font-weight:700;line-height:1.45;margin:4px 0 6px;color:var(--ink)}
+.tour-price-bar{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:8px 10px;background:var(--sunk);border-radius:8px;margin:6px 0}
+.tour-daily-hero{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--muted)}
+.tour-daily-hero b{font-family:var(--f-num);font-size:15px;color:#0284c7}
+:root[data-theme="dark"] .tour-daily-hero b, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tour-daily-hero b{color:#38bdf8}}
+.tag-tips{font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.tag-tips.in{background:var(--good-soft);color:var(--good);border:1px solid rgba(29,115,73,.3)}
+.tag-airline{font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px;background:var(--sky-soft);color:var(--sky);border:1px solid rgba(31,95,168,.25)}
+
 /* 攤位表 */
 .tbox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-sm)}
 table{border-collapse:collapse;width:100%;font-size:15px}
@@ -333,6 +352,7 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
           <button type="button" class="booth-pill" data-jump-tab="lodging" data-jump-q="M2709"><b>M2709</b> 長榮酒店</button>
           <button type="button" class="booth-pill" data-jump-tab="lodging" data-jump-q="M1009"><b>M1009</b> 圓山大飯店</button>
           <button type="button" class="booth-pill" data-jump-tab="lodging" data-jump-q="M1304"><b>M1304</b> 國泰飯店</button>
+          <button type="button" class="booth-pill" data-jump-tab="lodging" data-jump-q="M506"><b>M506</b> 大板根溫泉</button>
         </div>
       </div>
       <div class="booth-zone">
@@ -349,6 +369,14 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
           <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="J1309"><b>J1309</b> 雄獅旅遊</button>
           <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="J1816"><b>J1816</b> 可樂旅遊</button>
           <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="J2409"><b>J2409</b> 東南旅遊</button>
+          <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="I1802"><b>I1802</b> 山富旅遊</button>
+          <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="I2102"><b>I2102</b> 易飛旅遊</button>
+          <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="J109"><b>J109</b> 五福旅遊</button>
+          <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="J2701"><b>J2701</b> 台鋼燦星</button>
+          <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="K2323"><b>K2323</b> 大榮旅遊</button>
+          <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="J1801"><b>J1801</b> 鳳凰旅遊</button>
+          <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="J101"><b>J101</b> 世邦旅遊</button>
+          <button type="button" class="booth-pill" data-jump-tab="flight" data-jump-q="K2404"><b>K2404</b> 樂桃/全日空</button>
         </div>
       </div>
     </div>
@@ -637,7 +665,7 @@ function renderSet(k){
   const d = D[k], c = CFG[k], h = d.headers;
   const filt = c.filters.map(s => col(h, s)).filter((i, n, a) => i >= 0 && a.indexOf(i) === n);
   const sorts = (c.sorts || []).map(([s, label]) => ({i: col(h, s), label})).filter(x => x.i >= 0);
-  const st = state[k] || (state[k] = {q:'', f:{}, hideOld:false, sort: sorts.length ? 0 : -1, limit:PAGE, open:new Set(), taxOnly:false, under10k:false, promoOnly:false, bfastOnly:false, freeSurch:false, familyOnly:false, buffetOnly:false, under1k:false, teaOnly:false, servOnly:false});
+  const st = state[k] || (state[k] = {q:'', f:{}, hideOld:false, sort: sorts.length ? 0 : -1, limit:PAGE, open:new Set(), taxOnly:false, under10k:false, promoOnly:false, bfastOnly:false, freeSurch:false, familyOnly:false, buffetOnly:false, under1k:false, teaOnly:false, servOnly:false, japanOnly:false, koreaOnly:false, tipsOnly:false});
   const hasOld = d.rows.some(r => isOld(d, r));
 
   let guideBanner = '';
@@ -652,6 +680,19 @@ function renderSet(k){
         <div class="guide-col"><span class="guide-num">02</span><div><b>託運行李額度差很大</b>日本航空經濟艙直接贈送「2件各23kg」（日本線誠意最高）、澳門航空享「32kg」；廉航（虎航、越捷、亞航）最低價僅含手提 7kg，加購來回託運約 1,500–2,500 元。</div></div>
         <div class="guide-col"><span class="guide-num">03</span><div><b>熱門連假多數排除</b>特惠機票多數排除跨年、農曆春節、寒暑假旺季與清明連假，購票請先點開「完整資料」確認出發期限與限制。</div></div>
         <div class="guide-col"><span class="guide-num">04</span><div><b>折扣碼現折最有感</b>國泰航空（亞洲折 500 / 長程折 1,000）、星宇聯名卡碼、易遊網滿額券，結帳直接折抵，搶票前請先點擊「複製代碼」備用！</div></div>
+      </div>
+    </div>`;
+  } else if(k === 'tour'){
+    guideBanner = `<div class="flight-guide">
+      <div class="flight-guide-head" id="fg-head">
+        <span class="flight-guide-title">🚌 2026 ITF 旅展買跟團 4 大避坑守則</span>
+        <button type="button" class="flight-guide-toggle" id="fg-toggle">收合 ▴</button>
+      </div>
+      <div class="flight-guide-grid" id="fg-grid">
+        <div class="guide-col"><span class="guide-num">01</span><div><b>認明「含不含小費與稅簽」</b>跟團導遊領隊小費通常每日約 300–350 元台幣（5天團約 1,500–1,750 元），是否內含差很多！本站卡片特別標註是否已含。</div></div>
+        <div class="guide-col"><span class="guide-num">02</span><div><b>留意「進購物站 (No Shopping)」</b>超便宜低價團常安排 2–3 個免稅店/人蔘/彩妝站，若不想把時間花在推銷，請認明「無自費、不進購物站」！</div></div>
+        <div class="guide-col"><span class="guide-num">03</span><div><b>航班時間差很大</b>早去晚回實玩足足天數；晚去早回頭尾都在搭機，實際縮水 1–2 天，下單前請確認航班時段。</div></div>
+        <div class="guide-col"><span class="guide-num">04</span><div><b>展場下單現折加碼</b>雄獅（J1309）、可樂（J1816）、東南（J2409）、五福（J109）、山富（I1802）、燦星（J2701）現場下單常有「第二人折 3,000–10,000」或「早鳥送網卡/登機箱」，記得現場比價！</div></div>
       </div>
     </div>`;
   }
@@ -710,6 +751,14 @@ function renderSet(k){
       <button type="button" class="switch-chip" id="sw-1k-${k}" aria-pressed="${st.under1k ? 'true' : 'false'}">💰 每人千元有找</button>
       <button type="button" class="switch-chip sky" id="sw-tea-${k}" aria-pressed="${st.teaOnly ? 'true' : 'false'}">☕ 下午茶特搜</button>
       <button type="button" class="switch-chip tax" id="sw-serv-${k}" aria-pressed="${st.servOnly ? 'true' : 'false'}">✓ 已含服務費</button>
+    </div>`;
+  } else if(k === 'tour'){
+    html += `<div class="quick-switches">
+      <span style="font-size:13px;color:var(--muted);font-weight:600">快速篩選：</span>
+      <button type="button" class="switch-chip accent" id="sw-jp-${k}" aria-pressed="${st.japanOnly ? 'true' : 'false'}">🇯🇵 日本行程</button>
+      <button type="button" class="switch-chip sky" id="sw-kr-${k}" aria-pressed="${st.koreaOnly ? 'true' : 'false'}">🇰🇷 韓國行程</button>
+      <button type="button" class="switch-chip" id="sw-10k-${k}" aria-pressed="${st.under10k ? 'true' : 'false'}">💰 萬元有找跟團</button>
+      <button type="button" class="switch-chip tax" id="sw-tips-${k}" aria-pressed="${st.tipsOnly ? 'true' : 'false'}">✨ 含小費/免小費</button>
     </div>`;
   }
 
@@ -804,6 +853,23 @@ function renderSet(k){
           const sv = r[servIdx];
           if(!sv.includes('含')) return false;
         }
+      } else if(k === 'tour'){
+        if(st.japanOnly){
+          const t = (r[1] + ' ' + r[2] + ' ' + r[3] + ' ' + r[4]).toLowerCase();
+          if(!t.includes('日') && !t.includes('沖繩') && !t.includes('東京') && !t.includes('大阪') && !t.includes('北海道') && !t.includes('九州') && !t.includes('名古') && !t.includes('福岡')) return false;
+        }
+        if(st.koreaOnly){
+          const t = (r[1] + ' ' + r[2] + ' ' + r[3] + ' ' + r[4]).toLowerCase();
+          if(!t.includes('韓') && !t.includes('首爾') && !t.includes('釜山') && !t.includes('濟州') && !t.includes('大邱')) return false;
+        }
+        if(st.under10k && priceIdx >= 0){
+          const p = num(r[priceIdx]);
+          if(isNaN(p) || p <= 0 || p > 10000) return false;
+        }
+        if(st.tipsOnly){
+          const t = (r[12] || '') + ' ' + r[2];
+          if(!t.includes('含') && !t.includes('贈小費') && !t.includes('免小費')) return false;
+        }
       }
       return true;
     });
@@ -868,6 +934,15 @@ function renderSet(k){
     if(swTea) swTea.addEventListener('click', () => { st.teaOnly = !st.teaOnly; swTea.setAttribute('aria-pressed', st.teaOnly); st.limit = PAGE; draw(); });
     const swServ = document.getElementById('sw-serv-' + k);
     if(swServ) swServ.addEventListener('click', () => { st.servOnly = !st.servOnly; swServ.setAttribute('aria-pressed', st.servOnly); st.limit = PAGE; draw(); });
+  } else if(k === 'tour'){
+    const swJp = document.getElementById('sw-jp-' + k);
+    if(swJp) swJp.addEventListener('click', () => { st.japanOnly = !st.japanOnly; swJp.setAttribute('aria-pressed', st.japanOnly); st.limit = PAGE; draw(); });
+    const swKr = document.getElementById('sw-kr-' + k);
+    if(swKr) swKr.addEventListener('click', () => { st.koreaOnly = !st.koreaOnly; swKr.setAttribute('aria-pressed', st.koreaOnly); st.limit = PAGE; draw(); });
+    const sw10k = document.getElementById('sw-10k-' + k);
+    if(sw10k) sw10k.addEventListener('click', () => { st.under10k = !st.under10k; sw10k.setAttribute('aria-pressed', st.under10k); st.limit = PAGE; draw(); });
+    const swTips = document.getElementById('sw-tips-' + k);
+    if(swTips) swTips.addEventListener('click', () => { st.tipsOnly = !st.tipsOnly; swTips.setAttribute('aria-pressed', st.tipsOnly); st.limit = PAGE; draw(); });
   }
 
   draw();
@@ -1027,7 +1102,81 @@ function card(d, c, r, idx, open, k){
     </article>`;
   }
 
-  // ===== 國內住宿、跟團等其他卡片 =====
+  // ===== 跟團卡片專屬強化 =====
+  if(k === 'tour'){
+    const agency = val('旅行社');
+    const name = val('行程名稱');
+    const dest = val('目的地國家/地區');
+    const region = val('區域分類');
+    const days = val('天數');
+    const priceVal = val('旅展價(每人,元)');
+    const wasVal = val('原價');
+    const discVal = val('折扣金額或折數');
+    const dailyPer = val('每日平均價(元)');
+    const tipsVal = val('是否含小費/稅/簽證');
+    const airline = val('航空公司');
+
+    const tags = [];
+    if(old) tags.push('<span class="tag y25">2025 舊價格</span>');
+    if(bm) tags.push(`<span class="tag booth" title="展場攤位">攤位 ${esc(bm[0])}</span>`);
+    if(!blank(region)) tags.push(`<span class="tag">${esc(region)}</span>`);
+    if(!blank(airline) && airline !== '—' && airline !== '-') tags.push(`<span class="tag-airline">✈ ${esc(airline)}</span>`);
+    if(!blank(tipsVal) && tipsVal !== '未公布'){
+      if(tipsVal.includes('含') || tipsVal.includes('贈')){
+        tags.push(`<span class="tag-tips in">✓ ${esc(tipsVal)}</span>`);
+      } else {
+        tags.push(`<span class="tag-tips">${esc(tipsVal)}</span>`);
+      }
+    }
+    if(!blank(discVal)) tags.push(`<span class="tag disc">${esc(discVal)}</span>`);
+
+    let priceHtml = '';
+    if(blank(priceVal)){
+      priceHtml = `<div class="price"><span class="now na">價格未公布</span></div>`;
+    } else if(!isNaN(num(priceVal))){
+      priceHtml = `<div class="tour-price-bar">
+        <div class="tour-daily-hero"><span>每天約</span> <b>NT$ ${esc(fmt(dailyPer || Math.round(num(priceVal) / (num(days) || 1))))}</b></div>
+        <div class="price" style="margin:0">
+          <span style="font-size:13px;font-weight:700;color:var(--accent);align-self:flex-end;margin-bottom:2px">NT$</span>
+          <span class="now">${esc(fmt(priceVal))}</span>
+          <span style="font-size:13px;color:var(--muted);align-self:flex-end;margin-bottom:2px">起/人</span>
+          ${!blank(wasVal) && wasVal !== priceVal ? `<span class="was">NT$ ${esc(fmt(wasVal))}</span>` : ''}
+        </div>
+      </div>`;
+    } else {
+      priceHtml = `<div class="price"><span class="now txt">${esc(priceVal)}</span></div>`;
+    }
+
+    const infoFields = [['出發日期/期間','出發'],['出發地','出發地'],['適用條件','條件'],['限量','限量']];
+    const info = infoFields.map(([s, label]) => {
+      const v = val(s); return blank(v) ? '' : `<div><dt>${label}</dt><dd>${esc(v.length > 90 ? v.slice(0, 88) + '…' : v)}</dd></div>`;
+    }).join('');
+
+    const full = open ? `<dl class="full">${h.map((name, i) => { const v = r[i]; if(!v || !v.trim()) return '';
+      return `<div><dt>${esc(name)}</dt><dd>${name.includes('截圖') ? shots(d, v) : linkify(v)}</dd></div>`; }).join('')}</dl>` : '';
+
+    return `<article class="deal deal-tour${old ? ' old' : ''}${on ? ' saved' : ''}">
+      <div class="top">
+        <div class="tour-agency-box">
+          <span class="tour-agency-pill">🚌 ${esc(agency)}</span>
+          ${bm ? `<span class="tag booth" title="展場攤位">攤位 ${esc(bm[0])}</span>` : ''}
+        </div>
+        <button class="save-btn" data-k="${k}" data-idx="${idx}" aria-pressed="${on}" aria-label="收藏：${esc(agency)} ${esc(name)}">${on ? '★ 已收藏' : '☆ 收藏'}</button>
+      </div>
+      <div class="tour-header-meta">
+        <span class="tour-dest-tag">${esc(dest || region || '跟團')}</span>
+        ${days ? `<span class="tour-days-tag">${esc(days)} 天</span>` : ''}
+      </div>
+      <h4 class="tour-title">${esc(name)}</h4>
+      ${tags.length ? `<div class="tags">${tags.join('')}</div>` : ''}
+      ${priceHtml}
+      ${info ? `<dl class="info">${info}</dl>` : ''}
+      ${full}
+      <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-expanded="${open}">${open ? '收起詳細 ▴' : '完整資料、行程內容與截圖 ▾'}</button>
+    </article>`;
+  }
+
+  // ===== 國內住宿等其他卡片 =====
   let title = pick(h, r, c.title).join('｜') || '（未命名）';
   const route = pick(h, r, c.route);
   if(route.length === 2) title += `　${route[0]} → ${route[1]}`;
