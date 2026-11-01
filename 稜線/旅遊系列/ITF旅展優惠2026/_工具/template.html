@@ -282,6 +282,30 @@ ul.plain{margin:0;padding-left:1.2em;display:grid;gap:8px}
 .sheet-body a{word-break:break-all}
 :root[data-font="large"] .sheet-body .full{font-size:17px}
 body.sheet-open{overflow:hidden}
+.sheet-save{grid-row:3;grid-column:2;justify-self:end;white-space:nowrap;min-height:40px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;padding:0 12px}
+.sheet-save[aria-pressed="true"]{color:var(--star);border-color:var(--star)}
+
+/* 同一家合併 */
+.grp-toggle{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:6px 14px;min-height:36px;font-size:14px;font-weight:700;cursor:pointer;margin-right:10px}
+.grp-toggle[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--navy-ink)}
+.grp-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.grp-head h4{margin:0;font-size:18px;line-height:1.4;overflow-wrap:anywhere}
+.grp-n{flex:none;font-size:13px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:99px;padding:1px 10px}
+.grp-meta{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.grp-range{font-family:var(--f-num);font-weight:700;color:var(--accent);font-size:15px}
+.grp-list{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid var(--line)}
+.grp-list li{border-bottom:1px solid var(--line)}
+.grp-list li:last-child{border-bottom:0}
+.more-btn.grp-item{display:grid;grid-template-columns:1fr auto 14px;gap:4px 10px;align-items:center;width:100%;background:none;border:0;border-radius:0;padding:11px 2px;min-height:48px;text-align:left;font-weight:500;font-size:15px;color:var(--ink);margin:0}
+.more-btn.grp-item:hover{background:var(--sunk);color:var(--ink)}
+.gi-name{line-height:1.5;overflow-wrap:anywhere}
+.gi-name .tag{margin-right:6px;font-size:11px}
+.gi-star{color:var(--star);margin-right:4px}
+.gi-price{font-family:var(--f-num);font-weight:700;color:var(--accent);text-align:right;white-space:nowrap;line-height:1.3}
+.gi-price small{display:block;font-family:var(--f-body);font-size:12px;color:var(--muted);font-weight:500}
+.gi-na{font-family:var(--f-body);color:var(--faint);font-weight:500}
+.gi-go{color:var(--faint);font-size:18px}
+.grp-sum{color:var(--muted)}
 
 /* ===== 機票卡片專屬強化 ===== */
 .deal.deal-flight{border-top:4px solid var(--sky);background:linear-gradient(180deg, rgba(31,95,168,.02) 0%, var(--surface) 35%)}
@@ -796,7 +820,7 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
 <button class="totop" id="totop" aria-label="回到頂部" title="回到頂部" hidden>↑</button>
 <div class="sheet-back" id="sheet-back" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
-    <div class="sheet-head"><span class="sheet-grip" aria-hidden="true"></span><p class="sheet-title" id="sheet-title"></p><div class="sheet-sub"></div><button type="button" class="sheet-close" aria-label="關閉">✕ 關閉</button><div class="sheet-price"></div></div>
+    <div class="sheet-head"><span class="sheet-grip" aria-hidden="true"></span><p class="sheet-title" id="sheet-title"></p><div class="sheet-sub"></div><button type="button" class="sheet-close" aria-label="關閉">✕ 關閉</button><button type="button" class="sheet-save" aria-pressed="false">☆ 收藏</button><div class="sheet-price"></div></div>
     <div class="sheet-body"></div>
   </div>
 </div>
@@ -949,6 +973,40 @@ function infoRow(label, v){
   const shortV = long ? v.slice(0, 76) + '…' : v;
   return `<div class="${long ? 'trunc' : ''}"${long ? ' title="點擊展開完整規定"' : ''}><dt>${esc(label)}</dt><dd>${formatText(shortV)}${long ? '<span class="expand-cue">展開 ▾</span>' : ''}</dd></div>`;
 }
+// 同一家合併：住宿看「飯店名稱」、餐券看「飯店/品牌」；括號內的補充說明不列入比對
+const GROUPABLE = {lodging:'飯店名稱', dining:'飯店/品牌'};
+let redrawList = null;
+const grpName = v => String(v || '').replace(/[（(][^）)]*[）)]/g, '').replace(/\s+/g, '').trim();
+function groupRows(k, rows){
+  const i = col(D[k].headers, GROUPABLE[k]), map = new Map(), out = [];
+  rows.forEach(x => { const key = grpName(x.r[i]) || ('#' + x.idx);
+    if(!map.has(key)){ map.set(key, []); out.push(map.get(key)); } map.get(key).push(x); });
+  return out;
+}
+function groupCard(k, g){
+  const d = D[k], c = CFG[k], h = d.headers, gi = col(h, GROUPABLE[k]);
+  const val = (r, s) => { const i = s ? col(h, s) : -1; return i >= 0 ? r[i].trim() : ''; };
+  const name = grpName(g[0].r[gi]) || g[0].r[gi];
+  const prices = g.map(x => num(val(x.r, c.price))).filter(n => !isNaN(n) && n > 0);
+  const lo = Math.min(...prices), hi = Math.max(...prices);
+  const range = prices.length ? (lo === hi ? `NT$ ${lo.toLocaleString()}` : `NT$ ${lo.toLocaleString()}–${hi.toLocaleString()}`) : '價格未公布';
+  const booths = [...new Set(g.map(x => (val(x.r, '攤位號碼').match(/^[A-Z]區?-?\d{2,4}/) || [''])[0]).filter(Boolean))];
+  const items = g.map(({r, idx}) => {
+    const sub = (k === 'dining' ? [val(r, '餐廳'), val(r, c.sub[0])] : [val(r, c.sub[0])]).filter(v => v && !blank(v)).join('・') || '（未命名方案）';
+    const p = val(r, c.price), per = c.per ? val(r, c.per[0]) : '';
+    const on = saved.has(rowKey(k, r)), old = isOld(d, r);
+    return `<li><button type="button" class="more-btn grp-item" data-k="${k}" data-idx="${idx}" aria-haspopup="dialog">
+      <span class="gi-name">${on ? '<span class="gi-star" title="已收藏">★</span>' : ''}${old ? '<span class="tag y25">2025</span>' : ''}${esc(sub)}</span>
+      <span class="gi-price">${blank(p) ? '<span class="gi-na">未公布</span>' : 'NT$ ' + esc(fmt(p))}${!blank(per) ? `<small>${esc(c.per[1])} ${esc(fmt(per))}</small>` : ''}</span>
+      <span class="gi-go" aria-hidden="true">›</span></button></li>`;
+  }).join('');
+  return `<article class="deal grp-card">
+    <div class="grp-head"><h4>${esc(name)}</h4><span class="grp-n">${g.length} 個方案</span></div>
+    <div class="grp-meta">${booths.map(b => `<span class="tag booth">攤位 ${esc(b)}</span>`).join('')}<span class="grp-range">${range}</span></div>
+    <ul class="grp-list">${items}</ul>
+  </article>`;
+}
+
 function renderFull(d, h, r, idx){
   const items = [];
   const hiddenItems = [];
@@ -1351,7 +1409,7 @@ viewData.addEventListener('click', e => {
 
 // 完整資料面板：手機從下方滑出、桌機置中；返回鍵／Esc／點背景都會關閉，關閉後焦點回到原按鈕
 const sheetBack = document.getElementById('sheet-back'), sheetEl = sheetBack.querySelector('.sheet');
-let sheetFrom = null, sheetY = 0;
+let sheetFrom = null, sheetY = 0, sheetDirty = false;
 function openSheet(k, idx, from){
   const d = D[k], r = d.rows[idx], tmp = document.createElement('div');
   tmp.innerHTML = card(d, CFG[k], r, idx, false, k, '');
@@ -1360,6 +1418,8 @@ function openSheet(k, idx, from){
   sheetEl.querySelector('.sheet-sub').innerHTML = sub ? sub.innerHTML : '';
   const ph = sheetEl.querySelector('.sheet-price'); ph.innerHTML = price ? price.outerHTML : '';
   sheetEl.querySelector('.sheet-body').innerHTML = renderFull(d, d.headers, r, idx);
+  const ssv = sheetEl.querySelector('.sheet-save'), on = saved.has(rowKey(k, r));
+  ssv.dataset.k = k; ssv.dataset.idx = idx; ssv.setAttribute('aria-pressed', on); ssv.textContent = on ? '★ 已收藏' : '☆ 收藏';
   sheetEl.querySelector('.sheet-body').scrollTop = 0;
   sheetFrom = from || null; sheetY = scrollY;
   sheetBack.hidden = false; document.body.classList.add('sheet-open');
@@ -1369,11 +1429,24 @@ function openSheet(k, idx, from){
 function closeSheet(fromPop){
   if(sheetBack.hidden) return;
   sheetBack.hidden = true; document.body.classList.remove('sheet-open');
+  if(sheetDirty){ sheetDirty = false; const k = sheetFrom && sheetFrom.dataset.k, idx = sheetFrom && sheetFrom.dataset.idx;
+    if(view === 'saved') go('saved'); else if(redrawList) redrawList();
+    if(idx != null) sheetFrom = viewData.querySelector(`.more-btn[data-k="${k}"][data-idx="${idx}"]`) || sheetFrom; }
   if(!fromPop && history.state && history.state.itfSheet){ try{ history.back(); }catch(e){} }
   if(sheetFrom && document.contains(sheetFrom)) sheetFrom.focus({preventScroll:true});
   const y = sheetY; requestAnimationFrame(() => scrollTo(0, y)); setTimeout(() => { if(Math.abs(scrollY - y) > 2) scrollTo(0, y); }, 120);
 }
-sheetBack.addEventListener('click', e => { if(e.target === sheetBack || e.target.closest('.sheet-close')) closeSheet(); });
+sheetBack.addEventListener('click', e => {
+  const sv = e.target.closest('.sheet-save');
+  if(sv){
+    const k = sv.dataset.k, key = rowKey(k, D[k].rows[+sv.dataset.idx]);
+    saved.has(key) ? saved.delete(key) : saved.add(key); persist(); starCount();
+    const on = saved.has(key); sv.setAttribute('aria-pressed', on); sv.textContent = on ? '★ 已收藏' : '☆ 收藏';
+    showToast(on ? `已收藏（共 ${saved.size} 筆），可至「收藏」分頁比價` : '已取消收藏');
+    sheetDirty = true; return;
+  }
+  if(e.target === sheetBack || e.target.closest('.sheet-close')) closeSheet();
+});
 addEventListener('keydown', e => { if(e.key === 'Escape' && !sheetBack.hidden) closeSheet(); });
 addEventListener('popstate', () => closeSheet(true));
 
@@ -1750,10 +1823,23 @@ function renderSet(k){
     document.getElementById('cnt-' + k).innerHTML = (rows.length === d.rows.length
       ? `顯示全部 <b>${rows.length.toLocaleString()}</b> 筆` : `符合條件 <b>${rows.length.toLocaleString()}</b> 筆（共 ${d.rows.length.toLocaleString()} 筆）`) +
       (active ? `<button type="button" class="linkbtn clear-all">✕ 清除全部條件</button>` : '');
+    if(GROUPABLE[k]) document.getElementById('cnt-' + k).insertAdjacentHTML('afterbegin',
+      `<button type="button" class="grp-toggle" aria-pressed="${st.group !== false}">${st.group !== false ? '✓ ' : ''}同一家合併</button>`);
     syncHash(k);
     const list = document.getElementById('list-' + k);
     if(!rows.length){ list.innerHTML = `<div class="empty">沒有符合條件的優惠。請試試更短的關鍵字或關掉部分篩選。<br><button type="button" class="reset clear-all">✕ 清除全部條件</button></div>`; }
     else if(c.table) list.innerHTML = boothTable(d, rows.slice(0, st.limit));
+    else if(GROUPABLE[k] && st.group !== false){
+      // 同一家合併：依目前排序，以每家第一個（最划算）方案的位置排家數；只有一個方案的照舊顯示單張卡
+      const groups = groupRows(k, rows);
+      list.innerHTML = `<div class="cards">${groups.slice(0, st.limit).map(g => g.length > 1 ? groupCard(k, g) : card(d, c, g[0].r, g[0].idx, false, k)).join('')}</div>`;
+      highlight(list, st.q);
+      document.getElementById('cnt-' + k).insertAdjacentHTML('beforeend', `<span class="grp-sum">，合併成 <b>${groups.length.toLocaleString()}</b> 家</span>`);
+      const more = document.getElementById('more-' + k);
+      more.hidden = groups.length <= st.limit;
+      more.textContent = `再顯示 ${Math.min(PAGE, groups.length - st.limit)} 家（還有 ${(groups.length - st.limit).toLocaleString()} 家）`;
+      return;
+    }
     else { list.innerHTML = `<div class="cards">${rows.slice(0, st.limit).map(x => card(d, c, x.r, x.idx, st.open.has(x.idx), k)).join('')}</div>`; highlight(list, st.q); }
     const more = document.getElementById('more-' + k);
     more.hidden = rows.length <= st.limit;
@@ -1787,6 +1873,12 @@ function renderSet(k){
   const oc = document.getElementById('old-' + k); if(oc) oc.addEventListener('change', e => { st.hideOld = e.target.checked; draw(); });
   document.getElementById('reset-' + k).addEventListener('click', () => { delete state[k]; renderSet(k); document.getElementById('q-' + k).focus(); });
   document.getElementById('more-' + k).addEventListener('click', () => { st.limit += PAGE; draw(); });
+  document.getElementById('cnt-' + k).addEventListener('click', e => {
+    if(!e.target.closest('.grp-toggle')) return;
+    st.group = st.group === false; st.limit = PAGE; draw();
+    showToast(st.group ? '已合併同一家的方案' : '已改成逐筆列出');
+  });
+  redrawList = draw;
 
   // 綁定各分頁快捷按鈕
   if(k === 'flight'){

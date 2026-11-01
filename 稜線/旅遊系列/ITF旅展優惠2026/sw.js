@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ridgeline-travel-itf-2026-v8';
+const CACHE_NAME = 'ridgeline-travel-itf-2026-v9';
 const PRECACHE_URLS = [
   './',
   './index.html',
