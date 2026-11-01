@@ -258,6 +258,30 @@ ul.plain{margin:0;padding-left:1.2em;display:grid;gap:8px}
 .saved-head h3{margin:0}
 .totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:6;background:var(--navy);color:var(--navy-ink);border:0;border-radius:99px;padding:10px 16px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.2);transition:transform .12s}
 .totop:hover{transform:translateY(-2px)}
+.totop{width:44px;height:44px;padding:0;display:grid;place-items:center;font-size:20px;line-height:1;opacity:.92}
+
+/* 完整資料面板：從下方滑出（手機）／置中（桌機），卡片本身不展開 */
+.sheet-back{position:fixed;inset:0;z-index:90;background:rgba(15,23,42,.5);display:flex;align-items:flex-end;justify-content:center}
+.sheet-back[hidden]{display:none}
+.sheet{background:var(--surface);color:var(--ink);width:100%;max-width:680px;max-height:88vh;border-radius:18px 18px 0 0;display:flex;flex-direction:column;box-shadow:0 -6px 24px rgba(0,0,0,.18);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (min-width:769px){.sheet-back{align-items:center;padding:24px}.sheet{border-radius:18px;max-height:84vh}}
+.sheet-head{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:start;padding:14px 18px 12px;border-bottom:1px solid var(--line)}
+.sheet-grip{grid-column:1/-1;justify-self:center;width:40px;height:4px;border-radius:99px;background:var(--line);margin:-4px 0 6px}
+@media (min-width:769px){.sheet-grip{display:none}}
+.sheet-title{font-family:var(--f-title);font-size:19px;font-weight:700;line-height:1.4;margin:0;overflow-wrap:anywhere}
+.sheet-sub{grid-column:1;color:var(--muted);font-size:14px;line-height:1.5}
+.sheet-price{grid-column:1/-1}
+.sheet-head .price{margin-top:4px}
+.sheet-close{grid-row:2;grid-column:2;align-self:start;justify-self:end;white-space:nowrap;min-width:44px;min-height:40px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;padding:0 12px}
+.sheet-body{overflow-y:auto;overscroll-behavior:contain;padding:12px 18px 20px;-webkit-overflow-scrolling:touch}
+.sheet-body .full{border-top:0;padding-top:0;font-size:15.5px;gap:2px}
+.sheet-body .full-row{grid-template-columns:1fr;gap:2px;padding:10px 4px}
+.sheet-body .full-row.key-row{padding:10px 10px}
+.sheet-body .full dt{font-size:13px;letter-spacing:.04em}
+.sheet-body .full dd{line-height:1.75}
+.sheet-body a{word-break:break-all}
+:root[data-font="large"] .sheet-body .full{font-size:17px}
+body.sheet-open{overflow:hidden}
 
 /* ===== 機票卡片專屬強化 ===== */
 .deal.deal-flight{border-top:4px solid var(--sky);background:linear-gradient(180deg, rgba(31,95,168,.02) 0%, var(--surface) 35%)}
@@ -399,7 +423,6 @@ button.tag.booth:hover{background:var(--accent);color:#fff}
 @media (max-width:640px){
   .filter-toggle{display:inline-flex;gap:4px;align-items:center}
   .toolbar.collapsed .filters>.field,.toolbar.collapsed .filters>.check{display:none}
-  .toolbar{position:sticky;top:48px;z-index:4}
   .toolbar.collapsed{padding:10px 12px;gap:8px}
   .gs-cat ul{font-size:12px}
 }
@@ -770,7 +793,13 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
   </div>
 </div>
 
-<button class="totop" id="totop" hidden>↑ 回到頂部</button>
+<button class="totop" id="totop" aria-label="回到頂部" title="回到頂部" hidden>↑</button>
+<div class="sheet-back" id="sheet-back" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <div class="sheet-head"><span class="sheet-grip" aria-hidden="true"></span><p class="sheet-title" id="sheet-title"></p><div class="sheet-sub"></div><button type="button" class="sheet-close" aria-label="關閉">✕ 關閉</button><div class="sheet-price"></div></div>
+    <div class="sheet-body"></div>
+  </div>
+</div>
 
 <script type="application/json" id="data">__DATA__</script>
 <script>
@@ -940,9 +969,12 @@ function renderFull(d, h, r, idx){
       content = shots(d, v);
     } else if(name.includes('網址') || name.includes('連結')){
       const urls = v.split(/\s*[；;]\s*/).filter(Boolean);
+      const link = u => { const m = u.match(/https?:\/\/[^\s；，、）)\]」]+/); if(!m) return formatText(u);
+        let host = m[0]; try{ host = new URL(m[0]).hostname.replace(/^www\./, ''); }catch(e){}
+        return `<a href="${esc(m[0])}" target="_blank" rel="noopener">${esc(host)} ↗</a>${formatText(u.replace(m[0], ''))}`; };
       content = urls.length > 1
-        ? `<ul class="dd-list">${urls.map(u => `<li>${formatText(u)}</li>`).join('')}</ul>`
-        : formatText(v);
+        ? `<ul class="dd-list">${urls.map(u => `<li>${link(u)}</li>`).join('')}</ul>`
+        : link(v);
     } else {
       const parts = v.split(/；\s*/).map(x => x.trim()).filter(Boolean);
       content = (parts.length >= 2 && v.length > 35)
@@ -1314,16 +1346,36 @@ viewData.addEventListener('click', e => {
     return;
   }
   const b = e.target.closest('.more-btn'); if(!b) return;
-  const k = b.dataset.k, idx = +b.dataset.idx;
-  const useShared = view === 'saved' || view === 'picks' || !state[k];
-  const open = useShared ? savedOpen : state[k].open, id = useShared ? k + idx : idx;
-  open.has(id) ? open.delete(id) : open.add(id);
-  const dealEl = b.closest('.deal');
-  const reason = dealEl ? dealEl.dataset.reason || '' : '';
-  dealEl.outerHTML = card(D[k], CFG[k], D[k].rows[idx], idx, open.has(id), k, reason);
-  const nextBtn = viewData.querySelector(`.more-btn[data-k="${k}"][data-idx="${idx}"]`);
-  if(nextBtn) nextBtn.focus();
+  openSheet(b.dataset.k, +b.dataset.idx, b);
 });
+
+// 完整資料面板：手機從下方滑出、桌機置中；返回鍵／Esc／點背景都會關閉，關閉後焦點回到原按鈕
+const sheetBack = document.getElementById('sheet-back'), sheetEl = sheetBack.querySelector('.sheet');
+let sheetFrom = null, sheetY = 0;
+function openSheet(k, idx, from){
+  const d = D[k], r = d.rows[idx], tmp = document.createElement('div');
+  tmp.innerHTML = card(d, CFG[k], r, idx, false, k, '');
+  const t = tmp.querySelector('.deal h4, .deal h3'), sub = tmp.querySelector('.deal .subt'), price = tmp.querySelector('.deal .price');
+  sheetEl.querySelector('.sheet-title').innerHTML = t ? t.innerHTML : esc(d.name);
+  sheetEl.querySelector('.sheet-sub').innerHTML = sub ? sub.innerHTML : '';
+  const ph = sheetEl.querySelector('.sheet-price'); ph.innerHTML = price ? price.outerHTML : '';
+  sheetEl.querySelector('.sheet-body').innerHTML = renderFull(d, d.headers, r, idx);
+  sheetEl.querySelector('.sheet-body').scrollTop = 0;
+  sheetFrom = from || null; sheetY = scrollY;
+  sheetBack.hidden = false; document.body.classList.add('sheet-open');
+  try{ history.pushState({itfSheet:1}, ''); }catch(e){}
+  sheetEl.querySelector('.sheet-close').focus();
+}
+function closeSheet(fromPop){
+  if(sheetBack.hidden) return;
+  sheetBack.hidden = true; document.body.classList.remove('sheet-open');
+  if(!fromPop && history.state && history.state.itfSheet){ try{ history.back(); }catch(e){} }
+  if(sheetFrom && document.contains(sheetFrom)) sheetFrom.focus({preventScroll:true});
+  const y = sheetY; requestAnimationFrame(() => scrollTo(0, y)); setTimeout(() => { if(Math.abs(scrollY - y) > 2) scrollTo(0, y); }, 120);
+}
+sheetBack.addEventListener('click', e => { if(e.target === sheetBack || e.target.closest('.sheet-close')) closeSheet(); });
+addEventListener('keydown', e => { if(e.key === 'Escape' && !sheetBack.hidden) closeSheet(); });
+addEventListener('popstate', () => closeSheet(true));
 
 
 // 最佳推薦特選頁面渲染
@@ -1873,7 +1925,7 @@ function card(d, c, r, idx, open, k, pickReason){
       ${priceHtml}
       ${!open && info ? `<dl class="info">${info}</dl>` : ''}
       ${full}
-      <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-expanded="${open}">${open ? '收起詳細 ▴' : '完整資料、來源與截圖 ▾'}</button>
+      <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-haspopup="dialog">完整資料、來源與截圖 ›</button>
     </article>`;
   }
 
@@ -1923,7 +1975,7 @@ function card(d, c, r, idx, open, k, pickReason){
       ${priceHtml}
       ${!open && info ? `<dl class="info">${info}</dl>` : ''}
       ${full}
-      <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-expanded="${open}">${open ? '收起詳細 ▴' : '完整資料、使用規定與截圖 ▾'}</button>
+      <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-haspopup="dialog">完整資料、使用規定與截圖 ›</button>
     </article>`;
   }
 
@@ -1994,7 +2046,7 @@ function card(d, c, r, idx, open, k, pickReason){
       ${priceHtml}
       ${!open && info ? `<dl class="info">${info}</dl>` : ''}
       ${full}
-      <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-expanded="${open}">${open ? '收起詳細 ▴' : '完整資料、行程內容與截圖 ▾'}</button>
+      <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-haspopup="dialog">完整資料、行程內容與截圖 ›</button>
     </article>`;
   }
 
@@ -2040,7 +2092,7 @@ function card(d, c, r, idx, open, k, pickReason){
     <div class="top">${tags.length ? `<div class="tags">${tags.join('')}</div>` : ''}<button class="save-btn" data-k="${k}" data-idx="${idx}" aria-pressed="${on}" aria-label="收藏：${esc(title)}">${on ? '<svg class="ti ti-star-filled" aria-hidden="true"><use href="#ti-star-filled"/></svg> <span class="lbl">已收藏</span>' : '<svg class="ti" aria-hidden="true"><use href="#ti-star"/></svg> <span class="lbl">收藏</span>'}</button></div>
     <div><h4>${esc(title)}</h4>${sub ? `<div class="subt">${esc(sub)}</div>` : ''}</div>
     ${price}${!open && info ? `<dl class="info">${info}</dl>` : ''}${full}
-    <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-expanded="${open}">${open ? '收起詳細 ▴' : '完整資料、加價規定與截圖 ▾'}</button>
+    <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-haspopup="dialog">完整資料、加價規定與截圖 ›</button>
   </article>`;
 }
 
