@@ -26,7 +26,8 @@
   | Noto Serif TC 子集 | — | OFL-1.1，內部名改為 ITF Serif | `vendor/serif-ui/`（700 約 202KB、900 約 7KB） | `_工具/build_serif_font.py` |
 
   **改介面文字後要重跑字型腳本。** Web Awesome 沒有採用：既有的彈窗、篩選、收合都是原生元素而且能正常運作，換元件只會增加約 250KB，看不出差別。
-- **sw 版號**：`ridgeline-travel-itf-2026-v4`。
+- **11-01 補：完全不連外**：拿掉 Google 字型。數字字型 IBM Plex Mono（OFL-1.1，@fontsource 5.3.0 latin 子集，500/600/700 各約 15KB）放在 `vendor/plex-mono/`；內文中文改用系統黑體（蘋方／微軟正黑），因為資料有 2,600 多筆，把內文字型放進 App 會多好幾 MB。實測外部連線 0。
+- **sw 版號**：`ridgeline-travel-itf-2026-v5`。
 - **驗證**：
   - 手機 390、桌機 1440、深色模式都測過：不左右滑，宋體有載入，山形會依深淺色切換，主鈕會到推薦頁，頁尾署名存在，底部導覽沒有 emoji，沒有錯誤。
   - `品牌檢核.py` 結果 0 FAIL。

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ridgeline-travel-itf-2026-v4';
+const CACHE_NAME = 'ridgeline-travel-itf-2026-v5';
 const PRECACHE_URLS = [
   './',
   './index.html',
@@ -26,6 +26,9 @@ const PRECACHE_URLS = [
   './vendor/fluent-3d/plane.png',
   './vendor/fluent-3d/star.png',
   './vendor/fluent-3d/ticket.png',
+  './vendor/plex-mono/plex-mono-500.woff2',
+  './vendor/plex-mono/plex-mono-600.woff2',
+  './vendor/plex-mono/plex-mono-700.woff2',
   './vendor/serif-ui/itf-serif-700.woff2',
   './vendor/serif-ui/itf-serif-900.woff2',
   './vendor/brand/fitzroy_navy.png',
