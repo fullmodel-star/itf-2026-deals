@@ -45,7 +45,8 @@ header.pass .wrap{padding-block:22px 20px;display:flex;flex-wrap:wrap;gap:14px 3
 /* 分頁 */
 nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(0,0,0,.04)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
-nav.tabs .wrap{display:flex;gap:2px;overflow-x:auto;scrollbar-width:thin;align-items:stretch}
+nav.tabs .wrap{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;align-items:stretch}
+nav.tabs .wrap::-webkit-scrollbar{display:none}
 nav.tabs .grp{align-self:center;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--faint);padding:0 2px 0 14px;margin-left:6px;border-left:1px solid var(--line);white-space:nowrap;line-height:1.2}
 nav.tabs .star-n{color:var(--star)}
 nav.tabs button{background:none;border:0;color:var(--muted);padding:13px 14px 11px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;font-size:15px;transition:color .12s,border-color .12s}
@@ -146,7 +147,7 @@ ul.plain{margin:0;padding-left:1.2em;display:grid;gap:8px}
 .count b{color:var(--ink);font-variant-numeric:tabular-nums}
 
 /* 優惠卡通用樣式 */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px;align-items:start}
 .deal{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0;box-shadow:var(--shadow-sm);transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease;position:relative}
 .deal:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);border-color:#cbd5e1}
 .deal.old{background:var(--sunk);opacity:.92}
@@ -169,15 +170,31 @@ ul.plain{margin:0;padding-left:1.2em;display:grid;gap:8px}
 .price .now.na{font-family:var(--f-body);font-size:16px;color:var(--faint);font-weight:500}
 .price .was{color:var(--faint);text-decoration:line-through;font-size:14px;font-variant-numeric:tabular-nums}
 .price .per{font-size:13px;background:var(--accent-soft);color:var(--accent);border-radius:6px;padding:2px 8px;font-weight:700;white-space:nowrap}
-.info{margin:0;display:grid;gap:5px;font-size:14px}
-.info div{display:grid;grid-template-columns:4.8em 1fr;gap:8px}
-.info dt{color:var(--muted);font-size:13px}
-.info dd{margin:0;overflow-wrap:anywhere;line-height:1.55}
-.more-btn{align-self:flex-start;background:var(--sunk);border:1px solid var(--line);border-radius:8px;color:var(--ink);cursor:pointer;padding:5px 12px;font-size:13px;font-weight:600;margin-top:auto;transition:all .12s}
+.info{margin:0;display:grid;gap:6px;font-size:14px;background:var(--sunk);border-radius:10px;padding:10px 12px;border:1px solid var(--line)}
+.info div{display:grid;grid-template-columns:4.8em 1fr;gap:8px;padding-bottom:5px;border-bottom:1px dashed var(--line);align-items:baseline}
+.info div:last-child{padding-bottom:0;border-bottom:0}
+.info div.trunc{cursor:pointer;border-radius:4px;transition:background .12s}
+.info div.trunc:hover{background:rgba(201,86,28,.06)}
+.info dt{color:var(--muted);font-size:13px;font-weight:600}
+.info dd{margin:0;overflow-wrap:anywhere;line-height:1.6}
+.expand-cue{display:inline-block;font-size:12px;font-weight:700;color:var(--accent);margin-left:4px;white-space:nowrap}
+.more-btn{align-self: stretch;text-align:center;background:var(--sunk);border:1px solid var(--line);border-radius:8px;color:var(--ink);cursor:pointer;padding:7px 12px;font-size:13px;font-weight:700;margin-top:auto;transition:all .12s}
 .more-btn:hover{background:var(--surface);border-color:var(--accent);color:var(--accent)}
-.full{margin:0;border-top:1px dashed var(--line);padding-top:12px;display:grid;gap:8px;font-size:14px}
-.full dt{color:var(--muted);font-size:13px;font-weight:600}
-.full dd{margin:0;overflow-wrap:anywhere;line-height:1.6}
+.full{margin:0;border-top:2px solid var(--line);padding-top:12px;display:grid;gap:8px;font-size:14px}
+.full-row{display:grid;grid-template-columns:5.8em 1fr;gap:10px;padding:6px 8px;border-radius:8px;align-items:baseline;border-bottom:1px solid var(--line)}
+.full-row:last-child{border-bottom:0}
+.full-row.key-row{background:var(--sunk)}
+.full-row.muted-row{opacity:.75;font-size:12.5px}
+.full dt{color:var(--muted);font-size:13px;font-weight:700}
+.full dd{margin:0;overflow-wrap:anywhere;line-height:1.65}
+.faint-dd{color:var(--muted)}
+.dd-list{margin:0;padding-left:1.2em;display:grid;gap:4px}
+.dd-list li{line-height:1.6}
+.hl-surch{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums}
+.hl-free{color:var(--good);font-weight:700;background:var(--good-soft);padding:0 5px;border-radius:4px}
+.hl-warn{color:#b45309;font-weight:700;background:#fef3c7;padding:0 5px;border-radius:4px}
+:root[data-theme="dark"] .hl-warn{color:#fde68a;background:#451a03}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hl-warn{color:#fde68a;background:#451a03}}
 .loadmore{display:block;margin:24px auto 0;padding:11px 28px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);cursor:pointer;font-size:15px;font-weight:600;box-shadow:var(--shadow-sm);transition:all .15s}
 .loadmore:hover{box-shadow:var(--shadow-md);border-color:var(--faint)}
 .empty{background:var(--surface);border:1px dashed var(--line);border-radius:14px;padding:36px;text-align:center;color:var(--muted)}
@@ -333,18 +350,37 @@ button.tag.booth:hover{background:var(--accent);color:#fff}
 
 
 /* ===== 最佳推薦專屬頁樣式 ===== */
-.picks-hero{background:linear-gradient(135deg, rgba(201,86,28,.08) 0%, rgba(31,95,168,.08) 100%);border:1px solid rgba(201,86,28,.2);border-radius:14px;padding:20px 22px;margin-bottom:24px}
+.picks-hero{background:linear-gradient(135deg, rgba(201,86,28,.08) 0%, rgba(31,95,168,.08) 100%);border:1px solid rgba(201,86,28,.2);border-radius:14px;padding:20px 22px;margin-bottom:20px}
 .picks-hero h2{margin:0 0 8px;font-size:24px;font-weight:900;display:flex;align-items:center;gap:8px}
 .picks-hero p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
-.picks-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
-.picks-nav a{background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:6px 14px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:4px;box-shadow:var(--shadow-sm);transition:all .12s}
-.picks-nav a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
-.pick-sec{margin-bottom:36px;scroll-margin-top:70px}
+.picks-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;position:sticky;top:49px;z-index:4;background:var(--bg);padding:8px 0;border-bottom:1px solid var(--line)}
+.picks-nav button{background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:7px 15px;color:var(--ink);font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:5px;box-shadow:var(--shadow-sm);cursor:pointer;transition:all .12s}
+.picks-nav button:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.pick-sec{margin-bottom:40px;scroll-margin-top:110px}
 .pick-sec-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:14px;border-bottom:2px solid var(--line);padding-bottom:8px}
-.pick-sec-head h3{margin:0;font-size:19px;font-weight:800;display:flex;align-items:center;gap:6px}
+.pick-sec-head h3{margin:0;font-size:19px;font-weight:800;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .pick-sec-head .more-link{color:var(--accent);font-weight:700;font-size:14px;cursor:pointer;background:none;border:0;padding:0}
 .pick-sec-head .more-link:hover{text-decoration:underline}
 .badge-hot{background:linear-gradient(135deg, #ef4444 0%, #f97316 100%);color:#fff;font-size:11px;font-weight:800;padding:2px 7px;border-radius:4px;letter-spacing:.02em}
+.pick-reason{background:linear-gradient(90deg, var(--accent-soft) 0%, rgba(201,86,28,.04) 100%);color:var(--accent);border-left:3.5px solid var(--accent);padding:7px 11px;border-radius:6px;font-size:13.5px;font-weight:700;line-height:1.45;margin-bottom:2px}
+
+/* 閱讀舒適度：大字模式與時程控制 */
+.hdr-tools{display:flex;gap:8px;align-items:center;align-self:center}
+.alert-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.alert-head h3{margin:0}
+.tl-toggle{background:var(--surface);border:1px solid rgba(201,86,28,.35);color:var(--accent);border-radius:99px;padding:3px 11px;font-size:12.5px;font-weight:700;cursor:pointer}
+.tl-toggle:hover{background:var(--accent);color:#fff}
+.timeline.hide-past li.past{display:none}
+:root[data-font="large"] body{font-size:18px;line-height:1.75}
+:root[data-font="large"] .deal h4,:root[data-font="large"] .tour-title{font-size:19.5px}
+:root[data-font="large"] .deal .subt{font-size:16px}
+:root[data-font="large"] .info,:root[data-font="large"] .full{font-size:16px}
+:root[data-font="large"] .info dt,:root[data-font="large"] .full dt{font-size:14.5px}
+:root[data-font="large"] .tag,:root[data-font="large"] .tag-tax,:root[data-font="large"] .tag-baggage,:root[data-font="large"] .tag-service,:root[data-font="large"] .tag-meal,:root[data-font="large"] .tag-surch,:root[data-font="large"] .tag-tips,:root[data-font="large"] .tag-airline{font-size:13.5px;padding:3px 9px}
+:root[data-font="large"] .price .now{font-size:27px}
+:root[data-font="large"] .chip,:root[data-font="large"] .switch-chip,:root[data-font="large"] .picks-nav button{font-size:15.5px}
+:root[data-font="large"] nav.tabs button{font-size:16.5px}
+:root[data-font="large"] .pick-reason{font-size:15px}
 
 /* 攤位表 */
 .tbox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-sm)}
@@ -370,7 +406,10 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
     <div class="stub"><span>展期</span><b>11/6（五）–11/9（一）</b></div>
     <div class="stub"><span>地點</span><b>南港展覽館 1 館</b></div>
     <div class="stub count" id="countdown" hidden><span></span><b></b></div>
-    <button type="button" class="theme-btn" id="theme-btn" aria-label="切換深淺色">🌓 自動</button>
+    <div class="hdr-tools">
+      <button type="button" class="theme-btn" id="font-btn" aria-label="切換字級大小" title="放大全站字體，閱讀更輕鬆">Aa 標準字</button>
+      <button type="button" class="theme-btn" id="theme-btn" aria-label="切換深淺色">🌓 自動</button>
+    </div>
   </div>
 </div></header>
 
@@ -476,8 +515,11 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
   </section>
 
   <div class="alert">
-    <h3>要搶的時間</h3>
-    <ul class="timeline">
+    <div class="alert-head">
+      <h3>⏰ 要搶的時間（限時快閃）</h3>
+      <button type="button" class="tl-toggle" id="tl-toggle" hidden></button>
+    </div>
+    <ul class="timeline" id="home-tl">
       <li data-end="2026-10-30"><span class="when">10/30 13:00</span><span>君悅凱菲屋、彩日本料理「兩人同行一人免費」，每人 979 元，限量 50 組</span></li>
       <li data-start="2026-10-29" data-end="2026-11-11"><span class="when">到 11/11 平日 11:00</span><span>易遊網 100 元機票（沖繩、北海道、曼谷、首爾）</span></li>
       <li data-end="2026-11-04"><span class="when">11/4 10:00</span><span>易遊網全站折扣碼，最高折 1,000 元</span></li>
@@ -606,6 +648,64 @@ const blank = v => !v || !String(v).trim() || /^(未公布|未標示|查無|—|
 const fmt = v => /^\s*[\d,]+(\.\d+)?\s*$/.test(v) ? Number(String(v).replace(/,/g, '')).toLocaleString('zh-TW') : String(v).trim();
 const isOld = (d, r) => { const y = d.headers.findIndex(x => x.startsWith('資料年')); return (y >= 0 && r[y].includes('2025')) || r.some(c => c.includes('2025參考')); };
 const linkify = s => esc(s).replace(/https?:\/\/[^\s；，、）)\]」]+/g, u => `<a href="${u}" target="_blank" rel="noopener">${u.length > 60 ? u.slice(0, 57) + '…' : u} ↗</a>`);
+function richSeg(s){
+  return esc(s)
+    .replace(/(?:\+|加價\s*|補差價\s*)\d[\d,]*(?:\s*元)?/g, '<span class="hl-surch">$&</span>')
+    .replace(/(?:平日)?(?:免加價|不加價|免費升等|買\d+送\d+|買一送一|兩人同行一人免費)/g, '<span class="hl-free">$&</span>')
+    .replace(/(?:農曆)?春節(?:期間)?|跨年|不適用|除外日?/g, '<span class="hl-warn">$&</span>');
+}
+function formatText(raw){
+  const urlRe = /https?:\/\/[^\s；，、）)\]」]+/g;
+  let out = '', last = 0, m;
+  const str = String(raw ?? '');
+  while((m = urlRe.exec(str)) !== null){
+    out += richSeg(str.slice(last, m.index));
+    const u = esc(m[0]);
+    out += `<a href="${u}" target="_blank" rel="noopener">${u.length > 55 ? u.slice(0, 52) + '…' : u} ↗</a>`;
+    last = m.index + m[0].length;
+  }
+  out += richSeg(str.slice(last));
+  return out;
+}
+function infoRow(label, v){
+  if(blank(v)) return '';
+  const long = v.length > 78;
+  const shortV = long ? v.slice(0, 76) + '…' : v;
+  return `<div class="${long ? 'trunc' : ''}"${long ? ' title="點擊展開完整規定"' : ''}><dt>${esc(label)}</dt><dd>${formatText(shortV)}${long ? '<span class="expand-cue">展開 ▾</span>' : ''}</dd></div>`;
+}
+function renderFull(d, h, r){
+  const items = [];
+  const hiddenItems = [];
+  const skipHeader = /^(序號|飯店名稱|飯店\/品牌|地區|縣市|區域|區域分類|旅行社|行程名稱|房型\/品名|券種內容|旅展價\(元\)|旅展單張價\(元\)|旅展價\(每人,元\)|折數|每人每晚約\(元\)|每人均價\(元\)|每日平均價\(元\))$/;
+  h.forEach((name, i) => {
+    const v = (r[i] || '').trim();
+    if(!v || skipHeader.test(name)) return;
+    if(blank(v) || v === '（未截圖）'){
+      hiddenItems.push(name);
+      return;
+    }
+    let content = '';
+    if(name.includes('截圖')){
+      content = shots(d, v);
+    } else if(name.includes('網址') || name.includes('連結')){
+      const urls = v.split(/\s*[；;]\s*/).filter(Boolean);
+      content = urls.length > 1
+        ? `<ul class="dd-list">${urls.map(u => `<li>${formatText(u)}</li>`).join('')}</ul>`
+        : formatText(v);
+    } else {
+      const parts = v.split(/；\s*/).map(x => x.trim()).filter(Boolean);
+      content = (parts.length >= 2 && v.length > 35)
+        ? `<ul class="dd-list">${parts.map(p => `<li>${formatText(p)}</li>`).join('')}</ul>`
+        : formatText(v);
+    }
+    const isKey = /加價|期限|包含|規定|限制|備註|條件|小費|服務費/.test(name);
+    items.push(`<div class="full-row${isKey ? ' key-row' : ''}"><dt>${esc(name)}</dt><dd>${content}</dd></div>`);
+  });
+  if(hiddenItems.length){
+    items.push(`<div class="full-row muted-row"><dt>未公布項</dt><dd class="faint-dd">${esc(hiddenItems.join('、'))}</dd></div>`);
+  }
+  return `<dl class="full">${items.join('')}</dl>`;
+}
 function shots(d, s){
   const names = s.split(/[；;、,\n]+/).map(x => x.trim()).filter(Boolean);
   if(!SHOTS) return esc(names.join('、')) + '<br><span class="note">截圖請至 GitHub 網站版查看</span>';
@@ -657,8 +757,24 @@ function jump(k, q){
   go(k);
 }
 
-// 深淺色切換（自動 → 淺色 → 深色）
+// 字體大小與深淺色切換
 (function(){
+  const fbtn = document.getElementById('font-btn');
+  if(fbtn){
+    let f = 'normal'; try{ f = localStorage.getItem('itf-font') || 'normal'; }catch(e){}
+    const applyF = () => {
+      if(f === 'large') document.documentElement.setAttribute('data-font', 'large');
+      else document.documentElement.removeAttribute('data-font');
+      fbtn.textContent = f === 'large' ? 'Aa 大字模式' : 'Aa 標準字';
+    };
+    applyF();
+    fbtn.addEventListener('click', () => {
+      f = f === 'large' ? 'normal' : 'large';
+      try{ localStorage.setItem('itf-font', f); }catch(e){}
+      applyF();
+      showToast(f === 'large' ? '已切換為「大字舒適閱讀模式」' : '已切換為「標準字級」');
+    });
+  }
   const btn = document.getElementById('theme-btn');
   const modes = ['auto', 'light', 'dark'], label = {auto:'🌓 自動', light:'☀️ 淺色', dark:'🌙 深色'};
   let m = 'auto'; try{ m = localStorage.getItem('itf-theme') || 'auto'; }catch(e){}
@@ -730,12 +846,23 @@ const today = new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Taipei'}).format(
   else if(into <= 4){ cd.querySelector('span').textContent = '今天'; cd.querySelector('b').textContent = `旅展第 ${into} 天`; cd.hidden = false; }
   const items = [...document.querySelectorAll('.timeline li[data-end]')].map(li => ({li, s: li.dataset.start || li.dataset.end, e: li.dataset.end}));
   const soon = items.filter(x => x.s > today).map(x => x.s).sort()[0];
+  let pastCount = 0;
   items.forEach(({li, s, e}) => {
     const w = li.querySelector('.when'), tag = (cls, t) => { li.classList.add(cls); w.insertAdjacentHTML('beforeend', `<span class="badge ${cls}">${t}</span>`); };
-    if(e < today) tag('past', '已過');
+    if(e < today){ tag('past', '已過'); pastCount++; }
     else if(s <= today) tag('next', s === e ? '今天' : '進行中');
     else if(s === soon) tag('next', '下一個');
   });
+  const tlToggle = document.getElementById('tl-toggle'), homeTl = document.getElementById('home-tl');
+  if(tlToggle && homeTl && pastCount > 0){
+    tlToggle.hidden = false;
+    const updTl = () => {
+      const hidden = homeTl.classList.contains('hide-past');
+      tlToggle.textContent = hidden ? `顯示已結束時段 (${pastCount})` : `隱藏已結束時段 (${pastCount})`;
+    };
+    updTl();
+    tlToggle.addEventListener('click', () => { homeTl.classList.toggle('hide-past'); updTl(); });
+  }
 })();
 
 // 按 '/' 快捷鍵搜尋
@@ -769,14 +896,20 @@ function go(k){
   window.scrollTo({top:0});
 }
 
-// 點擊代理（收藏、展開、複製代碼）
+// 點擊代理（收藏、展開、複製代碼、推薦頁快速捲動）
 const savedOpen = new Set();
 viewData.addEventListener('click', e => {
+  const pj = e.target.closest('[data-pick-scroll]');
+  if(pj){
+    const sec = document.getElementById(pj.dataset.pickScroll);
+    if(sec) sec.scrollIntoView({behavior:'smooth'});
+    return;
+  }
   if(e.target.closest('.clear-all')){ const k = view; delete state[k]; renderSet(k); return; }
   const bt = e.target.closest('button.tag.booth');
   if(bt){
     const k = bt.dataset.k, code = bt.dataset.booth;
-    if(view === k){ state[k].q = code; state[k].limit = PAGE; renderSet(k); window.scrollTo({top:0}); }
+    if(view === k && state[k]){ state[k].q = code; state[k].limit = PAGE; renderSet(k); window.scrollTo({top:0}); }
     else jump(k, code);
     showToast(`攤位 ${code} 的所有優惠`);
     return;
@@ -803,10 +936,20 @@ viewData.addEventListener('click', e => {
     showToast(on ? `已收藏（共 ${saved.size} 筆），到「★ 收藏」分頁查看` : '已取消收藏');
     return;
   }
+  const tr = e.target.closest('.info .trunc');
+  if(tr && !e.target.closest('a')){
+    const mb = tr.closest('.deal').querySelector('.more-btn');
+    if(mb) mb.click();
+    return;
+  }
   const b = e.target.closest('.more-btn'); if(!b) return;
-  const k = b.dataset.k, idx = +b.dataset.idx, open = view === 'saved' ? savedOpen : state[k].open, id = view === 'saved' ? k + idx : idx;
+  const k = b.dataset.k, idx = +b.dataset.idx;
+  const useShared = view === 'saved' || view === 'picks' || !state[k];
+  const open = useShared ? savedOpen : state[k].open, id = useShared ? k + idx : idx;
   open.has(id) ? open.delete(id) : open.add(id);
-  b.closest('.deal').outerHTML = card(D[k], CFG[k], D[k].rows[idx], idx, open.has(id), k);
+  const dealEl = b.closest('.deal');
+  const reason = dealEl ? dealEl.dataset.reason || '' : '';
+  dealEl.outerHTML = card(D[k], CFG[k], D[k].rows[idx], idx, open.has(id), k, reason);
   const nextBtn = viewData.querySelector(`.more-btn[data-k="${k}"][data-idx="${idx}"]`);
   if(nextBtn) nextBtn.focus();
 });
@@ -814,84 +957,102 @@ viewData.addEventListener('click', e => {
 
 // 最佳推薦特選頁面渲染
 function renderPicks(){
-  // 精選國內住宿 (8 筆高 CP 首選)
-  // 承億文旅3天2夜(137), 承億集團雙人(136), 老爺家庭聯盟(61), 台南老爺家庭(73), 雲朗翰品高雄/兆品嘉義(2), 台東趣淘漫旅(45), 台北圓山通用券(8), 台北萬豪經典客房(160)
-  const lodgingIdxs = [136, 135, 60, 72, 1, 44, 7, 159]; // 0-based row indices
-  
-  // 精選餐飲餐券 (8 筆超值首選)
-  // 海霸王甲天下四人(161), 海霸王打狗霸(163), 喜來登十二廚(40), 台北天成套餐(100), 晶華栢麗廳早餐(24), 凱撒聯合買一送一(68), 台北美福彩匯平日午餐(77), 君悅凱菲屋下午茶四人(17)
-  const diningIdxs = [161, 163, 40, 100, 24, 68, 77, 17];
-  
-  // 精選國外機票 (8 筆含稅/送行李必搶)
-  // 日航沖繩(165), 澳門航空(203), 國泰香港(153), 華航釜山(83), 星宇舊金山(132), 汶萊皇家汶萊(212), 阿提哈德(314), 台灣虎航成田(234)
-  const flightIdxs = [165, 203, 153, 83, 132, 212, 314, 234];
-  
-  // 精選跟團 (8 筆各區最高性價比)
-  // 百威MSC郵輪沖繩5天, 雄獅阿里山夜未眠2日, 百威邱釜慶5天, 雄獅釜山5日, 可樂花蓮補助3日, 易飛泰國曼芭6日, 大榮沖繩4日, 易飛土耳其10日
+  const lodgingPicks = [
+    {i: 136, reason: '🏆 全場最省：淡水或花蓮住 2 晚含早餐，每人每晚約 750 元'},
+    {i: 135, reason: '🏆 單晚千元有找：雙人房含早，買 8 送 1 平均每張約 1,688 元'},
+    {i: 60,  reason: '🏆 四人家庭首選：老爺 5 館擇一，每人約 1,000 元（11/9 限定）'},
+    {i: 72,  reason: '🏆 台南高 CP 值：台南老爺四人房每人約 1,075 元，買 10 送 1 更省'},
+    {i: 1,   reason: '🏆 多館通用彈性王：1 張住翰品高雄或兆品嘉義，含雙人早餐'},
+    {i: 44,  reason: '🏆 東部連住長假王：約 2.1 折連住 3 晚含早，每人每晚約 1,166 元'},
+    {i: 14,  reason: '🏆 經典地標 3.5 折：1 張住圓山精緻客房、2 張升等天際客房含早'},
+    {i: 87,  reason: '🏆 北市五星 25 折：大直台北萬豪年度最低價，下殺約 2.5 折'}
+  ];
+
+  const diningPicks = [
+    {i: 161, reason: '🏆 全場每人最低價：4 人台菜桌席每人僅 222 元（展場每日限 50 組）'},
+    {i: 163, reason: '🏆 火鍋超值王：約 58 折雙人海陸鍋物，每人僅 344 元'},
+    {i: 40,  reason: '🏆 五星 Buffet 破盤價：每人 400 元吃十二廚（11/6 寒舍會員快閃）'},
+    {i: 100, reason: '🏆 台北車站西餐王：51 折含服務費，平日午晚餐皆可用'},
+    {i: 68,  reason: '🏆 買一送一必搶：板橋凱撒泰式吃到飽，展場限定每人 445 元'},
+    {i: 24,  reason: '🏆 晶華栢麗廳最親民：含服務費約 52 折，每人 550 元享五星早餐'},
+    {i: 16,  reason: '🏆 信義區聚餐首選：含服務費約 66 折，每人 900 元暢享君悅凱菲屋'},
+    {i: 46,  reason: '🏆 頂級食材吃到飽：買 12 送 2 平均每人 1,380 元享美福彩匯午晚餐'}
+  ];
+
+  const flightPicks = [
+    {i: 317, reason: '🏆 日本線誠意王：沖繩含稅來回 7,616 元起，免費送 2 件 23kg 託運！'},
+    {i: 203, reason: '🏆 傳統航空破盤價：澳門含稅來回 6,645 元起，再送 32kg 大額度行李'},
+    {i: 153, reason: '🏆 港澳含稅最划算：國泰官網直購香港含稅來回 6,751 元起'},
+    {i: 315, reason: '🏆 結帳直接折現金：亞洲航線輸入折扣碼 CXITF500 現折 500 元'},
+    {i: 320, reason: '🏆 韓國含稅萬元有找：大韓航空首爾/釜山含稅含 23kg 託運行李'},
+    {i: 212, reason: '🏆 東南亞含稅最低價：直飛汶萊來回含稅 7,253 元起，含託運行李'},
+    {i: 215, reason: '🏆 紐澳長程超低價：墨爾本來回含稅不到 1.9 萬元，小資南半球首選'},
+    {i: 136, reason: '🏆 北美直飛含稅首選：星宇直飛舊金山來回含稅 25,650 元起'}
+  ];
+
   const tourRows = D.tour.rows;
-  const tourHits = [];
-  const findTour = (kw, agency) => {
-    return tourRows.findIndex(r => (!agency || r[1].includes(agency)) && r[2].includes(kw));
-  };
-  const t1 = findTour('宮古島、沖繩、石垣島', '百威'); if(t1 >= 0) tourHits.push(t1);
-  const t2 = findTour('阿里山夜未眠', '雄獅'); if(t2 >= 0) tourHits.push(t2);
-  const t3 = findTour('邱釜慶', '百威'); if(t3 >= 0) tourHits.push(t3);
-  const t4 = findTour('海雲台列車', '雄獅'); if(t4 >= 0) tourHits.push(t4);
-  const t5 = findTour('花蓮補助', '可樂'); if(t5 >= 0) tourHits.push(t5);
-  const t6 = findTour('曼芭', '易飛'); if(t6 >= 0) tourHits.push(t6);
-  const t7 = findTour('沖繩', '大榮'); if(t7 >= 0) tourHits.push(t7);
-  const t8 = findTour('土耳其', '易飛'); if(t8 >= 0) tourHits.push(t8);
+  const findTour = (kw, agency) => tourRows.findIndex(r => (!agency || r[1].includes(agency)) && r[2].includes(kw));
+  const tourPicks = [
+    {i: findTour('宮古島、沖繩、石垣島', '百威'), reason: '🏆 郵輪破盤價：每房減 6,000 後最低每人 6,900 元起，平均每天 1,380 元'},
+    {i: findTour('阿里山夜未眠', '雄獅'),         reason: '🏆 國旅跟團最低價：每人 1,999 元起暢遊阿里山日出與奮起湖'},
+    {i: findTour('邱釜慶', '百威'),               reason: '🏆 出國萬元有找：韓國大邱・釜山・慶州 5 日僅 8,888 元（每天 1,778 元）'},
+    {i: findTour('海雲台列車', '雄獅'),           reason: '🏆 釜山熱門行程：升等 1 晚五星飯店＋汗蒸幕，萬元有找超划算'},
+    {i: findTour('花蓮補助', '可樂'),             reason: '🏆 東部鐵道慢旅：結合花蓮旅遊補助，3 天 2 夜每人 4,988 元起'},
+    {i: findTour('曼芭', '易飛'),                 reason: '🏆 東南亞最高 CP 值：6 天 5 夜玩曼谷＋芭達雅，平均每天 2,448 元'},
+    {i: findTour('沖繩', '大榮'),                 reason: '🏆 日本短線最划算：沖繩 4 日平均每天 3,972 元，小資日本首選'},
+    {i: findTour('土耳其', '易飛'),               reason: '🏆 長程跨洲破盤王：10 天土耳其不到 4 萬（每天 3,990 元）'}
+  ].filter(x => x.i >= 0);
 
   let html = `
     <div class="picks-hero">
       <h2>🔥 2026 ITF 旅展 最佳優惠推薦</h2>
-      <p>由編輯團隊依據「官方真實定價、每人均價性價比、含稅/含行李條件與歷年折扣誠意」嚴格精選！免去在數千筆中挑選的繁瑣，四大領域最值得入手的 Top 8 優惠全收錄：</p>
+      <p>依據「官方真實定價、每人均價性價比、含稅/含行李條件與折扣誠意」嚴格精選！每張卡片皆附推薦亮點說明，點擊「完整資料」即可檢視條列化的加價規定與官方來源：</p>
     </div>
     
-    <div class="picks-nav">
-      <a href="#pick-lodging">🏨 住宿最超值 Top 8</a>
-      <a href="#pick-dining">🍴 餐券吃到飽 Top 8</a>
-      <a href="#pick-flight">✈ 機票含稅熱門 Top 8</a>
-      <a href="#pick-tour">🚌 推薦跟團行程 Top 8</a>
+    <div class="picks-nav" role="navigation" aria-label="推薦分類快速跳轉">
+      <button type="button" data-pick-scroll="pick-lodging">🏨 住宿最超值 Top 8</button>
+      <button type="button" data-pick-scroll="pick-dining">🍴 餐券吃到飽 Top 8</button>
+      <button type="button" data-pick-scroll="pick-flight">✈ 機票含稅熱門 Top 8</button>
+      <button type="button" data-pick-scroll="pick-tour">🚌 推薦跟團行程 Top 8</button>
     </div>
 
     <section class="pick-sec" id="pick-lodging">
       <div class="pick-sec-head">
         <h3>🏨 國內住宿券．最超值精選 Top 8 <span class="badge-hot">萬元有找 / 每人每晚750起</span></h3>
-        <button type="button" class="more-link" onclick="go('lodging')">查看全部 171 筆住宿 →</button>
+        <button type="button" class="more-link" onclick="go('lodging')">查看全部 ${D.lodging.rows.length} 筆住宿 →</button>
       </div>
       <div class="cards">
-        ${lodgingIdxs.map(i => D.lodging.rows[i] ? card(D.lodging, CFG.lodging, D.lodging.rows[i], i, state.lodging && state.lodging.open && state.lodging.open.has(i), 'lodging') : '').join('')}
+        ${lodgingPicks.map(({i, reason}) => D.lodging.rows[i] ? card(D.lodging, CFG.lodging, D.lodging.rows[i], i, savedOpen.has('lodging' + i), 'lodging', reason) : '').join('')}
       </div>
     </section>
 
     <section class="pick-sec" id="pick-dining">
       <div class="pick-sec-head">
         <h3>🍴 熱門餐券．五星飯店與吃到飽 Top 8 <span class="badge-hot">每人222起 / 必搶快閃</span></h3>
-        <button type="button" class="more-link" onclick="go('dining')">查看全部 185 筆餐券 →</button>
+        <button type="button" class="more-link" onclick="go('dining')">查看全部 ${D.dining.rows.length} 筆餐券 →</button>
       </div>
       <div class="cards">
-        ${diningIdxs.map(i => D.dining.rows[i] ? card(D.dining, CFG.dining, D.dining.rows[i], i, state.dining && state.dining.open && state.dining.open.has(i), 'dining') : '').join('')}
+        ${diningPicks.map(({i, reason}) => D.dining.rows[i] ? card(D.dining, CFG.dining, D.dining.rows[i], i, savedOpen.has('dining' + i), 'dining', reason) : '').join('')}
       </div>
     </section>
 
     <section class="pick-sec" id="pick-flight">
       <div class="pick-sec-head">
         <h3>✈ 國外機票．含稅來回與高性價比 Top 8 <span class="badge-hot">送託運行李 / 折扣碼折抵</span></h3>
-        <button type="button" class="more-link" onclick="go('flight')">查看全部 321 筆機票 →</button>
+        <button type="button" class="more-link" onclick="go('flight')">查看全部 ${D.flight.rows.length} 筆機票 →</button>
       </div>
       <div class="cards">
-        ${flightIdxs.map(i => D.flight.rows[i] ? card(D.flight, CFG.flight, D.flight.rows[i], i, state.flight && state.flight.open && state.flight.open.has(i), 'flight') : '').join('')}
+        ${flightPicks.map(({i, reason}) => D.flight.rows[i] ? card(D.flight, CFG.flight, D.flight.rows[i], i, savedOpen.has('flight' + i), 'flight', reason) : '').join('')}
       </div>
     </section>
 
     <section class="pick-sec" id="pick-tour">
       <div class="pick-sec-head">
         <h3>🚌 跟團行程．每日預算最省 Top 8 <span class="badge-hot">每天1,380起 / 日韓郵輪首選</span></h3>
-        <button type="button" class="more-link" onclick="go('tour')">查看全部 1,723 筆跟團 →</button>
+        <button type="button" class="more-link" onclick="go('tour')">查看全部 ${D.tour.rows.length.toLocaleString()} 筆跟團 →</button>
       </div>
       <div class="cards">
-        ${tourHits.map(i => D.tour.rows[i] ? card(D.tour, CFG.tour, D.tour.rows[i], i, state.tour && state.tour.open && state.tour.open.has(i), 'tour') : '').join('')}
+        ${tourPicks.map(({i, reason}) => D.tour.rows[i] ? card(D.tour, CFG.tour, D.tour.rows[i], i, savedOpen.has('tour' + i), 'tour', reason) : '').join('')}
       </div>
     </section>
   `;
@@ -1224,11 +1385,13 @@ function renderSet(k){
 
 function pick(h, r, subs){ return (subs || []).map(s => { const i = col(h, s); return i >= 0 ? r[i].trim() : ''; }).filter(v => !blank(v)); }
 
-function card(d, c, r, idx, open, k){
+function card(d, c, r, idx, open, k, pickReason){
   const h = d.headers, old = isOld(d, r);
   const val = s => { const i = col(h, s); return i >= 0 ? r[i].trim() : ''; };
   const bv = c.booth ? val(c.booth) : '', bm = !bv.includes('2025') && bv.match(/^[A-Z]區?\d{2,4}/);
   const on = saved.has(rowKey(k, r));
+  const reasonAttr = pickReason ? ` data-reason="${esc(pickReason)}"` : '';
+  const reasonHtml = pickReason ? `<div class="pick-reason">${esc(pickReason)}</div>` : '';
 
   // ===== 機票專屬卡片結構 =====
   if(k === 'flight'){
@@ -1299,14 +1462,11 @@ function card(d, c, r, idx, open, k){
     }
 
     const infoFields = [['出發期間','出發'],['開票/購買','搶購期'],['搶票方式','方式']];
-    const info = infoFields.map(([s, label]) => {
-      const v = val(s); return blank(v) ? '' : `<div><dt>${label}</dt><dd>${esc(v.length > 90 ? v.slice(0, 88) + '…' : v)}</dd></div>`;
-    }).join('');
+    const info = infoFields.map(([s, label]) => infoRow(label, val(s))).join('');
+    const full = open ? renderFull(d, h, r) : '';
 
-    const full = open ? `<dl class="full">${h.map((name, i) => { const v = r[i]; if(!v || !v.trim()) return '';
-      return `<div><dt>${esc(name)}</dt><dd>${name.includes('截圖') ? shots(d, v) : linkify(v)}</dd></div>`; }).join('')}</dl>` : '';
-
-    return `<article class="deal deal-flight${old ? ' old' : ''}${on ? ' saved' : ''}">
+    return `<article class="deal deal-flight${old ? ' old' : ''}${on ? ' saved' : ''}"${reasonAttr}>
+      ${reasonHtml}
       <div class="top">
         <div class="flight-airline">✈ ${esc(airline)}</div>
         <button class="save-btn" data-k="${k}" data-idx="${idx}" aria-pressed="${on}" aria-label="收藏：${esc(airline)} ${esc(arr)}">${on ? '★ 已收藏' : '☆ 收藏'}</button>
@@ -1315,7 +1475,7 @@ function card(d, c, r, idx, open, k){
       ${tags.length ? `<div class="tags">${tags.join('')}</div>` : ''}
       ${promoCoupon}
       ${priceHtml}
-      ${info ? `<dl class="info">${info}</dl>` : ''}
+      ${!open && info ? `<dl class="info">${info}</dl>` : ''}
       ${full}
       <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-expanded="${open}">${open ? '收起詳細 ▴' : '完整資料、來源與截圖 ▾'}</button>
     </article>`;
@@ -1333,8 +1493,6 @@ function card(d, c, r, idx, open, k){
     const discVal = val('折數');
     const servVal = val('服務費');
     const servDesc = val('服務費說明');
-    const expVal = val('使用期限');
-    const ruleVal = val('平假日/加價規定');
 
     const tags = [];
     if(old) tags.push('<span class="tag y25">2025 舊價格</span>');
@@ -1359,18 +1517,15 @@ function card(d, c, r, idx, open, k){
     }
 
     const infoFields = [['張數組合','組合'],['使用期限','期限'],['平假日','平假日'],['平假日/加價規定','加價規定']];
-    const info = infoFields.map(([s, label]) => {
-      const v = val(s); return blank(v) ? '' : `<div><dt>${label}</dt><dd>${esc(v.length > 90 ? v.slice(0, 88) + '…' : v)}</dd></div>`;
-    }).join('');
+    const info = infoFields.map(([s, label]) => infoRow(label, val(s))).join('');
+    const full = open ? renderFull(d, h, r) : '';
 
-    const full = open ? `<dl class="full">${h.map((name, i) => { const v = r[i]; if(!v || !v.trim()) return '';
-      return `<div><dt>${esc(name)}</dt><dd>${name.includes('截圖') ? shots(d, v) : linkify(v)}</dd></div>`; }).join('')}</dl>` : '';
-
-    return `<article class="deal deal-dining${old ? ' old' : ''}${on ? ' saved' : ''}">
+    return `<article class="deal deal-dining${old ? ' old' : ''}${on ? ' saved' : ''}"${reasonAttr}>
+      ${reasonHtml}
       <div class="top">${tags.length ? `<div class="tags">${tags.join('')}</div>` : ''}<button class="save-btn" data-k="${k}" data-idx="${idx}" aria-pressed="${on}" aria-label="收藏：${esc(hotel)} ${esc(name)}">${on ? '★ 已收藏' : '☆ 收藏'}</button></div>
       <div><h4>${esc(hotel)}${rest ? '・' + esc(rest) : ''}</h4><div class="subt">${esc(name)}</div></div>
       ${priceHtml}
-      ${info ? `<dl class="info">${info}</dl>` : ''}
+      ${!open && info ? `<dl class="info">${info}</dl>` : ''}
       ${full}
       <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-expanded="${open}">${open ? '收起詳細 ▴' : '完整資料、使用規定與截圖 ▾'}</button>
     </article>`;
@@ -1421,14 +1576,11 @@ function card(d, c, r, idx, open, k){
     }
 
     const infoFields = [['出發日期/期間','出發'],['出發地','出發地'],['適用條件','條件'],['限量','限量']];
-    const info = infoFields.map(([s, label]) => {
-      const v = val(s); return blank(v) ? '' : `<div><dt>${label}</dt><dd>${esc(v.length > 90 ? v.slice(0, 88) + '…' : v)}</dd></div>`;
-    }).join('');
+    const info = infoFields.map(([s, label]) => infoRow(label, val(s))).join('');
+    const full = open ? renderFull(d, h, r) : '';
 
-    const full = open ? `<dl class="full">${h.map((name, i) => { const v = r[i]; if(!v || !v.trim()) return '';
-      return `<div><dt>${esc(name)}</dt><dd>${name.includes('截圖') ? shots(d, v) : linkify(v)}</dd></div>`; }).join('')}</dl>` : '';
-
-    return `<article class="deal deal-tour${old ? ' old' : ''}${on ? ' saved' : ''}">
+    return `<article class="deal deal-tour${old ? ' old' : ''}${on ? ' saved' : ''}"${reasonAttr}>
+      ${reasonHtml}
       <div class="top">
         <div class="tour-agency-box">
           <span class="tour-agency-pill">🚌 ${esc(agency)}</span>
@@ -1443,7 +1595,7 @@ function card(d, c, r, idx, open, k){
       <h4 class="tour-title">${esc(name)}</h4>
       ${tags.length ? `<div class="tags">${tags.join('')}</div>` : ''}
       ${priceHtml}
-      ${info ? `<dl class="info">${info}</dl>` : ''}
+      ${!open && info ? `<dl class="info">${info}</dl>` : ''}
       ${full}
       <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-expanded="${open}">${open ? '收起詳細 ▴' : '完整資料、行程內容與截圖 ▾'}</button>
     </article>`;
@@ -1482,15 +1634,14 @@ function card(d, c, r, idx, open, k){
       (!blank(w) && w !== p ? `<span class="was">NT$ ${esc(fmt(w))}</span>` : '') +
       (!blank(per) ? `<span class="per">${c.per[1]} ${esc(fmt(per))}</span>` : '') + `</div>`;
   }
-  const info = (c.info || []).map(([s, label]) => { const v = val(s); return blank(v) || (bm && v === bm[0]) ? '' :
-    `<div><dt>${label}</dt><dd>${esc(v.length > 90 ? v.slice(0, 88) + '…' : v)}</dd></div>`; }).join('');
-  const full = open ? `<dl class="full">${h.map((name, i) => { const v = r[i]; if(!v || !v.trim()) return '';
-    return `<div><dt>${esc(name)}</dt><dd>${name.includes('截圖') ? shots(d, v) : linkify(v)}</dd></div>`; }).join('')}</dl>` : '';
+  const info = (c.info || []).map(([s, label]) => { const v = val(s); return (bm && v === bm[0]) ? '' : infoRow(label, v); }).join('');
+  const full = open ? renderFull(d, h, r) : '';
 
-  return `<article class="deal${old ? ' old' : ''}${on ? ' saved' : ''}">
+  return `<article class="deal${old ? ' old' : ''}${on ? ' saved' : ''}"${reasonAttr}>
+    ${reasonHtml}
     <div class="top">${tags.length ? `<div class="tags">${tags.join('')}</div>` : ''}<button class="save-btn" data-k="${k}" data-idx="${idx}" aria-pressed="${on}" aria-label="收藏：${esc(title)}">${on ? '★ 已收藏' : '☆ 收藏'}</button></div>
     <div><h4>${esc(title)}</h4>${sub ? `<div class="subt">${esc(sub)}</div>` : ''}</div>
-    ${price}${info ? `<dl class="info">${info}</dl>` : ''}${full}
+    ${price}${!open && info ? `<dl class="info">${info}</dl>` : ''}${full}
     <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-expanded="${open}">${open ? '收起詳細 ▴' : '完整資料、加價規定與截圖 ▾'}</button>
   </article>`;
 }
