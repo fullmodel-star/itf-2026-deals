@@ -17,13 +17,33 @@ SETS = [
     ('booth', '參展商攤位', '00_官方總覽', '參展商名單.csv'),
 ]
 
+MDS = {
+    'flash': ('00_官方總覽', '官方總覽.md'),
+    'lodging': ('01_國內住宿', '國內住宿分析.md'),
+    'dining': ('02_餐飲', '餐飲分析.md'),
+    'flight': ('03_國外機票', '國外機票分析.md'),
+    'tour': ('04_跟團', '跟團分析.md'),
+}
+
 data = {}
 for key, name, folder, fn in SETS:
     with open(os.path.join(ROOT, folder, fn), encoding='utf-8-sig') as f:
         rows = list(csv.reader(f))
     head = [h.strip() for h in rows[0]]
     body = [r + [''] * (len(head) - len(r)) for r in rows[1:] if any(c.strip() for c in r)]
-    data[key] = {'name': name, 'folder': folder, 'headers': head, 'rows': body}
+    item = {'name': name, 'folder': folder, 'csv': fn, 'csv_path': f'{folder}\\{fn}', 'headers': head, 'rows': body}
+    if key in MDS:
+        mf, mfn = MDS[key]
+        mp = os.path.join(ROOT, mf, mfn)
+        if os.path.exists(mp):
+            item['md_path'] = f'{mf}\\{mfn}'
+            item['md'] = open(mp, encoding='utf-8').read()
+    data[key] = item
+
+sum_p = os.path.join(ROOT, '_先看這裡_總表.md')
+if os.path.exists(sum_p):
+    data['flash']['summary_path'] = '_先看這裡_總表.md'
+    data['flash']['summary_md'] = open(sum_p, encoding='utf-8').read()
 
 blob = json.dumps(data, ensure_ascii=False).replace('</', '<\\/')
 tpl = open(os.path.join(TOOLS, 'template.html'), encoding='utf-8').read().replace('__DATA__', blob)
@@ -31,6 +51,11 @@ tpl = open(os.path.join(TOOLS, 'template.html'), encoding='utf-8').read().replac
 page = tpl.replace('__SHOTS__', 'true')
 index = ('<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">'
          '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
+         '<meta name="theme-color" content="#162a4a">'
+         '<meta name="apple-mobile-web-app-capable" content="yes">'
+         '<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">'
+         '<meta name="apple-mobile-web-app-title" content="2026 ITF 旅展">'
+         '<link rel="manifest" href="manifest.json">'
          '</head><body>' + page + '</body></html>')
 open(os.path.join(ROOT, 'index.html'), 'w', encoding='utf-8').write(index)
 print('index.html', os.path.getsize(os.path.join(ROOT, 'index.html')) // 1024, 'KB',

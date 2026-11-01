@@ -382,6 +382,45 @@ button.tag.booth:hover{background:var(--accent);color:#fff}
 :root[data-font="large"] nav.tabs button{font-size:16.5px}
 :root[data-font="large"] .pick-reason{font-size:15px}
 
+/* 編號標籤、資料夾路徑列、Markdown 分析報告與離線 App 外殼 */
+.tag.seq-tag{background:var(--sunk);color:var(--navy);border:1px solid rgba(29,55,96,.28);font-family:var(--f-num);font-weight:700;letter-spacing:.01em}
+:root[data-theme="dark"] .tag.seq-tag{color:var(--sky);border-color:rgba(141,188,242,.35)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag.seq-tag{color:var(--sky);border-color:rgba(141,188,242,.35)}}
+.folder-badge{display:inline-flex;align-items:center;justify-content:center;font-family:var(--f-num);font-size:15px;font-weight:800;background:var(--navy);color:var(--navy-ink);padding:2px 9px;border-radius:7px;vertical-align:middle;margin-right:6px}
+.path-bar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:8px 0 16px;padding:11px 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;font-size:13.5px;box-shadow:var(--shadow-sm)}
+.path-pill{font-family:var(--f-num);font-size:12.5px;background:var(--sunk);color:var(--ink);padding:2px 8px;border-radius:6px;border:1px solid var(--line);display:inline-flex;align-items:center;gap:4px}
+.md-toggle-btn{background:var(--navy);color:var(--navy-ink);border:0;border-radius:8px;padding:6px 13px;font-size:13.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .12s}
+.md-toggle-btn:hover{background:var(--accent);color:#fff}
+.md-toggle-btn.alt{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.md-toggle-btn.alt:hover{border-color:var(--accent);color:var(--accent);background:var(--surface)}
+.md-box{background:var(--surface);border:2px solid var(--navy);border-radius:14px;padding:20px 24px;margin:0 0 22px;box-shadow:var(--shadow-md);font-size:15px;line-height:1.75}
+.md-box h1{font-size:21px;margin:0 0 12px;padding-bottom:8px;border-bottom:2px solid var(--line);color:var(--navy)}
+:root[data-theme="dark"] .md-box h1{color:var(--sky)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .md-box h1{color:var(--sky)}}
+.md-box h2{font-size:18px;margin:22px 0 10px;padding-left:10px;border-left:4px solid var(--accent)}
+.md-box h3{font-size:16px;margin:16px 0 8px;color:var(--ink)}
+.md-box blockquote{margin:10px 0 14px;padding:10px 14px;background:var(--sunk);border-left:4px solid var(--sky);border-radius:0 8px 8px 0;color:var(--muted);font-size:14px}
+.md-box hr{border:0;border-top:1px dashed var(--line);margin:18px 0}
+.md-box ul,.md-box ol{margin:8px 0 14px;padding-left:1.4em;display:grid;gap:5px}
+.md-box code{font-family:var(--f-num);font-size:13px;background:var(--sunk);padding:1px 6px;border-radius:4px;border:1px solid var(--line)}
+.md-box .tbox{margin:10px 0 16px}
+.app-btn.online{background:rgba(29,115,73,.35);border-color:rgba(111,211,156,.6)}
+.app-btn.offline{background:rgba(201,86,28,.55);border-color:#ffd2b8}
+.app-dock{display:none;position:fixed;bottom:0;left:0;right:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -4px 16px rgba(0,0,0,.08);padding:4px max(4px,env(safe-area-inset-left,0px)) calc(4px + env(safe-area-inset-bottom,0px))}
+.app-dock-inner{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;max-width:640px;margin:0 auto}
+.dock-btn{background:none;border:0;color:var(--muted);padding:5px 2px;border-radius:8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:600;line-height:1.15}
+.dock-btn .ico{font-size:15px;line-height:1}
+.dock-btn[aria-current="page"]{color:var(--accent);font-weight:800;background:var(--accent-soft)}
+@media (max-width:768px){
+  .app-dock{display:block}
+  main .wrap{padding-bottom:96px}
+  .totop{bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+}
+.app-modal-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.62);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px}
+.app-modal-backdrop[hidden]{display:none}
+.app-modal{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:16px;max-width:560px;width:100%;max-height:85vh;overflow-y:auto;padding:22px 24px;box-shadow:var(--shadow-lg)}
+.app-modal h3{margin:0 0 12px;font-size:19px;display:flex;justify-content:space-between;align-items:center}
+
 /* 攤位表 */
 .tbox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-sm)}
 table{border-collapse:collapse;width:100%;font-size:15px}
@@ -400,13 +439,14 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
 </style>
 
 <header class="pass"><div class="wrap">
-  <div><h1>2026 ITF 台灣國際旅展 優惠整理</h1>
-  <div class="sub">住宿・餐券・機票・跟團｜資料查詢 2026-11-01｜實際以商家公告為準</div></div>
+  <div><h1>2026 ITF 台灣國際旅展 優惠全攻略 App</h1>
+  <div class="sub">00_官方總覽・01_國內住宿・02_餐飲・03_國外機票・04_跟團｜支援 #序號查詢與離線瀏覽</div></div>
   <div class="stubs">
     <div class="stub"><span>展期</span><b>11/6（五）–11/9（一）</b></div>
     <div class="stub"><span>地點</span><b>南港展覽館 1 館</b></div>
     <div class="stub count" id="countdown" hidden><span></span><b></b></div>
     <div class="hdr-tools">
+      <button type="button" class="theme-btn app-btn online" id="app-btn" aria-label="離線App狀態與安裝說明" title="查看離線快取狀態、資料夾清單與手機主畫面安裝教學">📲 離線可用</button>
       <button type="button" class="theme-btn" id="font-btn" aria-label="切換字級大小" title="放大全站字體，閱讀更輕鬆">Aa 標準字</button>
       <button type="button" class="theme-btn" id="theme-btn" aria-label="切換深淺色">🌓 自動</button>
     </div>
@@ -424,15 +464,23 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
     <div class="fact"><b>官方網站</b><a href="https://www.taiwanitf.org.tw/" target="_blank" rel="noopener">taiwanitf.org.tw</a></div>
   </div>
 
+  <div class="path-bar" aria-label="00_官方總覽與總表文件">
+    <span>📂 <b>00_官方總覽</b> 與總表文件：</span>
+    <button type="button" class="md-toggle-btn" id="home-md-summary">📖 閱讀《_先看這裡_總表.md》 ▾</button>
+    <button type="button" class="md-toggle-btn alt" id="home-md-official">📖 閱讀《00_官方總覽\官方總覽.md》 ▾</button>
+    <a class="md-toggle-btn alt" href="00_%E5%AE%98%E6%96%B9%E7%B8%BD%E8%A6%BD/2026_ITF%E5%B1%95%E5%A0%B4%E5%B9%B3%E9%9D%A2%E5%9C%96.pdf" target="_blank" rel="noopener" style="text-decoration:none">🗺️ 00_官方總覽\2026_ITF展場平面圖.pdf ↗</a>
+  </div>
+  <div class="md-box" id="home-md-box" hidden></div>
+
   <section class="gsearch" aria-label="全站搜尋">
-    <h3>🔎 全站搜尋</h3>
-    <p class="hint">一次搜尋住宿、餐券、機票、跟團、限時搶購與刷卡回饋。可輸入飯店、地點、航空、旅行社或攤位號碼。</p>
+    <h3>🔎 全站搜尋（支援 #序號、飯店、航線、攤位）</h3>
+    <p class="hint">一次搜尋 00–04 全部分類。可輸入 <b>#序號（如 #137）</b>、飯店、地點、航空、旅行社或攤位號碼（如 M1607）。</p>
     <div class="search-wrap">
-      <input type="search" id="gq" placeholder="例如：晶華、沖繩、星宇、M1607、下午茶…" aria-label="全站搜尋" autocomplete="off">
+      <input type="search" id="gq" placeholder="例如：#137、晶華、沖繩、星宇、M1607、下午茶…" aria-label="全站搜尋" autocomplete="off">
       <button type="button" class="search-clear" id="gq-clear" aria-label="清空搜尋">✕</button>
     </div>
     <div class="gs-eg" id="gs-eg">
-      <button type="button">下午茶</button><button type="button">吃到飽</button><button type="button">沖繩</button><button type="button">北海道</button><button type="button">日月潭</button><button type="button">宜蘭</button><button type="button">含早</button><button type="button">星宇</button>
+      <button type="button">#137</button><button type="button">下午茶</button><button type="button">吃到飽</button><button type="button">沖繩</button><button type="button">北海道</button><button type="button">日月潭</button><button type="button">宜蘭</button><button type="button">含早</button><button type="button">星宇</button>
     </div>
     <div class="gs-res" id="gs-res" role="status" aria-live="polite"></div>
   </section>
@@ -445,20 +493,20 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
           <span style="font-size:20px;font-weight:900">🔥 2026 ITF 最佳優惠推薦專頁</span>
           <span class="badge" style="background:#ef4444;color:#fff">精選榜單</span>
         </div>
-        <div style="opacity:.9;font-size:14px">住宿、餐飲、機票、跟團 4 大領域性價比最高 Top 8 優惠完整精選！</div>
+        <div style="opacity:.9;font-size:14px">01_住宿、02_餐飲、03_機票、04_跟團 4 大領域性價比最高 Top 8 優惠完整精選（含 #序號對照）！</div>
       </div>
       <button type="button" onclick="go('picks')" style="background:#fff;border:0;color:#1d3760;border-radius:99px;padding:9px 20px;font-size:15px;font-weight:800;cursor:pointer;white-space:nowrap;box-shadow:var(--shadow-sm);transition:transform .12s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">立即查看推薦清單 →</button>
     </div>
   </section>
 
   <section class="entry">
-    <div class="zone home-zone"><h3>國內</h3><div class="tiles">
-      <button class="tile" data-go="lodging"><span class="t">住宿券</span><span class="c" data-n="lodging"></span><span class="p">每人每晚約 750 起</span></button>
-      <button class="tile" data-go="dining"><span class="t">餐券</span><span class="c" data-n="dining"></span><span class="p">每人 222 起</span></button>
+    <div class="zone home-zone"><h3>01–02 國內優惠資料夾</h3><div class="tiles">
+      <button class="tile" data-go="lodging"><span class="t">01 國內住宿</span><span class="c">01_國內住宿\國內住宿優惠.csv（<span data-n="lodging"></span>）</span><span class="p">每人每晚約 750 起・含分析.md</span></button>
+      <button class="tile" data-go="dining"><span class="t">02 餐飲餐券</span><span class="c">02_餐飲\餐飲優惠.csv（<span data-n="dining"></span>）</span><span class="p">每人 222 起・含分析.md</span></button>
     </div></div>
-    <div class="zone abroad"><h3>國外</h3><div class="tiles">
-      <button class="tile" data-go="flight"><span class="t">機票</span><span class="c" data-n="flight"></span><span class="p">含稅來回約 6,650 起</span></button>
-      <button class="tile" data-go="tour"><span class="t">跟團</span><span class="c" data-n="tour"></span><span class="p">每天 1,778 起</span></button>
+    <div class="zone abroad"><h3>03–04 國外優惠資料夾</h3><div class="tiles">
+      <button class="tile" data-go="flight"><span class="t">03 國外機票</span><span class="c">03_國外機票\國外機票優惠.csv（<span data-n="flight"></span>）</span><span class="p">含稅來回約 6,650 起・含分析.md</span></button>
+      <button class="tile" data-go="tour"><span class="t">04 跟團行程</span><span class="c">04_跟團\跟團優惠.csv（<span data-n="tour"></span>）</span><span class="p">每天 1,778 起・含分析.md</span></button>
     </div></div>
   </section>
 
@@ -602,6 +650,40 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
 </div>
 <div id="view-data" hidden></div>
 </div></main>
+
+<!-- 手機版底部正式 App 導覽列 -->
+<nav class="app-dock" id="app-dock" aria-label="App底部快速導覽">
+  <button type="button" data-dock="home"><span class="dock-ic">🏠</span><span>00總覽</span></button>
+  <button type="button" data-dock="picks"><span class="dock-ic">🔥</span><span>推薦</span></button>
+  <button type="button" data-dock="lodging"><span class="dock-ic">🏨</span><span>01住宿</span></button>
+  <button type="button" data-dock="dining"><span class="dock-ic">🍴</span><span>02餐飲</span></button>
+  <button type="button" data-dock="flight"><span class="dock-ic">✈</span><span>03機票</span></button>
+  <button type="button" data-dock="tour"><span class="dock-ic">🚌</span><span>04跟團</span></button>
+  <button type="button" data-dock="saved"><span class="dock-ic">★</span><span>收藏</span></button>
+</nav>
+
+<!-- 離線 App 與安裝教學彈窗 -->
+<div class="app-modal-backdrop" id="app-modal" hidden>
+  <div class="app-modal" role="dialog" aria-modal="true" aria-labelledby="app-modal-title">
+    <h3><span id="app-modal-title">📲 2026 ITF 旅展離線 App 模式</span><button type="button" class="close-btn" id="app-modal-close" aria-label="關閉">✕</button></h3>
+    <p style="margin:0 0 10px;font-size:14px;color:var(--muted)">本站已升級為<strong>正式離線 Web App (PWA)</strong>，全站 2,605 筆優惠、00–04 資料夾分析報告與收藏清單皆已快取於您的裝置，展場網路壅塞或無訊號時仍可正常查詢與比價！</p>
+    <div id="pwa-install-area" hidden style="margin-bottom:12px">
+      <button type="button" class="more-link" id="pwa-install-trigger" style="width:100%;justify-content:center;padding:10px;font-size:15px">📲 立即安裝 App 到手機／桌面</button>
+    </div>
+    <div class="step"><b>🍎 iPhone / iPad (Safari) 加到主畫面：</b>點擊瀏覽器底部「分享」圖示（方框向上箭頭）→ 往下滑點選「<b>加入主畫面</b>」，即可像獨立 App 一樣全螢幕開啟。</div>
+    <div class="step"><b>🤖 Android (Chrome) 安裝 App：</b>點擊右上角「⋮」選單 → 點選「<b>安裝應用程式</b>」或「<b>加到主畫面</b>」。</div>
+    <div class="step"><b>📂 完整對應資料夾編號與 `#序號`：</b>
+      <div style="margin-top:4px;font-size:12px;color:var(--muted)">
+        • <code>00_官方總覽\</code>：官方總覽.md、限時搶購時程表.csv、刷卡回饋.csv、參展商名單.csv<br>
+        • <code>01_國內住宿\</code>：國內住宿優惠.csv（#1–#171）、國內住宿分析.md<br>
+        • <code>02_餐飲\</code>：餐飲優惠.csv（#1–#185）、餐飲分析.md<br>
+        • <code>03_國外機票\</code>：國外機票優惠.csv（#1–#321）、國外機票分析.md<br>
+        • <code>04_跟團\</code>：跟團優惠.csv（#1–#1723）、跟團分析.md
+      </div>
+    </div>
+  </div>
+</div>
+
 <button class="totop" id="totop" hidden>↑ 回到頂部</button>
 
 <script type="application/json" id="data">__DATA__</script>
@@ -609,6 +691,7 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
 (function(){
 const D = JSON.parse(document.getElementById('data').textContent);
 const SHOTS = __SHOTS__;
+const FOLDER_CODE = {home:'00', flash:'00', card:'00', booth:'00', lodging:'01', dining:'02', flight:'03', tour:'04'};
 
 // 每類資料怎麼排成一張卡：標題、副標、價格、原價、每人價、標籤、重點條件
 const CFG = {
@@ -631,9 +714,10 @@ const CFG = {
   booth:{table:true, filters:['樓層區','類別']}
 };
 ['lodging','dining','flight','tour'].forEach(k => { CFG[k].booth = '攤位號碼'; CFG[k].chips = true; });
-const GROUPS = [['', ['home','picks']], ['國內', ['lodging','dining']], ['國外', ['flight','tour']], ['展場', ['flash','card','booth']], ['', ['saved']]];
+const GROUPS = [['', ['home','picks']], ['01–02 國內', ['lodging','dining']], ['03–04 國外', ['flight','tour']], ['00 展場', ['flash','card','booth']], ['', ['saved']]];
 const ORDER = GROUPS.flatMap(g => g[1]);
 const tabs = document.getElementById('tabs');
+const appDock = document.getElementById('app-dock');
 const viewHome = document.getElementById('view-home');
 const viewData = document.getElementById('view-data');
 const state = {};
@@ -647,7 +731,84 @@ const num = s => { s = String(s || '').trim(); const m = s.match(/\d[\d,]*(\.\d+
 const blank = v => !v || !String(v).trim() || /^(未公布|未標示|查無|—|-|無)$/.test(String(v).trim());
 const fmt = v => /^\s*[\d,]+(\.\d+)?\s*$/.test(v) ? Number(String(v).replace(/,/g, '')).toLocaleString('zh-TW') : String(v).trim();
 const isOld = (d, r) => { const y = d.headers.findIndex(x => x.startsWith('資料年')); return (y >= 0 && r[y].includes('2025')) || r.some(c => c.includes('2025參考')); };
-const linkify = s => esc(s).replace(/https?:\/\/[^\s；，、）)\]」]+/g, u => `<a href="${u}" target="_blank" rel="noopener">${u.length > 60 ? u.slice(0, 57) + '…' : u} ↗</a>`);
+const rowSeq = (r, idx) => { const s = String(r && r[0] ? r[0] : '').trim(); return /^\d+$/.test(s) ? s : String(idx + 1); };
+
+// Markdown 轉 HTML 渲染器（供 _先看這裡_總表.md 與 00~04 資料夾內 .md 分析文件使用）
+function inlineMd(s, folder){
+  return esc(s)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/`([^`]+)`/g, (_, code) => {
+      if(folder && SHOTS && /^\d+_.*\.(png|jpg)$/i.test(code.trim())){
+        const jpg = code.trim().replace(/\.png$/i, '.jpg');
+        return `<a href="${encodeURI(folder + '/截圖_jpg/' + jpg)}" target="_blank">🖼 ${esc(code)}</a>`;
+      }
+      return `<code>${code}</code>`;
+    })
+    .replace(/https?:\/\/[^\s；，、）)\]」<]+/g, u => `<a href="${u}" target="_blank" rel="noopener">${u.length > 55 ? u.slice(0, 52) + '…' : u} ↗</a>`);
+}
+function renderMd(md, folder){
+  if(!md) return '';
+  const lines = String(md).replace(/\r\n/g, '\n').split('\n');
+  let out = '', inTable = false, inUl = false, inOl = false, inBq = false;
+  const closeLists = () => {
+    if(inUl){ out += '</ul>'; inUl = false; }
+    if(inOl){ out += '</ol>'; inOl = false; }
+    if(inBq){ out += '</blockquote>'; inBq = false; }
+  };
+  const closeTable = () => { if(inTable){ out += '</tbody></table></div>'; inTable = false; } };
+  for(let i = 0; i < lines.length; i++){
+    const raw = lines[i], t = raw.trim();
+    if(!t){ closeLists(); closeTable(); continue; }
+    if(/^---+$/.test(t)){ closeLists(); closeTable(); out += '<hr>'; continue; }
+    if(t.startsWith('|') && t.endsWith('|')){
+      closeLists();
+      const cells = t.slice(1, -1).split('|').map(c => c.trim());
+      if(cells.every(c => /^:?-{2,}:?$/.test(c))) continue;
+      if(!inTable){
+        out += '<div class="md-table-wrap"><table><thead><tr>' + cells.map(c => `<th>${inlineMd(c, folder)}</th>`).join('') + '</tr></thead><tbody>';
+        inTable = true;
+      } else {
+        out += '<tr>' + cells.map(c => `<td>${inlineMd(c, folder)}</td>`).join('') + '</tr>';
+      }
+      continue;
+    }
+    closeTable();
+    const hm = t.match(/^(#{1,4})\s+(.+)$/);
+    if(hm){
+      closeLists();
+      const lv = Math.min(4, hm[1].length + 1);
+      out += `<h${lv}>${inlineMd(hm[2], folder)}</h${lv}>`;
+      continue;
+    }
+    if(t.startsWith('>')){
+      if(inUl){ out += '</ul>'; inUl = false; }
+      if(inOl){ out += '</ol>'; inOl = false; }
+      if(!inBq){ out += '<blockquote>'; inBq = true; }
+      out += `<div>${inlineMd(t.replace(/^>\s*/, ''), folder)}</div>`;
+      continue;
+    }
+    if(inBq){ out += '</blockquote>'; inBq = false; }
+    const ulm = t.match(/^[-*]\s+(.+)$/);
+    if(ulm){
+      if(inOl){ out += '</ol>'; inOl = false; }
+      if(!inUl){ out += '<ul>'; inUl = true; }
+      out += `<li>${inlineMd(ulm[1], folder)}</li>`;
+      continue;
+    }
+    const olm = t.match(/^\d+\.\s+(.+)$/);
+    if(olm){
+      if(inUl){ out += '</ul>'; inUl = false; }
+      if(!inOl){ out += '<ol>'; inOl = true; }
+      out += `<li>${inlineMd(olm[1], folder)}</li>`;
+      continue;
+    }
+    closeLists();
+    out += `<p>${inlineMd(t, folder)}</p>`;
+  }
+  closeLists(); closeTable();
+  return out;
+}
+
 function richSeg(s){
   return esc(s)
     .replace(/(?:\+|加價\s*|補差價\s*)\d[\d,]*(?:\s*元)?/g, '<span class="hl-surch">$&</span>')
@@ -673,9 +834,13 @@ function infoRow(label, v){
   const shortV = long ? v.slice(0, 76) + '…' : v;
   return `<div class="${long ? 'trunc' : ''}"${long ? ' title="點擊展開完整規定"' : ''}><dt>${esc(label)}</dt><dd>${formatText(shortV)}${long ? '<span class="expand-cue">展開 ▾</span>' : ''}</dd></div>`;
 }
-function renderFull(d, h, r){
+function renderFull(d, h, r, idx){
   const items = [];
   const hiddenItems = [];
+  const seq = rowSeq(r, idx || 0);
+  if(d.csv_path){
+    items.push(`<div class="full-row"><dt>編號／路徑</dt><dd><code>#${esc(seq)}</code>　<span class="faint-dd">${esc(d.csv_path)}</span></dd></div>`);
+  }
   const skipHeader = /^(序號|飯店名稱|飯店\/品牌|地區|縣市|區域|區域分類|旅行社|行程名稱|房型\/品名|券種內容|旅展價\(元\)|旅展單張價\(元\)|旅展價\(每人,元\)|折數|每人每晚約\(元\)|每人均價\(元\)|每日平均價\(元\))$/;
   h.forEach((name, i) => {
     const v = (r[i] || '').trim();
@@ -740,8 +905,9 @@ GROUPS.forEach(([label, keys]) => {
   keys.forEach(k => {
     const b = document.createElement('button');
     b.dataset.key = k;
-    b.innerHTML = k === 'home' ? '總覽' : k === 'picks' ? '🔥 最佳推薦' : k === 'saved' ? '★ 收藏<span class="n star-n"></span>'
-      : `${esc(D[k].name)}<span class="n">${D[k].rows.length.toLocaleString()}</span>`;
+    const code = FOLDER_CODE[k] ? `<span class="folder-badge">${FOLDER_CODE[k]}</span>` : '';
+    b.innerHTML = k === 'home' ? `${code}總覽` : k === 'picks' ? '🔥 最佳推薦' : k === 'saved' ? '★ 收藏<span class="n star-n"></span>'
+      : `${code}${esc(D[k].name)}<span class="n">${D[k].rows.length.toLocaleString()}</span>`;
     b.addEventListener('click', () => go(k));
     tabs.appendChild(b);
   });
@@ -749,6 +915,40 @@ GROUPS.forEach(([label, keys]) => {
 starCount();
 document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => go(b.dataset.go)));
 document.querySelectorAll('[data-n]').forEach(s => s.textContent = `${D[s.dataset.n].rows.length.toLocaleString()} 筆`);
+if(appDock){
+  appDock.querySelectorAll('[data-dock]').forEach(b => b.addEventListener('click', () => go(b.dataset.dock)));
+}
+
+// 首頁 00_官方總覽 與 _先看這裡_總表.md 展開閱讀
+(function(){
+  const btnSum = document.getElementById('home-md-summary');
+  const btnOff = document.getElementById('home-md-official');
+  const box = document.getElementById('home-md-box');
+  if(!box) return;
+  let curDoc = '';
+  const toggleDoc = (which, mdText, titlePath, folder) => {
+    if(!box.hidden && curDoc === which){
+      box.hidden = true;
+      curDoc = '';
+      if(btnSum) btnSum.textContent = '📖 閱讀《_先看這裡_總表.md》 ▾';
+      if(btnOff) btnOff.textContent = '📖 閱讀《00_官方總覽\\官方總覽.md》 ▾';
+      return;
+    }
+    curDoc = which;
+    box.hidden = false;
+    box.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--line)"><strong style="font-size:13px;color:var(--accent)">📄 ${esc(titlePath)}</strong><button type="button" class="md-toggle" id="home-md-close">收合文件 ▴</button></div>` + renderMd(mdText, folder);
+    if(btnSum) btnSum.textContent = which === 'sum' ? '📖 收合《_先看這裡_總表.md》 ▴' : '📖 閱讀《_先看這裡_總表.md》 ▾';
+    if(btnOff) btnOff.textContent = which === 'off' ? '📖 收合《00_官方總覽\\官方總覽.md》 ▴' : '📖 閱讀《00_官方總覽\\官方總覽.md》 ▾';
+    const cl = document.getElementById('home-md-close');
+    if(cl) cl.addEventListener('click', () => toggleDoc(which));
+  };
+  if(btnSum && D.flash && D.flash.summary_md){
+    btnSum.addEventListener('click', () => toggleDoc('sum', D.flash.summary_md, D.flash.summary_md_path || '_先看這裡_總表.md', ''));
+  }
+  if(btnOff && D.flash && D.flash.md){
+    btnOff.addEventListener('click', () => toggleDoc('off', D.flash.md, D.flash.md_path || '00_官方總覽\\官方總覽.md', '00_官方總覽'));
+  }
+})();
 
 // 跳到某分頁並帶入搜尋字
 const pendingQ = {};
@@ -757,7 +957,7 @@ function jump(k, q){
   go(k);
 }
 
-// 字體大小與深淺色切換
+// 字體大小、深淺色與離線 App 狀態管理
 (function(){
   const fbtn = document.getElementById('font-btn');
   if(fbtn){
@@ -781,13 +981,61 @@ function jump(k, q){
   const apply = () => { if(m === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', m); btn.textContent = label[m]; };
   apply();
   btn.addEventListener('click', () => { m = modes[(modes.indexOf(m) + 1) % 3]; try{ localStorage.setItem('itf-theme', m); }catch(e){} apply(); showToast('顯示模式：' + label[m]); });
+
+  // 離線 PWA 註冊與安裝彈窗
+  const appBtn = document.getElementById('app-btn');
+  const appModal = document.getElementById('app-modal');
+  const appClose = document.getElementById('app-modal-close');
+  const installArea = document.getElementById('pwa-install-area');
+  const installTrigger = document.getElementById('pwa-install-trigger');
+  let deferredPrompt = null;
+
+  const updateNetStatus = () => {
+    if(!appBtn) return;
+    if(!navigator.onLine){
+      appBtn.textContent = '📴 離線瀏覽中';
+      appBtn.classList.add('offline');
+      appBtn.classList.remove('ready');
+    } else {
+      appBtn.textContent = deferredPrompt ? '📲 安裝 App' : '📲 離線App就緒';
+      appBtn.classList.remove('offline');
+      appBtn.classList.add('ready');
+    }
+  };
+  window.addEventListener('online', () => { updateNetStatus(); showToast('已恢復網路連線'); });
+  window.addEventListener('offline', () => { updateNetStatus(); showToast('目前無網路，已自動切換為離線 App 快取模式'); });
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if(installArea) installArea.hidden = false;
+    updateNetStatus();
+  });
+  if(installTrigger){
+    installTrigger.addEventListener('click', async () => {
+      if(!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      if(installArea) installArea.hidden = true;
+      updateNetStatus();
+    });
+  }
+  if(appBtn && appModal){
+    appBtn.addEventListener('click', () => { appModal.hidden = false; });
+    if(appClose) appClose.addEventListener('click', () => { appModal.hidden = true; });
+    appModal.addEventListener('click', e => { if(e.target === appModal) appModal.hidden = true; });
+  }
+  if('serviceWorker' in navigator && location.protocol.startsWith('http')){
+    navigator.serviceWorker.register('./sw.js').then(() => updateNetStatus()).catch(() => {});
+  }
+  updateNetStatus();
 })();
 
 // 搜尋字高亮
 function highlight(root, q){
   q = (q || '').trim(); if(!q || q.length > 40) return;
   const ql = q.toLowerCase();
-  root.querySelectorAll('.deal h4, .deal .subt, .flight-city, .tour-agency-pill').forEach(el => {
+  root.querySelectorAll('.deal h4, .deal .subt, .flight-city, .tour-agency-pill, .seq-tag').forEach(el => {
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
     const nodes = []; while(walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach(n => {
@@ -799,11 +1047,25 @@ function highlight(root, q){
   });
 }
 
+// 判斷是否匹配搜尋字串（支援 #137、01_#137、編號搜尋）
+function matchRowQuery(k, r, idx, lowerRowStr, q){
+  if(!q) return true;
+  const seq = rowSeq(r, idx);
+  const code = FOLDER_CODE[k] || '';
+  const seqM = q.match(/^(?:(\d{2})[_-])?#(\d+)$/);
+  if(seqM){
+    if(seqM[1] && seqM[1] !== code) return false;
+    return seq === seqM[2];
+  }
+  if(`#${seq}` === q || `${code}_#${seq}` === q) return true;
+  return lowerRowStr.includes(q);
+}
+
 // 全站搜尋
 (function(){
   const gq = document.getElementById('gq'), res = document.getElementById('gs-res'), clr = document.getElementById('gq-clear');
   const cats = ['lodging','dining','flight','tour','flash','card'].filter(k => D[k]);
-  const lower = {}; cats.forEach(k => lower[k] = D[k].rows.map(r => r.join(' ').toLowerCase()));
+  const lower = {}; cats.forEach(k => lower[k] = D[k].rows.map((r, i) => `#${rowSeq(r, i)} ${FOLDER_CODE[k]}_#${rowSeq(r, i)} ` + r.join(' ').toLowerCase()));
   let timer;
   const run = () => {
     const q = gq.value.trim().toLowerCase(); clr.classList.toggle('show', !!q);
@@ -811,17 +1073,18 @@ function highlight(root, q){
     let total = 0;
     const html = cats.map(k => {
       const d = D[k], c = CFG[k], h = d.headers, pi = c.price ? col(h, c.price) : -1;
-      const hits = []; lower[k].forEach((s, i) => { if(s.includes(q)) hits.push(i); });
+      const hits = []; d.rows.forEach((r, i) => { if(matchRowQuery(k, r, i, lower[k][i], q)) hits.push(i); });
       if(!hits.length) return '';
       total += hits.length;
       const fresh = hits.filter(i => !isOld(d, d.rows[i]));
       const top = (fresh.length ? fresh : hits).slice(0, 3).map(i => { const r = d.rows[i];
-        const name = [...pick(h, r, c.title), ...pick(h, r, c.sub)].slice(0, 2).join('・');
+        const seq = rowSeq(r, i);
+        const name = `#${seq} ` + [...pick(h, r, c.title), ...pick(h, r, c.sub)].slice(0, 2).join('・');
         const p = pi >= 0 && !blank(r[pi]) ? fmt(r[pi]) : '';
         return `<li><span>${esc(name)}</span>${p && p.length < 12 ? `<em>${esc(p)}</em>` : ''}</li>`; }).join('');
-      return `<div class="gs-cat"><h4>${esc(d.name)} <b>${hits.length.toLocaleString()} 筆</b></h4><ul>${top}</ul><button type="button" class="gs-go" data-k="${k}">看全部 →</button></div>`;
+      return `<div class="gs-cat"><h4>${FOLDER_CODE[k]} ${esc(d.name)} <b>${hits.length.toLocaleString()} 筆</b></h4><ul>${top}</ul><button type="button" class="gs-go" data-k="${k}">看全部 →</button></div>`;
     }).join('');
-    res.innerHTML = total ? html : `<p class="gs-none">找不到「${esc(gq.value.trim())}」。試試更短的關鍵字，例如只打飯店名或城市。</p>`;
+    res.innerHTML = total ? html : `<p class="gs-none">找不到「${esc(gq.value.trim())}」。試試輸入編號（如 #137）或更短的飯店／城市關鍵字。</p>`;
   };
   gq.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(run, 120); });
   gq.addEventListener('keydown', e => { if(e.key === 'Escape'){ gq.value = ''; run(); } });
@@ -887,6 +1150,7 @@ function go(k){
   if(!ORDER.includes(k)) k = 'home';
   view = k;
   tabs.querySelectorAll('button').forEach(b => { if(b.dataset.key === k) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+  if(appDock) appDock.querySelectorAll('[data-dock]').forEach(b => { if(b.dataset.dock === k) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
   const cur = tabs.querySelector(`[data-key="${k}"]`); if(cur) cur.scrollIntoView({block:'nearest', inline:'nearest'});
   viewHome.hidden = k !== 'home';
   viewData.hidden = k === 'home';
@@ -1005,20 +1269,20 @@ function renderPicks(){
 
   let html = `
     <div class="picks-hero">
-      <h2>🔥 2026 ITF 旅展 最佳優惠推薦</h2>
-      <p>依據「官方真實定價、每人均價性價比、含稅/含行李條件與折扣誠意」嚴格精選！每張卡片皆附推薦亮點說明，點擊「完整資料」即可檢視條列化的加價規定與官方來源：</p>
+      <h2>🔥 2026 ITF 旅展 最佳優惠推薦（附資料夾與 #序號 對照）</h2>
+      <p>依據 <code>01_國內住宿</code>、<code>02_餐飲</code>、<code>03_國外機票</code>、<code>04_跟團</code> 分析報告嚴格精選！每張卡片標示完整編號（如 <code>01_#137</code>），點擊「完整資料」即可檢視條列化的加價規定與官方來源：</p>
     </div>
     
     <div class="picks-nav" role="navigation" aria-label="推薦分類快速跳轉">
-      <button type="button" data-pick-scroll="pick-lodging">🏨 住宿最超值 Top 8</button>
-      <button type="button" data-pick-scroll="pick-dining">🍴 餐券吃到飽 Top 8</button>
-      <button type="button" data-pick-scroll="pick-flight">✈ 機票含稅熱門 Top 8</button>
-      <button type="button" data-pick-scroll="pick-tour">🚌 推薦跟團行程 Top 8</button>
+      <button type="button" data-pick-scroll="pick-lodging">🏨 01 住宿 Top 8</button>
+      <button type="button" data-pick-scroll="pick-dining">🍴 02 餐券 Top 8</button>
+      <button type="button" data-pick-scroll="pick-flight">✈ 03 機票 Top 8</button>
+      <button type="button" data-pick-scroll="pick-tour">🚌 04 跟團 Top 8</button>
     </div>
 
     <section class="pick-sec" id="pick-lodging">
       <div class="pick-sec-head">
-        <h3>🏨 國內住宿券．最超值精選 Top 8 <span class="badge-hot">萬元有找 / 每人每晚750起</span></h3>
+        <h3>🏨 01_國內住宿．最超值精選 Top 8 <span class="badge-hot">萬元有找 / 每人每晚750起</span></h3>
         <button type="button" class="more-link" onclick="go('lodging')">查看全部 ${D.lodging.rows.length} 筆住宿 →</button>
       </div>
       <div class="cards">
@@ -1028,7 +1292,7 @@ function renderPicks(){
 
     <section class="pick-sec" id="pick-dining">
       <div class="pick-sec-head">
-        <h3>🍴 熱門餐券．五星飯店與吃到飽 Top 8 <span class="badge-hot">每人222起 / 必搶快閃</span></h3>
+        <h3>🍴 02_餐飲．五星飯店與吃到飽 Top 8 <span class="badge-hot">每人222起 / 必搶快閃</span></h3>
         <button type="button" class="more-link" onclick="go('dining')">查看全部 ${D.dining.rows.length} 筆餐券 →</button>
       </div>
       <div class="cards">
@@ -1038,7 +1302,7 @@ function renderPicks(){
 
     <section class="pick-sec" id="pick-flight">
       <div class="pick-sec-head">
-        <h3>✈ 國外機票．含稅來回與高性價比 Top 8 <span class="badge-hot">送託運行李 / 折扣碼折抵</span></h3>
+        <h3>✈ 03_國外機票．含稅來回與高性價比 Top 8 <span class="badge-hot">送託運行李 / 折扣碼折抵</span></h3>
         <button type="button" class="more-link" onclick="go('flight')">查看全部 ${D.flight.rows.length} 筆機票 →</button>
       </div>
       <div class="cards">
@@ -1048,7 +1312,7 @@ function renderPicks(){
 
     <section class="pick-sec" id="pick-tour">
       <div class="pick-sec-head">
-        <h3>🚌 跟團行程．每日預算最省 Top 8 <span class="badge-hot">每天1,380起 / 日韓郵輪首選</span></h3>
+        <h3>🚌 04_跟團．每日預算最省 Top 8 <span class="badge-hot">每天1,380起 / 日韓郵輪首選</span></h3>
         <button type="button" class="more-link" onclick="go('tour')">查看全部 ${D.tour.rows.length.toLocaleString()} 筆跟團 →</button>
       </div>
       <div class="cards">
@@ -1061,17 +1325,16 @@ function renderPicks(){
 }
 
 function renderSaved(){
-
-  let html = `<h2>★ 我的收藏</h2><p class="lead">在任何優惠卡上按「☆ 收藏」就會出現在這裡，逛展場時方便快速比價。收藏儲存於目前裝置的瀏覽器中。</p>`;
+  let html = `<h2>★ 我的收藏</h2><p class="lead">在任何優惠卡上按「☆ 收藏」就會出現在這裡，逛展場時方便快速比價。收藏儲存於目前裝置中，離線亦可隨時查閱。</p>`;
   let total = 0;
   ORDER.filter(k => D[k] && !CFG[k].table).forEach(k => {
     const rows = D[k].rows.map((r, idx) => ({r, idx})).filter(x => saved.has(rowKey(k, x.r)));
     if(!rows.length) return;
     total += rows.length;
-    html += `<div class="saved-head"><h3>${esc(D[k].name)}（${rows.length}）</h3></div><div class="cards">` +
+    html += `<div class="saved-head"><h3>${FOLDER_CODE[k] || ''} ${esc(D[k].name)}（${rows.length}）</h3></div><div class="cards">` +
       rows.map(x => card(D[k], CFG[k], x.r, x.idx, savedOpen.has(k + x.idx), k)).join('') + `</div>`;
   });
-  if(!total) html += `<div class="empty">目前還沒有收藏。可前往「國內住宿」「餐飲」「國外機票」「跟團」等分頁點擊「☆ 收藏」。</div>`;
+  if(!total) html += `<div class="empty">目前還沒有收藏。可前往「01 國內住宿」「02 餐飲」「03 國外機票」「04 跟團」等分頁點擊「☆ 收藏」。</div>`;
   else html += `<p class="note" style="margin-top:24px"><button class="reset" id="clear-saved">清空全部收藏</button></p>`;
   viewData.innerHTML = html;
   const cs = document.getElementById('clear-saved');
@@ -1086,9 +1349,18 @@ function renderSet(k){
   const d = D[k], c = CFG[k], h = d.headers;
   const filt = c.filters.map(s => col(h, s)).filter((i, n, a) => i >= 0 && a.indexOf(i) === n);
   const sorts = (c.sorts || []).map(([s, label]) => ({i: col(h, s), label})).filter(x => x.i >= 0);
-  const st = state[k] || (state[k] = {q:'', f:{}, hideOld:false, sort: sorts.length ? 0 : -1, limit:PAGE, open:new Set(), taxOnly:false, under10k:false, promoOnly:false, bfastOnly:false, freeSurch:false, familyOnly:false, buffetOnly:false, under1k:false, teaOnly:false, servOnly:false, japanOnly:false, koreaOnly:false, tipsOnly:false});
+  const st = state[k] || (state[k] = {q:'', f:{}, hideOld:false, sort: sorts.length ? 0 : -1, limit:PAGE, open:new Set(), mdOpen:false, taxOnly:false, under10k:false, promoOnly:false, bfastOnly:false, freeSurch:false, familyOnly:false, buffetOnly:false, under1k:false, teaOnly:false, servOnly:false, japanOnly:false, koreaOnly:false, tipsOnly:false});
   if(pendingQ[k] !== undefined){ st.q = pendingQ[k]; st.limit = PAGE; delete pendingQ[k]; }
   const hasOld = d.rows.some(r => isOld(d, r));
+  const fCode = FOLDER_CODE[k] || '';
+
+  // 資料夾與檔案路徑列 + 完整 Markdown 分析報告展開面板
+  const pathBarHtml = `<div class="path-bar">
+    <span class="path-chip" title="對應資料表路徑與編號範圍">📂 資料表：<code>${esc(d.csv_path || (d.folder + '\\' + d.csv))}</code>（#1–#${d.rows.length}）</span>
+    ${d.md ? `<span class="path-chip" title="對應分析報告路徑">📄 分析報告：<code>${esc(d.md_path)}</code></span>
+    <button type="button" class="md-toggle" id="md-btn-${k}" aria-expanded="${st.mdOpen ? 'true' : 'false'}">${st.mdOpen ? `📖 收合《${esc(d.md_path)}》 ▴` : `📖 閱讀《${esc(d.md_path)}》完整分析報告 ▾`}</button>` : ''}
+  </div>
+  ${d.md ? `<div class="md-box" id="md-box-${k}"${st.mdOpen ? '' : ' hidden'}>${st.mdOpen ? renderMd(d.md, d.folder) : ''}</div>` : ''}`;
 
   let guideBanner = '';
   if(k === 'flight'){
@@ -1119,11 +1391,12 @@ function renderSet(k){
     </div>`;
   }
 
-  let html = `<h2>${esc(d.name)}</h2><p class="lead">共 ${d.rows.length.toLocaleString()} 筆。點擊「完整資料」可查看加價規定、平假日限制、來源網址與證明截圖。</p>
+  let html = `<h2>${fCode ? fCode + ' ' : ''}${esc(d.name)}</h2><p class="lead">共 ${d.rows.length.toLocaleString()} 筆（編號 <code>#1</code>–<code>#${d.rows.length}</code>）。點擊「完整資料」可查看條列化加價規定、平假日限制、來源網址與證明截圖。</p>
+    ${pathBarHtml}
     ${guideBanner}
     <div class="toolbar${matchMedia('(max-width:640px)').matches ? ' collapsed' : ''}" id="tb-${k}"><div class="searchrow">
       <div class="search-wrap">
-        <input type="search" id="q-${k}" placeholder="搜尋名稱、地點、攤位號碼（如 M2111、J1804）…" value="${esc(st.q)}" aria-label="搜尋">
+        <input type="search" id="q-${k}" placeholder="搜尋編號（如 #137）、名稱、地點、攤位號碼（如 M2111）…" value="${esc(st.q)}" aria-label="搜尋">
         <button type="button" class="search-clear${st.q ? ' show' : ''}" id="qc-${k}" aria-label="清空搜尋">✕</button>
       </div>
       <button type="button" class="filter-toggle" id="ft-${k}" aria-expanded="false">⚙ 篩選排序</button>
@@ -1149,7 +1422,7 @@ function renderSet(k){
   html = html.replace('<div class="filters">', chipHtml + '<div class="filters">');
   if(sorts.length) html += `<label class="field"><span>排序</span><select id="s-${k}">` +
     sorts.map((s, n) => `<option value="${n}"${st.sort === n ? ' selected' : ''}>${esc(s.label)}</option>`).join('') +
-    `<option value="-1"${st.sort === -1 ? ' selected' : ''}>原始順序</option></select></label>`;
+    `<option value="-1"${st.sort === -1 ? ' selected' : ''}>依 #序號 原始順序</option></select></label>`;
   if(hasOld) html += `<label class="check"><input type="checkbox" id="old-${k}"${st.hideOld ? ' checked' : ''}> 不看 2025 年舊價格</label>`;
 
   // 分類專屬快速篩選膠囊
@@ -1189,6 +1462,18 @@ function renderSet(k){
   html += `</div></div><p class="count" id="cnt-${k}" role="status" aria-live="polite"></p><div id="list-${k}"></div><button class="loadmore" id="more-${k}" hidden></button>`;
   viewData.innerHTML = html;
 
+  // 綁定分析報告展開/收合
+  const mdBtn = document.getElementById('md-btn-' + k), mdBox = document.getElementById('md-box-' + k);
+  if(mdBtn && mdBox){
+    mdBtn.addEventListener('click', () => {
+      st.mdOpen = !st.mdOpen;
+      mdBox.hidden = !st.mdOpen;
+      if(st.mdOpen && !mdBox.innerHTML.trim()) mdBox.innerHTML = renderMd(d.md, d.folder);
+      mdBtn.setAttribute('aria-expanded', st.mdOpen);
+      mdBtn.textContent = st.mdOpen ? `📖 收合《${d.md_path}》 ▴` : `📖 閱讀《${d.md_path}》完整分析報告 ▾`;
+    });
+  }
+
   // 避坑指南收合
   const fgHead = document.getElementById('fg-head');
   if(fgHead){
@@ -1226,8 +1511,8 @@ function renderSet(k){
     const restIdx = col(h, '餐廳');
     const servIdx = col(h, '服務費');
 
-    let rows = d.rows.map((r, idx) => ({r, idx})).filter(({r}) => {
-      if(q && !r.join(' ').toLowerCase().includes(q)) return false;
+    let rows = d.rows.map((r, idx) => ({r, idx})).filter(({r, idx}) => {
+      if(q && !matchRowQuery(k, r, idx, r.join(' ').toLowerCase(), q)) return false;
       if(!Object.entries(st.f).every(([i, v]) => !v || r[i].trim() === v)) return false;
       if(st.hideOld && isOld(d, r)) return false;
 
@@ -1392,6 +1677,9 @@ function card(d, c, r, idx, open, k, pickReason){
   const on = saved.has(rowKey(k, r));
   const reasonAttr = pickReason ? ` data-reason="${esc(pickReason)}"` : '';
   const reasonHtml = pickReason ? `<div class="pick-reason">${esc(pickReason)}</div>` : '';
+  const seq = rowSeq(r, idx);
+  const seqLabel = (view === 'picks' || view === 'saved') && FOLDER_CODE[k] ? `${FOLDER_CODE[k]}_#${seq}` : `#${seq}`;
+  const seqBadge = `<span class="tag seq-tag" title="對應 ${esc(d.csv_path || d.csv)} 第 ${esc(seq)} 筆">${esc(seqLabel)}</span>`;
 
   // ===== 機票專屬卡片結構 =====
   if(k === 'flight'){
@@ -1425,7 +1713,7 @@ function card(d, c, r, idx, open, k, pickReason){
       promoCoupon = `<div class="coupon-box"><span style="font-size:12px;font-weight:700;color:#7e22ce">🏷 折扣碼</span><code class="coupon-code">${esc(mCode[1])}</code><button type="button" class="copy-btn" data-copy="${esc(mCode[1])}">📋 複製代碼</button></div>`;
     }
 
-    const tags = [];
+    const tags = [seqBadge];
     if(old) tags.push('<span class="tag y25">2025 舊價格</span>');
     if(bm) tags.push(`<button type="button" class="tag booth" data-k="${k}" data-booth="${esc(bm[0])}" title="點擊查看此攤位所有優惠">📍 ${esc(bm[0])}</button>`);
     if(taxTag) tags.push(taxTag);
@@ -1463,7 +1751,7 @@ function card(d, c, r, idx, open, k, pickReason){
 
     const infoFields = [['出發期間','出發'],['開票/購買','搶購期'],['搶票方式','方式']];
     const info = infoFields.map(([s, label]) => infoRow(label, val(s))).join('');
-    const full = open ? renderFull(d, h, r) : '';
+    const full = open ? renderFull(d, h, r, idx) : '';
 
     return `<article class="deal deal-flight${old ? ' old' : ''}${on ? ' saved' : ''}"${reasonAttr}>
       ${reasonHtml}
@@ -1494,7 +1782,7 @@ function card(d, c, r, idx, open, k, pickReason){
     const servVal = val('服務費');
     const servDesc = val('服務費說明');
 
-    const tags = [];
+    const tags = [seqBadge];
     if(old) tags.push('<span class="tag y25">2025 舊價格</span>');
     if(bm) tags.push(`<button type="button" class="tag booth" data-k="${k}" data-booth="${esc(bm[0])}" title="點擊查看此攤位所有優惠">📍 ${esc(bm[0])}</button>`);
     if(meal) tags.push(`<span class="tag tag-meal-cat">${esc(meal)}</span>`);
@@ -1518,7 +1806,7 @@ function card(d, c, r, idx, open, k, pickReason){
 
     const infoFields = [['張數組合','組合'],['使用期限','期限'],['平假日','平假日'],['平假日/加價規定','加價規定']];
     const info = infoFields.map(([s, label]) => infoRow(label, val(s))).join('');
-    const full = open ? renderFull(d, h, r) : '';
+    const full = open ? renderFull(d, h, r, idx) : '';
 
     return `<article class="deal deal-dining${old ? ' old' : ''}${on ? ' saved' : ''}"${reasonAttr}>
       ${reasonHtml}
@@ -1577,12 +1865,13 @@ function card(d, c, r, idx, open, k, pickReason){
 
     const infoFields = [['出發日期/期間','出發'],['出發地','出發地'],['適用條件','條件'],['限量','限量']];
     const info = infoFields.map(([s, label]) => infoRow(label, val(s))).join('');
-    const full = open ? renderFull(d, h, r) : '';
+    const full = open ? renderFull(d, h, r, idx) : '';
 
     return `<article class="deal deal-tour${old ? ' old' : ''}${on ? ' saved' : ''}"${reasonAttr}>
       ${reasonHtml}
       <div class="top">
         <div class="tour-agency-box">
+          ${seqBadge}
           <span class="tour-agency-pill">🚌 ${esc(agency)}</span>
           ${bm ? `<button type="button" class="tag booth" data-k="${k}" data-booth="${esc(bm[0])}" title="點擊查看此攤位所有優惠">📍 ${esc(bm[0])}</button>` : ''}
         </div>
@@ -1626,6 +1915,7 @@ function card(d, c, r, idx, open, k, pickReason){
 
   if(old) tags.unshift('<span class="tag y25">2025 舊價格</span>');
   if(bm) tags.unshift(`<button type="button" class="tag booth" data-k="${k}" data-booth="${esc(bm[0])}" title="點擊查看此攤位所有優惠">📍 ${esc(bm[0])}</button>`);
+  tags.unshift(seqBadge);
 
   let price = '';
   if(c.price){
@@ -1635,7 +1925,7 @@ function card(d, c, r, idx, open, k, pickReason){
       (!blank(per) ? `<span class="per">${c.per[1]} ${esc(fmt(per))}</span>` : '') + `</div>`;
   }
   const info = (c.info || []).map(([s, label]) => { const v = val(s); return (bm && v === bm[0]) ? '' : infoRow(label, v); }).join('');
-  const full = open ? renderFull(d, h, r) : '';
+  const full = open ? renderFull(d, h, r, idx) : '';
 
   return `<article class="deal${old ? ' old' : ''}${on ? ' saved' : ''}"${reasonAttr}>
     ${reasonHtml}
@@ -1647,9 +1937,9 @@ function card(d, c, r, idx, open, k, pickReason){
 }
 
 function boothTable(d, rows){
-  const h = d.headers, show = ['類別','參展單位','攤位號','樓層區'].map(s => col(h, s)).filter(i => i >= 0);
+  const h = d.headers, show = ['序號','類別','參展單位','攤位號','樓層區'].map(s => col(h, s)).filter(i => i >= 0);
   return `<div class="tbox"><table><thead><tr>${show.map(i => `<th>${esc(h[i])}</th>`).join('')}</tr></thead><tbody>` +
-    rows.map(({r}) => `<tr>${show.map(i => `<td${h[i].includes('攤位') ? ' class="code"' : ''}>${esc(r[i])}</td>`).join('')}</tr>`).join('') +
+    rows.map(({r}) => `<tr>${show.map(i => `<td${h[i].includes('攤位') || h[i].includes('序號') ? ' class="code"' : ''}>${h[i].includes('序號') ? '#' + esc(r[i]) : esc(r[i])}</td>`).join('')}</tr>`).join('') +
     `</tbody></table></div><p class="note">攤位號是從官方展場平面圖讀出，以現場公告為準。</p>`;
 }
 
