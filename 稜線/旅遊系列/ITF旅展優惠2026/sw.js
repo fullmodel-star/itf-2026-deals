@@ -1,13 +1,44 @@
-const CACHE_NAME = 'ridgeline-travel-itf-2026-v2';
+const CACHE_NAME = 'ridgeline-travel-itf-2026-v4';
 const PRECACHE_URLS = [
   './',
   './index.html',
   './manifest.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
+  './icons/icon-maskable-192.png',
+  './icons/icon-maskable-512.png',
+  './icons/apple-touch-icon.png',
+  './icons/favicon-32.png',
+  './icons/icon-16.png',
+  './icons/icon-48.png',
+  './og.png',
+  './vendor/fluent-3d/bell.png',
+  './vendor/fluent-3d/bus.png',
+  './vendor/fluent-3d/card.png',
+  './vendor/fluent-3d/clock.png',
+  './vendor/fluent-3d/dining.png',
+  './vendor/fluent-3d/fire.png',
+  './vendor/fluent-3d/globe.png',
+  './vendor/fluent-3d/hotel.png',
+  './vendor/fluent-3d/luggage.png',
+  './vendor/fluent-3d/map.png',
+  './vendor/fluent-3d/pin.png',
+  './vendor/fluent-3d/plane.png',
+  './vendor/fluent-3d/star.png',
+  './vendor/fluent-3d/ticket.png',
+  './vendor/serif-ui/itf-serif-700.woff2',
+  './vendor/serif-ui/itf-serif-900.woff2',
+  './vendor/brand/fitzroy_navy.png',
+  './vendor/brand/fitzroy_white.png',
   './00_%E5%AE%98%E6%96%B9%E7%B8%BD%E8%A6%BD/2026_ITF%E5%B1%95%E5%A0%B4%E5%B9%B3%E9%9D%A2%E5%9C%96.pdf'
 ];
 
+// 新版裝好後先等著，頁面的更新橫幅按下「更新」才送 SKIP_WAITING 接手（避免使用中突然換版）
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
+});
+
 self.addEventListener('install', event => {
-  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       return Promise.allSettled(PRECACHE_URLS.map(u => cache.add(u)));

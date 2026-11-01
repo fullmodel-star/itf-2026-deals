@@ -1,0 +1,17 @@
+{
+  "_說明": "換專案只要改這個檔的值即可；空字串代表該行不顯示。",
+  "_logo說明": "footer logo 一律用 family_slug 指定官方山形圖（05_品牌資源/02_山形素材庫/06_頁首頁尾小圖/{slug}_navy.png），不要手刻SVG。12家族slug：yushan/matterhorn/kilimanjaro/fitzroy/k2/aoraki/fuji/kailash/denali/sancha/aconcagua/everest。每個專案依所屬家族設定，沒有對應家族就先問使用者。logo_svg 欄位僅作為 family_slug 找不到圖檔時的最後備援，正常情況不應該用到。",
+  "byline": "Ridgeline · by Lucas",
+  "family_slug": "fitzroy",
+  "slogan_html": "人生走稜，<br>高低都是風景。",
+  "license": "© 2026 Lucas　本 App 免費提供參考使用；程式與整理內容著作權皆屬作者，未經同意請勿重製、散布或作商業用途。",
+  "disclaimer": "⚠️ 免責聲明：本 App 整理自各飯店、航空、旅行社官網與新聞報導，價格、使用規定與攤位號碼以商家與 ITF 官方公告為準，可能有誤或已變更；標「2025 舊價格」者為去年資料。與台灣國際旅展主辦單位及各商家均無隸屬或合作關係，所引用之名稱與商標歸原權利人所有。",
+  "_feedback說明": "全家族統一用同一信箱收使用者回報；subject 會自動帶入該 App 資料夾名稱，方便你在信箱裡分辨來源，不用改這個值。",
+  "feedback_mailto": "weiwynn8899@gmail.com",
+  "logo_svg": "",
+  "install_button": false,
+  "build_templates": [
+    "_工具/template.html"
+  ],
+  "icon_slug": "itf-deals"
+}
