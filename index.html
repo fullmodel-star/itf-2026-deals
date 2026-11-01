@@ -97,7 +97,8 @@ section{margin-bottom:32px}
 .booth-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px}
 .booth-zone{background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
 .booth-zone h4{margin:0 0 8px;font-size:14px;font-weight:700;color:var(--navy)}
-:root[data-theme="dark"] .booth-zone h4, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .booth-zone h4{color:var(--sky)}}
+:root[data-theme="dark"] .booth-zone h4{color:var(--sky)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .booth-zone h4{color:var(--sky)}}
 .booth-pills{display:flex;flex-wrap:wrap;gap:6px}
 .booth-pill{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:3px 8px;font-size:13px;cursor:pointer;color:var(--ink);transition:all .12s;display:inline-flex;align-items:center;gap:4px}
 .booth-pill b{font-family:var(--f-num);color:var(--accent);font-weight:700}
@@ -188,7 +189,8 @@ ul.plain{margin:0;padding-left:1.2em;display:grid;gap:8px}
 /* ===== 機票卡片專屬強化 ===== */
 .deal.deal-flight{border-top:4px solid var(--sky);background:linear-gradient(180deg, rgba(31,95,168,.02) 0%, var(--surface) 35%)}
 .flight-airline{font-size:15px;font-weight:800;color:var(--navy);display:inline-flex;align-items:center;gap:5px;letter-spacing:.01em}
-:root[data-theme="dark"] .flight-airline, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .flight-airline{color:var(--sky)}}
+:root[data-theme="dark"] .flight-airline{color:var(--sky)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .flight-airline{color:var(--sky)}}
 .flight-route-box{background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;margin:2px 0 4px}
 .flight-city{font-size:16px;font-weight:900;color:var(--ink);overflow-wrap:anywhere}
 .flight-city.dep{text-align:left}
@@ -203,29 +205,35 @@ ul.plain{margin:0;padding-left:1.2em;display:grid;gap:8px}
 .tag-tax.tax-in{background:var(--good-soft);color:var(--good);border:1px solid rgba(29,115,73,.35)}
 .tag-tax.tax-ex{background:var(--accent-soft);color:var(--accent);border:1px solid rgba(201,86,28,.3)}
 .tag-tax.tax-code{background:#f3e8ff;color:#6b21a8;border:1px solid rgba(107,33,168,.3)}
-:root[data-theme="dark"] .tag-tax.tax-code, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag-tax.tax-code{background:#2e1b47;color:#d8b4fe;border-color:#6b21a8}}
+:root[data-theme="dark"] .tag-tax.tax-code{background:#2e1b47;color:#d8b4fe;border-color:#6b21a8}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag-tax.tax-code{background:#2e1b47;color:#d8b4fe;border-color:#6b21a8}}
 
 /* 行李額度標籤 */
 .tag-baggage{font-size:12px;font-weight:700;line-height:1.4;padding:2px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;background:var(--sky-soft);color:var(--sky);border:1px solid rgba(31,95,168,.25);white-space:nowrap}
 .tag-baggage.warn{background:#fff8e6;color:#b45309;border-color:rgba(180,83,9,.3)}
-:root[data-theme="dark"] .tag-baggage.warn, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag-baggage.warn{background:#332612;color:#fbbf24;border-color:#78350f}}
+:root[data-theme="dark"] .tag-baggage.warn{background:#332612;color:#fbbf24;border-color:#78350f}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag-baggage.warn{background:#332612;color:#fbbf24;border-color:#78350f}}
 
 /* 折扣碼券盒 */
 .coupon-box{background:#faf5ff;border:1px dashed #a855f7;border-radius:8px;padding:6px 10px;display:flex;align-items:center;justify-content:space-between;gap:8px;margin:2px 0 2px}
-:root[data-theme="dark"] .coupon-box, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .coupon-box{background:#231738;border-color:#7e22ce}}
+:root[data-theme="dark"] .coupon-box{background:#231738;border-color:#7e22ce}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .coupon-box{background:#231738;border-color:#7e22ce}}
 .coupon-code{font-family:var(--f-num);font-size:14px;font-weight:700;color:#7e22ce;letter-spacing:.04em}
-:root[data-theme="dark"] .coupon-code, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .coupon-code{color:#d8b4fe}}
+:root[data-theme="dark"] .coupon-code{color:#d8b4fe}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .coupon-code{color:#d8b4fe}}
 .copy-btn{background:var(--surface);border:1px solid #c084fc;color:#7e22ce;border-radius:6px;padding:2px 9px;font-size:12px;cursor:pointer;font-weight:700;transition:all .12s}
 .copy-btn:hover{background:#7e22ce;color:#fff}
 
 /* ===== 餐飲卡片專屬強化 ===== */
 .deal.deal-dining{border-top:4px solid var(--accent);background:linear-gradient(180deg, rgba(201,86,28,.02) 0%, var(--surface) 35%)}
 .tag-meal-cat{background:#fff3eb;color:var(--accent);font-weight:700;border:1px solid rgba(201,86,28,.25)}
-:root[data-theme="dark"] .tag-meal-cat, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag-meal-cat{background:#382216;color:#f39260;border-color:#7c3d1d}}
+:root[data-theme="dark"] .tag-meal-cat{background:#382216;color:#f39260;border-color:#7c3d1d}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag-meal-cat{background:#382216;color:#f39260;border-color:#7c3d1d}}
 .tag-service{font-size:12px;font-weight:700;line-height:1.4;padding:2px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
 .tag-service.serv-in{background:var(--good-soft);color:var(--good);border:1px solid rgba(29,115,73,.3)}
 .tag-service.serv-ex{background:#fff8e6;color:#b45309;border:1px solid rgba(180,83,9,.3)}
-:root[data-theme="dark"] .tag-service.serv-ex, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag-service.serv-ex{background:#332612;color:#fbbf24;border-color:#78350f}}
+:root[data-theme="dark"] .tag-service.serv-ex{background:#332612;color:#fbbf24;border-color:#78350f}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag-service.serv-ex{background:#332612;color:#fbbf24;border-color:#78350f}}
 .dining-per-hero{display:inline-flex;align-items:center;gap:4px;background:var(--accent-soft);color:var(--accent);padding:2px 8px;border-radius:6px;font-size:13px;font-weight:700}
 .dining-per-hero b{font-family:var(--f-num);font-size:15px}
 
@@ -233,7 +241,8 @@ ul.plain{margin:0;padding-left:1.2em;display:grid;gap:8px}
 .tag-meal{font-size:12px;font-weight:700;line-height:1.4;padding:2px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
 .tag-meal.in{background:#e6f7f2;color:#0f766e;border:1px solid rgba(15,118,110,.3)}
 .tag-meal.no{background:var(--sunk);color:var(--muted);border:1px solid var(--line)}
-:root[data-theme="dark"] .tag-meal.in, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag-meal.in{background:#133431;color:#5eead4;border-color:#115e59}}
+:root[data-theme="dark"] .tag-meal.in{background:#133431;color:#5eead4;border-color:#115e59}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag-meal.in{background:#133431;color:#5eead4;border-color:#115e59}}
 .tag-surch{font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px;background:var(--sunk);color:var(--muted);white-space:nowrap}
 .tag-surch.free{background:var(--good-soft);color:var(--good);font-weight:700}
 
@@ -265,19 +274,62 @@ ul.plain{margin:0;padding-left:1.2em;display:grid;gap:8px}
 .deal.deal-tour{border-top:4px solid #0284c7;background:linear-gradient(180deg, rgba(2,132,199,.02) 0%, var(--surface) 35%)}
 .tour-agency-box{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .tour-agency-pill{background:#e0f2fe;color:#0369a1;font-weight:700;font-size:13px;padding:2px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px}
-:root[data-theme="dark"] .tour-agency-pill, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tour-agency-pill{background:#0c4a6e;color:#7dd3fc}}
+:root[data-theme="dark"] .tour-agency-pill{background:#0c4a6e;color:#7dd3fc}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tour-agency-pill{background:#0c4a6e;color:#7dd3fc}}
 .tour-header-meta{display:flex;align-items:center;gap:6px;margin:4px 0 2px}
 .tour-dest-tag{background:var(--sunk);color:var(--ink);font-weight:700;font-size:12px;padding:2px 8px;border-radius:6px;border:1px solid var(--line)}
 .tour-days-tag{background:#fef3c7;color:#b45309;font-weight:800;font-size:12px;padding:2px 8px;border-radius:6px;border:1px solid rgba(180,83,9,.25)}
-:root[data-theme="dark"] .tour-days-tag, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tour-days-tag{background:#451a03;color:#fde68a;border-color:#78350f}}
+:root[data-theme="dark"] .tour-days-tag{background:#451a03;color:#fde68a;border-color:#78350f}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tour-days-tag{background:#451a03;color:#fde68a;border-color:#78350f}}
 .tour-title{font-size:16px;font-weight:700;line-height:1.45;margin:4px 0 6px;color:var(--ink)}
 .tour-price-bar{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:8px 10px;background:var(--sunk);border-radius:8px;margin:6px 0}
 .tour-daily-hero{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--muted)}
 .tour-daily-hero b{font-family:var(--f-num);font-size:15px;color:#0284c7}
-:root[data-theme="dark"] .tour-daily-hero b, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tour-daily-hero b{color:#38bdf8}}
+:root[data-theme="dark"] .tour-daily-hero b{color:#38bdf8}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tour-daily-hero b{color:#38bdf8}}
 .tag-tips{font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
 .tag-tips.in{background:var(--good-soft);color:var(--good);border:1px solid rgba(29,115,73,.3)}
 .tag-airline{font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px;background:var(--sky-soft);color:var(--sky);border:1px solid rgba(31,95,168,.25)}
+
+
+/* ===== UI/UX v3 ===== */
+.theme-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:99px;padding:5px 12px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;align-self:center}
+.theme-btn:hover{background:rgba(255,255,255,.22)}
+.gsearch{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:28px;box-shadow:var(--shadow-md)}
+.gsearch h3{margin:0 0 4px}
+.gsearch p.hint{color:var(--muted);font-size:14px;margin:0 0 10px}
+.gsearch .search-wrap input[type=search]{font-size:17px;padding:12px 40px 12px 16px}
+.gs-eg{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.gs-eg button{background:var(--sunk);border:1px solid var(--line);border-radius:99px;padding:3px 11px;font-size:13px;cursor:pointer;color:var(--ink)}
+.gs-eg button:hover{border-color:var(--accent);color:var(--accent)}
+.gs-res{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:10px;margin-top:14px}
+.gs-res:empty{display:none}
+.gs-cat{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg);display:flex;flex-direction:column;gap:6px;min-width:0}
+.gs-cat h4{margin:0;font-size:15px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.gs-cat h4 b{font-family:var(--f-num);color:var(--accent)}
+.gs-cat ul{list-style:none;margin:0;padding:0;display:grid;gap:3px;font-size:13px}
+.gs-cat li{display:flex;justify-content:space-between;gap:8px;min-width:0}
+.gs-cat li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.gs-cat li em{font-style:normal;font-family:var(--f-num);color:var(--accent);white-space:nowrap}
+.gs-cat .gs-go{align-self:flex-start;background:none;border:0;padding:2px 0;color:var(--accent);font-weight:700;cursor:pointer;font-size:14px}
+.gs-none{color:var(--muted);font-size:14px;margin-top:10px}
+mark{background:#ffe58a;color:inherit;border-radius:3px;padding:0 1px}
+:root[data-theme="dark"] mark{background:#6b5a12}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) mark{background:#6b5a12}}
+button.tag.booth{border:0;cursor:pointer;font-size:12px;line-height:1.5}
+button.tag.booth:hover{background:var(--accent);color:#fff}
+.share-btn,.filter-toggle{background:none;border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--muted);cursor:pointer;font-size:14px;white-space:nowrap}
+.share-btn:hover,.filter-toggle:hover{color:var(--ink);border-color:var(--faint)}
+.filter-toggle{display:none}
+.count .linkbtn{font-size:14px;margin-left:10px}
+.empty .reset{margin-top:12px}
+@media (max-width:640px){
+  .filter-toggle{display:inline-flex;gap:4px;align-items:center}
+  .toolbar.collapsed .filters>.field,.toolbar.collapsed .filters>.check{display:none}
+  .toolbar{position:sticky;top:48px;z-index:4}
+  .toolbar.collapsed{padding:10px 12px;gap:8px}
+  .gs-cat ul{font-size:12px}
+}
 
 /* 攤位表 */
 .tbox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-sm)}
@@ -303,6 +355,7 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
     <div class="stub"><span>展期</span><b>11/6（五）–11/9（一）</b></div>
     <div class="stub"><span>地點</span><b>南港展覽館 1 館</b></div>
     <div class="stub count" id="countdown" hidden><span></span><b></b></div>
+    <button type="button" class="theme-btn" id="theme-btn" aria-label="切換深淺色">🌓 自動</button>
   </div>
 </div></header>
 
@@ -316,6 +369,19 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
     <div class="fact"><b>捐血換門票</b>10/31–11/7，限量 8,000 張</div>
     <div class="fact"><b>官方網站</b><a href="https://www.taiwanitf.org.tw/" target="_blank" rel="noopener">taiwanitf.org.tw</a></div>
   </div>
+
+  <section class="gsearch" aria-label="全站搜尋">
+    <h3>🔎 全站搜尋</h3>
+    <p class="hint">一次搜尋住宿、餐券、機票、跟團、限時搶購與刷卡回饋。可輸入飯店、地點、航空、旅行社或攤位號碼。</p>
+    <div class="search-wrap">
+      <input type="search" id="gq" placeholder="例如：晶華、沖繩、星宇、M1607、下午茶…" aria-label="全站搜尋" autocomplete="off">
+      <button type="button" class="search-clear" id="gq-clear" aria-label="清空搜尋">✕</button>
+    </div>
+    <div class="gs-eg" id="gs-eg">
+      <button type="button">下午茶</button><button type="button">吃到飽</button><button type="button">沖繩</button><button type="button">北海道</button><button type="button">日月潭</button><button type="button">宜蘭</button><button type="button">含早</button><button type="button">星宇</button>
+    </div>
+    <div class="gs-res" id="gs-res" role="status" aria-live="polite"></div>
+  </section>
 
   <section class="entry">
     <div class="zone home-zone"><h3>國內</h3><div class="tiles">
@@ -352,7 +418,6 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
           <button type="button" class="booth-pill" data-jump-tab="lodging" data-jump-q="M2709"><b>M2709</b> 長榮酒店</button>
           <button type="button" class="booth-pill" data-jump-tab="lodging" data-jump-q="M1009"><b>M1009</b> 圓山大飯店</button>
           <button type="button" class="booth-pill" data-jump-tab="lodging" data-jump-q="M1304"><b>M1304</b> 國泰飯店</button>
-          <button type="button" class="booth-pill" data-jump-tab="lodging" data-jump-q="M506"><b>M506</b> 大板根溫泉</button>
         </div>
       </div>
       <div class="booth-zone">
@@ -373,7 +438,6 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
           <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="I2102"><b>I2102</b> 易飛旅遊</button>
           <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="J109"><b>J109</b> 五福旅遊</button>
           <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="J2701"><b>J2701</b> 台鋼燦星</button>
-          <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="K2323"><b>K2323</b> 大榮旅遊</button>
           <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="J1801"><b>J1801</b> 鳳凰旅遊</button>
           <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="J101"><b>J101</b> 世邦旅遊</button>
           <button type="button" class="booth-pill" data-jump-tab="flight" data-jump-q="K2404"><b>K2404</b> 樂桃/全日空</button>
@@ -557,15 +621,74 @@ starCount();
 document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => go(b.dataset.go)));
 document.querySelectorAll('[data-n]').forEach(s => s.textContent = `${D[s.dataset.n].rows.length.toLocaleString()} 筆`);
 
+// 跳到某分頁並帶入搜尋字
+const pendingQ = {};
+function jump(k, q){
+  if(state[k]){ state[k].q = q; state[k].limit = PAGE; } else pendingQ[k] = q;
+  go(k);
+}
+
+// 深淺色切換（自動 → 淺色 → 深色）
+(function(){
+  const btn = document.getElementById('theme-btn');
+  const modes = ['auto', 'light', 'dark'], label = {auto:'🌓 自動', light:'☀️ 淺色', dark:'🌙 深色'};
+  let m = 'auto'; try{ m = localStorage.getItem('itf-theme') || 'auto'; }catch(e){}
+  const apply = () => { if(m === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', m); btn.textContent = label[m]; };
+  apply();
+  btn.addEventListener('click', () => { m = modes[(modes.indexOf(m) + 1) % 3]; try{ localStorage.setItem('itf-theme', m); }catch(e){} apply(); showToast('顯示模式：' + label[m]); });
+})();
+
+// 搜尋字高亮
+function highlight(root, q){
+  q = (q || '').trim(); if(!q || q.length > 40) return;
+  const ql = q.toLowerCase();
+  root.querySelectorAll('.deal h4, .deal .subt, .flight-city, .tour-agency-pill').forEach(el => {
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    const nodes = []; while(walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(n => {
+      const s = n.nodeValue, i = s.toLowerCase().indexOf(ql); if(i < 0) return;
+      const frag = document.createDocumentFragment(); let p = 0, j = i;
+      while(j >= 0){ frag.append(s.slice(p, j)); const mk = document.createElement('mark'); mk.textContent = s.slice(j, j + q.length); frag.append(mk); p = j + q.length; j = s.toLowerCase().indexOf(ql, p); }
+      frag.append(s.slice(p)); n.replaceWith(frag);
+    });
+  });
+}
+
+// 全站搜尋
+(function(){
+  const gq = document.getElementById('gq'), res = document.getElementById('gs-res'), clr = document.getElementById('gq-clear');
+  const cats = ['lodging','dining','flight','tour','flash','card'].filter(k => D[k]);
+  const lower = {}; cats.forEach(k => lower[k] = D[k].rows.map(r => r.join(' ').toLowerCase()));
+  let timer;
+  const run = () => {
+    const q = gq.value.trim().toLowerCase(); clr.classList.toggle('show', !!q);
+    if(!q){ res.innerHTML = ''; return; }
+    let total = 0;
+    const html = cats.map(k => {
+      const d = D[k], c = CFG[k], h = d.headers, pi = c.price ? col(h, c.price) : -1;
+      const hits = []; lower[k].forEach((s, i) => { if(s.includes(q)) hits.push(i); });
+      if(!hits.length) return '';
+      total += hits.length;
+      const fresh = hits.filter(i => !isOld(d, d.rows[i]));
+      const top = (fresh.length ? fresh : hits).slice(0, 3).map(i => { const r = d.rows[i];
+        const name = [...pick(h, r, c.title), ...pick(h, r, c.sub)].slice(0, 2).join('・');
+        const p = pi >= 0 && !blank(r[pi]) ? fmt(r[pi]) : '';
+        return `<li><span>${esc(name)}</span>${p && p.length < 12 ? `<em>${esc(p)}</em>` : ''}</li>`; }).join('');
+      return `<div class="gs-cat"><h4>${esc(d.name)} <b>${hits.length.toLocaleString()} 筆</b></h4><ul>${top}</ul><button type="button" class="gs-go" data-k="${k}">看全部 →</button></div>`;
+    }).join('');
+    res.innerHTML = total ? html : `<p class="gs-none">找不到「${esc(gq.value.trim())}」。試試更短的關鍵字，例如只打飯店名或城市。</p>`;
+  };
+  gq.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(run, 120); });
+  gq.addEventListener('keydown', e => { if(e.key === 'Escape'){ gq.value = ''; run(); } });
+  clr.addEventListener('click', () => { gq.value = ''; run(); gq.focus(); });
+  res.addEventListener('click', e => { const b = e.target.closest('.gs-go'); if(b) jump(b.dataset.k, gq.value.trim()); });
+  document.getElementById('gs-eg').addEventListener('click', e => { const b = e.target.closest('button'); if(b){ gq.value = b.textContent; run(); } });
+})();
+
 // 攤位速查快速跳轉
 document.querySelectorAll('[data-jump-tab]').forEach(b => {
   b.addEventListener('click', () => {
-    const targetTab = b.dataset.jumpTab;
-    const query = b.dataset.jumpQ;
-    const st = state[targetTab] || (state[targetTab] = {q:'', f:{}, hideOld:false, sort: 0, limit:PAGE, open:new Set()});
-    st.q = query;
-    st.limit = PAGE;
-    go(targetTab);
+    jump(b.dataset.jumpTab, b.dataset.jumpQ);
   });
 });
 
@@ -590,11 +713,20 @@ const today = new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Taipei'}).format(
 window.addEventListener('keydown', e => {
   if(e.key === '/' && document.activeElement && !['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)){
     e.preventDefault();
-    const curSearch = document.getElementById('q-' + view);
+    const curSearch = document.getElementById(view === 'home' ? 'gq' : 'q-' + view);
     if(curSearch){ curSearch.focus(); curSearch.select(); }
   }
 });
 
+function syncHash(k){
+  const q = k !== 'home' && state[k] && state[k].q ? '?q=' + encodeURIComponent(state[k].q) : '';
+  if(location.hash !== '#' + k + q) history.replaceState(null, '', '#' + k + q);
+}
+function fromHash(){
+  const [k, qs] = location.hash.slice(1).split('?');
+  const q = qs && new URLSearchParams(qs).get('q');
+  if(q && ORDER.includes(k)) jump(k, q); else go(k);
+}
 function go(k){
   if(!ORDER.includes(k)) k = 'home';
   view = k;
@@ -603,7 +735,7 @@ function go(k){
   viewHome.hidden = k !== 'home';
   viewData.hidden = k === 'home';
   if(k === 'saved') renderSaved(); else if(k !== 'home') renderSet(k);
-  if(location.hash.slice(1) !== k) history.replaceState(null, '', '#' + k);
+  syncHash(k);
   try{ localStorage.setItem('itf-tab', k); }catch(e){}
   window.scrollTo({top:0});
 }
@@ -611,6 +743,15 @@ function go(k){
 // 點擊代理（收藏、展開、複製代碼）
 const savedOpen = new Set();
 viewData.addEventListener('click', e => {
+  if(e.target.closest('.clear-all')){ const k = view; delete state[k]; renderSet(k); return; }
+  const bt = e.target.closest('button.tag.booth');
+  if(bt){
+    const k = bt.dataset.k, code = bt.dataset.booth;
+    if(view === k){ state[k].q = code; state[k].limit = PAGE; renderSet(k); window.scrollTo({top:0}); }
+    else jump(k, code);
+    showToast(`攤位 ${code} 的所有優惠`);
+    return;
+  }
   const cb = e.target.closest('.copy-btn');
   if(cb){
     const code = cb.dataset.copy;
@@ -630,6 +771,7 @@ viewData.addEventListener('click', e => {
     const on = saved.has(key);
     sb.setAttribute('aria-pressed', on); sb.textContent = on ? '★ 已收藏' : '☆ 收藏';
     sb.closest('.deal').classList.toggle('saved', on);
+    showToast(on ? `已收藏（共 ${saved.size} 筆），到「★ 收藏」分頁查看` : '已取消收藏');
     return;
   }
   const b = e.target.closest('.more-btn'); if(!b) return;
@@ -666,6 +808,7 @@ function renderSet(k){
   const filt = c.filters.map(s => col(h, s)).filter((i, n, a) => i >= 0 && a.indexOf(i) === n);
   const sorts = (c.sorts || []).map(([s, label]) => ({i: col(h, s), label})).filter(x => x.i >= 0);
   const st = state[k] || (state[k] = {q:'', f:{}, hideOld:false, sort: sorts.length ? 0 : -1, limit:PAGE, open:new Set(), taxOnly:false, under10k:false, promoOnly:false, bfastOnly:false, freeSurch:false, familyOnly:false, buffetOnly:false, under1k:false, teaOnly:false, servOnly:false, japanOnly:false, koreaOnly:false, tipsOnly:false});
+  if(pendingQ[k] !== undefined){ st.q = pendingQ[k]; st.limit = PAGE; delete pendingQ[k]; }
   const hasOld = d.rows.some(r => isOld(d, r));
 
   let guideBanner = '';
@@ -699,11 +842,13 @@ function renderSet(k){
 
   let html = `<h2>${esc(d.name)}</h2><p class="lead">共 ${d.rows.length.toLocaleString()} 筆。點擊「完整資料」可查看加價規定、平假日限制、來源網址與證明截圖。</p>
     ${guideBanner}
-    <div class="toolbar"><div class="searchrow">
+    <div class="toolbar${matchMedia('(max-width:640px)').matches ? ' collapsed' : ''}" id="tb-${k}"><div class="searchrow">
       <div class="search-wrap">
         <input type="search" id="q-${k}" placeholder="搜尋名稱、地點、攤位號碼（如 M2111、J1804）…" value="${esc(st.q)}" aria-label="搜尋">
         <button type="button" class="search-clear${st.q ? ' show' : ''}" id="qc-${k}" aria-label="清空搜尋">✕</button>
       </div>
+      <button type="button" class="filter-toggle" id="ft-${k}" aria-expanded="false">⚙ 篩選排序</button>
+      <button type="button" class="share-btn" id="share-${k}" title="複製目前搜尋的連結">🔗 分享</button>
       <button class="reset" id="reset-${k}">清除條件</button></div><div class="filters">`;
 
   let chipHtml = '';
@@ -768,6 +913,7 @@ function renderSet(k){
   // 避坑指南收合
   const fgHead = document.getElementById('fg-head');
   if(fgHead){
+    if(matchMedia('(max-width:640px)').matches){ document.getElementById('fg-grid').hidden = true; document.getElementById('fg-toggle').textContent = '展開 ▾'; }
     fgHead.addEventListener('click', () => {
       const g = document.getElementById('fg-grid'), t = document.getElementById('fg-toggle');
       if(g.hidden){ g.hidden = false; t.textContent = '收合 ▴'; } else { g.hidden = true; t.textContent = '展開 ▾'; }
@@ -854,20 +1000,15 @@ function renderSet(k){
           if(!sv.includes('含')) return false;
         }
       } else if(k === 'tour'){
-        if(st.japanOnly){
-          const t = (r[1] + ' ' + r[2] + ' ' + r[3] + ' ' + r[4]).toLowerCase();
-          if(!t.includes('日') && !t.includes('沖繩') && !t.includes('東京') && !t.includes('大阪') && !t.includes('北海道') && !t.includes('九州') && !t.includes('名古') && !t.includes('福岡')) return false;
-        }
-        if(st.koreaOnly){
-          const t = (r[1] + ' ' + r[2] + ' ' + r[3] + ' ' + r[4]).toLowerCase();
-          if(!t.includes('韓') && !t.includes('首爾') && !t.includes('釜山') && !t.includes('濟州') && !t.includes('大邱')) return false;
-        }
+        const regIdx = col(h, '區域分類');
+        if(st.japanOnly && !(regIdx >= 0 && r[regIdx].includes('日本'))) return false;
+        if(st.koreaOnly && !(regIdx >= 0 && r[regIdx].includes('韓國'))) return false;
         if(st.under10k && priceIdx >= 0){
           const p = num(r[priceIdx]);
           if(isNaN(p) || p <= 0 || p > 10000) return false;
         }
         if(st.tipsOnly){
-          const t = (r[12] || '') + ' ' + r[2];
+          const tipIdx = col(h, '是否含小費'), t = (tipIdx >= 0 ? r[tipIdx] : '') + ' ' + r[2];
           if(!t.includes('含') && !t.includes('贈小費') && !t.includes('免小費')) return false;
         }
       }
@@ -880,22 +1021,37 @@ function renderSet(k){
         if(isNaN(x)) return isNaN(y) ? 0 : 1; if(isNaN(y)) return -1; return x - y; });
     }
     rows.sort((a, b) => isOld(d, a.r) - isOld(d, b.r));
-    document.getElementById('cnt-' + k).innerHTML = rows.length === d.rows.length
-      ? `顯示全部 <b>${rows.length.toLocaleString()}</b> 筆` : `符合條件 <b>${rows.length.toLocaleString()}</b> 筆（共 ${d.rows.length.toLocaleString()} 筆）`;
+    const SW = ['taxOnly','under10k','promoOnly','bfastOnly','freeSurch','familyOnly','buffetOnly','under1k','teaOnly','servOnly','japanOnly','koreaOnly','tipsOnly'];
+    const active = !!st.q.trim() || Object.values(st.f).some(Boolean) || st.hideOld || SW.some(x => st[x]);
+    document.getElementById('cnt-' + k).innerHTML = (rows.length === d.rows.length
+      ? `顯示全部 <b>${rows.length.toLocaleString()}</b> 筆` : `符合條件 <b>${rows.length.toLocaleString()}</b> 筆（共 ${d.rows.length.toLocaleString()} 筆）`) +
+      (active ? `<button type="button" class="linkbtn clear-all">✕ 清除全部條件</button>` : '');
+    syncHash(k);
     const list = document.getElementById('list-' + k);
-    if(!rows.length){ list.innerHTML = `<div class="empty">沒有符合條件的優惠。請試試調整關鍵字，或按「清除條件」。</div>`; }
+    if(!rows.length){ list.innerHTML = `<div class="empty">沒有符合條件的優惠。請試試更短的關鍵字或關掉部分篩選。<br><button type="button" class="reset clear-all">✕ 清除全部條件</button></div>`; }
     else if(c.table) list.innerHTML = boothTable(d, rows.slice(0, st.limit));
-    else list.innerHTML = `<div class="cards">${rows.slice(0, st.limit).map(x => card(d, c, x.r, x.idx, st.open.has(x.idx), k)).join('')}</div>`;
+    else { list.innerHTML = `<div class="cards">${rows.slice(0, st.limit).map(x => card(d, c, x.r, x.idx, st.open.has(x.idx), k)).join('')}</div>`; highlight(list, st.q); }
     const more = document.getElementById('more-' + k);
     more.hidden = rows.length <= st.limit;
     more.textContent = `再顯示 ${Math.min(PAGE, rows.length - st.limit)} 筆（還有 ${(rows.length - st.limit).toLocaleString()} 筆）`;
   };
 
+  let qTimer;
   qInput.addEventListener('input', e => {
     st.q = e.target.value;
     if(qClear) qClear.classList.toggle('show', !!st.q);
     st.limit = PAGE;
-    draw();
+    clearTimeout(qTimer); qTimer = setTimeout(draw, 120);
+  });
+  qInput.addEventListener('keydown', e => { if(e.key === 'Escape' && st.q){ qClear.click(); } });
+  const ft = document.getElementById('ft-' + k), tb = document.getElementById('tb-' + k);
+  if(ft) ft.addEventListener('click', () => { const c2 = tb.classList.toggle('collapsed'); ft.setAttribute('aria-expanded', !c2); });
+  const sh = document.getElementById('share-' + k);
+  if(sh) sh.addEventListener('click', () => {
+    const url = location.href;
+    if(navigator.share && matchMedia('(max-width:640px)').matches) navigator.share({title: document.title, url}).catch(() => {});
+    else if(navigator.clipboard) navigator.clipboard.writeText(url).then(() => showToast('已複製連結，貼給朋友就能看到同樣的搜尋結果')).catch(() => prompt('請手動複製連結：', url));
+    else prompt('請手動複製連結：', url);
   });
   viewData.querySelectorAll('select[data-i]').forEach(s => s.addEventListener('change', e => { st.f[e.target.dataset.i] = e.target.value; st.limit = PAGE; draw(); }));
   viewData.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => {
@@ -990,7 +1146,7 @@ function card(d, c, r, idx, open, k){
 
     const tags = [];
     if(old) tags.push('<span class="tag y25">2025 舊價格</span>');
-    if(bm) tags.push(`<span class="tag booth" title="展場攤位">攤位 ${esc(bm[0])}</span>`);
+    if(bm) tags.push(`<button type="button" class="tag booth" data-k="${k}" data-booth="${esc(bm[0])}" title="點擊查看此攤位所有優惠">📍 ${esc(bm[0])}</button>`);
     if(taxTag) tags.push(taxTag);
     if(bagTag) tags.push(bagTag);
     if(!blank(region) && region !== '—') tags.push(`<span class="tag">${esc(region)}</span>`);
@@ -1064,7 +1220,7 @@ function card(d, c, r, idx, open, k){
 
     const tags = [];
     if(old) tags.push('<span class="tag y25">2025 舊價格</span>');
-    if(bm) tags.push(`<span class="tag booth" title="展場攤位">攤位 ${esc(bm[0])}</span>`);
+    if(bm) tags.push(`<button type="button" class="tag booth" data-k="${k}" data-booth="${esc(bm[0])}" title="點擊查看此攤位所有優惠">📍 ${esc(bm[0])}</button>`);
     if(meal) tags.push(`<span class="tag tag-meal-cat">${esc(meal)}</span>`);
     if(!blank(discVal)) tags.push(`<span class="tag disc">${esc(discVal)}</span>`);
 
@@ -1118,7 +1274,6 @@ function card(d, c, r, idx, open, k){
 
     const tags = [];
     if(old) tags.push('<span class="tag y25">2025 舊價格</span>');
-    if(bm) tags.push(`<span class="tag booth" title="展場攤位">攤位 ${esc(bm[0])}</span>`);
     if(!blank(region)) tags.push(`<span class="tag">${esc(region)}</span>`);
     if(!blank(airline) && airline !== '—' && airline !== '-') tags.push(`<span class="tag-airline">✈ ${esc(airline)}</span>`);
     if(!blank(tipsVal) && tipsVal !== '未公布'){
@@ -1159,7 +1314,7 @@ function card(d, c, r, idx, open, k){
       <div class="top">
         <div class="tour-agency-box">
           <span class="tour-agency-pill">🚌 ${esc(agency)}</span>
-          ${bm ? `<span class="tag booth" title="展場攤位">攤位 ${esc(bm[0])}</span>` : ''}
+          ${bm ? `<button type="button" class="tag booth" data-k="${k}" data-booth="${esc(bm[0])}" title="點擊查看此攤位所有優惠">📍 ${esc(bm[0])}</button>` : ''}
         </div>
         <button class="save-btn" data-k="${k}" data-idx="${idx}" aria-pressed="${on}" aria-label="收藏：${esc(agency)} ${esc(name)}">${on ? '★ 已收藏' : '☆ 收藏'}</button>
       </div>
@@ -1200,7 +1355,7 @@ function card(d, c, r, idx, open, k){
   }
 
   if(old) tags.unshift('<span class="tag y25">2025 舊價格</span>');
-  if(bm) tags.unshift(`<span class="tag booth" title="展場攤位">攤位 ${esc(bm[0])}</span>`);
+  if(bm) tags.unshift(`<button type="button" class="tag booth" data-k="${k}" data-booth="${esc(bm[0])}" title="點擊查看此攤位所有優惠">📍 ${esc(bm[0])}</button>`);
 
   let price = '';
   if(c.price){
@@ -1229,10 +1384,9 @@ function boothTable(d, rows){
     `</tbody></table></div><p class="note">攤位號是從官方展場平面圖讀出，以現場公告為準。</p>`;
 }
 
-let start = location.hash.slice(1);
-if(!ORDER.includes(start)){ try{ start = localStorage.getItem('itf-tab') || 'home'; }catch(e){ start = 'home'; } }
-go(start);
-window.addEventListener('hashchange', () => go(location.hash.slice(1)));
+if(ORDER.includes(location.hash.slice(1).split('?')[0])) fromHash();
+else { let start = 'home'; try{ start = localStorage.getItem('itf-tab') || 'home'; }catch(e){} go(start); }
+window.addEventListener('hashchange', fromHash);
 })();
 </script>
 </body></html>
