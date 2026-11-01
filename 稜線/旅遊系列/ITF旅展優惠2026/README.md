@@ -4,7 +4,7 @@
 
 展期 2026/11/6–11/9，南港展覽館 1 館。資料查詢日期 2026-10-29。
 
-**網頁入口：** https://fullmodel-star.github.io/itf-2026-deals/ （發布後由此導向品牌資料夾）
+**網址：** https://itf-2026-deals.pages.dev/ （2026-11-01 起放在 Cloudflare Pages，專案名稱 `itf-2026-deals`；舊的 GitHub Pages 網址會自動轉過來）
 
 ## 2026-11-01 改版「旅展票根」（品牌規範 v6）
 
@@ -53,7 +53,12 @@
 1. 修改各資料夾的 `.csv`（新增、修改價格都可以）。
 2. 有新截圖就放進該資料夾的 `截圖\`，再執行 `python _工具/shrink_shots.py` 壓成 JPG。
 3. 執行 `python _工具/build.py` 重新產生 `index.html`。
-4. commit 並 push，網頁版幾分鐘內就會更新。
+4. 部署到 Cloudflare（部署包只收白名單裡的檔，規則寫在 `_工具/build_staging.py`）：
+   ```
+   python _工具/build_staging.py <暫存資料夾>
+   npx wrangler pages deploy <暫存資料夾> --project-name=itf-2026-deals --branch=main
+   ```
+5. commit 並 push 到 GitHub 留存（GitHub 只負責版控和舊網址轉址）。
 
 也可以直接請 Claude 做以上步驟。
 
