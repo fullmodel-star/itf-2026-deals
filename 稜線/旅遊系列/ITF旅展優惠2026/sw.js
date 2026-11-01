@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ridgeline-travel-itf-2026-v5';
+const CACHE_NAME = 'ridgeline-travel-itf-2026-v6';
 const PRECACHE_URLS = [
   './',
   './index.html',
@@ -9,6 +9,7 @@ const PRECACHE_URLS = [
   './icons/icon-maskable-512.png',
   './icons/apple-touch-icon.png',
   './icons/favicon-32.png',
+  './favicon-32.png',
   './icons/icon-16.png',
   './icons/icon-48.png',
   './og.png',

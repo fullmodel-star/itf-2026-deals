@@ -52,7 +52,7 @@ page = tpl.replace('__SHOTS__', 'true')
 index = ('<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">'
          '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
          '<meta name="theme-color" content="#f4eee3">'
-         '<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">'
+         '<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">'
          '<link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">'
          '<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">'
          '<meta name="description" content="整理 2026 台灣國際旅展（11/6–11/9 南港）住宿、餐飲、機票、跟團與展場優惠，可搜尋、收藏、離線查詢。">'
