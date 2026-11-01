@@ -54,7 +54,7 @@ index = ('<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">'
          '<meta name="theme-color" content="#162a4a">'
          '<meta name="apple-mobile-web-app-capable" content="yes">'
          '<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">'
-         '<meta name="apple-mobile-web-app-title" content="2026 ITF 旅展">'
+         '<meta name="apple-mobile-web-app-title" content="稜線旅展">'
          '<link rel="manifest" href="manifest.json">'
          '</head><body>' + page + '</body></html>')
 open(os.path.join(ROOT, 'index.html'), 'w', encoding='utf-8').write(index)
