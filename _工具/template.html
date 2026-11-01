@@ -89,6 +89,20 @@ section{margin-bottom:32px}
 .tile .c{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
 .tile .p{font-size:14px;color:var(--accent);font-weight:700;margin-top:6px}
 .zone.abroad .tile .p{color:var(--sky)}
+
+/* 展場速查地圖板 */
+.booth-board{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:32px;box-shadow:var(--shadow-sm)}
+.booth-board h3{margin:0 0 4px}
+.booth-board p{color:var(--muted);font-size:14px;margin:0 0 14px}
+.booth-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px}
+.booth-zone{background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.booth-zone h4{margin:0 0 8px;font-size:14px;font-weight:700;color:var(--navy)}
+:root[data-theme="dark"] .booth-zone h4, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .booth-zone h4{color:var(--sky)}}
+.booth-pills{display:flex;flex-wrap:wrap;gap:6px}
+.booth-pill{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:3px 8px;font-size:13px;cursor:pointer;color:var(--ink);transition:all .12s;display:inline-flex;align-items:center;gap:4px}
+.booth-pill b{font-family:var(--f-num);color:var(--accent);font-weight:700}
+.booth-pill:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+
 .picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,500px),1fr));gap:16px}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px;min-width:0;box-shadow:var(--shadow-sm)}
 .panel-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:10px}
@@ -107,9 +121,12 @@ ul.plain{margin:0;padding-left:1.2em;display:grid;gap:8px}
 
 /* 資料頁工具列 */
 .toolbar{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:12px;margin:16px 0;box-shadow:var(--shadow-sm)}
-.searchrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.searchrow input[type=search]{flex:1 1 260px;min-width:0;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font-size:16px;transition:border-color .15s}
-.searchrow input[type=search]:focus{border-color:var(--accent);outline:none}
+.searchrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;position:relative}
+.search-wrap{position:relative;flex:1 1 260px;min-width:0;display:flex;align-items:center}
+.search-wrap input[type=search]{width:100%;padding:10px 36px 10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font-size:16px;transition:border-color .15s}
+.search-wrap input[type=search]:focus{border-color:var(--accent);outline:none}
+.search-clear{position:absolute;right:10px;background:none;border:0;color:var(--faint);cursor:pointer;font-size:16px;padding:4px;display:none;line-height:1}
+.search-clear.show{display:block}
 .filters{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:flex-end}
 .field{display:grid;gap:3px;min-width:0}
 .field span{font-size:13px;color:var(--muted);font-weight:500}
@@ -201,11 +218,24 @@ ul.plain{margin:0;padding-left:1.2em;display:grid;gap:8px}
 .copy-btn{background:var(--surface);border:1px solid #c084fc;color:#7e22ce;border-radius:6px;padding:2px 9px;font-size:12px;cursor:pointer;font-weight:700;transition:all .12s}
 .copy-btn:hover{background:#7e22ce;color:#fff}
 
-/* 住宿早餐標籤 */
+/* ===== 餐飲卡片專屬強化 ===== */
+.deal.deal-dining{border-top:4px solid var(--accent);background:linear-gradient(180deg, rgba(201,86,28,.02) 0%, var(--surface) 35%)}
+.tag-meal-cat{background:#fff3eb;color:var(--accent);font-weight:700;border:1px solid rgba(201,86,28,.25)}
+:root[data-theme="dark"] .tag-meal-cat, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag-meal-cat{background:#382216;color:#f39260;border-color:#7c3d1d}}
+.tag-service{font-size:12px;font-weight:700;line-height:1.4;padding:2px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.tag-service.serv-in{background:var(--good-soft);color:var(--good);border:1px solid rgba(29,115,73,.3)}
+.tag-service.serv-ex{background:#fff8e6;color:#b45309;border:1px solid rgba(180,83,9,.3)}
+:root[data-theme="dark"] .tag-service.serv-ex, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag-service.serv-ex{background:#332612;color:#fbbf24;border-color:#78350f}}
+.dining-per-hero{display:inline-flex;align-items:center;gap:4px;background:var(--accent-soft);color:var(--accent);padding:2px 8px;border-radius:6px;font-size:13px;font-weight:700}
+.dining-per-hero b{font-family:var(--f-num);font-size:15px}
+
+/* 住宿早餐與平假日標籤 */
 .tag-meal{font-size:12px;font-weight:700;line-height:1.4;padding:2px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
 .tag-meal.in{background:#e6f7f2;color:#0f766e;border:1px solid rgba(15,118,110,.3)}
 .tag-meal.no{background:var(--sunk);color:var(--muted);border:1px solid var(--line)}
 :root[data-theme="dark"] .tag-meal.in, @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag-meal.in{background:#133431;color:#5eead4;border-color:#115e59}}
+.tag-surch{font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px;background:var(--sunk);color:var(--muted);white-space:nowrap}
+.tag-surch.free{background:var(--good-soft);color:var(--good);font-weight:700}
 
 /* 機票避坑指南 Banner */
 .flight-guide{background:linear-gradient(135deg, rgba(31,95,168,.08) 0%, rgba(31,95,168,.02) 100%);border:1px solid rgba(31,95,168,.25);border-radius:14px;padding:16px 18px;margin-bottom:20px}
@@ -221,8 +251,10 @@ ul.plain{margin:0;padding-left:1.2em;display:grid;gap:8px}
 .quick-switches{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding-top:4px}
 .switch-chip{background:var(--bg);border:1px solid var(--line);color:var(--muted);border-radius:99px;padding:4px 12px;font-size:13px;cursor:pointer;font-weight:600;transition:all .12s;display:inline-flex;align-items:center;gap:4px}
 .switch-chip:hover{border-color:var(--faint);color:var(--ink)}
-.switch-chip[aria-pressed="true"]{background:var(--sky);border-color:var(--sky);color:#fff;font-weight:700}
+.switch-chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--navy-ink);font-weight:700}
+.switch-chip.sky[aria-pressed="true"]{background:var(--sky);border-color:var(--sky);color:#fff}
 .switch-chip.tax[aria-pressed="true"]{background:var(--good);border-color:var(--good);color:#fff}
+.switch-chip.accent[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
 
 /* 吐司通知 Toast */
 .toast-notice{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:rgba(24,34,58,.94);color:#fff;padding:10px 22px;border-radius:99px;font-size:14px;font-weight:700;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .25s cubic-bezier(0.16,1,0.3,1),opacity .25s;opacity:0;pointer-events:none}
@@ -277,9 +309,53 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
     </div></div>
   </section>
 
+  <!-- 展場熱門攤位速查板 -->
+  <section class="booth-board">
+    <div class="panel-head"><h3>📍 展場熱門攤位速查（點擊直達搜尋）</h3></div>
+    <p>現場逛展必備！點選任一攤位代號，直接跳轉該分類並過濾出該攤位所有優惠：</p>
+    <div class="booth-grid">
+      <div class="booth-zone">
+        <h4>4F 國內飯店與知名自助餐</h4>
+        <div class="booth-pills">
+          <button type="button" class="booth-pill" data-jump-tab="dining" data-jump-q="M2111"><b>M2111</b> 台北晶華</button>
+          <button type="button" class="booth-pill" data-jump-tab="dining" data-jump-q="M3009"><b>M3009</b> 台北君悅</button>
+          <button type="button" class="booth-pill" data-jump-tab="dining" data-jump-q="M2103"><b>M2103</b> 寒舍集團</button>
+          <button type="button" class="booth-pill" data-jump-tab="dining" data-jump-q="M1607"><b>M1607</b> 台北美福</button>
+          <button type="button" class="booth-pill" data-jump-tab="dining" data-jump-q="M1409"><b>M1409</b> 台北萬豪</button>
+          <button type="button" class="booth-pill" data-jump-tab="dining" data-jump-q="M415"><b>M415</b> JR東日本</button>
+          <button type="button" class="booth-pill" data-jump-tab="dining" data-jump-q="M109"><b>M109</b> 老爺酒店</button>
+          <button type="button" class="booth-pill" data-jump-tab="dining" data-jump-q="M105"><b>M105</b> 凱撒連鎖</button>
+          <button type="button" class="booth-pill" data-jump-tab="dining" data-jump-q="M409"><b>M409</b> 漢來美食</button>
+          <button type="button" class="booth-pill" data-jump-tab="dining" data-jump-q="M709"><b>M709</b> 天成飯店</button>
+          <button type="button" class="booth-pill" data-jump-tab="dining" data-jump-q="M2109"><b>M2109</b> 大倉久和</button>
+          <button type="button" class="booth-pill" data-jump-tab="dining" data-jump-q="M114"><b>M114</b> 遠東香格里拉</button>
+          <button type="button" class="booth-pill" data-jump-tab="lodging" data-jump-q="M405"><b>M405</b> 福容大飯店</button>
+          <button type="button" class="booth-pill" data-jump-tab="lodging" data-jump-q="M2709"><b>M2709</b> 長榮酒店</button>
+          <button type="button" class="booth-pill" data-jump-tab="lodging" data-jump-q="M1009"><b>M1009</b> 圓山大飯店</button>
+          <button type="button" class="booth-pill" data-jump-tab="lodging" data-jump-q="M1304"><b>M1304</b> 國泰飯店</button>
+        </div>
+      </div>
+      <div class="booth-zone">
+        <h4>1F 國外航空與大型旅行社</h4>
+        <div class="booth-pills">
+          <button type="button" class="booth-pill" data-jump-tab="flight" data-jump-q="J1804"><b>J1804</b> 中華航空</button>
+          <button type="button" class="booth-pill" data-jump-tab="flight" data-jump-q="J1809"><b>J1809</b> 長榮航空</button>
+          <button type="button" class="booth-pill" data-jump-tab="flight" data-jump-q="K1302"><b>K1302</b> 星宇航空</button>
+          <button type="button" class="booth-pill" data-jump-tab="flight" data-jump-q="J709"><b>J709</b> 台灣虎航</button>
+          <button type="button" class="booth-pill" data-jump-tab="flight" data-jump-q="I403"><b>I403</b> 國泰航空</button>
+          <button type="button" class="booth-pill" data-jump-tab="flight" data-jump-q="K101"><b>K101</b> 日本航空</button>
+          <button type="button" class="booth-pill" data-jump-tab="flight" data-jump-q="J116"><b>J116</b> 阿提哈德</button>
+          <button type="button" class="booth-pill" data-jump-tab="flight" data-jump-q="K701"><b>K701</b> 太陽富國</button>
+          <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="J1309"><b>J1309</b> 雄獅旅遊</button>
+          <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="J1816"><b>J1816</b> 可樂旅遊</button>
+          <button type="button" class="booth-pill" data-jump-tab="tour" data-jump-q="J2409"><b>J2409</b> 東南旅遊</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div class="alert">
     <h3>要搶的時間</h3>
-    <!-- data-start／data-end：這一項開始與最後有效的日期，依今天自動標「已過／進行中／下一個」 -->
     <ul class="timeline">
       <li data-end="2026-10-30"><span class="when">10/30 13:00</span><span>君悅凱菲屋、彩日本料理「兩人同行一人免費」，每人 979 元，限量 50 組</span></li>
       <li data-start="2026-10-29" data-end="2026-11-11"><span class="when">到 11/11 平日 11:00</span><span>易遊網 100 元機票（沖繩、北海道、曼谷、首爾）</span></li>
@@ -287,7 +363,7 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
       <li data-end="2026-11-04"><span class="when">11/4 11:00</span><span>雄獅機票折扣碼，中信卡滿 15,000 元折 1,000 元</span></li>
       <li data-start="2026-11-06" data-end="2026-11-09"><span class="when">11/7–11/9 10:00；11/6 時間待確認</span><span>大溪笠復威斯汀（M2702）買住宿券送下午茶券，每天 100 張</span></li>
       <li data-start="2026-11-06" data-end="2026-11-09"><span class="when">展場每天 15:00</span><span>美福（M1607）自助晚餐券 1,600 元，每天 60 組</span></li>
-      <li data-end="2026-11-06"><span class="when">只有 11/6</span><span>圓山（M1009）快閃住宿券 5,999 元限 10 組；喜來登十二廚下午茶</span></li>
+      <li data-end="2026-11-06"><span class="when">只有 11/6</span><span>圓山（M1009）快閃住宿券 5,999 元限 10 組；喜來登十二廚下午茶 800 元</span></li>
       <li data-end="2026-11-08"><span class="when">只有 11/8</span><span>寒舍艾美探索廚房平日自助餐 4 張 4,100 元</span></li>
       <li data-end="2026-11-09"><span class="when">只有 11/9</span><span>老爺家庭聯盟券 3,999 元</span></li>
     </ul>
@@ -308,11 +384,11 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
     <div class="panel">
       <div class="panel-head"><h3>餐券 最划算</h3><button class="linkbtn" data-go="dining">看全部餐券 →</button></div>
       <ol class="rank">
-        <li><span class="no">1</span><span class="what">海霸王甲天下 四人套餐<small>只在展場賣，每天 50 組（M1006）</small></span><span class="amt">888<small>每人 222</small></span></li>
+        <li><span class="no">1</span><span class="what">海霸王甲天下 四人套餐<small>展場 M1006 每天限量 50 組</small></span><span class="amt">888<small>每人 222</small></span></li>
         <li><span class="no">2</span><span class="what">海霸王打狗霸 日式海陸雙人券</span><span class="amt">688<small>每人 344</small></span></li>
-        <li><span class="no">3</span><span class="what">海霸王 16OZ 昆布鍋雙人券</span><span class="amt">699<small>每人 350</small></span></li>
-        <li><span class="no">4</span><span class="what">海霸王魅麗海 平日雙人自助吧<small>買 5 送 1</small></span><span class="amt">890<small>每人 371</small></span></li>
-        <li><span class="no">5</span><span class="what">喜來登十二廚 平日雙人下午茶<small>只在 11/6，寒舍會員</small></span><span class="amt">800<small>每人 400</small></span></li>
+        <li><span class="no">3</span><span class="what">喜來登十二廚 平日雙人下午茶<small>11/6 當天限量會員</small></span><span class="amt">800<small>每人 400</small></span></li>
+        <li><span class="no">4</span><span class="what">晶華栢麗廳 平日下午茶雙人券<small>含服務費</small></span><span class="amt">1,799<small>每人 900</small></span></li>
+        <li><span class="no">5</span><span class="what">君悅凱菲屋 平日下午茶四人券<small>平假日皆可使用</small></span><span class="amt">3,600<small>每人 900</small></span></li>
       </ol>
     </div>
     <div class="panel">
@@ -353,10 +429,10 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
       <li>機票新聞價多半不含稅；廉航行李另外算；春節、清明多半不能用。</li>
     </ul></div>
     <div class="panel"><h3>查證進度與追蹤備忘</h3><ul class="plain">
-      <li>住宿：重點 12 家集團加價規定與攤位已完整補齊，其餘飯店持續留意官方公告</li>
+      <li>住宿：重點 12 家飯店與五星集團加價規定、使用期限與攤位已全面補齊</li>
+      <li>餐券：晶華、君悅、寒舍、美福、JR東日本、大倉久和等 158 筆攤位與使用期限已更新</li>
       <li>機票：阿提哈德（J116）、國泰（I403）、日航（K101）、大韓、越捷促銷與折扣碼已補齊；虎航（J709）、樂桃、星悅開展前夕促銷持續追蹤</li>
       <li>跟團：各旅行社現場加碼優惠開展時以現場看板為主</li>
-      <li>展場手冊：官方電子型錄上線後同步核實</li>
     </ul>
     <p class="note">每筆資料都附來源網址。不同來源說法不一樣的，兩邊都記在備註。標「2025 舊價格」的是去年的價格。</p></div>
   </section>
@@ -377,8 +453,8 @@ const CFG = {
     tags:['地區','縣市'], disc:'折數', info:[['使用期限','期限'],['加價規定','加價'],['包含內容','包含'],['攤位號碼','攤位']],
     filters:['地區','縣市'], sorts:[['每人每晚','每人每晚 低→高'],['旅展價','旅展價 低→高']]},
   dining:{title:['飯店/品牌','餐廳'], sub:['券種內容'], price:'單張價', was:'原價', per:['每人均價','每人'],
-    tags:['地區','餐別'], disc:'折數', info:[['張數組合','組合'],['使用期限','期限'],['平假日','平假日'],['服務費（','服務費'],['攤位號碼','攤位']],
-    filters:['地區','餐別','服務費（'], sorts:[['每人均價','每人 低→高'],['單張價','單張價 低→高']]},
+    tags:['地區','餐別'], disc:'折數', info:[['張數組合','組合'],['使用期限','期限'],['平假日','平假日'],['服務費說明','服務費'],['攤位號碼','攤位']],
+    filters:['地區','餐別'], sorts:[['每人均價','每人 低→高'],['單張價','單張價 低→高']]},
   flight:{title:['航空'], route:['出發地','目的地'], sub:['艙等','單程/來回','銷售者'], price:'旅展價', tax:'是否含稅',
     tags:['區域','類型'], info:[['出發期間','出發'],['開票/購買','購買'],['搶票方式','怎麼搶'],['攤位號碼','攤位']],
     filters:['區域','類型','航空'], sorts:[['旅展價','旅展價 低→高']]},
@@ -391,7 +467,6 @@ const CFG = {
     filters:['銀行'], sorts:[]},
   booth:{table:true, filters:['樓層區','類別']}
 };
-// 卡片上醒目顯示攤位號；第一欄篩選提供快捷點擊標籤
 ['lodging','dining','flight','tour'].forEach(k => { CFG[k].booth = '攤位號碼'; CFG[k].chips = true; });
 const GROUPS = [['', ['home']], ['國內', ['lodging','dining']], ['國外', ['flight','tour']], ['展場', ['flash','card','booth']], ['', ['saved']]];
 const ORDER = GROUPS.flatMap(g => g[1]);
@@ -454,6 +529,18 @@ starCount();
 document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => go(b.dataset.go)));
 document.querySelectorAll('[data-n]').forEach(s => s.textContent = `${D[s.dataset.n].rows.length.toLocaleString()} 筆`);
 
+// 攤位速查快速跳轉
+document.querySelectorAll('[data-jump-tab]').forEach(b => {
+  b.addEventListener('click', () => {
+    const targetTab = b.dataset.jumpTab;
+    const query = b.dataset.jumpQ;
+    const st = state[targetTab] || (state[targetTab] = {q:'', f:{}, hideOld:false, sort: 0, limit:PAGE, open:new Set()});
+    st.q = query;
+    st.limit = PAGE;
+    go(targetTab);
+  });
+});
+
 // 倒數計時與時程
 const today = new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Taipei'}).format(new Date());
 (function(){
@@ -470,6 +557,15 @@ const today = new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Taipei'}).format(
     else if(s === soon) tag('next', '下一個');
   });
 })();
+
+// 按 '/' 快捷鍵搜尋
+window.addEventListener('keydown', e => {
+  if(e.key === '/' && document.activeElement && !['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)){
+    e.preventDefault();
+    const curSearch = document.getElementById('q-' + view);
+    if(curSearch){ curSearch.focus(); curSearch.select(); }
+  }
+});
 
 function go(k){
   if(!ORDER.includes(k)) k = 'home';
@@ -541,7 +637,7 @@ function renderSet(k){
   const d = D[k], c = CFG[k], h = d.headers;
   const filt = c.filters.map(s => col(h, s)).filter((i, n, a) => i >= 0 && a.indexOf(i) === n);
   const sorts = (c.sorts || []).map(([s, label]) => ({i: col(h, s), label})).filter(x => x.i >= 0);
-  const st = state[k] || (state[k] = {q:'', f:{}, hideOld:false, sort: sorts.length ? 0 : -1, limit:PAGE, open:new Set(), taxOnly:false, under10k:false, promoOnly:false});
+  const st = state[k] || (state[k] = {q:'', f:{}, hideOld:false, sort: sorts.length ? 0 : -1, limit:PAGE, open:new Set(), taxOnly:false, under10k:false, promoOnly:false, bfastOnly:false, freeSurch:false, familyOnly:false, buffetOnly:false, under1k:false, teaOnly:false, servOnly:false});
   const hasOld = d.rows.some(r => isOld(d, r));
 
   let guideBanner = '';
@@ -563,7 +659,10 @@ function renderSet(k){
   let html = `<h2>${esc(d.name)}</h2><p class="lead">共 ${d.rows.length.toLocaleString()} 筆。點擊「完整資料」可查看加價規定、平假日限制、來源網址與證明截圖。</p>
     ${guideBanner}
     <div class="toolbar"><div class="searchrow">
-      <input type="search" id="q-${k}" placeholder="搜尋名稱、地點、航線、航空公司…" value="${esc(st.q)}" aria-label="搜尋">
+      <div class="search-wrap">
+        <input type="search" id="q-${k}" placeholder="搜尋名稱、地點、攤位號碼（如 M2111、J1804）…" value="${esc(st.q)}" aria-label="搜尋">
+        <button type="button" class="search-clear${st.q ? ' show' : ''}" id="qc-${k}" aria-label="清空搜尋">✕</button>
+      </div>
       <button class="reset" id="reset-${k}">清除條件</button></div><div class="filters">`;
 
   let chipHtml = '';
@@ -588,12 +687,29 @@ function renderSet(k){
     `<option value="-1"${st.sort === -1 ? ' selected' : ''}>原始順序</option></select></label>`;
   if(hasOld) html += `<label class="check"><input type="checkbox" id="old-${k}"${st.hideOld ? ' checked' : ''}> 不看 2025 年舊價格</label>`;
 
+  // 分類專屬快速篩選膠囊
   if(k === 'flight'){
     html += `<div class="quick-switches">
       <span style="font-size:13px;color:var(--muted);font-weight:600">快速篩選：</span>
       <button type="button" class="switch-chip tax" id="sw-tax-${k}" aria-pressed="${st.taxOnly ? 'true' : 'false'}">✓ 只看含稅價</button>
       <button type="button" class="switch-chip" id="sw-10k-${k}" aria-pressed="${st.under10k ? 'true' : 'false'}">💰 萬元有找</button>
       <button type="button" class="switch-chip" id="sw-promo-${k}" aria-pressed="${st.promoOnly ? 'true' : 'false'}">🏷 折扣碼/優惠</button>
+    </div>`;
+  } else if(k === 'lodging'){
+    html += `<div class="quick-switches">
+      <span style="font-size:13px;color:var(--muted);font-weight:600">快速篩選：</span>
+      <button type="button" class="switch-chip accent" id="sw-bfast-${k}" aria-pressed="${st.bfastOnly ? 'true' : 'false'}">🍳 只看含早餐</button>
+      <button type="button" class="switch-chip" id="sw-10k-${k}" aria-pressed="${st.under10k ? 'true' : 'false'}">💰 萬元有找</button>
+      <button type="button" class="switch-chip tax" id="sw-free-${k}" aria-pressed="${st.freeSurch ? 'true' : 'false'}">⭐ 平日免加價</button>
+      <button type="button" class="switch-chip sky" id="sw-fam-${k}" aria-pressed="${st.familyOnly ? 'true' : 'false'}">👨‍👩‍👧‍👦 四人家庭房</button>
+    </div>`;
+  } else if(k === 'dining'){
+    html += `<div class="quick-switches">
+      <span style="font-size:13px;color:var(--muted);font-weight:600">快速篩選：</span>
+      <button type="button" class="switch-chip accent" id="sw-buffet-${k}" aria-pressed="${st.buffetOnly ? 'true' : 'false'}">🍴 只看吃到飽 (Buffet)</button>
+      <button type="button" class="switch-chip" id="sw-1k-${k}" aria-pressed="${st.under1k ? 'true' : 'false'}">💰 每人千元有找</button>
+      <button type="button" class="switch-chip sky" id="sw-tea-${k}" aria-pressed="${st.teaOnly ? 'true' : 'false'}">☕ 下午茶特搜</button>
+      <button type="button" class="switch-chip tax" id="sw-serv-${k}" aria-pressed="${st.servOnly ? 'true' : 'false'}">✓ 已含服務費</button>
     </div>`;
   }
 
@@ -609,17 +725,38 @@ function renderSet(k){
     });
   }
 
+  const qInput = document.getElementById('q-' + k);
+  const qClear = document.getElementById('qc-' + k);
+  if(qClear && qInput){
+    qClear.addEventListener('click', () => {
+      qInput.value = '';
+      st.q = '';
+      qClear.classList.remove('show');
+      st.limit = PAGE;
+      draw();
+      qInput.focus();
+    });
+  }
+
   const draw = () => {
     const q = st.q.trim().toLowerCase();
     const taxIdx = col(h, '是否含稅');
     const priceIdx = col(h, '旅展價');
     const typeIdx = col(h, '類型');
     const noteIdx = col(h, '備註');
+    const incIdx = col(h, '包含內容');
+    const surchIdx = col(h, '加價規定');
+    const guestsIdx = col(h, '入住人數');
+    const perIdx = col(h, '每人均價');
+    const mealIdx = col(h, '餐別');
+    const restIdx = col(h, '餐廳');
+    const servIdx = col(h, '服務費');
 
     let rows = d.rows.map((r, idx) => ({r, idx})).filter(({r}) => {
       if(q && !r.join(' ').toLowerCase().includes(q)) return false;
       if(!Object.entries(st.f).every(([i, v]) => !v || r[i].trim() === v)) return false;
       if(st.hideOld && isOld(d, r)) return false;
+
       if(k === 'flight'){
         if(st.taxOnly && taxIdx >= 0 && !r[taxIdx].includes('含稅')) return false;
         if(st.under10k && priceIdx >= 0){
@@ -632,6 +769,40 @@ function renderSet(k){
                           (priceIdx >= 0 && r[priceIdx].includes('折')) ||
                           (noteIdx >= 0 && (r[noteIdx].includes('折扣碼') || r[noteIdx].includes('代碼')));
           if(!isPromo) return false;
+        }
+      } else if(k === 'lodging'){
+        if(st.bfastOnly && incIdx >= 0){
+          const inc = r[incIdx];
+          if(!inc.includes('早') && !inc.includes('一泊一食') && !inc.includes('一泊二食')) return false;
+        }
+        if(st.under10k && priceIdx >= 0){
+          const p = num(r[priceIdx]);
+          if(isNaN(p) || p <= 0 || p > 10000) return false;
+        }
+        if(st.freeSurch && surchIdx >= 0){
+          const s = r[surchIdx];
+          if(s.includes('週五+') || s.includes('週六+') || s.includes('假日+') || s.includes('加價')) return false;
+        }
+        if(st.familyOnly && guestsIdx >= 0){
+          const g = r[guestsIdx];
+          if(!g.includes('4') && !g.includes('四')) return false;
+        }
+      } else if(k === 'dining'){
+        if(st.buffetOnly){
+          const t = ((mealIdx >= 0 ? r[mealIdx] : '') + (restIdx >= 0 ? r[restIdx] : '') + r[5]).toLowerCase();
+          if(!t.includes('自助') && !t.includes('buffet') && !t.includes('百匯') && !t.includes('吃到飽')) return false;
+        }
+        if(st.under1k && perIdx >= 0){
+          const p = num(r[perIdx]);
+          if(isNaN(p) || p <= 0 || p > 1000) return false;
+        }
+        if(st.teaOnly && mealIdx >= 0){
+          const m = r[mealIdx] + r[5];
+          if(!m.includes('下午茶')) return false;
+        }
+        if(st.servOnly && servIdx >= 0){
+          const sv = r[servIdx];
+          if(!sv.includes('含')) return false;
         }
       }
       return true;
@@ -654,7 +825,12 @@ function renderSet(k){
     more.textContent = `再顯示 ${Math.min(PAGE, rows.length - st.limit)} 筆（還有 ${(rows.length - st.limit).toLocaleString()} 筆）`;
   };
 
-  document.getElementById('q-' + k).addEventListener('input', e => { st.q = e.target.value; st.limit = PAGE; draw(); });
+  qInput.addEventListener('input', e => {
+    st.q = e.target.value;
+    if(qClear) qClear.classList.toggle('show', !!st.q);
+    st.limit = PAGE;
+    draw();
+  });
   viewData.querySelectorAll('select[data-i]').forEach(s => s.addEventListener('change', e => { st.f[e.target.dataset.i] = e.target.value; st.limit = PAGE; draw(); }));
   viewData.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => {
     st.f[b.dataset.ci] = b.dataset.v; st.limit = PAGE;
@@ -666,6 +842,7 @@ function renderSet(k){
   document.getElementById('reset-' + k).addEventListener('click', () => { delete state[k]; renderSet(k); document.getElementById('q-' + k).focus(); });
   document.getElementById('more-' + k).addEventListener('click', () => { st.limit += PAGE; draw(); });
 
+  // 綁定各分頁快捷按鈕
   if(k === 'flight'){
     const swTax = document.getElementById('sw-tax-' + k);
     if(swTax) swTax.addEventListener('click', () => { st.taxOnly = !st.taxOnly; swTax.setAttribute('aria-pressed', st.taxOnly); st.limit = PAGE; draw(); });
@@ -673,7 +850,26 @@ function renderSet(k){
     if(sw10k) sw10k.addEventListener('click', () => { st.under10k = !st.under10k; sw10k.setAttribute('aria-pressed', st.under10k); st.limit = PAGE; draw(); });
     const swPromo = document.getElementById('sw-promo-' + k);
     if(swPromo) swPromo.addEventListener('click', () => { st.promoOnly = !st.promoOnly; swPromo.setAttribute('aria-pressed', st.promoOnly); st.limit = PAGE; draw(); });
+  } else if(k === 'lodging'){
+    const swBfast = document.getElementById('sw-bfast-' + k);
+    if(swBfast) swBfast.addEventListener('click', () => { st.bfastOnly = !st.bfastOnly; swBfast.setAttribute('aria-pressed', st.bfastOnly); st.limit = PAGE; draw(); });
+    const sw10k = document.getElementById('sw-10k-' + k);
+    if(sw10k) sw10k.addEventListener('click', () => { st.under10k = !st.under10k; sw10k.setAttribute('aria-pressed', st.under10k); st.limit = PAGE; draw(); });
+    const swFree = document.getElementById('sw-free-' + k);
+    if(swFree) swFree.addEventListener('click', () => { st.freeSurch = !st.freeSurch; swFree.setAttribute('aria-pressed', st.freeSurch); st.limit = PAGE; draw(); });
+    const swFam = document.getElementById('sw-fam-' + k);
+    if(swFam) swFam.addEventListener('click', () => { st.familyOnly = !st.familyOnly; swFam.setAttribute('aria-pressed', st.familyOnly); st.limit = PAGE; draw(); });
+  } else if(k === 'dining'){
+    const swBuffet = document.getElementById('sw-buffet-' + k);
+    if(swBuffet) swBuffet.addEventListener('click', () => { st.buffetOnly = !st.buffetOnly; swBuffet.setAttribute('aria-pressed', st.buffetOnly); st.limit = PAGE; draw(); });
+    const sw1k = document.getElementById('sw-1k-' + k);
+    if(sw1k) sw1k.addEventListener('click', () => { st.under1k = !st.under1k; sw1k.setAttribute('aria-pressed', st.under1k); st.limit = PAGE; draw(); });
+    const swTea = document.getElementById('sw-tea-' + k);
+    if(swTea) swTea.addEventListener('click', () => { st.teaOnly = !st.teaOnly; swTea.setAttribute('aria-pressed', st.teaOnly); st.limit = PAGE; draw(); });
+    const swServ = document.getElementById('sw-serv-' + k);
+    if(swServ) swServ.addEventListener('click', () => { st.servOnly = !st.servOnly; swServ.setAttribute('aria-pressed', st.servOnly); st.limit = PAGE; draw(); });
   }
+
   draw();
 }
 
@@ -685,7 +881,7 @@ function card(d, c, r, idx, open, k){
   const bv = c.booth ? val(c.booth) : '', bm = !bv.includes('2025') && bv.match(/^[A-Z]區?\d{2,4}/);
   const on = saved.has(rowKey(k, r));
 
-  // 機票專屬卡片結構
+  // ===== 機票專屬卡片結構 =====
   if(k === 'flight'){
     const airline = val('航空') || '航空公司';
     const dep = val('出發地'), arr = val('目的地');
@@ -694,14 +890,12 @@ function card(d, c, r, idx, open, k){
     const notes = val('備註'), priceVal = val('旅展價'), wasVal = val('一般價');
     const region = val('區域'), type = val('類型');
 
-    // 含稅 vs 未稅標籤
     let taxTag = '';
     if(tax.includes('含稅')) taxTag = `<span class="tag-tax tax-in">✓ 含稅來回</span>`;
     else if(tax.includes('未稅')) taxTag = `<span class="tag-tax tax-ex">⚠ 未稅起價</span>`;
     else if(tax.includes('折抵')) taxTag = `<span class="tag-tax tax-code">🏷 折扣抵用</span>`;
     else if(!blank(tax)) taxTag = `<span class="tag-tax">${esc(tax)}</span>`;
 
-    // 行李額度標籤
     let bagTag = '';
     if(notes.includes('2件') && (notes.includes('23kg') || notes.includes('23公斤') || notes.includes('託運'))){
       bagTag = `<span class="tag-baggage">🧳 含2件23kg</span>`;
@@ -713,7 +907,6 @@ function card(d, c, r, idx, open, k){
       bagTag = `<span class="tag-baggage warn">⚠️ 僅手提/託運另計</span>`;
     }
 
-    // 旅展折扣碼辨識
     let promoCoupon = '';
     const mCode = notes.match(/\b(CXITF\d+|[A-Z0-9]{5,10})\b/) || priceVal.match(/\b(CXITF\d+)\b/);
     if(mCode && (type.includes('折扣碼') || notes.includes('折扣碼') || notes.includes('代碼'))){
@@ -779,7 +972,62 @@ function card(d, c, r, idx, open, k){
     </article>`;
   }
 
-  // 國內住宿、餐飲、跟團等其他卡片
+  // ===== 餐飲卡片專屬強化 =====
+  if(k === 'dining'){
+    const hotel = val('飯店/品牌');
+    const rest = val('餐廳');
+    const meal = val('餐別');
+    const name = val('券種內容');
+    const priceVal = val('旅展單張價(元)');
+    const perVal = val('每人均價(元)');
+    const wasVal = val('原價(元)');
+    const discVal = val('折數');
+    const servVal = val('服務費');
+    const servDesc = val('服務費說明');
+    const expVal = val('使用期限');
+    const ruleVal = val('平假日/加價規定');
+
+    const tags = [];
+    if(old) tags.push('<span class="tag y25">2025 舊價格</span>');
+    if(bm) tags.push(`<span class="tag booth" title="展場攤位">攤位 ${esc(bm[0])}</span>`);
+    if(meal) tags.push(`<span class="tag tag-meal-cat">${esc(meal)}</span>`);
+    if(!blank(discVal)) tags.push(`<span class="tag disc">${esc(discVal)}</span>`);
+
+    // 服務費狀態
+    if(servVal.includes('含') || servDesc.includes('已含')){
+      tags.push(`<span class="tag-service serv-in">✓ 含10%服務費</span>`);
+    } else if(servVal.includes('另') || servDesc.includes('另加') || servDesc.includes('現場加')){
+      tags.push(`<span class="tag-service serv-ex">⚠ 另加10%服務費</span>`);
+    }
+
+    let priceHtml = '';
+    if(blank(priceVal)){
+      priceHtml = `<div class="price"><span class="now na">價格未公布</span></div>`;
+    } else {
+      priceHtml = `<div class="price"><span class="now">NT$ ${esc(fmt(priceVal))}</span>` +
+        (!blank(wasVal) && wasVal !== priceVal ? `<span class="was">NT$ ${esc(fmt(wasVal))}</span>` : '') +
+        (!blank(perVal) ? `<div class="dining-per-hero">每人 <b>NT$ ${esc(fmt(perVal))}</b></div>` : '') + `</div>`;
+    }
+
+    const infoFields = [['張數組合','組合'],['使用期限','期限'],['平假日','平假日'],['平假日/加價規定','加價規定']];
+    const info = infoFields.map(([s, label]) => {
+      const v = val(s); return blank(v) ? '' : `<div><dt>${label}</dt><dd>${esc(v.length > 90 ? v.slice(0, 88) + '…' : v)}</dd></div>`;
+    }).join('');
+
+    const full = open ? `<dl class="full">${h.map((name, i) => { const v = r[i]; if(!v || !v.trim()) return '';
+      return `<div><dt>${esc(name)}</dt><dd>${name.includes('截圖') ? shots(d, v) : linkify(v)}</dd></div>`; }).join('')}</dl>` : '';
+
+    return `<article class="deal deal-dining${old ? ' old' : ''}${on ? ' saved' : ''}">
+      <div class="top">${tags.length ? `<div class="tags">${tags.join('')}</div>` : ''}<button class="save-btn" data-k="${k}" data-idx="${idx}" aria-pressed="${on}" aria-label="收藏：${esc(hotel)} ${esc(name)}">${on ? '★ 已收藏' : '☆ 收藏'}</button></div>
+      <div><h4>${esc(hotel)}${rest ? '・' + esc(rest) : ''}</h4><div class="subt">${esc(name)}</div></div>
+      ${priceHtml}
+      ${info ? `<dl class="info">${info}</dl>` : ''}
+      ${full}
+      <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-expanded="${open}">${open ? '收起詳細 ▴' : '完整資料、使用規定與截圖 ▾'}</button>
+    </article>`;
+  }
+
+  // ===== 國內住宿、跟團等其他卡片 =====
   let title = pick(h, r, c.title).join('｜') || '（未命名）';
   const route = pick(h, r, c.route);
   if(route.length === 2) title += `　${route[0]} → ${route[1]}`;
@@ -788,13 +1036,17 @@ function card(d, c, r, idx, open, k){
   const disc = c.disc && val(c.disc); if(!blank(disc)) tags.push(`<span class="tag disc">${esc(disc)}</span>`);
   const tax = c.tax && val(c.tax); if(!blank(tax)) tags.push(`<span class="tag">${esc(tax)}</span>`);
 
-  // 住宿早餐辨識
+  // 住宿早餐與加價辨識
   if(k === 'lodging'){
     const inc = val('包含內容');
     if(inc.includes('早餐') || inc.includes('一泊一食') || inc.includes('一泊二食') || inc.includes('早晚餐')){
       tags.push(`<span class="tag-meal in">🍳 含早餐</span>`);
     } else if(inc.includes('不含早') || inc.includes('純住宿')){
       tags.push(`<span class="tag-meal no">🍳 純住宿</span>`);
+    }
+    const surch = val('加價規定');
+    if(surch.includes('無') || surch.includes('免加價') || surch.includes('不加價')){
+      tags.push(`<span class="tag-surch free">✓ 平日免加價</span>`);
     }
   }
 
@@ -804,8 +1056,8 @@ function card(d, c, r, idx, open, k){
   let price = '';
   if(c.price){
     const p = val(c.price), w = c.was && val(c.was), per = c.per && val(c.per[0]);
-    price = `<div class="price">${blank(p) ? '<span class="now na">價格未公布</span>' : `<span class="now${fmt(p).length > 12 ? ' txt' : ''}">${esc(fmt(p))}</span>`}` +
-      (!blank(w) && w !== p ? `<span class="was">${esc(fmt(w))}</span>` : '') +
+    price = `<div class="price">${blank(p) ? '<span class="now na">價格未公布</span>' : `<span class="now${fmt(p).length > 12 ? ' txt' : ''}">NT$ ${esc(fmt(p))}</span>`}` +
+      (!blank(w) && w !== p ? `<span class="was">NT$ ${esc(fmt(w))}</span>` : '') +
       (!blank(per) ? `<span class="per">${c.per[1]} ${esc(fmt(per))}</span>` : '') + `</div>`;
   }
   const info = (c.info || []).map(([s, label]) => { const v = val(s); return blank(v) || (bm && v === bm[0]) ? '' :
