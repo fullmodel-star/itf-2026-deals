@@ -253,6 +253,7 @@ ul.plain{margin:0;padding-left:1.2em;display:grid;gap:8px}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hl-warn{color:#fde68a;background:#451a03}}
 .loadmore{display:block;margin:24px auto 0;padding:11px 28px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);cursor:pointer;font-size:15px;font-weight:600;box-shadow:var(--shadow-sm);transition:all .15s}
 .loadmore:hover{box-shadow:var(--shadow-md);border-color:var(--faint)}
+input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
 .empty{background:var(--surface);border:1px dashed var(--line);border-radius:14px;padding:36px;text-align:center;color:var(--muted)}
 .saved-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:24px 0 10px}
 .saved-head h3{margin:0}
@@ -612,13 +613,13 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
 
   <section class="gsearch" aria-label="全站搜尋">
     <h3>全站搜尋</h3>
-    <p class="hint">一次搜尋 00–04 全部分類。可輸入 <b>#序號（如 #137）</b>、飯店、地點、航空、旅行社或攤位號碼（如 M1607）。</p>
+    <p class="hint">一次搜尋 00–04 全部分類。可輸入 <b>#序號（如 #137）</b>、飯店、地點、航空、旅行社或攤位號碼（如 M1607）；<b>多個條件用空格分開</b>，例如「台中 含早」。</p>
     <div class="search-wrap">
-      <input type="search" id="gq" placeholder="例如：#137、晶華、沖繩、星宇、M1607、下午茶…" aria-label="全站搜尋" autocomplete="off">
+      <input type="search" id="gq" placeholder="例如：台中 含早、日本 5天、高雄 下午茶…" aria-label="全站搜尋" autocomplete="off">
       <button type="button" class="search-clear" id="gq-clear" aria-label="清空搜尋"><svg class="ti" aria-hidden="true"><use href="#ti-x"/></svg></button>
     </div>
     <div class="gs-eg" id="gs-eg">
-      <button type="button">#137</button><button type="button">下午茶</button><button type="button">吃到飽</button><button type="button">沖繩</button><button type="button">北海道</button><button type="button">日月潭</button><button type="button">宜蘭</button><button type="button">含早</button><button type="button">星宇</button>
+      <button type="button">台中 含早</button><button type="button">日本 5天</button><button type="button">花蓮 溫泉</button><button type="button">#137</button><button type="button">下午茶</button><button type="button">吃到飽</button><button type="button">沖繩</button><button type="button">北海道</button><button type="button">日月潭</button><button type="button">宜蘭</button><button type="button">含早</button><button type="button">星宇</button>
     </div>
     <div class="gs-res" id="gs-res" role="status" aria-live="polite"></div>
   </section>
@@ -1227,17 +1228,40 @@ function jump(k, q){
   updateNetStatus();
 })();
 
-// 搜尋字高亮
+// 搜尋正規化：全形轉半形、大小寫、臺→台、國字天數（五天→5天），讓使用者怎麼打都找得到
+const CN_NUM = {一:1, 二:2, 兩:2, 三:3, 四:4, 五:5, 六:6, 七:7, 八:8, 九:9};
+const norm = v => String(v || '').normalize('NFKC').toLowerCase().replace(/臺/g, '台')
+  .replace(/十([一二三四五六七八九])?(?=[天日晚夜])/g, (m, a) => 10 + (a ? CN_NUM[a] : 0))
+  .replace(/([一二兩三四五六七八九])(?=[天日晚夜人])/g, m => CN_NUM[m]);
+// 常見別名：打其中任一個都算
+const SYN = [['吃到飽', 'buffet', '自助餐', '自助式'], ['下午茶', 'high tea', 'afternoon tea'], ['溫泉', '泡湯', '湯屋'],
+  ['華航', '中華航空', 'china airlines'], ['長榮', 'eva air'], ['星宇', 'starlux'], ['虎航', 'tigerair'], ['國泰', 'cathay'],
+  ['日航', '日本航空'], ['新航', '新加坡航空'], ['亞航', '亞洲航空', 'airasia'], ['土航', '土耳其航空'], ['紐航', '紐西蘭航空'],
+  ['韓國', '南韓'], ['含早', '含早餐', '附早餐']].map(g => g.map(norm));
+let qtCache = ['', []];
+// 「台中 含早」→ [[台中], [含早, 含早餐, 附早餐]]：每一組都要有一個符合
+function qTerms(q){
+  if(qtCache[0] === q) return qtCache[1];
+  const t = norm(q).split(/[\s,，、+＋]+/).filter(Boolean).map(w => (SYN.find(g => g.includes(w)) || [w]));
+  qtCache = [q, t]; return t;
+}
+const rowNorm = new WeakMap();
+const hayOf = r => { let v = rowNorm.get(r); if(v === undefined){ v = norm(r.join(' ')); rowNorm.set(r, v); } return v; };
+
+// 搜尋字高亮（每個關鍵字與別名都標）
 function highlight(root, q){
   q = (q || '').trim(); if(!q || q.length > 40) return;
-  const ql = q.toLowerCase();
-  root.querySelectorAll('.deal h4, .deal .subt, .flight-city, .tour-agency-pill, .seq-tag').forEach(el => {
+  const words = [...new Set(qTerms(q).flat())].filter(w => w && !/^#\d+$/.test(w)).sort((a, b) => b.length - a.length);
+  if(!words.length) return;
+  const reEsc = w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/台/g, '[台臺]');
+  const re = new RegExp(words.map(reEsc).join('|'), 'gi');
+  root.querySelectorAll('.deal h4, .deal .subt, .flight-city, .tour-agency-pill, .seq-tag, .gi-name').forEach(el => {
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
     const nodes = []; while(walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach(n => {
-      const s = n.nodeValue, i = s.toLowerCase().indexOf(ql); if(i < 0) return;
-      const frag = document.createDocumentFragment(); let p = 0, j = i;
-      while(j >= 0){ frag.append(s.slice(p, j)); const mk = document.createElement('mark'); mk.textContent = s.slice(j, j + q.length); frag.append(mk); p = j + q.length; j = s.toLowerCase().indexOf(ql, p); }
+      const s = n.nodeValue; re.lastIndex = 0; if(!re.test(s)) return;
+      const frag = document.createDocumentFragment(); let p = 0; re.lastIndex = 0;
+      for(const m of s.matchAll(re)){ frag.append(s.slice(p, m.index)); const mk = document.createElement('mark'); mk.textContent = m[0]; frag.append(mk); p = m.index + m[0].length; }
       frag.append(s.slice(p)); n.replaceWith(frag);
     });
   });
@@ -1254,7 +1278,16 @@ function matchRowQuery(k, r, idx, lowerRowStr, q){
     return seq === seqM[2];
   }
   if(`#${seq}` === q || `${code}_#${seq}` === q) return true;
-  return lowerRowStr.includes(q);
+  const hay = hayOf(r);
+  return qTerms(q).every(alts => alts.some(a => hay.includes(a)));
+}
+
+// 找不到時，指出是哪個字讓結果歸零（只看文字比對，不含篩選）
+function missHint(rows, q){
+  const t = qTerms(q); if(t.length < 2) return '';
+  const zero = t.filter(alts => !rows.some(r => { const h = hayOf(r); return alts.some(a => h.includes(a)); }));
+  if(zero.length) return `「${zero.map(a => a[0]).join('」「')}」在這裡沒有資料，拿掉試試。`;
+  return '每個字單獨都找得到，但沒有同時符合全部的，少打一個字試試。';
 }
 
 // 全站搜尋
@@ -1280,7 +1313,8 @@ function matchRowQuery(k, r, idx, lowerRowStr, q){
         return `<li><span>${esc(name)}</span>${p && p.length < 12 ? `<em>${esc(p)}</em>` : ''}</li>`; }).join('');
       return `<div class="gs-cat"><h4>${FOLDER_CODE[k]} ${esc(d.name)} <b>${hits.length.toLocaleString()} 筆</b></h4><ul>${top}</ul><button type="button" class="gs-go" data-k="${k}">看全部 →</button></div>`;
     }).join('');
-    res.innerHTML = total ? html : `<p class="gs-none">找不到「${esc(gq.value.trim())}」。試試輸入編號（如 #137）或更短的飯店／城市關鍵字。</p>`;
+    const allRows = cats.flatMap(k => D[k].rows);
+    res.innerHTML = total ? html : `<p class="gs-none">找不到「${esc(gq.value.trim())}」。${esc(missHint(allRows, q) || '試試輸入編號（如 #137）或更短的飯店／城市關鍵字。')}</p>`;
   };
   gq.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(run, 120); });
   gq.addEventListener('keydown', e => { if(e.key === 'Escape'){ gq.value = ''; run(); } });
@@ -1624,11 +1658,10 @@ function renderSet(k){
   }
 
   let html = `<h2>${fCode ? fCode + ' ' : ''}${esc(d.name)}</h2><p class="lead">共 ${d.rows.length.toLocaleString()} 筆（編號 <code>#1</code>–<code>#${d.rows.length}</code>）。點擊「完整資料」可查看條列化加價規定、平假日限制、來源網址與證明截圖。</p>
-    ${pathBarHtml}
     ${guideBanner}
     <div class="toolbar${matchMedia('(max-width:640px)').matches ? ' collapsed' : ''}" id="tb-${k}"><div class="searchrow">
       <div class="search-wrap">
-        <input type="search" id="q-${k}" placeholder="搜尋編號（如 #137）、名稱、地點、攤位號碼（如 M2111）…" value="${esc(st.q)}" aria-label="搜尋">
+        <input type="search" id="q-${k}" placeholder="名稱、地點、攤位或 #編號；多個字用空格分開" value="${esc(st.q)}" aria-label="搜尋">
         <button type="button" class="search-clear${st.q ? ' show' : ''}" id="qc-${k}" aria-label="清空搜尋"><svg class="ti" aria-hidden="true"><use href="#ti-x"/></svg></button>
       </div>
       <button type="button" class="filter-toggle" id="ft-${k}" aria-expanded="false"><svg class="ti" aria-hidden="true"><use href="#ti-adjustments"/></svg> <span class="lbl">篩選排序</span></button>
@@ -1691,7 +1724,7 @@ function renderSet(k){
     </div>`;
   }
 
-  html += `</div></div><p class="count" id="cnt-${k}" role="status" aria-live="polite"></p><div id="list-${k}"></div><button class="loadmore" id="more-${k}" hidden></button>`;
+  html += `</div></div><p class="count" id="cnt-${k}" role="status" aria-live="polite"></p><div id="list-${k}"></div><button class="loadmore" id="more-${k}" hidden></button>${pathBarHtml}`;
   viewData.innerHTML = html;
 
   // 綁定分析報告展開/收合
@@ -1827,14 +1860,15 @@ function renderSet(k){
       `<button type="button" class="grp-toggle" aria-pressed="${st.group !== false}">${st.group !== false ? '✓ ' : ''}同一家合併</button>`);
     syncHash(k);
     const list = document.getElementById('list-' + k);
-    if(!rows.length){ list.innerHTML = `<div class="empty">沒有符合條件的優惠。請試試更短的關鍵字或關掉部分篩選。<br><button type="button" class="reset clear-all">✕ 清除全部條件</button></div>`; }
+    if(!rows.length){ const mh = q ? missHint(d.rows, q) : ''; list.innerHTML = `<div class="empty">沒有符合條件的優惠。${mh ? esc(mh) : '請試試更短的關鍵字或關掉部分篩選。'}<br><button type="button" class="reset clear-all">✕ 清除全部條件</button></div>`; }
     else if(c.table) list.innerHTML = boothTable(d, rows.slice(0, st.limit));
     else if(GROUPABLE[k] && st.group !== false){
       // 同一家合併：依目前排序，以每家第一個（最划算）方案的位置排家數；只有一個方案的照舊顯示單張卡
       const groups = groupRows(k, rows);
       list.innerHTML = `<div class="cards">${groups.slice(0, st.limit).map(g => g.length > 1 ? groupCard(k, g) : card(d, c, g[0].r, g[0].idx, false, k)).join('')}</div>`;
       highlight(list, st.q);
-      document.getElementById('cnt-' + k).insertAdjacentHTML('beforeend', `<span class="grp-sum">，合併成 <b>${groups.length.toLocaleString()}</b> 家</span>`);
+      const cntEl = document.getElementById('cnt-' + k), clr = cntEl.querySelector('.clear-all'), sum = `<span class="grp-sum">，合併成 <b>${groups.length.toLocaleString()}</b> 家</span>`;
+      clr ? clr.insertAdjacentHTML('beforebegin', sum) : cntEl.insertAdjacentHTML('beforeend', sum);
       const more = document.getElementById('more-' + k);
       more.hidden = groups.length <= st.limit;
       more.textContent = `再顯示 ${Math.min(PAGE, groups.length - st.limit)} 家（還有 ${(groups.length - st.limit).toLocaleString()} 家）`;
