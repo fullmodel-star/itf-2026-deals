@@ -2088,7 +2088,7 @@ function card(d, c, r, idx, open, k, pickReason){
     } else if(!isNaN(num(priceVal))){
       priceHtml = `<div class="price">
         <span style="font-size:13px;font-weight:700;color:var(--accent);align-self:flex-end;margin-bottom:2px">NT$</span>
-        <span class="now">${esc(fmt(priceVal))}</span>
+        <span class="now">${esc(fmt(priceVal).replace(/起$/, ''))}</span>
         <span style="font-size:13px;color:var(--muted);align-self:flex-end;margin-bottom:2px">起</span>
         ${!blank(wasVal) && wasVal !== priceVal ? `<span class="was">NT$ ${esc(fmt(wasVal))}</span>` : ''}
       </div>`;

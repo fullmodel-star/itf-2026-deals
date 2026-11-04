@@ -1,0 +1,26 @@
+{
+ "修補": [
+  {"序號": "149", "欄位": "是否含稅", "新值": "未稅（折扣僅折機票票價，稅金及附加費不折）", "來源網址": "https://www.starlux-airlines.com/flights/zh-tw/co-brand-card-promotions", "依據原文": "星宇官網聯名卡優惠頁（2026 ITF代碼Z26W5EUS3000）：「折扣僅適用於機票票價，各項附加費與各地機場稅金等無提供折扣」；適用旅行期間2026/10/22–2027/6/30"},
+  {"序號": "150", "欄位": "是否含稅", "新值": "未稅（折扣僅折機票票價，稅金及附加費不折）", "來源網址": "https://www.starlux-airlines.com/flights/zh-tw/co-brand-card-promotions", "依據原文": "星宇官網聯名卡優惠頁（2026 ITF代碼ZESUNITF266H6KV，歐美航線除外）：「折扣僅適用於機票票價，各項附加費與各地機場稅金等無提供折扣」"},
+  {"序號": "246", "欄位": "出發期間(去程期限)", "新值": "2026/11/1–2027/6/30", "來源網址": "https://travel.ettoday.net/article/3255593.htm", "依據原文": "ETtoday（新聞，非官方）：「適用旅遊期間為2026年11月1日至2027年6月30日」；官網etihad.com讀不到"},
+  {"序號": "246", "欄位": "銷售者", "新值": "雄獅/可樂/永信/朋威等旅行社（以各業者公告為準）", "來源網址": "https://travel.ettoday.net/article/3255593.htm", "依據原文": "ETtoday（新聞）：雄獅旅遊、可樂旅遊、永信旅遊、朋威旅遊等「進駐阿提哈德航空攤位區」；「實際優惠幅度及適用條件依各銷售業者公告為準」。注意：新聞未明說這些旅行社就是8折機票的販售者"}
+ ],
+ "衝突": [
+  {"序號": "315", "欄位": "開票/購買期間", "現值": "2026/10/25–2026/11/09", "官方值": "2026/10/26–2026/11/09（新聞值，非官方）", "來源網址": "https://travel.ettoday.net/article/3255593.htm", "依據原文": "ETtoday：「從10月26日起，至11月9日，阿提哈德航空線上旅展將提前開跑」；官網etihad.com讀不到，無法以官方確認"}
+ ],
+ "查無": [
+  {"序號": "172", "欄位": ["是否含稅"], "已查來源": ["https://news.cathaypacific.com/讓期待即刻成行-國泰航空2026線上旅展開跑-全球70-精選航點最優8（未提稅金，只寫「須受細則及條款限制」）", "https://www.cathaypacific.com/cx/zh_TW/offers/current/2026-itf.html（WebFetch兩次逾時）", "https://news.tvbs.com.tw/life/4040292（只說代碼短程最高折500，未提稅）", "WebSearch：2025年CXITF25為「不含稅金及附加費」門檻，屬2025不可套用"]},
+  {"序號": "173", "欄位": ["是否含稅"], "已查來源": ["https://news.cathaypacific.com/讓期待即刻成行-國泰航空2026線上旅展開跑-全球70-精選航點最優8（只寫「單筆訂位滿TWD20,000以上」，未說含不含稅）", "https://www.cathaypacific.com/cx/zh_TW/offers/current/2026-itf.html（逾時）", "https://news.tvbs.com.tw/life/4040292"]},
+  {"序號": "174", "欄位": ["是否含稅", "出發期間(去程期限)"], "已查來源": ["https://event.liontravel.com/zh-tw/travelfair/itf/fit（抓到只有標題，內容為動態載入）", "WebSearch「雄獅 國泰日 週三 滿10000折800」無2026結果"]},
+  {"序號": "248", "欄位": ["出發期間(去程期限)"], "已查來源": ["https://www.cardu.com.tw/epoint/detail.php?66227=（抓回空白）", "https://news.tvbs.com.tw/life/4042611", "https://www.mirrormedia.mg/external/setn_1929382", "均未寫出發期間；線索：10/28北海道、首爾，11/4曼谷、沖繩（分日輪替，來源為搜尋摘要）"]},
+  {"序號": "249", "欄位": ["航空", "出發期間(去程期限)"], "已查來源": ["https://news.tvbs.com.tw/life/4042611", "https://www.mirrormedia.mg/external/setn_1929382", "https://www.cardu.com.tw/epoint/detail.php?66227=（空白）"]},
+  {"序號": "250", "欄位": ["航空", "出發地", "艙等", "單程/來回", "是否含稅", "出發期間(去程期限)"], "已查來源": ["https://news.tvbs.com.tw/life/4042611（只寫10/28、11/4上午10點限量、最高現折1,000）", "https://www.mirrormedia.mg/external/setn_1929382", "https://www.cardu.com.tw/epoint/detail.php?66227="]},
+  {"序號": "289", "欄位": ["是否含稅"], "已查來源": ["https://udn.com/news/story/7266/9839916（只說「適用航班與票價的折扣」，未提稅）", "https://www.ctee.com.tw/news/20261031700212-439902"]},
+  {"序號": "247", "欄位": ["銷售者", "出發地", "目的地", "艙等", "單程/來回", "旅展價(TWD)", "是否含稅", "出發期間(去程期限)", "開票/購買期間"], "已查來源": ["https://udn.com/news/story/7266/9839916（內容即序號289的攤位領碼活動，本列看似重複佔位，未另找到機票票價）", "https://www.ctee.com.tw/news/20261031700212-439902", "https://www.1111.com.tw/news/jobns/167774"]},
+  {"序號": "230", "欄位": ["旅展價(TWD)", "是否含稅"], "已查來源": ["https://www.cardu.com.tw/epoint/detail.php?66227=（空白）", "https://news.tvbs.com.tw/life/4040292（未提香港航空）", "WebSearch：只找到2025年及夏季旅展香港航空資料，不可套用"]},
+  {"序號": "242", "欄位": ["旅展價(TWD)", "是否含稅", "出發期間(去程期限)"], "已查來源": ["https://eatmary.net/5615（表頭為「來回最低票價（含稅）」但價格與適用區間欄空白）", "https://news.tvbs.com.tw/life/4040292（只提新航/酷航20多航點最高8折，需新加坡轉機）", "WebSearch：只找到2026年6月、9月酷航促銷，非旅展檔"]},
+  {"序號": "244", "欄位": ["銷售者", "出發地", "目的地", "艙等", "單程/來回", "旅展價(TWD)", "是否含稅", "出發期間(去程期限)", "開票/購買期間"], "已查來源": ["https://www.starflyer.jp/int_tw/campaign/（11/04 仍無旅展優惠，只有Tesla接送、2027增班）", "https://www.ctee.com.tw/news/20261031700212-439902（只寫日本館有星悅參展）"]},
+  {"序號": "252", "欄位": ["是否含稅"], "已查來源": ["https://www.colatour.com.tw/webDM/airline/tk/tkt_tk.html（88折條款未說明含不含稅；「不包含兩地機場稅、燃油附加費」只針對抽獎機票）", "https://supertaste.tvbs.com.tw/hot/361905"]},
+  {"序號": "321", "欄位": ["旅展價(TWD)", "是否含稅", "出發期間(去程期限)", "開票/購買期間", "搶票方式與時間"], "已查來源": ["https://news.tvbs.com.tw/life/4040292（未提大韓）", "https://www.ctee.com.tw/news/20261031700212-439902（只寫韓國館有大韓航空進駐）", "WebSearch「大韓航空 2026 ITF 旅展 優惠」無結果；koreanair.com 先前回403未再嘗試"]}
+ ]
+}

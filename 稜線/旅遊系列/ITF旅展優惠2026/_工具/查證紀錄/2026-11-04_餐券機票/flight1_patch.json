@@ -1,0 +1,291 @@
+{
+ "修補": [
+  {
+   "序號": "231",
+   "欄位": "銷售者",
+   "新值": "台灣虎航",
+   "來源網址": "https://www.tigerairtw.com/zh-TW/news/261102",
+   "依據原文": "虎航官網11/2公告標題：「台灣虎航2026 ITF線上旅展全航線單程未稅999元起本週五準時開賣」"
+  },
+  {
+   "序號": "231",
+   "欄位": "旅展價(TWD)",
+   "新值": "999",
+   "來源網址": "https://www.ctee.com.tw/news/20261102701688-430503",
+   "依據原文": "全航線單程未稅999元起"
+  },
+  {
+   "序號": "231",
+   "欄位": "單程/來回",
+   "新值": "單程",
+   "來源網址": "https://www.ctee.com.tw/news/20261102701688-430503",
+   "依據原文": "全航線單程未稅999元起"
+  },
+  {
+   "序號": "231",
+   "欄位": "是否含稅",
+   "新值": "未稅",
+   "來源網址": "https://www.ctee.com.tw/news/20261102701688-430503",
+   "依據原文": "全航線單程未稅999元起"
+  },
+  {
+   "序號": "231",
+   "欄位": "開票/購買期間",
+   "新值": "2026/11/6 10:00–11/9 23:59",
+   "來源網址": "https://www.ctee.com.tw/news/20261102701688-430503",
+   "依據原文": "6日上午10：00開賣至9日晚間23：59止"
+  },
+  {
+   "序號": "231",
+   "欄位": "出發期間(去程期限)",
+   "新值": "2026/11/6–2027/10/30（部分航班至2027/3/27）",
+   "來源網址": "https://www.nownews.com/news/6888773",
+   "依據原文": "旅遊期間2026年11月6日至2027年10月30日，部分航班至2027年3月27日"
+  },
+  {
+   "序號": "231",
+   "欄位": "出發地",
+   "新值": "台北、台中",
+   "來源網址": "https://www.nownews.com/news/6888773",
+   "依據原文": "日本：台北、台中出發至沖繩、石垣島…；韓國：台北、台中至仁川、濟州；台北至釜山"
+  },
+  {
+   "序號": "231",
+   "欄位": "目的地",
+   "新值": "全航線（日本、韓國、越南峴港）",
+   "來源網址": "https://www.nownews.com/news/6888773",
+   "依據原文": "日本線…韓國線1199元起，越南線（峴港）1799元起"
+  }
+ ],
+ "衝突": [
+  {
+   "序號": "263",
+   "欄位": "搶票方式與時間",
+   "現值": "官網/App線上訂購",
+   "官方值": "每週二、四搶購（官網/App線上）",
+   "來源網址": "https://www.ctee.com.tw/news/20261012700684-430503",
+   "依據原文": "雄獅旅展期間每週二、四搶購，沖繩機加酒4日…萬元有找（工商時報10/12；非直接矛盾，屬現值不完整）"
+  }
+ ],
+ "查無": [
+  {
+   "序號": "251",
+   "欄位": [
+    "航空",
+    "艙等",
+    "單程/來回",
+    "是否含稅",
+    "出發期間(去程期限)"
+   ],
+   "已查來源": [
+    "https://event.liontravel.com/zh-tw/travelfair/itf/fit",
+    "https://supertaste.tvbs.com.tw/hot/361905",
+    "https://cpok.tw/74134",
+    "WebSearch：雄獅 中信卡 滿15,000折1,000 條件"
+   ]
+  },
+  {
+   "序號": "254",
+   "欄位": [
+    "艙等",
+    "單程/來回"
+   ],
+   "已查來源": [
+    "https://event.liontravel.com/zh-tw/travelfair/itf/fit（SPA，WebFetch只讀到標題）",
+    "WebSearch：雄獅 2026 ITF 自由行 商品"
+   ]
+  },
+  {
+   "序號": "255",
+   "欄位": [
+    "艙等",
+    "單程/來回"
+   ],
+   "已查來源": [
+    "https://event.liontravel.com/zh-tw/travelfair/itf/fit（SPA，WebFetch只讀到標題）",
+    "WebSearch：雄獅 2026 ITF 自由行 商品"
+   ]
+  },
+  {
+   "序號": "256",
+   "欄位": [
+    "艙等",
+    "單程/來回"
+   ],
+   "已查來源": [
+    "https://event.liontravel.com/zh-tw/travelfair/itf/fit（SPA，WebFetch只讀到標題）",
+    "WebSearch：雄獅 2026 ITF 自由行 商品"
+   ]
+  },
+  {
+   "序號": "257",
+   "欄位": [
+    "艙等",
+    "單程/來回"
+   ],
+   "已查來源": [
+    "https://event.liontravel.com/zh-tw/travelfair/itf/fit（SPA，WebFetch只讀到標題）",
+    "WebSearch：雄獅 2026 ITF 自由行 商品"
+   ]
+  },
+  {
+   "序號": "258",
+   "欄位": [
+    "艙等",
+    "單程/來回"
+   ],
+   "已查來源": [
+    "https://event.liontravel.com/zh-tw/travelfair/itf/fit（SPA，WebFetch只讀到標題）",
+    "WebSearch：雄獅 2026 ITF 自由行 商品"
+   ]
+  },
+  {
+   "序號": "259",
+   "欄位": [
+    "艙等",
+    "單程/來回"
+   ],
+   "已查來源": [
+    "https://event.liontravel.com/zh-tw/travelfair/itf/fit（SPA，WebFetch只讀到標題）",
+    "WebSearch：雄獅 2026 ITF 自由行 商品"
+   ]
+  },
+  {
+   "序號": "260",
+   "欄位": [
+    "艙等",
+    "單程/來回"
+   ],
+   "已查來源": [
+    "https://event.liontravel.com/zh-tw/travelfair/itf/fit（SPA，WebFetch只讀到標題）",
+    "WebSearch：雄獅 2026 ITF 自由行 商品"
+   ]
+  },
+  {
+   "序號": "261",
+   "欄位": [
+    "艙等",
+    "單程/來回"
+   ],
+   "已查來源": [
+    "https://event.liontravel.com/zh-tw/travelfair/itf/fit（SPA，WebFetch只讀到標題）",
+    "WebSearch：雄獅 2026 ITF 自由行 商品"
+   ]
+  },
+  {
+   "序號": "262",
+   "欄位": [
+    "艙等",
+    "單程/來回",
+    "出發期間(去程期限)"
+   ],
+   "已查來源": [
+    "https://www.ctee.com.tw/news/20261012700684-430503",
+    "https://supertaste.tvbs.com.tw/hot/361905",
+    "https://event.liontravel.com/zh-tw/travelfair/itf/fit"
+   ]
+  },
+  {
+   "序號": "263",
+   "欄位": [
+    "艙等",
+    "單程/來回",
+    "出發期間(去程期限)"
+   ],
+   "已查來源": [
+    "https://www.ctee.com.tw/news/20261012700684-430503",
+    "https://supertaste.tvbs.com.tw/hot/361905",
+    "https://event.liontravel.com/zh-tw/travelfair/itf/fit"
+   ]
+  },
+  {
+   "序號": "228",
+   "欄位": [
+    "旅展價(TWD)",
+    "是否含稅"
+   ],
+   "已查來源": [
+    "https://www.cardu.com.tw/epoint/detail.php?66227=（內容空白）",
+    "https://www.ezfly.com/promotion/2026itf/（404）",
+    "WebSearch：易遊網 2026 ITF 大灣區航空 8折"
+   ]
+  },
+  {
+   "序號": "229",
+   "欄位": [
+    "旅展價(TWD)",
+    "是否含稅"
+   ],
+   "已查來源": [
+    "https://www.cardu.com.tw/epoint/detail.php?66227=（內容空白）",
+    "https://www.ezfly.com/promotion/2026itf/（404）",
+    "WebSearch：易遊網 2026 ITF 東方航空 9折"
+   ]
+  },
+  {
+   "序號": "231",
+   "欄位": [
+    "艙等"
+   ],
+   "已查來源": [
+    "https://www.tigerairtw.com/zh-TW/news/261102",
+    "https://www.ctee.com.tw/news/20261102701688-430503",
+    "https://www.nownews.com/news/6888773"
+   ]
+  },
+  {
+   "序號": "243",
+   "欄位": [
+    "銷售者",
+    "出發地",
+    "目的地",
+    "艙等",
+    "單程/來回",
+    "旅展價(TWD)",
+    "是否含稅",
+    "出發期間(去程期限)",
+    "開票/購買期間"
+   ],
+   "已查來源": [
+    "https://www.flypeach.com/tw/lm/ai/news（逾時）",
+    "https://travel.udn.com/travel/story/7934/9854112",
+    "https://www.nownews.com/news/6888773",
+    "https://www.ana.co.jp/zh/tw/plan-book/promotions/ana-itf-fair/（僅2025版）"
+   ]
+  },
+  {
+   "序號": "245",
+   "欄位": [
+    "銷售者",
+    "出發地",
+    "目的地",
+    "艙等",
+    "單程/來回",
+    "旅展價(TWD)",
+    "是否含稅",
+    "出發期間(去程期限)",
+    "開票/購買期間"
+   ],
+   "已查來源": [
+    "https://travel.udn.com/travel/story/7934/9854112",
+    "https://www.nownews.com/news/6888773",
+    "WebSearch：天馬航空 Skymark ITF 2026"
+   ]
+  },
+  {
+   "序號": "253",
+   "欄位": [
+    "航空",
+    "艙等",
+    "單程/來回",
+    "是否含稅",
+    "出發期間(去程期限)"
+   ],
+   "已查來源": [
+    "https://cpok.tw/74134",
+    "https://www.dcard.tw/@settour/post/262269483（403）",
+    "https://www.settour.com.tw/event/ITF（404）"
+   ]
+  }
+ ]
+}
