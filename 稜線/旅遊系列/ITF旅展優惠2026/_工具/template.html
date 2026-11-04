@@ -843,10 +843,10 @@ const FOLDER_CODE = {home:'00', flash:'00', card:'00', booth:'00', lodging:'01',
 // 每類資料怎麼排成一張卡：標題、副標、價格、原價、每人價、標籤、重點條件
 const CFG = {
   lodging:{title:['飯店名稱'], sub:['房型/品名'], price:'旅展價', was:'原價', per:['每人每晚','每人每晚'],
-    tags:['地區','縣市'], disc:'折數', info:[['使用期限','期限'],['加價規定','加價'],['包含內容','包含'],['攤位號碼','攤位']],
+    tags:['地區','縣市'], disc:'折數', info:[['使用張數','用券'],['購買組合','買法'],['使用期限','期限'],['加價規定','加價'],['包含內容','包含'],['攤位號碼','攤位']],
     filters:['地區','縣市'], sorts:[['每人每晚','每人每晚 低→高'],['旅展價','旅展價 低→高']]},
   dining:{title:['飯店/品牌','餐廳'], sub:['券種內容'], price:'單張價', was:'原價', per:['每人均價','每人'],
-    tags:['地區','餐別'], disc:'折數', info:[['張數組合','組合'],['使用期限','期限'],['平假日','平假日'],['服務費說明','服務費'],['攤位號碼','攤位']],
+    tags:['地區','餐別'], disc:'折數', info:[['每張人數','一張幾人'],['購買張數','要買幾張'],['使用期限','期限'],['平假日','平假日'],['服務費說明','服務費'],['攤位號碼','攤位']],
     filters:['地區','餐別'], sorts:[['每人均價','每人 低→高'],['單張價','單張價 低→高']]},
   flight:{title:['航空'], route:['出發地','目的地'], sub:['艙等','單程/來回','銷售者'], price:'旅展價', tax:'是否含稅',
     tags:['區域','類型'], info:[['出發期間','出發'],['開票/購買','購買'],['搶票方式','怎麼搶'],['攤位號碼','攤位']],
@@ -1029,7 +1029,9 @@ function groupCard(k, g){
   const booths = M && realBooth(M['攤位']) ? [M['攤位']] : [...new Set(g.map(x => (val(x.r, '攤位號碼').match(/^[A-Z]區?-?\d{2,4}/) || [''])[0]).filter(Boolean))];
   const FOLD = g.length > 6 ? 5 : g.length;   // 方案多的先列最划算的 5 個，其餘收起
   const items = g.map(({r, idx}, n) => {
-    const sub = [showWhere ? where(r) : '', ...(k === 'dining' ? [val(r, '餐廳'), val(r, c.sub[0])] : [val(r, c.sub[0])])].filter(v => v && !blank(v)).join('・') || '（未命名方案）';
+    // 張數一眼看到：住宿用幾張券、餐券幾張一套
+    const tk = (k === 'lodging' ? (val(r, '使用張數').match(/^\d+張起?/) || [''])[0].replace(/^1張$/, '') : (val(r, '購買張數').match(/^\d+張一套/) || [''])[0]);
+    const sub = [showWhere ? where(r) : '', ...(k === 'dining' ? [val(r, '餐廳'), val(r, c.sub[0])] : [val(r, c.sub[0])]), tk ? (k === 'lodging' ? `用${tk}券` : tk) : ''].filter(v => v && !blank(v)).join('・') || '（未命名方案）';
     const p = val(r, c.price), per = c.per ? val(r, c.per[0]) : '';
     const on = saved.has(rowKey(k, r)), old = isOld(d, r);
     return `<li${n >= FOLD ? ' hidden' : ''}><button type="button" class="more-btn grp-item" data-k="${k}" data-idx="${idx}" aria-haspopup="dialog">
@@ -2149,7 +2151,7 @@ function card(d, c, r, idx, open, k, pickReason){
         (!blank(perVal) ? `<div class="dining-per-hero">每人 <b>NT$ ${esc(fmt(perVal))}</b></div>` : '') + `</div>`;
     }
 
-    const infoFields = [['張數組合','組合'],['使用期限','期限'],['平假日','平假日'],['平假日/加價規定','加價規定']];
+    const infoFields = [['每張人數','一張幾人'],['購買張數','要買幾張'],['使用期限','期限'],['平假日','平假日'],['平假日/加價規定','加價規定']];
     const info = infoFields.map(([s, label]) => infoRow(label, val(s))).join('');
     const full = open ? renderFull(d, h, r, idx) : '';
 
