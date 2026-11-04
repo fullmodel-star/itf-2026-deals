@@ -2,10 +2,14 @@
 用法：python _工具/build.py            → 產生 index.html（含截圖連結）
       python _工具/build.py --artifact → 另外產生 claude.ai 發布用版本（不含截圖連結、不含外框）
 """
-import csv, json, os, sys
+import csv, json, os, subprocess, sys
 
 TOOLS = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(TOOLS)
+
+# 每筆優惠都要連到商家總表，否則不准建置（規則見 link_merchants.py）
+if subprocess.run([sys.executable, os.path.join(TOOLS, 'link_merchants.py'), '--check']).returncode:
+    sys.exit('[FAIL] 有資料沒連到商家總表，先執行 python _工具/link_merchants.py')
 
 SETS = [
     ('lodging', '國內住宿', '01_國內住宿', '國內住宿優惠.csv'),
@@ -15,6 +19,7 @@ SETS = [
     ('flash', '限時搶購', '00_官方總覽', '限時搶購時程表.csv'),
     ('card', '刷卡回饋', '00_官方總覽', '刷卡回饋.csv'),
     ('booth', '參展商攤位', '00_官方總覽', '參展商名單.csv'),
+    ('merchant', '商家總表', '00_官方總覽', '商家總表.csv'),
 ]
 
 MDS = {

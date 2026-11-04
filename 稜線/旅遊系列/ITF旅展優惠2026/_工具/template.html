@@ -307,6 +307,13 @@ body.sheet-open{overflow:hidden}
 .gi-na{font-family:var(--f-body);color:var(--faint);font-weight:500}
 .gi-go{color:var(--faint);font-size:18px}
 .grp-sum{color:var(--muted)}
+.grp-expand{justify-self:start;border:0;background:none;color:var(--accent);font-weight:700;font-size:15px;padding:6px 2px;min-height:40px;cursor:pointer}
+.mer-more{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-size:13px;color:var(--muted)}
+.mer-jump{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:99px;padding:4px 12px;min-height:34px;font-size:14px;font-weight:700;cursor:pointer}
+.mer-jump:hover{border-color:var(--accent);color:var(--accent)}
+.mer-chip{border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:99px;padding:4px 12px;min-height:34px;font-size:14px;font-weight:700;cursor:pointer;margin:0 8px}
+.gs-mer{border-color:var(--accent)}
+.gs-mer-sub{margin:4px 0 8px;font-size:13px;color:var(--muted)}
 
 /* ===== 機票卡片專屬強化 ===== */
 .deal.deal-flight{border-top:4px solid var(--sky);background:linear-gradient(180deg, rgba(31,95,168,.02) 0%, var(--surface) 35%)}
@@ -975,28 +982,57 @@ function infoRow(label, v){
   return `<div class="${long ? 'trunc' : ''}"${long ? ' title="點擊展開完整規定"' : ''}><dt>${esc(label)}</dt><dd>${formatText(shortV)}${long ? '<span class="expand-cue">展開 ▾</span>' : ''}</dd></div>`;
 }
 // 同一家合併：住宿看「飯店名稱」、餐券看「飯店/品牌」；括號內的補充說明不列入比對
+// 商家總表（00_官方總覽/商家總表.csv）：每筆優惠的「商家編號」連到這裡。
+// 上層＝參展單位（逛展要去的那一攤：集團、單一飯店、航空、旅行社）；旗下館的上層編號指回參展單位。
+const MER = {};
+if(D.merchant) D.merchant.rows.forEach(r => { const o = {}; D.merchant.headers.forEach((h, i) => o[h] = (r[i] || '').trim()); MER[o['商家編號']] = o; });
+const merTop = id => (MER[id] && MER[id]['上層編號']) || id;
+const merOf = (k, r) => { const i = col(D[k].headers, '商家編號'); return i >= 0 ? (r[i] || '').trim() : ''; };
+const MER_CATS = {lodging:'住宿', dining:'餐券', flight:'機票', tour:'跟團', flash:'限時搶購'};
+let merCnt = null;
+function merCounts(top){
+  if(!merCnt){ merCnt = {}; Object.keys(MER_CATS).forEach(k => D[k] && D[k].rows.forEach(r => { const t = merTop(merOf(k, r)); if(t) (merCnt[t] = merCnt[t] || {})[k] = (merCnt[t][k] || 0) + 1; })); }
+  return merCnt[top] || {};
+}
+const realBooth = v => /^[A-Z]\d/.test(v || '') ? v : '';
+const pendingM = {};
+function jumpMer(k, top){
+  if(state[k]){ state[k].m = top; state[k].q = ''; state[k].f = {}; state[k].limit = PAGE; } else pendingM[k] = top;
+  go(k); showToast(`只看 ${(MER[top] || {})['商家名稱'] || top}`);
+}
+// 「這家還有」：同一家在其他分類的筆數，點了跳過去只看這家
+function merMore(top, except){
+  const c = merCounts(top), ks = Object.keys(MER_CATS).filter(k => k !== except && c[k]);
+  return ks.length ? `<div class="mer-more"><span>這家還有</span>${ks.map(k => `<button type="button" class="mer-jump" data-k="${k}" data-m="${esc(top)}">${MER_CATS[k]} ${c[k]} 筆 ›</button>`).join('')}</div>` : '';
+}
+
 const GROUPABLE = {lodging:'飯店名稱', dining:'飯店/品牌'};
 let redrawList = null;
 const grpName = v => String(v || '').replace(/[（(][^）)]*[）)]/g, '').replace(/\s+/g, '').trim();
 function groupRows(k, rows){
   const i = col(D[k].headers, GROUPABLE[k]), map = new Map(), out = [];
-  rows.forEach(x => { const key = grpName(x.r[i]) || ('#' + x.idx);
+  rows.forEach(x => { const key = merTop(merOf(k, x.r)) || grpName(x.r[i]) || ('#' + x.idx);
     if(!map.has(key)){ map.set(key, []); out.push(map.get(key)); } map.get(key).push(x); });
   return out;
 }
 function groupCard(k, g){
   const d = D[k], c = CFG[k], h = d.headers, gi = col(h, GROUPABLE[k]);
   const val = (r, s) => { const i = s ? col(h, s) : -1; return i >= 0 ? r[i].trim() : ''; };
-  const name = grpName(g[0].r[gi]) || g[0].r[gi];
+  const top = merTop(merOf(k, g[0].r)), M = MER[top];
+  const name = M ? M['商家名稱'] : (grpName(g[0].r[gi]) || g[0].r[gi]);
+  // 各方案屬於哪一館：旗下館用總表名稱，掛在集團層的用原始寫法；整組只有一種時不重複顯示
+  const where = r => { const id = merOf(k, r); return id && id !== top && MER[id] ? MER[id]['商家名稱'] : r[gi].trim(); };
+  const showWhere = new Set(g.map(x => where(x.r))).size > 1;
   const prices = g.map(x => num(val(x.r, c.price))).filter(n => !isNaN(n) && n > 0);
   const lo = Math.min(...prices), hi = Math.max(...prices);
   const range = prices.length ? (lo === hi ? `NT$ ${lo.toLocaleString()}` : `NT$ ${lo.toLocaleString()}–${hi.toLocaleString()}`) : '價格未公布';
-  const booths = [...new Set(g.map(x => (val(x.r, '攤位號碼').match(/^[A-Z]區?-?\d{2,4}/) || [''])[0]).filter(Boolean))];
-  const items = g.map(({r, idx}) => {
-    const sub = (k === 'dining' ? [val(r, '餐廳'), val(r, c.sub[0])] : [val(r, c.sub[0])]).filter(v => v && !blank(v)).join('・') || '（未命名方案）';
+  const booths = M && realBooth(M['攤位']) ? [M['攤位']] : [...new Set(g.map(x => (val(x.r, '攤位號碼').match(/^[A-Z]區?-?\d{2,4}/) || [''])[0]).filter(Boolean))];
+  const FOLD = g.length > 6 ? 5 : g.length;   // 方案多的先列最划算的 5 個，其餘收起
+  const items = g.map(({r, idx}, n) => {
+    const sub = [showWhere ? where(r) : '', ...(k === 'dining' ? [val(r, '餐廳'), val(r, c.sub[0])] : [val(r, c.sub[0])])].filter(v => v && !blank(v)).join('・') || '（未命名方案）';
     const p = val(r, c.price), per = c.per ? val(r, c.per[0]) : '';
     const on = saved.has(rowKey(k, r)), old = isOld(d, r);
-    return `<li><button type="button" class="more-btn grp-item" data-k="${k}" data-idx="${idx}" aria-haspopup="dialog">
+    return `<li${n >= FOLD ? ' hidden' : ''}><button type="button" class="more-btn grp-item" data-k="${k}" data-idx="${idx}" aria-haspopup="dialog">
       <span class="gi-name">${on ? '<span class="gi-star" title="已收藏">★</span>' : ''}${old ? '<span class="tag y25">2025</span>' : ''}${esc(sub)}</span>
       <span class="gi-price">${blank(p) ? '<span class="gi-na">未公布</span>' : 'NT$ ' + esc(fmt(p))}${!blank(per) ? `<small>${esc(c.per[1])} ${esc(fmt(per))}</small>` : ''}</span>
       <span class="gi-go" aria-hidden="true">›</span></button></li>`;
@@ -1005,6 +1041,8 @@ function groupCard(k, g){
     <div class="grp-head"><h4>${esc(name)}</h4><span class="grp-n">${g.length} 個方案</span></div>
     <div class="grp-meta">${booths.map(b => `<span class="tag booth">攤位 ${esc(b)}</span>`).join('')}<span class="grp-range">${range}</span></div>
     <ul class="grp-list">${items}</ul>
+    ${g.length > FOLD ? `<button type="button" class="grp-expand">看其餘 ${g.length - FOLD} 個方案 ▾</button>` : ''}
+    ${top ? merMore(top, k) : ''}
   </article>`;
 }
 
@@ -1024,7 +1062,10 @@ function renderFull(d, h, r, idx){
       return;
     }
     let content = '';
-    if(name.includes('截圖')){
+    if(name === '商家編號'){
+      const m = MER[v], t = MER[merTop(v)];
+      content = `<code>${esc(v)}</code>　${esc(m ? m['商家名稱'] : '')}${t && t !== m ? `（屬 ${esc(t['商家名稱'])}）` : ''}${t && t['攤位'] ? `　攤位 ${esc(t['攤位'])}` : ''}`;
+    } else if(name.includes('截圖')){
       content = shots(d, v);
     } else if(name.includes('網址') || name.includes('連結')){
       const urls = v.split(/\s*[；;]\s*/).filter(Boolean);
@@ -1130,7 +1171,7 @@ if(appDock){
 // 跳到某分頁並帶入搜尋字
 const pendingQ = {};
 function jump(k, q){
-  if(state[k]){ state[k].q = q; state[k].limit = PAGE; } else pendingQ[k] = q;
+  if(state[k]){ state[k].q = q; state[k].m = ''; state[k].limit = PAGE; } else pendingQ[k] = q;
   go(k);
 }
 
@@ -1300,6 +1341,18 @@ function missHint(rows, q){
     const q = gq.value.trim().toLowerCase(); clr.classList.toggle('show', !!q);
     if(!q){ res.innerHTML = ''; return; }
     let total = 0;
+    // 商家：名稱、各種寫法、旗下館名都比對；只列有優惠資料的參展單位
+    let merHtml = '';
+    if(!/^(\d{2}[_-])?#\d+$/.test(q)){
+      const t = qTerms(q), hits = [];
+      Object.values(MER).forEach(m => { if(m['上層編號'] || m['商家編號'] === 'X01') return;   /* X01＝多家合賣，不是一家公司 */ const c = merCounts(m['商家編號']); if(!Object.keys(c).length) return;
+        const kids = Object.values(MER).filter(x => x['上層編號'] === m['商家編號']);
+        const hay = norm([m['商家名稱'], m['對應名稱'], ...kids.map(x => x['商家名稱'] + ' ' + x['對應名稱'])].join(' '));
+        if(t.every(alts => alts.some(a => hay.includes(a)))) hits.push([m, c]); });
+      merHtml = hits.slice(0, 4).map(([m, c]) => `<div class="gs-cat gs-mer"><h4>${esc(m['商家名稱'])}${realBooth(m['攤位']) ? ` <b>攤位 ${esc(m['攤位'])}</b>` : ''}</h4>
+        <p class="gs-mer-sub">${esc(m['類別'])}${m['樓層區'] ? '・' + esc(m['樓層區']) : ''}　同一家的優惠都在這裡：</p>
+        <div class="mer-more">${Object.keys(MER_CATS).filter(k => c[k]).map(k => `<button type="button" class="mer-jump" data-k="${k}" data-m="${esc(m['商家編號'])}">${MER_CATS[k]} ${c[k]} 筆 ›</button>`).join('')}</div></div>`).join('');
+    }
     const html = cats.map(k => {
       const d = D[k], c = CFG[k], h = d.headers, pi = c.price ? col(h, c.price) : -1;
       const hits = []; d.rows.forEach((r, i) => { if(matchRowQuery(k, r, i, lower[k][i], q)) hits.push(i); });
@@ -1314,12 +1367,13 @@ function missHint(rows, q){
       return `<div class="gs-cat"><h4>${FOLDER_CODE[k]} ${esc(d.name)} <b>${hits.length.toLocaleString()} 筆</b></h4><ul>${top}</ul><button type="button" class="gs-go" data-k="${k}">看全部 →</button></div>`;
     }).join('');
     const allRows = cats.flatMap(k => D[k].rows);
-    res.innerHTML = total ? html : `<p class="gs-none">找不到「${esc(gq.value.trim())}」。${esc(missHint(allRows, q) || '試試輸入編號（如 #137）或更短的飯店／城市關鍵字。')}</p>`;
+    res.innerHTML = (total || merHtml) ? merHtml + html : `<p class="gs-none">找不到「${esc(gq.value.trim())}」。${esc(missHint(allRows, q) || '試試輸入編號（如 #137）或更短的飯店／城市關鍵字。')}</p>`;
   };
   gq.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(run, 120); });
   gq.addEventListener('keydown', e => { if(e.key === 'Escape'){ gq.value = ''; run(); } });
   clr.addEventListener('click', () => { gq.value = ''; run(); gq.focus(); });
-  res.addEventListener('click', e => { const b = e.target.closest('.gs-go'); if(b) jump(b.dataset.k, gq.value.trim()); });
+  res.addEventListener('click', e => { const mj = e.target.closest('.mer-jump'); if(mj) return jumpMer(mj.dataset.k, mj.dataset.m);
+    const b = e.target.closest('.gs-go'); if(b) jump(b.dataset.k, gq.value.trim()); });
   document.getElementById('gs-eg').addEventListener('click', e => { const b = e.target.closest('button'); if(b){ gq.value = b.textContent; run(); } });
 })();
 
@@ -1400,6 +1454,10 @@ viewData.addEventListener('click', e => {
     return;
   }
   if(e.target.closest('.clear-all')){ const k = view; delete state[k]; renderSet(k); return; }
+  const ge = e.target.closest('.grp-expand');
+  if(ge){ ge.closest('.grp-card').querySelectorAll('.grp-list li[hidden]').forEach(li => li.hidden = false); ge.remove(); return; }
+  const mj = e.target.closest('.mer-jump');
+  if(mj){ jumpMer(mj.dataset.k, mj.dataset.m); return; }
   const bt = e.target.closest('button.tag.booth');
   if(bt){
     const k = bt.dataset.k, code = bt.dataset.booth;
@@ -1616,7 +1674,8 @@ function renderSet(k){
   const filt = c.filters.map(s => col(h, s)).filter((i, n, a) => i >= 0 && a.indexOf(i) === n);
   const sorts = (c.sorts || []).map(([s, label]) => ({i: col(h, s), label})).filter(x => x.i >= 0);
   const st = state[k] || (state[k] = {q:'', f:{}, hideOld:false, sort: sorts.length ? 0 : -1, limit:PAGE, open:new Set(), mdOpen:false, taxOnly:false, under10k:false, promoOnly:false, bfastOnly:false, freeSurch:false, familyOnly:false, buffetOnly:false, under1k:false, teaOnly:false, servOnly:false, japanOnly:false, koreaOnly:false, tipsOnly:false});
-  if(pendingQ[k] !== undefined){ st.q = pendingQ[k]; st.limit = PAGE; delete pendingQ[k]; }
+  if(pendingQ[k] !== undefined){ st.q = pendingQ[k]; st.m = ''; st.limit = PAGE; delete pendingQ[k]; }
+  if(pendingM[k] !== undefined){ st.m = pendingM[k]; st.q = ''; st.f = {}; st.limit = PAGE; delete pendingM[k]; }
   const hasOld = d.rows.some(r => isOld(d, r));
   const fCode = FOLDER_CODE[k] || '';
 
@@ -1778,6 +1837,7 @@ function renderSet(k){
     const servIdx = col(h, '服務費');
 
     let rows = d.rows.map((r, idx) => ({r, idx})).filter(({r, idx}) => {
+      if(st.m && merTop(merOf(k, r)) !== st.m) return false;
       if(q && !matchRowQuery(k, r, idx, r.join(' ').toLowerCase(), q)) return false;
       if(!Object.entries(st.f).every(([i, v]) => !v || r[i].trim() === v)) return false;
       if(st.hideOld && isOld(d, r)) return false;
@@ -1852,9 +1912,10 @@ function renderSet(k){
     }
     rows.sort((a, b) => isOld(d, a.r) - isOld(d, b.r));
     const SW = ['taxOnly','under10k','promoOnly','bfastOnly','freeSurch','familyOnly','buffetOnly','under1k','teaOnly','servOnly','japanOnly','koreaOnly','tipsOnly'];
-    const active = !!st.q.trim() || Object.values(st.f).some(Boolean) || st.hideOld || SW.some(x => st[x]);
+    const active = !!st.m || !!st.q.trim() || Object.values(st.f).some(Boolean) || st.hideOld || SW.some(x => st[x]);
     document.getElementById('cnt-' + k).innerHTML = (rows.length === d.rows.length
       ? `顯示全部 <b>${rows.length.toLocaleString()}</b> 筆` : `符合條件 <b>${rows.length.toLocaleString()}</b> 筆（共 ${d.rows.length.toLocaleString()} 筆）`) +
+      (st.m ? `<button type="button" class="mer-chip" title="取消只看這家">只看：${esc((MER[st.m] || {})['商家名稱'] || st.m)} ✕</button>` : '') +
       (active ? `<button type="button" class="linkbtn clear-all">✕ 清除全部條件</button>` : '');
     if(GROUPABLE[k]) document.getElementById('cnt-' + k).insertAdjacentHTML('afterbegin',
       `<button type="button" class="grp-toggle" aria-pressed="${st.group !== false}">${st.group !== false ? '✓ ' : ''}同一家合併</button>`);
@@ -1908,6 +1969,7 @@ function renderSet(k){
   document.getElementById('reset-' + k).addEventListener('click', () => { delete state[k]; renderSet(k); document.getElementById('q-' + k).focus(); });
   document.getElementById('more-' + k).addEventListener('click', () => { st.limit += PAGE; draw(); });
   document.getElementById('cnt-' + k).addEventListener('click', e => {
+    if(e.target.closest('.mer-chip')){ st.m = ''; st.limit = PAGE; draw(); return; }
     if(!e.target.closest('.grp-toggle')) return;
     st.group = st.group === false; st.limit = PAGE; draw();
     showToast(st.group ? '已合併同一家的方案' : '已改成逐筆列出');
