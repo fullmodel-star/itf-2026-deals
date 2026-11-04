@@ -58,6 +58,7 @@ ICONS = [
     ("copy", "copy", "outline"),
     ("tag", "tag", "outline"),
     ("coffee", "coffee", "outline"),
+    ("bath", "bath", "outline"),
     ("luggage", "luggage", "outline"),
     ("alert-triangle", "alert-triangle", "outline"),
     ("award", "award", "outline"),
