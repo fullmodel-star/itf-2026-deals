@@ -240,7 +240,7 @@ ul.plain{margin:0;padding-left:1.2em;display:grid;gap:8px}
 .full-row{display:grid;grid-template-columns:5.8em 1fr;gap:10px;padding:6px 8px;border-radius:8px;align-items:baseline;border-bottom:1px solid var(--line)}
 .full-row:last-child{border-bottom:0}
 .full-row.key-row{background:var(--sunk)}
-.full-row.muted-row{opacity:.75;font-size:12.5px}
+.full-row.muted-row dt,.full-row.muted-row dd{color:var(--muted);font-weight:400}
 .full dt{color:var(--muted);font-size:13px;font-weight:700}
 .full dd{margin:0;overflow-wrap:anywhere;line-height:1.65}
 .faint-dd{color:var(--muted)}
@@ -1046,25 +1046,25 @@ function groupCard(k, g){
   </article>`;
 }
 
+// 第二層：原始資料每一欄都照順序列出（序號已併入「編號／路徑」）；沒資料的欄位留在原位標「未公布」，不刪欄位
 function renderFull(d, h, r, idx){
   const items = [];
-  const hiddenItems = [];
   const seq = rowSeq(r, idx || 0);
   if(d.csv_path){
     items.push(`<div class="full-row"><dt>編號／路徑</dt><dd><code>#${esc(seq)}</code>　<span class="faint-dd">${esc(d.csv_path)}</span></dd></div>`);
   }
-  const skipHeader = /^(序號|飯店名稱|飯店\/品牌|地區|縣市|區域|區域分類|旅行社|行程名稱|房型\/品名|券種內容|旅展價\(元\)|旅展單張價\(元\)|旅展價\(每人,元\)|折數|每人每晚約\(元\)|每人均價\(元\)|每日平均價\(元\))$/;
   h.forEach((name, i) => {
     const v = (r[i] || '').trim();
-    if(!v || skipHeader.test(name)) return;
-    if(blank(v) || v === '（未截圖）'){
-      hiddenItems.push(name);
+    if(name === '序號') return;
+    if(!v || /^(未公布.*|未標示|查無|—|-)$/.test(v) || v === '（未截圖）'){
+      items.push(`<div class="full-row muted-row"><dt>${esc(name)}</dt><dd class="faint-dd">${v === '（未截圖）' ? '未截圖' : v && v !== '—' && v !== '-' ? esc(v) : (name.startsWith('備註') ? '無' : '未公布')}</dd></div>`);
       return;
     }
     let content = '';
     if(name === '商家編號'){
       const m = MER[v], t = MER[merTop(v)];
-      content = `<code>${esc(v)}</code>　${esc(m ? m['商家名稱'] : '')}${t && t !== m ? `（屬 ${esc(t['商家名稱'])}）` : ''}${t && t['攤位'] ? `　攤位 ${esc(t['攤位'])}` : ''}`;
+      const meta = t ? [t['類別'], t['樓層區'], t['攤位'] ? '攤位 ' + t['攤位'] : ''].filter(Boolean).join('・') : '';
+      content = `<code>${esc(v)}</code>　${esc(m ? m['商家名稱'] : '')}${t && t !== m ? `（屬 ${esc(t['商家名稱'])}）` : ''}${meta ? `<br><span class="faint-dd">${esc(meta)}</span>` : ''}`;
     } else if(name.includes('截圖')){
       content = shots(d, v);
     } else if(name.includes('網址') || name.includes('連結')){
@@ -1084,9 +1084,6 @@ function renderFull(d, h, r, idx){
     const isKey = /加價|期限|包含|規定|限制|備註|條件|小費|服務費/.test(name);
     items.push(`<div class="full-row${isKey ? ' key-row' : ''}"><dt>${esc(name)}</dt><dd>${content}</dd></div>`);
   });
-  if(hiddenItems.length){
-    items.push(`<div class="full-row muted-row"><dt>未公布項</dt><dd class="faint-dd">${esc(hiddenItems.join('、'))}</dd></div>`);
-  }
   return `<dl class="full">${items.join('')}</dl>`;
 }
 function shots(d, s){
