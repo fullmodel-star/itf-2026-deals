@@ -634,7 +634,7 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
       <button type="button" class="search-clear" id="gq-clear" aria-label="清空搜尋"><svg class="ti" aria-hidden="true"><use href="#ti-x"/></svg></button>
     </div>
     <div class="gs-eg" id="gs-eg">
-      <button type="button">台中 含早</button><button type="button">日本 5天</button><button type="button">花蓮 溫泉</button><button type="button">溫泉</button><button type="button">#137</button><button type="button">下午茶</button><button type="button">吃到飽</button><button type="button">沖繩</button><button type="button">北海道</button><button type="button">日月潭</button><button type="button">宜蘭</button><button type="button">含早</button><button type="button">星宇</button>
+      <button type="button">台中 含早</button><button type="button">日本 5天</button><button type="button">烤鴨</button><button type="button">牛排</button><button type="button">花蓮 溫泉</button><button type="button">溫泉</button><button type="button">#137</button><button type="button">下午茶</button><button type="button">吃到飽</button><button type="button">沖繩</button><button type="button">北海道</button><button type="button">日月潭</button><button type="button">宜蘭</button><button type="button">含早</button><button type="button">星宇</button>
     </div>
     <div class="gs-res" id="gs-res" role="status" aria-live="polite"></div>
   </section>
@@ -1986,10 +1986,13 @@ function renderSet(k){
     </div>`;
   } else if(k === 'dining'){
     html += `<div class="quick-switches">
-      <span style="font-size:13px;color:var(--muted);font-weight:600">快速篩選：</span>
-      <button type="button" class="switch-chip accent" id="sw-buffet-${k}" aria-pressed="${st.buffetOnly ? 'true' : 'false'}"><svg class="ti" aria-hidden="true"><use href="#ti-tools-kitchen-2"/></svg> 只看吃到飽 (Buffet)</button>
-      <button type="button" class="switch-chip" id="sw-1k-${k}" aria-pressed="${st.under1k ? 'true' : 'false'}">每人千元有找</button>
-      <button type="button" class="switch-chip sky" id="sw-tea-${k}" aria-pressed="${st.teaOnly ? 'true' : 'false'}"><svg class="ti" aria-hidden="true"><use href="#ti-coffee"/></svg> 下午茶特搜</button>
+      <span style="font-size:13px;color:var(--muted);font-weight:600">料理特色：</span>
+      <button type="button" class="switch-chip accent" id="sw-duck-${k}" aria-pressed="${st.duckOnly ? 'true' : 'false'}"><svg class="ti" aria-hidden="true"><use href="#ti-flame"/></svg> 招牌烤鴨</button>
+      <button type="button" class="switch-chip" id="sw-steak-${k}" aria-pressed="${st.steakOnly ? 'true' : 'false'}"><svg class="ti" aria-hidden="true"><use href="#ti-tools-kitchen-2"/></svg> 牛排／鐵板燒</button>
+      <button type="button" class="switch-chip accent" id="sw-buffet-${k}" aria-pressed="${st.buffetOnly ? 'true' : 'false'}"><svg class="ti" aria-hidden="true"><use href="#ti-tools-kitchen-2"/></svg> 吃到飽 (Buffet)</button>
+      <button type="button" class="switch-chip sky" id="sw-tea-${k}" aria-pressed="${st.teaOnly ? 'true' : 'false'}"><svg class="ti" aria-hidden="true"><use href="#ti-coffee"/></svg> 下午茶</button>
+      <button type="button" class="switch-chip" id="sw-pot-${k}" aria-pressed="${st.potOnly ? 'true' : 'false'}"><svg class="ti" aria-hidden="true"><use href="#ti-tools-kitchen-2"/></svg> 鍋物</button>
+      <button type="button" class="switch-chip" id="sw-1k-${k}" aria-pressed="${st.under1k ? 'true' : 'false'}">千元有找</button>
       <button type="button" class="switch-chip tax" id="sw-serv-${k}" aria-pressed="${st.servOnly ? 'true' : 'false'}"><svg class="ti" aria-hidden="true"><use href="#ti-check"/></svg> 已含服務費</button>
     </div>`;
   } else if(k === 'tour'){
@@ -2096,6 +2099,16 @@ function renderSet(k){
           if(!g.includes('4') && !g.includes('四')) return false;
         }
       } else if(k === 'dining'){
+        const allText = r.join(' ');
+        if(st.duckOnly){
+          if(!allText.includes('烤鴨') && !allText.includes('片皮') && !allText.includes('片鴨') && !allText.includes('鴨')) return false;
+        }
+        if(st.steakOnly){
+          if(!allText.includes('牛排') && !allText.includes('鐵板燒') && !allText.includes('肋眼') && !allText.includes('菲力') && !allText.includes('和牛') && !allText.includes('戰斧') && !allText.includes('牛')) return false;
+        }
+        if(st.potOnly){
+          if(!allText.includes('火鍋') && !allText.includes('鍋物') && !allText.includes('壽喜燒') && !allText.includes('鴛鴦鍋')) return false;
+        }
         if(st.buffetOnly){
           const t = ((mealIdx >= 0 ? r[mealIdx] : '') + (restIdx >= 0 ? r[restIdx] : '') + r[5]).toLowerCase();
           if(!t.includes('自助') && !t.includes('buffet') && !t.includes('百匯') && !t.includes('吃到飽')) return false;
@@ -2134,7 +2147,7 @@ function renderSet(k){
         if(isNaN(x)) return isNaN(y) ? 0 : 1; if(isNaN(y)) return -1; return x - y; });
     }
     rows.sort((a, b) => isOld(d, a.r) - isOld(d, b.r));
-    const SW = ['taxOnly','under10k','promoOnly','springOnly','bfastOnly','freeSurch','familyOnly','buffetOnly','under1k','teaOnly','servOnly','japanOnly','koreaOnly','tipsOnly'];
+    const SW = ['taxOnly','under10k','promoOnly','springOnly','bfastOnly','freeSurch','familyOnly','duckOnly','steakOnly','potOnly','buffetOnly','under1k','teaOnly','servOnly','japanOnly','koreaOnly','tipsOnly'];
     const active = !!st.m || !!st.q.trim() || Object.values(st.f).some(Boolean) || st.hideOld || SW.some(x => st[x]);
     document.getElementById('cnt-' + k).innerHTML = (rows.length === d.rows.length
       ? `顯示全部 <b>${rows.length.toLocaleString()}</b> 筆` : `符合條件 <b>${rows.length.toLocaleString()}</b> 筆（共 ${d.rows.length.toLocaleString()} 筆）`) +
@@ -2219,6 +2232,12 @@ function renderSet(k){
     const swFam = document.getElementById('sw-fam-' + k);
     if(swFam) swFam.addEventListener('click', () => { st.familyOnly = !st.familyOnly; swFam.setAttribute('aria-pressed', st.familyOnly); st.limit = PAGE; draw(); });
   } else if(k === 'dining'){
+    const swDuck = document.getElementById('sw-duck-' + k);
+    if(swDuck) swDuck.addEventListener('click', () => { st.duckOnly = !st.duckOnly; swDuck.setAttribute('aria-pressed', st.duckOnly); st.limit = PAGE; draw(); });
+    const swSteak = document.getElementById('sw-steak-' + k);
+    if(swSteak) swSteak.addEventListener('click', () => { st.steakOnly = !st.steakOnly; swSteak.setAttribute('aria-pressed', st.steakOnly); st.limit = PAGE; draw(); });
+    const swPot = document.getElementById('sw-pot-' + k);
+    if(swPot) swPot.addEventListener('click', () => { st.potOnly = !st.potOnly; swPot.setAttribute('aria-pressed', st.potOnly); st.limit = PAGE; draw(); });
     const swBuffet = document.getElementById('sw-buffet-' + k);
     if(swBuffet) swBuffet.addEventListener('click', () => { st.buffetOnly = !st.buffetOnly; swBuffet.setAttribute('aria-pressed', st.buffetOnly); st.limit = PAGE; draw(); });
     const sw1k = document.getElementById('sw-1k-' + k);
@@ -2358,6 +2377,21 @@ function card(d, c, r, idx, open, k, pickReason){
     const tags = [seqBadge];
     if(old) tags.push('<span class="tag y25">2025 舊價格</span>');
     if(bm) tags.push(`<button type="button" class="tag booth" data-k="${k}" data-booth="${esc(bm[0])}" title="點擊查看此攤位所有優惠"><svg class="ti" aria-hidden="true"><use href="#ti-map-pin"/></svg> ${esc(bm[0])}</button>`);
+
+    // 料理特色標籤（烤鴨、牛排、鐵板燒、鍋物、港點）
+    const dishStr = (hotel + ' ' + rest + ' ' + name + ' ' + val('備註'));
+    if(dishStr.includes('烤鴨') || dishStr.includes('片皮') || dishStr.includes('片鴨') || dishStr.includes('鴨歡聚')){
+      tags.push('<span class="tag-dish tag-duck"><svg class="ti" aria-hidden="true"><use href="#ti-flame"/></svg> 招牌烤鴨</span>');
+    } else if(dishStr.includes('鐵板燒')){
+      tags.push('<span class="tag-dish tag-teppan"><svg class="ti" aria-hidden="true"><use href="#ti-flame"/></svg> 鐵板燒</span>');
+    } else if(dishStr.includes('牛排') || dishStr.includes('肋眼') || dishStr.includes('菲力') || dishStr.includes('和牛') || dishStr.includes('戰斧')){
+      tags.push('<span class="tag-dish tag-steak"><svg class="ti" aria-hidden="true"><use href="#ti-tools-kitchen-2"/></svg> 頂級牛排</span>');
+    } else if(dishStr.includes('火鍋') || dishStr.includes('鍋物') || dishStr.includes('壽喜燒') || dishStr.includes('鴛鴦鍋')){
+      tags.push('<span class="tag-dish tag-pot"><svg class="ti" aria-hidden="true"><use href="#ti-tools-kitchen-2"/></svg> 精選鍋物</span>');
+    } else if(dishStr.includes('港點') || dishStr.includes('飲茶') || dishStr.includes('港式')){
+      tags.push('<span class="tag-dish tag-dimsum"><svg class="ti" aria-hidden="true"><use href="#ti-tools-kitchen-2"/></svg> 港式飲茶</span>');
+    }
+
     if(meal) tags.push(`<span class="tag tag-meal-cat">${esc(meal)}</span>`);
     if(!blank(discVal)) tags.push(`<span class="tag disc">${esc(discVal)}</span>`);
 
