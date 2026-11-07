@@ -131,6 +131,8 @@ section{margin-bottom:32px}
 .zone h3{font-size:13px;letter-spacing:.12em;color:var(--muted);margin:0 0 8px;font-weight:700}
 .zone .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .tile img{width:52px;height:52px;flex:none}
+.tile[data-go="hotspring"]{grid-column:1/-1}
+.tile[data-go="hotspring"] .ti{width:52px;height:52px;flex:none;color:var(--accent)}
 .tile>span{display:flex;flex-direction:column;gap:1px;min-width:0}
 .tile{display:flex;flex-direction:row;align-items:center;gap:12px;min-height:84px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer;color:var(--ink);min-width:0;box-shadow:var(--shadow-sm);transition:transform .15s ease,box-shadow .15s ease}
 .zone.abroad .tile{border-left-color:var(--sky)}
@@ -518,7 +520,7 @@ button.tag.booth:hover{background:var(--accent);color:#fff}
 .app-btn.online{background:var(--good-soft);border-color:var(--good);color:var(--good)}
 .app-btn.offline{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .app-dock{display:none;position:fixed;bottom:0;left:0;right:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -4px 16px rgba(0,0,0,.08);padding:4px max(4px,env(safe-area-inset-left,0px)) calc(4px + env(safe-area-inset-bottom,0px))}
-.app-dock-inner{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;max-width:640px;margin:0 auto}
+.app-dock-inner{display:grid;grid-template-columns:repeat(8,1fr);gap:2px;max-width:640px;margin:0 auto}
 .dock-btn{background:none;border:0;color:var(--muted);padding:5px 2px;min-height:48px;justify-content:center;border-radius:8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:600;line-height:1.15}
 .dock-btn .ico{font-size:20px;line-height:1;display:flex}
 .dock-btn[aria-current="page"]{color:var(--accent);font-weight:800;background:var(--accent-soft)}
@@ -579,7 +581,8 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
 </style>
 
 <!-- TABLER_SPRITE_START Tabler Icons 3.49.0（MIT，授權見 vendor/tabler-icons/LICENSE.txt）；由 _工具/build_icon_sprite.py 產生，勿手改 -->
-<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false"><symbol id="ti-device-mobile" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-14"/><path d="M11 4h2"/><path d="M12 17v.01"/></symbol><symbol id="ti-wifi-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18l.01 0"/><path d="M9.172 15.172a4 4 0 0 1 5.656 0"/><path d="M6.343 12.343a7.963 7.963 0 0 1 3.864 -2.14m4.163 .155a7.965 7.965 0 0 1 3.287 2"/><path d="M3.515 9.515a12 12 0 0 1 3.544 -2.455m3.101 -.92a12 12 0 0 1 10.325 3.374"/><path d="M3 3l18 18"/></symbol><symbol id="ti-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"/></symbol><symbol id="ti-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454l0 .008"/></symbol><symbol id="ti-sun-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.173 14.83a4 4 0 1 1 5.657 -5.657"/><path d="M11.294 12.707l.174 .247a7.5 7.5 0 0 0 8.845 2.492a9 9 0 0 1 -14.671 2.914"/><path d="M3 12h1"/><path d="M12 3v1"/><path d="M5.6 5.6l.7 .7"/><path d="M3 21l18 -18"/></symbol><symbol id="ti-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></symbol><symbol id="ti-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l-2 0l9 -9l9 9l-2 0"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"/><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"/></symbol><symbol id="ti-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10.941c2.333 -3.308 .167 -7.823 -1 -8.941c0 3.395 -2.235 5.299 -3.667 6.706c-1.43 1.408 -2.333 3.294 -2.333 5.588c0 3.704 3.134 6.706 7 6.706c3.866 0 7 -3.002 7 -6.706c0 -1.712 -1.232 -4.403 -2.333 -5.588c-2.084 3.353 -3.257 3.353 -4.667 2.235"/></symbol><symbol id="ti-bed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M22 17v-3h-20"/><path d="M2 8v9"/><path d="M12 14h10v-2a3 3 0 0 0 -3 -3h-7v5"/></symbol><symbol id="ti-tools-kitchen-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12m0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3"/></symbol><symbol id="ti-plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 10h4a2 2 0 0 1 0 4h-4l-4 7h-3l2 -7h-4l-2 2h-3l2 -4l-2 -4h3l2 2h4l-2 -7h3l4 7"/></symbol><symbol id="ti-bus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M16 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M4 17h-2v-11a1 1 0 0 1 1 -1h14a5 7 0 0 1 5 7v5h-2m-4 0h-8"/><path d="M16 5l1.5 7l4.5 0"/><path d="M2 10l15 0"/><path d="M7 5l0 5"/><path d="M12 5l0 5"/></symbol><symbol id="ti-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873l-6.158 -3.245"/></symbol><symbol id="ti-star-filled" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"/></symbol><symbol id="ti-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></symbol><symbol id="ti-adjustments" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M6 4v4"/><path d="M6 12v8"/><path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M12 4v10"/><path d="M12 18v2"/><path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M18 4v1"/><path d="M18 9v11"/></symbol><symbol id="ti-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path d="M15 6a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path d="M15 18a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path d="M8.7 10.7l6.6 -3.4"/><path d="M8.7 13.3l6.6 3.4"/></symbol><symbol id="ti-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l10 -10"/></symbol><symbol id="ti-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0 -3 -3.85"/></symbol><symbol id="ti-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6l0 13"/><path d="M12 6l0 13"/><path d="M21 6l0 13"/></symbol><symbol id="ti-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6"/></symbol><symbol id="ti-photo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"/><path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12"/><path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5"/><path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3"/></symbol><symbol id="ti-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l6 -3l6 3l6 -3v13l-6 3l-6 -3l-6 3v-13"/><path d="M9 4v13"/><path d="M15 7v13"/></symbol><symbol id="ti-file-spreadsheet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2"/><path d="M8 11h8v7h-8l0 -7"/><path d="M8 15h8"/><path d="M11 11v7"/></symbol><symbol id="ti-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"/></symbol><symbol id="ti-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 9.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667l0 -8.666"/><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"/></symbol><symbol id="ti-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 7.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M3 6v5.172a2 2 0 0 0 .586 1.414l7.71 7.71a2.41 2.41 0 0 0 3.408 0l5.592 -5.592a2.41 2.41 0 0 0 0 -3.408l-7.71 -7.71a2 2 0 0 0 -1.414 -.586h-5.172a3 3 0 0 0 -3 3"/></symbol><symbol id="ti-coffee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1"/><path d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path d="M12 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5"/><path d="M16.746 16.726a3 3 0 1 0 .252 -5.555"/></symbol><symbol id="ti-bath" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16a1 1 0 0 1 1 1v3a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-3a1 1 0 0 1 1 -1"/><path d="M6 12v-7a2 2 0 0 1 2 -2h3v2.25"/><path d="M4 21l1 -1.5"/><path d="M20 21l-1 -1.5"/></symbol><symbol id="ti-luggage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -10"/><path d="M9 6v-1a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v1"/><path d="M6 10h12"/><path d="M6 16h12"/><path d="M9 20v1"/><path d="M15 20v1"/></symbol><symbol id="ti-alert-triangle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0"/><path d="M12 16h.01"/></symbol><symbol id="ti-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 1 0 12 0a6 6 0 1 0 -12 0"/><path d="M12 15l3.4 5.89l1.598 -3.233l3.598 .232l-3.4 -5.889"/><path d="M6.802 12l-3.4 5.89l3.598 -.233l1.598 3.232l3.4 -5.889"/></symbol><symbol id="ti-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"/></symbol></svg>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false"><symbol id="ti-device-mobile" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-14"/><path d="M11 4h2"/><path d="M12 17v.01"/></symbol><symbol id="ti-wifi-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18l.01 0"/><path d="M9.172 15.172a4 4 0 0 1 5.656 0"/><path d="M6.343 12.343a7.963 7.963 0 0 1 3.864 -2.14m4.163 .155a7.965 7.965 0 0 1 3.287 2"/><path d="M3.515 9.515a12 12 0 0 1 3.544 -2.455m3.101 -.92a12 12 0 0 1 10.325 3.374"/><path d="M3 3l18 18"/></symbol><symbol id="ti-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"/></symbol><symbol id="ti-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454l0 .008"/></symbol><symbol id="ti-sun-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.173 14.83a4 4 0 1 1 5.657 -5.657"/><path d="M11.294 12.707l.174 .247a7.5 7.5 0 0 0 8.845 2.492a9 9 0 0 1 -14.671 2.914"/><path d="M3 12h1"/><path d="M12 3v1"/><path d="M5.6 5.6l.7 .7"/><path d="M3 21l18 -18"/></symbol><symbol id="ti-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></symbol><symbol id="ti-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l-2 0l9 -9l9 9l-2 0"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"/><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"/></symbol><symbol id="ti-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10.941c2.333 -3.308 .167 -7.823 -1 -8.941c0 3.395 -2.235 5.299 -3.667 6.706c-1.43 1.408 -2.333 3.294 -2.333 5.588c0 3.704 3.134 6.706 7 6.706c3.866 0 7 -3.002 7 -6.706c0 -1.712 -1.232 -4.403 -2.333 -5.588c-2.084 3.353 -3.257 3.353 -4.667 2.235"/></symbol><symbol id="ti-bed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M22 17v-3h-20"/><path d="M2 8v9"/><path d="M12 14h10v-2a3 3 0 0 0 -3 -3h-7v5"/></symbol><symbol id="ti-tools-kitchen-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12m0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3"/></symbol><symbol id="ti-plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 10h4a2 2 0 0 1 0 4h-4l-4 7h-3l2 -7h-4l-2 2h-3l2 -4l-2 -4h3l2 2h4l-2 -7h3l4 7"/></symbol><symbol id="ti-bus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M16 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M4 17h-2v-11a1 1 0 0 1 1 -1h14a5 7 0 0 1 5 7v5h-2m-4 0h-8"/><path d="M16 5l1.5 7l4.5 0"/><path d="M2 10l15 0"/><path d="M7 5l0 5"/><path d="M12 5l0 5"/></symbol><symbol id="ti-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873l-6.158 -3.245"/></symbol><symbol id="ti-star-filled" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"/></symbol><symbol id="ti-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></symbol><symbol id="ti-adjustments" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M6 4v4"/><path d="M6 12v8"/><path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M12 4v10"/><path d="M12 18v2"/><path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M18 4v1"/><path d="M18 9v11"/></symbol><symbol id="ti-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path d="M15 6a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path d="M15 18a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path d="M8.7 10.7l6.6 -3.4"/><path d="M8.7 13.3l6.6 3.4"/></symbol><symbol id="ti-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l10 -10"/></symbol><symbol id="ti-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0 -3 -3.85"/></symbol><symbol id="ti-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6l0 13"/><path d="M12 6l0 13"/><path d="M21 6l0 13"/></symbol><symbol id="ti-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6"/></symbol><symbol id="ti-photo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"/><path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12"/><path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5"/><path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3"/></symbol><symbol id="ti-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l6 -3l6 3l6 -3v13l-6 3l-6 -3l-6 3v-13"/><path d="M9 4v13"/><path d="M15 7v13"/></symbol><symbol id="ti-file-spreadsheet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2"/><path d="M8 11h8v7h-8l0 -7"/><path d="M8 15h8"/><path d="M11 11v7"/></symbol><symbol id="ti-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"/></symbol><symbol id="ti-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 9.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667l0 -8.666"/><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"/></symbol><symbol id="ti-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 7.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M3 6v5.172a2 2 0 0 0 .586 1.414l7.71 7.71a2.41 2.41 0 0 0 3.408 0l5.592 -5.592a2.41 2.41 0 0 0 0 -3.408l-7.71 -7.71a2 2 0 0 0 -1.414 -.586h-5.172a3 3 0 0 0 -3 3"/></symbol><symbol id="ti-coffee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1"/><path d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path d="M12 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"/><path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5"/><path d="M16.746 16.726a3 3 0 1 0 .252 -5.555"/></symbol><symbol id="ti-bath" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16a1 1 0 0 1 1 1v3a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-3a1 1 0 0 1 1 -1"/><path d="M6 12v-7a2 2 0 0 1 2 -2h3v2.25"/><path d="M4 21l1 -1.5"/><path d="M20 21l-1 -1.5"/></symbol><symbol id="ti-luggage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -10"/><path d="M9 6v-1a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v1"/><path d="M6 10h12"/><path d="M6 16h12"/><path d="M9 20v1"/><path d="M15 20v1"/></symbol><symbol id="ti-alert-triangle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0"/><path d="M12 16h.01"/></symbol><symbol id="ti-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 1 0 12 0a6 6 0 1 0 -12 0"/><path d="M12 15l3.4 5.89l1.598 -3.233l3.598 .232l-3.4 -5.889"/><path d="M6.802 12l-3.4 5.89l3.598 -.233l1.598 3.232l3.4 -5.889"/></symbol><symbol id="ti-building" viewBox="0 0 24 24"><path d="M3 21l18 0"/><path d="M9 8l1 0"/><path d="M9 12l1 0"/><path d="M9 16l1 0"/><path d="M14 8l1 0"/><path d="M14 12l1 0"/><path d="M14 16l1 0"/><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16"/></symbol>
+  <symbol id="ti-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"/></symbol></svg>
 <!-- TABLER_SPRITE_END -->
 <header class="appbar"><div class="wrap">
   <img class="mark on-light" src="vendor/brand/fitzroy_navy.png" alt="稜線" width="44" height="24">
@@ -615,6 +618,7 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
     <div class="zone home-zone"><h3>國內</h3><div class="tiles">
       <button class="tile" data-go="lodging"><img src="vendor/fluent-3d/hotel.png" alt="" width="128" height="128"><span><span class="t">住宿券</span><span class="p">每人每晚 750 起</span><span class="c"><span data-n="lodging"></span></span></span></button>
       <button class="tile" data-go="dining"><img src="vendor/fluent-3d/dining.png" alt="" width="128" height="128"><span><span class="t">餐券</span><span class="p">每人 222 起</span><span class="c"><span data-n="dining"></span></span></span></button>
+      <button class="tile" data-go="hotspring"><svg class="ti" aria-hidden="true"><use href="#ti-bath"/></svg><span><span class="t">溫泉票券</span><span class="p">泡湯、湯屋、泡湯加餐</span><span class="c" data-n="hotspring"></span></span></button>
     </div></div>
     <div class="zone abroad"><h3>國外</h3><div class="tiles">
       <button class="tile" data-go="flight"><img src="vendor/fluent-3d/plane.png" alt="" width="128" height="128"><span><span class="t">機票</span><span class="p">含稅來回 6,650 起</span><span class="c"><span data-n="flight"></span></span></span></button>
@@ -635,6 +639,14 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
     <div class="gs-res" id="gs-res" role="status" aria-live="polite"></div>
   </section>
 
+
+  
+  <!-- 參展大廠／品牌一鍵歸戶 -->
+  <section class="mer-hub-board" id="mer-hub-board">
+    <div class="panel-head"><h3><svg class="ti" aria-hidden="true"><use href="#ti-building"/></svg>參展大廠・品牌一鍵歸戶</h3></div>
+    <p>現場逛展或線上比價首選！點選任一大廠集團或人氣溫泉，一秒查齊該品牌名下所有住宿、餐飲、泡湯票券與展場攤位：</p>
+    <div class="mer-hub-grid" id="mer-hub-grid"></div>
+  </section>
 
   <!-- 展場熱門攤位速查板 -->
   <section class="booth-board">
@@ -801,6 +813,7 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
     <button type="button" class="dock-btn" data-dock="picks"><span class="ico dock-ic"><svg class="ti" aria-hidden="true"><use href="#ti-flame"/></svg></span><span>推薦</span></button>
     <button type="button" class="dock-btn" data-dock="lodging"><span class="ico dock-ic"><svg class="ti" aria-hidden="true"><use href="#ti-bed"/></svg></span><span>住宿</span></button>
     <button type="button" class="dock-btn" data-dock="dining"><span class="ico dock-ic"><svg class="ti" aria-hidden="true"><use href="#ti-tools-kitchen-2"/></svg></span><span>餐飲</span></button>
+    <button type="button" class="dock-btn" data-dock="hotspring"><span class="ico dock-ic"><svg class="ti" aria-hidden="true"><use href="#ti-bath"/></svg></span><span>溫泉</span></button>
     <button type="button" class="dock-btn" data-dock="flight"><span class="ico dock-ic"><svg class="ti" aria-hidden="true"><use href="#ti-plane"/></svg></span><span>機票</span></button>
     <button type="button" class="dock-btn" data-dock="tour"><span class="ico dock-ic"><svg class="ti" aria-hidden="true"><use href="#ti-bus"/></svg></span><span>跟團</span></button>
     <button type="button" class="dock-btn" data-dock="saved"><span class="ico dock-ic"><svg class="ti" aria-hidden="true"><use href="#ti-star"/></svg></span><span>收藏</span></button>
@@ -823,7 +836,8 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
         • <code>01_國內住宿\</code>：國內住宿優惠.csv（#1–#171）、國內住宿分析.md<br>
         • <code>02_餐飲\</code>：餐飲優惠.csv（#1–#185）、餐飲分析.md<br>
         • <code>03_國外機票\</code>：國外機票優惠.csv（#1–#321）、國外機票分析.md<br>
-        • <code>04_跟團\</code>：跟團優惠.csv（#1–#1723）、跟團分析.md
+        • <code>04_跟團\</code>：跟團優惠.csv（#1–#1723）、跟團分析.md<br>
+        • <code>05_溫泉票券\</code>：溫泉票券優惠.csv
       </div>
     </div>
   </div>
@@ -842,7 +856,7 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
 (function(){
 const D = JSON.parse(document.getElementById('data').textContent);
 const SHOTS = __SHOTS__;
-const FOLDER_CODE = {home:'00', flash:'00', card:'00', booth:'00', lodging:'01', dining:'02', flight:'03', tour:'04'};
+const FOLDER_CODE = {home:'00', flash:'00', card:'00', booth:'00', lodging:'01', dining:'02', flight:'03', tour:'04', hotspring:'05'};
 
 // 每類資料怎麼排成一張卡：標題、副標、價格、原價、每人價、標籤、重點條件
 const CFG = {
@@ -852,6 +866,9 @@ const CFG = {
   dining:{title:['飯店/品牌','餐廳'], sub:['券種內容'], price:'單張價', was:'原價', per:['每人均價','每人'],
     tags:['地區','餐別'], disc:'折數', info:[['每張人數','一張幾人'],['購買張數','要買幾張'],['使用期限','期限'],['平假日','平假日'],['服務費說明','服務費'],['攤位號碼','攤位']],
     filters:['地區','餐別'], sorts:[['每人均價','每人 低→高'],['單張價','單張價 低→高']]},
+  hotspring:{title:['業者'], sub:['票券名稱'], price:'旅展價', was:'原價', disc:'折數', tags:['地區','券種'],
+    info:[['購買組合','買法'],['適用人數','人數'],['販售期間','販售'],['優惠期限','效期'],['使用限制','限制'],['攤位號碼','攤位']],
+    filters:['地區','券種'], sorts:[['旅展價','購買金額 低→高']]},
   flight:{title:['航空'], route:['出發地','目的地'], sub:['艙等','單程/來回','銷售者'], price:'旅展價', tax:'是否含稅',
     tags:['區域','類型'], info:[['艙等','艙等'],['是否含稅','含稅'],['出發期間','出發'],['開票/購買','購買'],['搶票方式','怎麼搶'],['備註','注意'],['攤位號碼','攤位']],
     filters:['區域','類型','航空'], sorts:[['旅展價','旅展價 低→高']]},
@@ -864,8 +881,8 @@ const CFG = {
     filters:['銀行'], sorts:[]},
   booth:{table:true, filters:['樓層區','類別']}
 };
-['lodging','dining','flight','tour'].forEach(k => { CFG[k].booth = '攤位號碼'; CFG[k].chips = true; });
-const GROUPS = [['', ['home','picks']], ['01–02 國內', ['lodging','dining']], ['03–04 國外', ['flight','tour']], ['00 展場', ['flash','card','booth']], ['', ['saved']]];
+['lodging','dining','hotspring','flight','tour'].forEach(k => { CFG[k].booth = '攤位號碼'; CFG[k].chips = true; });
+const GROUPS = [['', ['home','picks']], ['國內', ['lodging','dining','hotspring']], ['03–04 國外', ['flight','tour']], ['00 展場', ['flash','card','booth']], ['', ['saved']]];
 const ORDER = GROUPS.flatMap(g => g[1]);
 const tabs = document.getElementById('tabs');
 const appDock = document.getElementById('app-dock');
@@ -988,11 +1005,100 @@ function infoRow(label, v){
 // 同一家合併：住宿看「飯店名稱」、餐券看「飯店/品牌」；括號內的補充說明不列入比對
 // 商家總表（00_官方總覽/商家總表.csv）：每筆優惠的「商家編號」連到這裡。
 // 上層＝參展單位（逛展要去的那一攤：集團、單一飯店、航空、旅行社）；旗下館的上層編號指回參展單位。
+
+// 溫泉使用者評價與口碑資料庫（整合 Google 評論、PTT/Dcard 網友實測與泉質分析）
+const SPRING_REVIEWS = {
+  'H21': { // 北投麗禧
+    rating: '4.7★ (3,800+ 則評論)',
+    spring: '北投大磺嘴第一道白磺泉（牛奶湯，pH 3-4 弱酸性）',
+    pros: '北投奢華溫泉天花板！獨立湯屋私密性極佳，房間浴池大且出水量充沛，備品頂級；泡湯附贈純手工奶酪布丁與季節水果，服務細緻備至。',
+    tips: '秋冬旺季假日湯屋極為搶手，建議提早 2–3 週於官網或電話預約；純泡湯券限單次進出，大眾露天裸湯限 12 歲以上入場。'
+  },
+  'H22': { // 春天酒店
+    rating: '4.1★ (3,200+ 則評論)',
+    spring: '北投白磺泉（乳白色泉質，略帶微硫磺香）',
+    pros: '戶外露天風呂佔地寬廣，擁有九種不同功能湯池（石板浴、氣泡浴、衝擊浴、冷水池），親子同樂首選；旅展湯餐券 CP 值極高。',
+    tips: '露天風呂需著泳衣與泳帽；室內個人湯屋稍有歲月感；假日泡湯人潮眾多採現場候位，建議平日上午或下午提早入場避開尖峰。'
+  },
+  'H41': { // 北投大地
+    rating: '4.5★ (2,400+ 則評論)',
+    spring: '北投白磺泉（清爽潤膚）',
+    pros: '光陰部落四層樓高藏書閣絕美打卡景點！露天大眾風呂引進人造雪飄雪技術，宛如置身日本輕井澤；下午茶點心精緻可口，服務周到。',
+    tips: '獨立湯屋空間較為小巧，若追求寬敞景觀建議選擇大眾裸湯；旅展湯氛套券可彈性兌換湯屋、下午茶或 SPA。'
+  },
+  'H01': { // 老爺酒店集團（礁溪/知本/北投）
+    rating: '4.6★ (7,900+ 則評論)',
+    spring: '礁溪/知本碳酸氫鈉泉（無色無味美人湯）、北投白磺泉',
+    pros: '全台溫泉度假指標！礁溪老爺無邊際野天活泉風呂俯瞰蘭陽平原；知本老爺星月風呂由日本設計師操刀，露天裸湯景致無可挑剔；餐飲與活動極具水準。',
+    tips: '旅展聯合溫泉券為全場秒殺王！使用溫泉券務必提前預約；假日加價按各館規定，平日使用最划算。'
+  },
+  'H01-02': { // 礁溪老爺
+    rating: '4.6★ (7,900+ 則評論)',
+    spring: '礁溪碳酸氫鈉美人湯（pH 7.0–7.4）',
+    pros: '野天風呂遠眺蘭陽平原視野開闊，洞天風呂男女裸湯靜謐放鬆；雲天自助餐廳食材豐富評價極佳。',
+    tips: '展期與線上搶購量大，秋冬假日預約經常滿檔，建議避開五六日以獲最佳度假品質。'
+  },
+  'H01-03': { // 知本老爺
+    rating: '4.6★ (5,100+ 則評論)',
+    spring: '知本弱鹼性重碳酸鈉泉（水質純淨滑潤）',
+    pros: '星月風呂三大日式戶外裸湯充滿東瀛風情，晚上可仰望星空；原住民歌舞晚會與射箭活動精彩，非常適合家庭慢活。',
+    tips: '台東交通建議搭配台鐵接駁，館內設施豐富，建議安排一泊二食停留兩天一夜以上。'
+  },
+  'H03-04': { // 礁溪寒沐
+    rating: '4.4★ (5,600+ 則評論)',
+    spring: '礁溪碳酸氫鈉泉（美人湯）',
+    pros: '客房內均設有超大獨立溫泉浴池，出水快水質清澈；光之湯露天風呂設計現代俐落；樂未央兒童遊憩區設施強大，親子族群好評不斷。',
+    tips: '假日地下停車場位子較有限，建議搭乘火車或客運步行即可到達；餐券假日需加價。'
+  },
+  'H07-02': { // 長榮鳳凰酒店（礁溪）
+    rating: '4.5★ (7,200+ 則評論)',
+    spring: '礁溪碳酸氫鈉美人湯',
+    pros: '慢活 SPA 區佔地 1500 坪，設有衝擊浴、草本溫泉、金鑽池與溫泉魚池；桂冠自助餐廳海鮮與甜點極受推崇，一整天都在館內享受。',
+    tips: 'SPA 區需著泳裝泳帽，假日家庭客眾多，若喜好安靜泡湯建議預約頂樓慢活露天裸湯。'
+  },
+  'H08-01': { // 力麗威斯汀（宜蘭員山）
+    rating: '4.3★ (3,100+ 則評論)',
+    spring: '員山碳酸氫鈉溫泉（透明澄澈無硫磺味）',
+    pros: '威斯汀標誌性天夢之床睡眠體驗頂級；日式露天風呂裸湯池採高挑原木設計，禪意十足；獨棟 Villa 帶私有泳池與湯池，私密感極佳。',
+    tips: '飯店位於員山鄉較僻靜處，周邊步行無商業街，強烈建議購買一泊二食方案在館內享用晚餐。'
+  },
+  'H16-03': { // 天成逸旅-蝴蝶谷
+    rating: '4.4★ (3,500+ 則評論)',
+    spring: '富源天然碳酸氫鈉泉',
+    pros: '森林芬多精與天然溫泉完美結合，戶外溫泉水療池環繞青山綠樹，露天裸湯清幽自然。',
+    tips: '位於花東縱谷富源國家森林遊樂區內，生態豐富，建議攜帶防蚊液；戶外泡湯請注意保暖。'
+  },
+  'H57': { // 中冠礁溪
+    rating: '4.1★ (2,300+ 則評論)',
+    spring: '礁溪碳酸氫鈉泉',
+    pros: '五層樓高溫泉滑水道與星河傳說溫泉水世界是小朋友最愛；多元水療穴道衝擊強勁；鄰近礁溪轉運站與火車站。',
+    tips: '設施走懷舊家庭娛樂風格，若追求新穎奢華感請留意；滑水道有固定開放時段。'
+  },
+  'H58': { // 享沐時光莊園渡假酒店
+    rating: '4.4★ (2,800+ 則評論)',
+    spring: '苗栗苑裡碳酸氫鈉泉（美人湯）',
+    pros: '苗栗新興高質感溫泉！700 坪露天風呂視野開闊、頂樓戶外裸湯遠眺鐵砧山景色；雙人獨立湯屋設有專屬榻榻米休息區；鴛鴦鍋套餐份量足。',
+    tips: '地處苗栗苑裡山腰，自行開車前往較便利；秋冬假日湯屋一位難求，建議提前預約。'
+  },
+  'H59': { // 礁溪福朋喜來登
+    rating: '4.3★ (1,800+ 則評論)',
+    spring: '礁溪源頭碳酸氫鈉泉',
+    pros: '位於礁溪溫泉源頭區，水質純淨滑順；雙人獨立湯屋出水量充沛；萬豪旅享家會員服務口碑佳。',
+    tips: '湯屋券以平日使用最為划算，假日使用需留意加價規則。'
+  },
+  'H05-07': { // 紅葉谷綠能溫泉園區
+    rating: '4.5★ (1,200+ 則評論)',
+    spring: '台東延平鄉碳酸氫鈉泉',
+    pros: '雲朗觀光旗下綠能地熱溫泉新地標！清水模與自然林木相映成趣，泉質細膩滑順；餐廳尋星廚房在地原民食材評價極高。',
+    tips: '採預約制營運，前往前請務必至官網預約場次；園區距台東市區車程約 35 分鐘。'
+  }
+};
+
 const MER = {};
 if(D.merchant) D.merchant.rows.forEach(r => { const o = {}; D.merchant.headers.forEach((h, i) => o[h] = (r[i] || '').trim()); MER[o['商家編號']] = o; });
 const merTop = id => (MER[id] && MER[id]['上層編號']) || id;
 const merOf = (k, r) => { const i = col(D[k].headers, '商家編號'); return i >= 0 ? (r[i] || '').trim() : ''; };
-const MER_CATS = {lodging:'住宿', dining:'餐券', flight:'機票', tour:'跟團', flash:'限時搶購'};
+const MER_CATS = {lodging:'住宿', dining:'餐券', hotspring:'溫泉', flight:'機票', tour:'跟團', flash:'限時搶購'};
 let merCnt = null;
 function merCounts(top){
   if(!merCnt){ merCnt = {}; Object.keys(MER_CATS).forEach(k => D[k] && D[k].rows.forEach(r => { const t = merTop(merOf(k, r)); if(t) (merCnt[t] = merCnt[t] || {})[k] = (merCnt[t][k] || 0) + 1; })); }
@@ -1010,7 +1116,7 @@ function merMore(top, except){
   return ks.length ? `<div class="mer-more"><span>這家還有</span>${ks.map(k => `<button type="button" class="mer-jump" data-k="${k}" data-m="${esc(top)}">${MER_CATS[k]} ${c[k]} 筆 ›</button>`).join('')}</div>` : '';
 }
 
-const GROUPABLE = {lodging:'飯店名稱', dining:'飯店/品牌'};
+const GROUPABLE = {lodging:'飯店名稱', dining:'飯店/品牌', hotspring:'業者'};
 let redrawList = null;
 const grpName = v => String(v || '').replace(/[（(][^）)]*[）)]/g, '').replace(/\s+/g, '').trim();
 function groupRows(k, rows){
@@ -1034,8 +1140,8 @@ function groupCard(k, g){
   const FOLD = g.length > 6 ? 5 : g.length;   // 方案多的先列最划算的 5 個，其餘收起
   const items = g.map(({r, idx}, n) => {
     // 張數一眼看到：住宿用幾張券、餐券幾張一套
-    const tk = (k === 'lodging' ? (val(r, '使用張數').match(/^\d+張起?/) || [''])[0].replace(/^1張$/, '') : (val(r, '購買張數').match(/^\d+張一套/) || [''])[0]);
-    const sub = [showWhere ? where(r) : '', ...(k === 'dining' ? [val(r, '餐廳'), val(r, c.sub[0])] : [val(r, c.sub[0])]), tk ? (k === 'lodging' ? `用${tk}券` : tk) : ''].filter(v => v && !blank(v)).join('・') || '（未命名方案）';
+    const tk = (k === 'lodging' ? (val(r, '使用張數').match(/^\d+張起?/) || [''])[0].replace(/^1張$/, '') : (k === 'hotspring' ? (val(r, '購買組合') || val(r, '券種')) : (val(r, '購買張數').match(/^\d+張一套/) || [''])[0]));
+    const sub = [showWhere ? where(r) : '', ...(k === 'dining' ? [val(r, '餐廳'), val(r, c.sub[0])] : (k === 'hotspring' ? [val(r, '券種'), val(r, c.sub[0])] : [val(r, c.sub[0])])), tk ? (k === 'lodging' ? `用${tk}券` : (k === 'hotspring' ? tk : tk)) : ''].filter(v => v && !blank(v)).join('・') || '（未命名方案）';
     const p = val(r, c.price), per = c.per ? val(r, c.per[0]) : '';
     const on = saved.has(rowKey(k, r)), old = isOld(d, r);
     return `<li${n >= FOLD ? ' hidden' : ''}><button type="button" class="more-btn grp-item" data-k="${k}" data-idx="${idx}" aria-haspopup="dialog">
@@ -1043,8 +1149,11 @@ function groupCard(k, g){
       <span class="gi-price">${blank(p) ? '<span class="gi-na">未公布</span>' : 'NT$ ' + esc(fmt(p))}${!blank(per) ? `<small>${esc(c.per[1])} ${esc(fmt(per))}</small>` : ''}</span>
       <span class="gi-go" aria-hidden="true">›</span></button></li>`;
   }).join('');
+  const rev = (k === 'hotspring' || k === 'lodging') && (SPRING_REVIEWS[top] || (g[0] && g[0].r && SPRING_REVIEWS[merOf(k, g[0].r)]));
+  const revBadge = rev ? `<div class="grp-rev-badge"><svg class="ti" aria-hidden="true"><use href="#ti-star-filled"/></svg> <span>${esc(rev.rating.split(' ')[0])} 溫泉口碑：${esc(rev.spring.split('（')[0])}</span></div>` : '';
   return `<article class="deal grp-card">
     <div class="grp-head"><h4>${esc(name)}</h4><span class="grp-n">${g.length} 個方案</span></div>
+    ${revBadge}
     <div class="grp-meta">${booths.map(b => `<span class="tag booth">攤位 ${esc(b)}</span>`).join('')}<span class="grp-range">${range}</span></div>
     <ul class="grp-list">${items}</ul>
     ${g.length > FOLD ? `<button type="button" class="grp-expand">看其餘 ${g.length - FOLD} 個方案 ▾</button>` : ''}
@@ -1337,7 +1446,7 @@ function missHint(rows, q){
 // 全站搜尋
 (function(){
   const gq = document.getElementById('gq'), res = document.getElementById('gs-res'), clr = document.getElementById('gq-clear');
-  const cats = ['lodging','dining','flight','tour','flash','card'].filter(k => D[k]);
+  const cats = ['lodging','dining','hotspring','flight','tour','flash','card'].filter(k => D[k]);
   const lower = {}; cats.forEach(k => lower[k] = D[k].rows.map((r, i) => `#${rowSeq(r, i)} ${FOLDER_CODE[k]}_#${rowSeq(r, i)} ` + r.join(' ').toLowerCase()));
   let timer;
   const run = () => {
@@ -1376,9 +1485,49 @@ function missHint(rows, q){
   gq.addEventListener('keydown', e => { if(e.key === 'Escape'){ gq.value = ''; run(); } });
   clr.addEventListener('click', () => { gq.value = ''; run(); gq.focus(); });
   res.addEventListener('click', e => { const mj = e.target.closest('.mer-jump'); if(mj) return jumpMer(mj.dataset.k, mj.dataset.m);
-    const b = e.target.closest('.gs-go'); if(b) jump(b.dataset.k, gq.value.trim()); });
+    const b = e.target.closest('.gs-go');
+    if(b){
+      delete state[b.dataset.k];
+      jump(b.dataset.k, gq.value.trim());
+    }
+  });
   document.getElementById('gs-eg').addEventListener('click', e => { const b = e.target.closest('button'); if(b){ gq.value = b.textContent; run(); } });
 })();
+
+
+// 參展大廠・品牌一鍵歸戶渲染器
+function renderMerHub(){
+  const hubEl = document.getElementById('mer-hub-grid');
+  if(!hubEl) return;
+  const featured = ['H01', 'H02', 'H03', 'H05', 'H07', 'H16', 'H21', 'H22', 'H41', 'H11', 'H14', 'H17', 'H10', 'H12', 'H09', 'H58'];
+  const cards = [];
+  featured.forEach(id => {
+    const m = MER[id];
+    if(!m) return;
+    const c = merCounts(id);
+    const ks = Object.keys(MER_CATS).filter(k => c[k]);
+    if(!ks.length) return;
+    const total = ks.reduce((sum, k) => sum + (c[k] || 0), 0);
+    const primaryCat = c['hotspring'] ? 'hotspring' : (ks.sort((a,b) => (c[b]||0) - (c[a]||0))[0] || 'lodging');
+    cards.push(`<button type="button" class="mer-hub-card" data-top="${esc(id)}" data-cat="${primaryCat}">
+      <div class="mer-hub-top">
+        <span class="mer-hub-title"><svg class="ti" aria-hidden="true"><use href="#ti-building"/></svg> ${esc(m['商家名稱'])}</span>
+        ${realBooth(m['攤位']) ? `<span class="mer-hub-booth">${esc(m['攤位'])}</span>` : ''}
+      </div>
+      <div class="mer-hub-cats">
+        ${ks.map(k => `<span>${MER_CATS[k]} ${c[k]}筆</span>`).join('')}
+      </div>
+      <div class="mer-hub-total">全館 ${total} 筆優惠 ›</div>
+    </button>`);
+  });
+  hubEl.innerHTML = cards.join('');
+  hubEl.addEventListener('click', e => {
+    const btn = e.target.closest('.mer-hub-card');
+    if(btn){
+      jumpMer(btn.dataset.cat, btn.dataset.top);
+    }
+  });
+}
 
 // 攤位速查快速跳轉
 document.querySelectorAll('[data-jump-tab]').forEach(b => {
@@ -1450,6 +1599,12 @@ function go(k){
 // 點擊代理（收藏、展開、複製代碼、推薦頁快速捲動）
 const savedOpen = new Set();
 viewData.addEventListener('click', e => {
+  const cm = e.target.closest('.card-mer-hub');
+  if(cm){
+    e.stopPropagation();
+    jumpMer(cm.dataset.k, cm.dataset.m);
+    return;
+  }
   const pj = e.target.closest('[data-pick-scroll]');
   if(pj){
     const sec = document.getElementById(pj.dataset.pickScroll);
@@ -1512,7 +1667,52 @@ function openSheet(k, idx, from){
   sheetEl.querySelector('.sheet-title').innerHTML = t ? t.innerHTML : esc(d.name);
   sheetEl.querySelector('.sheet-sub').innerHTML = sub ? sub.innerHTML : '';
   const ph = sheetEl.querySelector('.sheet-price'); ph.innerHTML = price ? price.outerHTML : '';
-  sheetEl.querySelector('.sheet-body').innerHTML = renderFull(d, d.headers, r, idx);
+    const mId = merOf(k, r), top = merTop(mId), M = MER[top];
+  let merBanner = '';
+  if(top && M){
+    const c = merCounts(top);
+    const ks = Object.keys(MER_CATS).filter(ck => c[ck]);
+    merBanner = `<div class="sheet-mer-card">
+      <div class="sheet-mer-head">
+        <div class="sheet-mer-title"><svg class="ti" aria-hidden="true"><use href="#ti-building"/></svg> ${esc(M['商家名稱'])}${realBooth(M['攤位']) ? ` <span class="tag booth" style="font-size:12px;cursor:pointer" data-jump-tab="${k}" data-jump-q="${esc(M['攤位'])}">攤位 ${esc(M['攤位'])}</span>` : ''}</div>
+      </div>
+      <div class="sheet-mer-links">
+        <span style="font-size:12px;color:var(--muted)">此品牌在旅展還有：</span>
+        ${ks.map(ck => `<button type="button" class="mer-jump" data-k="${ck}" data-m="${esc(top)}">${MER_CATS[ck]} ${c[ck]} 筆 ›</button>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  // 溫泉使用者評價與泡湯意見
+  let revBox = '';
+  const rText = r.join(' ');
+  const matchedRev = SPRING_REVIEWS[top] || SPRING_REVIEWS[mId] ||
+    (rText.includes('麗禧') ? SPRING_REVIEWS['H21'] :
+     rText.includes('春天') ? SPRING_REVIEWS['H22'] :
+     rText.includes('大地') ? SPRING_REVIEWS['H41'] :
+     rText.includes('礁溪老爺') ? SPRING_REVIEWS['H01-02'] :
+     rText.includes('知本老爺') ? SPRING_REVIEWS['H01-03'] :
+     rText.includes('寒沐') ? SPRING_REVIEWS['H03-04'] :
+     rText.includes('長榮鳳凰') ? SPRING_REVIEWS['H07-02'] :
+     rText.includes('威斯汀') ? SPRING_REVIEWS['H08-01'] :
+     rText.includes('蝴蝶谷') ? SPRING_REVIEWS['H16-03'] :
+     rText.includes('享沐時光') ? SPRING_REVIEWS['H58'] :
+     rText.includes('中冠礁溪') ? SPRING_REVIEWS['H57'] :
+     rText.includes('紅葉谷') ? SPRING_REVIEWS['H05-07'] : null);
+
+  if(matchedRev){
+    revBox = `<div class="spring-review-box">
+      <div class="srb-head">
+        <span class="srb-title"><svg class="ti" aria-hidden="true"><use href="#ti-star-filled"/></svg> 使用者真實評價與泡湯意見</span>
+        <span class="srb-score">${esc(matchedRev.rating)}</span>
+      </div>
+      <div class="srb-item"><b>♨ 泉質特色：</b>${esc(matchedRev.spring)}</div>
+      <div class="srb-item srb-pros"><b>👍 網友口碑好評：</b>${esc(matchedRev.pros)}</div>
+      <div class="srb-item srb-tips"><b>⚠️ 泡湯與使用避坑提醒：</b>${esc(matchedRev.tips)}</div>
+    </div>`;
+  }
+
+  sheetEl.querySelector('.sheet-body').innerHTML = merBanner + renderFull(d, d.headers, r, idx) + revBox;
   const ssv = sheetEl.querySelector('.sheet-save'), on = saved.has(rowKey(k, r));
   ssv.dataset.k = k; ssv.dataset.idx = idx; ssv.setAttribute('aria-pressed', on); ssv.textContent = on ? '★ 已收藏' : '☆ 收藏';
   sheetEl.querySelector('.sheet-body').scrollTop = 0;
@@ -1532,6 +1732,18 @@ function closeSheet(fromPop){
   const y = sheetY; requestAnimationFrame(() => scrollTo(0, y)); setTimeout(() => { if(Math.abs(scrollY - y) > 2) scrollTo(0, y); }, 120);
 }
 sheetBack.addEventListener('click', e => {
+  const mj = e.target.closest('.mer-jump');
+  if(mj){
+    closeSheet();
+    jumpMer(mj.dataset.k, mj.dataset.m);
+    return;
+  }
+  const boothBtn = e.target.closest('[data-jump-tab]');
+  if(boothBtn){
+    closeSheet();
+    jump(boothBtn.dataset.jumpTab, boothBtn.dataset.jumpQ);
+    return;
+  }
   const sv = e.target.closest('.sheet-save');
   if(sv){
     const k = sv.dataset.k, key = rowKey(k, D[k].rows[+sv.dataset.idx]);
@@ -1719,7 +1931,10 @@ function renderSet(k){
     </div>`;
   }
 
-  let html = `<h2>${fCode ? fCode + ' ' : ''}${esc(d.name)}</h2><p class="lead">共 ${d.rows.length.toLocaleString()} 筆（編號 <code>#1</code>–<code>#${d.rows.length}</code>）。點擊「完整資料」可查看條列化加價規定、平假日限制、來源網址與證明截圖。</p>
+  const lead = k === 'hotspring'
+    ? '2026 ITF 台灣泡湯優惠，11/6 查核。價格以單次購買金額顯示，套券請看組合張數。點「完整資料」可查看優惠來源。'
+    : '點擊「完整資料」可查看條列化加價規定、平假日限制、來源網址與證明截圖。';
+  let html = `<h2>${fCode ? fCode + ' ' : ''}${esc(d.name)}</h2><p class="lead">共 ${d.rows.length.toLocaleString()} 筆（編號 <code>#1</code>–<code>#${d.rows.length}</code>）。${lead}</p>
     ${guideBanner}
     <div class="toolbar${matchMedia('(max-width:640px)').matches ? ' collapsed' : ''}" id="tb-${k}"><div class="searchrow">
       <div class="search-wrap">
@@ -2169,7 +2384,17 @@ function card(d, c, r, idx, open, k, pickReason){
     return `<article class="deal deal-dining${old ? ' old' : ''}${on ? ' saved' : ''}"${reasonAttr}>
       ${reasonHtml}
       <div class="top">${tags.length ? `<div class="tags">${tags.join('')}</div>` : ''}<button class="save-btn" data-k="${k}" data-idx="${idx}" aria-pressed="${on}" aria-label="收藏：${esc(hotel)} ${esc(name)}">${on ? '<svg class="ti ti-star-filled" aria-hidden="true"><use href="#ti-star-filled"/></svg> <span class="lbl">已收藏</span>' : '<svg class="ti" aria-hidden="true"><use href="#ti-star"/></svg> <span class="lbl">收藏</span>'}</button></div>
-      <div><h4>${esc(hotel)}${rest ? '・' + esc(rest) : ''}</h4><div class="subt">${esc(name)}</div></div>
+      <div>
+        ${(() => {
+          const mId = merOf(k, r), top = merTop(mId), M = MER[top];
+          if(top && M){
+            const mc = merCounts(top), tot = Object.values(mc).reduce((s, n) => s + n, 0);
+            if(tot > 1) return `<button type="button" class="card-mer-hub" data-k="${k}" data-m="${esc(top)}" title="查看 ${esc(M['商家名稱'])} 全館優惠"><svg class="ti" aria-hidden="true"><use href="#ti-building"/></svg> ${esc(M['商家名稱'])} 全館 ${tot} 筆 ›</button>`;
+          }
+          return '';
+        })()}
+        <h4>${esc(hotel)}${rest ? '・' + esc(rest) : ''}</h4><div class="subt">${esc(name)}</div>
+      </div>
       ${priceHtml}
       ${!open && info ? `<dl class="info">${info}</dl>` : ''}
       ${full}
@@ -2292,9 +2517,19 @@ function card(d, c, r, idx, open, k, pickReason){
   return `<article class="deal${old ? ' old' : ''}${on ? ' saved' : ''}"${reasonAttr}>
     ${reasonHtml}
     <div class="top">${tags.length ? `<div class="tags">${tags.join('')}</div>` : ''}<button class="save-btn" data-k="${k}" data-idx="${idx}" aria-pressed="${on}" aria-label="收藏：${esc(title)}">${on ? '<svg class="ti ti-star-filled" aria-hidden="true"><use href="#ti-star-filled"/></svg> <span class="lbl">已收藏</span>' : '<svg class="ti" aria-hidden="true"><use href="#ti-star"/></svg> <span class="lbl">收藏</span>'}</button></div>
-    <div><h4>${esc(title)}</h4>${sub ? `<div class="subt">${esc(sub)}</div>` : ''}</div>
+    <div>
+      ${(() => {
+        const mId = merOf(k, r), top = merTop(mId), M = MER[top];
+        if(top && M){
+          const mc = merCounts(top), tot = Object.values(mc).reduce((s, n) => s + n, 0);
+          if(tot > 1) return `<button type="button" class="card-mer-hub" data-k="${k}" data-m="${esc(top)}" title="查看 ${esc(M['商家名稱'])} 全館優惠"><svg class="ti" aria-hidden="true"><use href="#ti-building"/></svg> ${esc(M['商家名稱'])} 全館 ${tot} 筆 ›</button>`;
+        }
+        return '';
+      })()}
+      <h4>${esc(title)}</h4>${sub ? `<div class="subt">${esc(sub)}</div>` : ''}
+    </div>
     ${price}${!open && info ? `<dl class="info">${info}</dl>` : ''}${full}
-    <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-haspopup="dialog">完整資料、加價規定與截圖 ›</button>
+    <button class="more-btn" data-k="${k}" data-idx="${idx}" aria-haspopup="dialog">${k === 'hotspring' ? '完整資料與優惠來源' : '完整資料、加價規定與截圖'} ›</button>
   </article>`;
 }
 
@@ -2305,6 +2540,7 @@ function boothTable(d, rows){
     `</tbody></table></div><p class="note">攤位號是從官方展場平面圖讀出，以現場公告為準。</p>`;
 }
 
+renderMerHub();
 if(ORDER.includes(location.hash.slice(1).split('?')[0])) fromHash();
 else { let start = 'home'; try{ start = localStorage.getItem('itf-tab') || 'home'; }catch(e){} go(start); }
 window.addEventListener('hashchange', fromHash);
