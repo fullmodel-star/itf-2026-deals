@@ -51,7 +51,7 @@ header.appbar .wrap{display:flex;align-items:center;gap:10px;padding-block:10px;
 .appbar .series{font-size:12px;color:var(--muted);letter-spacing:.08em;white-space:nowrap}
 .hdr-tools{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
 
-/* 封面：一張入場券（主票＋撕線＋票根），唯一主要行動＝金色「看最划算清單」 */
+/* 封面：一張入場券（主票＋撕線＋票根），唯一主要行動＝金色「看當時優惠」（2026-11-13 展後改回顧語氣） */
 .cover{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:20px;display:grid;grid-template-columns:1fr;overflow:hidden;margin:4px 0 22px}
 .cover-main{position:relative;padding:22px 22px 20px;min-height:250px}
 .cover-kicker{font-size:13px;letter-spacing:.2em;color:var(--accent);font-weight:700}
@@ -60,6 +60,7 @@ header.appbar .wrap{display:flex;align-items:center;gap:10px;padding-block:10px;
 .cover-lead{color:var(--muted);font-size:16px;line-height:1.6;margin:0 0 18px;max-width:28em}
 .cover-cta{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--gold-ink);border:0;border-radius:12px;padding:12px 22px;font-size:17px;font-weight:800;min-height:48px;cursor:pointer;font-family:var(--f-title)}
 .cover-cta:hover{filter:brightness(1.05)}
+.cover-cta{position:relative;z-index:1}
 .cover-cta .ti{width:20px;height:20px}
 .cover-art{position:absolute;right:12px;bottom:8px;width:140px;height:112px;pointer-events:none}
 .cover-art img{position:absolute;width:70px;height:auto}
@@ -602,7 +603,7 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
   </div>
 </div></header>
 
-<aside class="ended-banner" id="ended-banner" data-ver="v20" role="note" aria-label="活動已結束">
+<aside class="ended-banner" id="ended-banner" data-ver="v21" role="note" aria-label="活動已結束">
   <div class="wrap">
     <svg class="ti" aria-hidden="true"><use href="#ti-info-circle"/></svg>
     <div>
@@ -619,9 +620,9 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
   <section class="cover" aria-labelledby="cover-title">
     <div class="cover-main">
       <div class="cover-kicker">ADMIT ONE・南港 1 館</div>
-      <h1 class="cover-title" id="cover-title">旅展這四天，<br><em>先看誰最划算</em></h1>
+      <h1 class="cover-title" id="cover-title">本屆旅展回顧，<br><em>當時誰最划算</em></h1>
       <p class="cover-lead">住宿、餐券、機票、跟團 2,605 筆，每人每晚、每天多少錢都幫你算好。</p>
-      <button type="button" class="cover-cta" data-go="picks">看最划算清單<svg class="ti" aria-hidden="true"><use href="#ti-arrow"/></svg></button>
+      <button type="button" class="cover-cta" data-go="picks">看當時優惠<svg class="ti" aria-hidden="true"><use href="#ti-arrow"/></svg></button>
       <div class="cover-art" aria-hidden="true"><img class="a-plane" src="vendor/fluent-3d/plane.png" alt="" width="128" height="128"><img class="a-ticket" src="vendor/fluent-3d/ticket.png" alt="" width="128" height="128"></div>
     </div>
     <div class="cover-stub">
@@ -661,14 +662,14 @@ td.code{font-family:var(--f-num);font-weight:600;white-space:nowrap}
   <!-- 參展大廠／品牌一鍵歸戶 -->
   <section class="mer-hub-board" id="mer-hub-board">
     <div class="panel-head"><h3><svg class="ti" aria-hidden="true"><use href="#ti-building"/></svg>參展大廠・品牌一鍵歸戶</h3></div>
-    <p>現場逛展或線上比價首選！點選任一大廠集團或人氣溫泉，一秒查齊該品牌名下所有住宿、餐飲、泡湯票券與展場攤位：</p>
+    <p>點選任一大廠集團或人氣溫泉，查看該品牌當時所有住宿、餐飲、泡湯票券與展場攤位：</p>
     <div class="mer-hub-grid" id="mer-hub-grid"></div>
   </section>
 
   <!-- 展場熱門攤位速查板 -->
   <section class="booth-board">
     <div class="panel-head"><h3><img class="h-ic" src="vendor/fluent-3d/pin.png" alt="" width="128" height="128">展場熱門攤位速查</h3></div>
-    <p>現場逛展必備！點選任一攤位代號，直接跳轉該分類並過濾出該攤位所有優惠：</p>
+    <p>點選任一攤位代號，直接跳到該分類並列出該攤位當時的所有優惠：</p>
     <div class="booth-grid">
       <div class="booth-zone">
         <h4>4F 國內飯店與知名自助餐</h4>
@@ -887,7 +888,7 @@ const CFG = {
     info:[['購買組合','買法'],['適用人數','人數'],['販售期間','販售'],['優惠期限','效期'],['使用限制','限制'],['攤位號碼','攤位']],
     filters:['地區','券種'], sorts:[['旅展價','購買金額 低→高']]},
   flight:{title:['航空'], route:['出發地','目的地'], sub:['艙等','單程/來回','銷售者'], price:'旅展價', tax:'是否含稅',
-    tags:['區域','類型'], info:[['艙等','艙等'],['是否含稅','含稅'],['出發期間','出發'],['開票/購買','購買'],['搶票方式','怎麼搶'],['備註','注意'],['攤位號碼','攤位']],
+    tags:['區域','類型'], info:[['艙等','艙等'],['是否含稅','含稅'],['出發期間','出發'],['開票/購買','購買'],['搶票方式','購買方式'],['備註','注意'],['攤位號碼','攤位']],
     filters:['區域','類型','航空'], sorts:[['旅展價','旅展價 低→高']]},
   tour:{title:['行程名稱'], sub:['旅行社','目的地國家','天數'], price:'旅展價', was:'原價', per:['每日平均價','每天'],
     tags:['區域分類'], info:[['出發日期','出發'],['折扣金額','折扣'],['是否含小費','含不含'],['適用條件','條件']],
@@ -1048,13 +1049,13 @@ const GENERAL_REVIEWS = {
     rating: '4.6★ (7,900+ 則評論)',
     topic: '老爺酒店集團・渡假指標',
     pros: '全台溫泉與度假指標！礁溪老爺無邊際野天活泉風呂俯瞰蘭陽平原；知本老爺星月風呂露天裸湯景致無可挑剔；餐飲與活動極具水準。',
-    tips: '旅展聯合住宿券與溫泉券為全場秒殺王！使用溫泉券務必提前預約；平日使用最划算。'
+    tips: '旅展聯合住宿券與溫泉券當時很快賣完；使用溫泉券務必提前預約；平日使用最划算。'
   },
   'H01-02': {
     rating: '4.6★ (7,900+ 則評論)',
     topic: '礁溪碳酸氫鈉美人湯',
     pros: '野天風呂遠眺蘭陽平原視野開闊，洞天風呂男女裸湯靜謐放鬆；雲天自助餐廳食材豐富評價極佳。',
-    tips: '展期搶購量大，秋冬假日預約經常滿檔，建議避開五六日以獲最佳度假品質。'
+    tips: '旅展期間售出量大，秋冬假日預約經常滿檔，建議避開五六日以獲最佳度假品質。'
   },
   'H01-03': {
     rating: '4.6★ (5,100+ 則評論)',
@@ -1167,13 +1168,13 @@ const SPRING_REVIEWS = {
     rating: '4.6★ (7,900+ 則評論)',
     spring: '礁溪/知本碳酸氫鈉泉（無色無味美人湯）、北投白磺泉',
     pros: '全台溫泉度假指標！礁溪老爺無邊際野天活泉風呂俯瞰蘭陽平原；知本老爺星月風呂由日本設計師操刀，露天裸湯景致無可挑剔；餐飲與活動極具水準。',
-    tips: '旅展聯合溫泉券為全場秒殺王！使用溫泉券務必提前預約；假日加價按各館規定，平日使用最划算。'
+    tips: '旅展聯合溫泉券當時很快賣完；使用溫泉券務必提前預約；假日加價按各館規定，平日使用最划算。'
   },
   'H01-02': { // 礁溪老爺
     rating: '4.6★ (7,900+ 則評論)',
     spring: '礁溪碳酸氫鈉美人湯（pH 7.0–7.4）',
     pros: '野天風呂遠眺蘭陽平原視野開闊，洞天風呂男女裸湯靜謐放鬆；雲天自助餐廳食材豐富評價極佳。',
-    tips: '展期與線上搶購量大，秋冬假日預約經常滿檔，建議避開五六日以獲最佳度假品質。'
+    tips: '旅展與線上售出量大，秋冬假日預約經常滿檔，建議避開五六日以獲最佳度假品質。'
   },
   'H01-03': { // 知本老爺
     rating: '4.6★ (5,100+ 則評論)',
@@ -2020,7 +2021,7 @@ function renderPicks(){
     {i: 163, reason: '🏆 火鍋超值王：約 58 折雙人海陸鍋物，每人僅 344 元'},
     {i: 40,  reason: '🏆 五星 Buffet 破盤價：每人 400 元吃十二廚（11/6 寒舍會員快閃）'},
     {i: 100, reason: '🏆 台北車站西餐王：51 折含服務費，平日午晚餐皆可用'},
-    {i: 68,  reason: '🏆 買一送一必搶：板橋凱撒泰式吃到飽，展場限定每人 445 元'},
+    {i: 68,  reason: '🏆 當時買一送一：板橋凱撒泰式吃到飽，展場限定每人 445 元'},
     {i: 24,  reason: '🏆 晶華栢麗廳最親民：含服務費約 52 折，每人 550 元享五星早餐'},
     {i: 16,  reason: '🏆 信義區聚餐首選：含服務費約 66 折，每人 900 元暢享君悅凱菲屋'},
     {i: 46,  reason: '🏆 頂級食材吃到飽：買 12 送 2 平均每人 1,380 元享美福彩匯午晚餐'}
@@ -2585,7 +2586,7 @@ function card(d, c, r, idx, open, k, pickReason){
       priceHtml = `<div class="price"><span class="now txt">${esc(priceVal)}</span></div>`;
     }
 
-    const infoFields = [['艙等','艙等'],['是否含稅','含稅'],['出發期間','出發'],['開票/購買','搶購期'],['搶票方式','方式'],['備註','注意']];
+    const infoFields = [['艙等','艙等'],['是否含稅','含稅'],['出發期間','出發'],['開票/購買','購買期'],['搶票方式','方式'],['備註','注意']];
     const info = infoFields.map(([s, label]) => infoRow(label, val(s))).join('');
     const full = open ? renderFull(d, h, r, idx) : '';
 
